@@ -1,2 +1,0 @@
-# ajdintrejic.github.io
-page
