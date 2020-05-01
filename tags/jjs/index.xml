@@ -5,17 +5,17 @@
     <link>https://ajdintrejic.github.io/tags/jjs/</link>
     <description>Recent content in jjs on ajdintrejic</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 01 May 2020 13:28:11 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 13:28:11 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdintrejic.github.io/tags/jjs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox :: Mango Write Up</title>
-      <link>https://ajdintrejic.github.io/posts/2020/05/hackthebox-mango-write-up/</link>
-      <pubDate>Fri, 01 May 2020 13:28:11 +0200</pubDate>
+      <link>https://ajdintrejic.github.io/posts/2020/04/hackthebox-mango-write-up/</link>
+      <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdintrejic.github.io/posts/2020/05/hackthebox-mango-write-up/</guid>
+      <guid>https://ajdintrejic.github.io/posts/2020/04/hackthebox-mango-write-up/</guid>
       <description>This is a write-up of HackTheBox Mango. Contact me on Twitter (@ajdintrejic) if you have any questions
 Reconnaissance Let’s run nmap,
 sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.

@@ -5,7 +5,7 @@
     <link>https://ajdintrejic.github.io/tags/</link>
     <description>Recent content in Tags on ajdintrejic</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 01 May 2020 13:28:11 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 13:28:11 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdintrejic.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>Authentication bypass</title>
       <link>https://ajdintrejic.github.io/tags/authentication-bypass/</link>
-      <pubDate>Fri, 01 May 2020 13:28:11 +0200</pubDate>
+      <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
       <guid>https://ajdintrejic.github.io/tags/authentication-bypass/</guid>
       <description></description>
@@ -22,7 +22,7 @@
     <item>
       <title>jjs</title>
       <link>https://ajdintrejic.github.io/tags/jjs/</link>
-      <pubDate>Fri, 01 May 2020 13:28:11 +0200</pubDate>
+      <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
       <guid>https://ajdintrejic.github.io/tags/jjs/</guid>
       <description></description>
@@ -31,7 +31,7 @@
     <item>
       <title>MongoDB</title>
       <link>https://ajdintrejic.github.io/tags/mongodb/</link>
-      <pubDate>Fri, 01 May 2020 13:28:11 +0200</pubDate>
+      <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
       <guid>https://ajdintrejic.github.io/tags/mongodb/</guid>
       <description></description>
@@ -40,7 +40,7 @@
     <item>
       <title>NoSQL injection</title>
       <link>https://ajdintrejic.github.io/tags/nosql-injection/</link>
-      <pubDate>Fri, 01 May 2020 13:28:11 +0200</pubDate>
+      <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
       <guid>https://ajdintrejic.github.io/tags/nosql-injection/</guid>
       <description></description>
@@ -49,9 +49,18 @@
     <item>
       <title>SSL certificate</title>
       <link>https://ajdintrejic.github.io/tags/ssl-certificate/</link>
-      <pubDate>Fri, 01 May 2020 13:28:11 +0200</pubDate>
+      <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
       <guid>https://ajdintrejic.github.io/tags/ssl-certificate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notag</title>
+      <link>https://ajdintrejic.github.io/tags/notag/</link>
+      <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
+      
+      <guid>https://ajdintrejic.github.io/tags/notag/</guid>
       <description></description>
     </item>
     
