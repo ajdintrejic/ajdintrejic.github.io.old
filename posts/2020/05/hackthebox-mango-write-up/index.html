@@ -153,6 +153,7 @@ Getting user account I checked the /robots.txt, also ran gobuster, nothing usefu
     <li><a href="#getting-user-account">Getting user account</a>
       <ul>
         <li><a href="#nosql-injection">NoSQL injection</a></li>
+        <li><a href="#bruteforcing-the-password">Bruteforcing the password</a></li>
       </ul>
     </li>
     <li><a href="#getting-root-account">Getting root account</a>
@@ -201,7 +202,7 @@ staging-order.mango.htb</p>
 </code></pre><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
 <p><img src="https://ajdintrejic.github.io/htb-mango/request_reply.png" alt="reply"></p>
 <p><img src="https://ajdintrejic.github.io/htb-mango/after_login.png" alt="afterlogin"></p>
-<p>###Bruteforcing the password</p>
+<h3 id="bruteforcing-the-password">Bruteforcing the password</h3>
 <p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
 <p>You should change the cookie ID.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> requests
