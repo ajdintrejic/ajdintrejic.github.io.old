@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenNetAdmin on ajdintrejic</title>
+    <link>https://ajdintrejic.github.io/tags/opennetadmin/</link>
+    <description>Recent content in OpenNetAdmin on ajdintrejic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 02 May 2020 09:03:27 +0200</lastBuildDate>
+    
+	<atom:link href="https://ajdintrejic.github.io/tags/opennetadmin/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HackTheBox :: Openadmin Write Up</title>
+      <link>https://ajdintrejic.github.io/posts/2020/05/hackthebox-openadmin-write-up/</link>
+      <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
+      
+      <guid>https://ajdintrejic.github.io/posts/2020/05/hackthebox-openadmin-write-up/</guid>
+      <description>Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
+nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
+    </item>
+    
+  </channel>
+</rss>
