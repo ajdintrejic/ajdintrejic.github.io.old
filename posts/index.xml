@@ -34,7 +34,7 @@
                 <span style="color:#24909d">document</span>.csrf_form.submit();
 &lt;<span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
 </code></pre></div><p>What is this token? Well one way to protect your site from CSRF attacks it to use tokens to validate if the request is being authentic, so we have to switch our token with victims token.</p>
-<p>So how does this work? The code is pretty easy to read. This code inside the <code>&lt;script&gt;</code> tag is executed on our victims machine, and it loads a new <code>HTTP</code> request, finds the token using regular expressions and replaces it. Now our form has a valid token and we can submit it.</p>
+<p>So how does this work? The code is pretty easy to understand. This code inside the <code>&lt;script&gt;</code> tag is executed on our victims machine, and it loads a new <code>HTTP</code> request, finds the token using regular expressions and replaces it. Now our form has a valid token and we can submit it.</p>
 ]]></content>
         </item>
         
