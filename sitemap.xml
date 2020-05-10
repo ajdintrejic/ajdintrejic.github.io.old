@@ -3,12 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ajdintrejic.github.io/categories/</loc>
+    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ajdintrejic.github.io/tags/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/2020/05/csrf-bypass-token-with-xss/</loc>
+    <loc>https://ajdintrejic.github.io/categories/csrf/</loc>
+    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdintrejic.github.io/posts/2020/05/csrf-token-extraction/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
@@ -25,6 +35,11 @@
   <url>
     <loc>https://ajdintrejic.github.io/tags/xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdintrejic.github.io/categories/hackthebox/</loc>
+    <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
@@ -105,10 +120,6 @@
   <url>
     <loc>https://ajdintrejic.github.io/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdintrejic.github.io/categories/</loc>
   </url>
   
 </urlset>
