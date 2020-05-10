@@ -172,6 +172,10 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 
             <div class="post-content">
                 <p><img src="https://ajdintrejic.github.io/htb-openadmin/info_card.png" alt="info card"></p>
+
+    <img src="https://ajdintrejic.github.io/htb-openadmin/info_card.png"  alt="Info Card"  class="center"  style="border-radius: 8px;"  />
+
+
 <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let&rsquo;s see what have we got here with nmap.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
@@ -183,8 +187,16 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
 </code></pre></div><pre><code>-p-: scans from port 1 to 65535, same as -p1-65535
 </code></pre><p><img src="https://ajdintrejic.github.io/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
+
+    <img src="https://ajdintrejic.github.io/htb-openadmin/nmap_initial.png"  alt="Hello Friend"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>Let&rsquo;s look at the http server.</p>
 <p><img src="https://ajdintrejic.github.io/htb-openadmin/http_server.png" alt="http server"></p>
+
+    <img src="https://ajdintrejic.github.io/htb-openadmin/http_server.png"  alt="Hello Friend"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>The page has the default Apache 2 page, so let&rsquo;s fire up gobuster. </p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#3677a9">100</span>
 </code></pre></div><pre><code>-w: use a wordlist
