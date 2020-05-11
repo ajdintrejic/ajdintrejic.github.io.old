@@ -26,21 +26,21 @@
 
 
 
-<link rel="stylesheet" href="https://ajdintrejic.github.io/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
 
 
     
-        <link rel="stylesheet" type="text/css" href="https://ajdintrejic.github.io/css/textpadding.css">
+        <link rel="stylesheet" type="text/css" href="/css/textpadding.css">
     
 
 
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://ajdintrejic.github.io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://ajdintrejic.github.io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://ajdintrejic.github.io/favicon-16x16.png">
-    <link rel="manifest" href="https://ajdintrejic.github.io/site.webmanifest">
-    <link rel="mask-icon" href="https://ajdintrejic.github.io/safari-pinned-tab.svg" color="#252627">
-    <link rel="shortcut icon" href="https://ajdintrejic.github.io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="msapplication-TileColor" content="#252627">
     <meta name="theme-color" content="#252627">
 
@@ -84,9 +84,8 @@
     <body class="dark-theme">
         <div class="container">
             <header class="header">
-    <script src="https://cmp.osano.com/16BZ4HRycxCi348bc/8ff750c6-53ef-4380-a5db-5a3ab6dee59f/osano.js"></script>
     <span class="header__inner">
-        <a href="https://ajdintrejic.github.io/" style="text-decoration: none;">
+        <a href="/" style="text-decoration: none;">
     <div class="logo">
         
             <span class="logo__mark">></span>
@@ -173,7 +172,7 @@ In the meantime you can contact me:</p>
 
 
 
-<script type="text/javascript" src="https://ajdintrejic.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -182,17 +181,22 @@ if (!doNotTrack) {
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-165836726-1', 'auto');
-	
+	if (window.sessionStorage) {
+		var GA_SESSION_STORAGE_KEY = 'ga:clientId';
+		ga('create', 'UA-165836726-1', {
+	    'storage': 'none',
+	    'clientId': sessionStorage.getItem(GA_SESSION_STORAGE_KEY)
+	   });
+	   ga(function(tracker) {
+	    sessionStorage.setItem(GA_SESSION_STORAGE_KEY, tracker.get('clientId'));
+	   });
+   }
+	ga('set', 'anonymizeIp', true);
 	ga('send', 'pageview');
 }
 </script>
 
 
-
-    
-        <script src="https://ajdintrejic.github.io/js/osano.js"></script>
-    
 
 
     </body>

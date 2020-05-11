@@ -28,21 +28,21 @@ Getting user account I checked the /robots.txt, also ran gobuster, nothing usefu
 
 
 
-<link rel="stylesheet" href="https://ajdintrejic.github.io/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
 
 
     
-        <link rel="stylesheet" type="text/css" href="https://ajdintrejic.github.io/css/textpadding.css">
+        <link rel="stylesheet" type="text/css" href="/css/textpadding.css">
     
 
 
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://ajdintrejic.github.io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://ajdintrejic.github.io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://ajdintrejic.github.io/favicon-16x16.png">
-    <link rel="manifest" href="https://ajdintrejic.github.io/site.webmanifest">
-    <link rel="mask-icon" href="https://ajdintrejic.github.io/safari-pinned-tab.svg" color="#252627">
-    <link rel="shortcut icon" href="https://ajdintrejic.github.io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
     <meta name="msapplication-TileColor" content="#252627">
     <meta name="theme-color" content="#252627">
 
@@ -92,9 +92,8 @@ Getting user account I checked the /robots.txt, also ran gobuster, nothing usefu
     <body class="dark-theme">
         <div class="container">
             <header class="header">
-    <script src="https://cmp.osano.com/16BZ4HRycxCi348bc/8ff750c6-53ef-4380-a5db-5a3ab6dee59f/osano.js"></script>
     <span class="header__inner">
-        <a href="https://ajdintrejic.github.io/" style="text-decoration: none;">
+        <a href="/" style="text-decoration: none;">
     <div class="logo">
         
             <span class="logo__mark">></span>
@@ -176,39 +175,39 @@ Getting user account I checked the /robots.txt, also ran gobuster, nothing usefu
             
 
             <div class="post-content">
-                <p><img src="https://ajdintrejic.github.io/htb-mango/mango_info_card.png" alt="infocard"></p>
+                <p><img src="/htb-mango/mango_info_card.png" alt="infocard"></p>
 <p>This is a write-up of HackTheBox Mango.
 Contact me on Twitter (@ajdintrejic) if you have any questions</p>
 <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let’s run nmap,</p>
 <pre><code>sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
-</code></pre><p><img src="https://ajdintrejic.github.io/htb-mango/nmap_initial_results.png" alt="nmap"></p>
+</code></pre><p><img src="/htb-mango/nmap_initial_results.png" alt="nmap"></p>
 <p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/mango_search_page.png" alt="page"></p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/mango_analytics_page.png" alt="page"></p>
+<p><img src="/htb-mango/mango_search_page.png" alt="page"></p>
+<p><img src="/htb-mango/mango_analytics_page.png" alt="page"></p>
 <h2 id="getting-user-account">Getting user account</h2>
 <p>I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference:
 staging-order.mango.htb</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/ssl_certificate.png" alt="ssl"></p>
+<p><img src="/htb-mango/ssl_certificate.png" alt="ssl"></p>
 <p>The page is inaccessible, but we can use the /etc/hosts file to redirect the page back to the server itself. You could also change the headers of the https request and change the host value to “staging-order.mango.htb”.</p>
 <p>We have multiple server running on the same machine and port (Vhost - virtual hosts) so that is why when we change the host value, we access a “different” server.</p>
 <p>Now I added the line to /etc/hosts so the hostname is translated to the correct IP address.</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/etc_hosts.png" alt="hosts"></p>
+<p><img src="/htb-mango/etc_hosts.png" alt="hosts"></p>
 <h3 id="nosql-injection">NoSQL injection</h3>
 <p>Now we have a login page here, I spent around 4 hours here as this wasn’t something I had experience with. We have to perform an authentication bypass.</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/login_mongodb.png" alt="login"></p>
+<p><img src="/htb-mango/login_mongodb.png" alt="login"></p>
 <p>The login is handeld by MongoDB in the background. How do I know this? The full nmap scan has recognized a MongoDB instance. MondoDB is a NoSQL database, unlike PostgreSQL, which is an SQL database. We need to perform a NoSQL injection attack.</p>
 <p>I opened the network tab in Firefox and tried to login with “admin” and “test”. This will send a POST request. We can open it and see the request body.</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/network_tab.png" alt="network"></p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/request.png" alt="request"></p>
+<p><img src="/htb-mango/network_tab.png" alt="network"></p>
+<p><img src="/htb-mango/request.png" alt="request"></p>
 <p>Edit the request:</p>
 <p>Before:</p>
 <pre><code>username=admin&amp;password=test&amp;login=login
 </code></pre><p>After:</p>
 <pre><code>username=admin&amp;password[$ne]=test&amp;login=login
 </code></pre><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/request_reply.png" alt="reply"></p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/after_login.png" alt="afterlogin"></p>
+<p><img src="/htb-mango/request_reply.png" alt="reply"></p>
+<p><img src="/htb-mango/after_login.png" alt="afterlogin"></p>
 <h3 id="bruteforcing-the-password">Bruteforcing the password</h3>
 <p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
 <p>You should change the cookie ID.</p>
@@ -251,19 +250,19 @@ possible_chars = <span style="color:#24909d">list</span>(string.ascii_letters) +
     <span style="color:#6ab825;font-weight:bold">return</span> usernamesfor u <span style="color:#6ab825;font-weight:bold">in</span> get_usernames():
     get_password(u)
 </code></pre></div><p>This will run for some time, the output is:</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/password_bruteforce.png" alt="success"></p>
+<p><img src="/htb-mango/password_bruteforce.png" alt="success"></p>
 <pre><code>admin:t9KcS3&gt;!0B#2
 mango:h3mXK8RhU~f{]f5H
 </code></pre><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/user_txt.png" alt="usertxt"></p>
+<p><img src="/htb-mango/user_txt.png" alt="usertxt"></p>
 <h2 id="getting-root-account">Getting root account</h2>
 <p>First, I switch from sh to bash by running /bin/bash.</p>
 <p>I transfered linenum.sh on the server and checked the output. There was an interesting file with SUID bit set to 1:</p>
-<p><img src="https://ajdintrejic.github.io/htb-mango/jjs.png" alt="jjs"></p>
+<p><img src="/htb-mango/jjs.png" alt="jjs"></p>
 <h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS</h3>
 <p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
 <pre><code>echo 'var BufferedReader = Java.type(&quot;java.io.BufferedReader&quot;); var FileReader = Java.type(&quot;java.io.FileReader&quot;); var br = new BufferedReader(new FileReader(&quot;/root/root.txt&quot;)); while ((line = br.readLine()) != null) { print(line); }' | jjs
-</code></pre><p><img src="https://ajdintrejic.github.io/htb-mango/root_txt.png" alt="roottxt"></p>
+</code></pre><p><img src="/htb-mango/root_txt.png" alt="roottxt"></p>
 <p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
 
             </div>
@@ -325,7 +324,7 @@ mango:h3mXK8RhU~f{]f5H
 
 
 
-<script type="text/javascript" src="https://ajdintrejic.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -334,17 +333,22 @@ if (!doNotTrack) {
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-165836726-1', 'auto');
-	
+	if (window.sessionStorage) {
+		var GA_SESSION_STORAGE_KEY = 'ga:clientId';
+		ga('create', 'UA-165836726-1', {
+	    'storage': 'none',
+	    'clientId': sessionStorage.getItem(GA_SESSION_STORAGE_KEY)
+	   });
+	   ga(function(tracker) {
+	    sessionStorage.setItem(GA_SESSION_STORAGE_KEY, tracker.get('clientId'));
+	   });
+   }
+	ga('set', 'anonymizeIp', true);
 	ga('send', 'pageview');
 }
 </script>
 
 
-
-    
-        <script src="https://ajdintrejic.github.io/js/osano.js"></script>
-    
 
 
     </body>
