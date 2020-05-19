@@ -2,129 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on ajdintrejic</title>
-    <link>http://ajdintrejic.github.io/tags/</link>
+    <link>https://ajdintrejic.github.io/tags/</link>
     <description>Recent content in Tags on ajdintrejic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
     
-	<atom:link href="http://ajdintrejic.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdintrejic.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CSRF</title>
-      <link>http://ajdintrejic.github.io/tags/csrf/</link>
+      <link>https://ajdintrejic.github.io/tags/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/csrf/</guid>
+      <guid>https://ajdintrejic.github.io/tags/csrf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>XSS</title>
-      <link>http://ajdintrejic.github.io/tags/xss/</link>
+      <link>https://ajdintrejic.github.io/tags/xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/xss/</guid>
+      <guid>https://ajdintrejic.github.io/tags/xss/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nano</title>
-      <link>http://ajdintrejic.github.io/tags/nano/</link>
+      <link>https://ajdintrejic.github.io/tags/nano/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/nano/</guid>
+      <guid>https://ajdintrejic.github.io/tags/nano/</guid>
       <description></description>
     </item>
     
     <item>
       <title>netstat</title>
-      <link>http://ajdintrejic.github.io/tags/netstat/</link>
+      <link>https://ajdintrejic.github.io/tags/netstat/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/netstat/</guid>
+      <guid>https://ajdintrejic.github.io/tags/netstat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OpenNetAdmin</title>
-      <link>http://ajdintrejic.github.io/tags/opennetadmin/</link>
+      <link>https://ajdintrejic.github.io/tags/opennetadmin/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/opennetadmin/</guid>
+      <guid>https://ajdintrejic.github.io/tags/opennetadmin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Authentication bypass</title>
-      <link>http://ajdintrejic.github.io/tags/authentication-bypass/</link>
+      <link>https://ajdintrejic.github.io/tags/authentication-bypass/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/authentication-bypass/</guid>
+      <guid>https://ajdintrejic.github.io/tags/authentication-bypass/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jjs</title>
-      <link>http://ajdintrejic.github.io/tags/jjs/</link>
+      <link>https://ajdintrejic.github.io/tags/jjs/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/jjs/</guid>
+      <guid>https://ajdintrejic.github.io/tags/jjs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MongoDB</title>
-      <link>http://ajdintrejic.github.io/tags/mongodb/</link>
+      <link>https://ajdintrejic.github.io/tags/mongodb/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/mongodb/</guid>
+      <guid>https://ajdintrejic.github.io/tags/mongodb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NoSQL injection</title>
-      <link>http://ajdintrejic.github.io/tags/nosql-injection/</link>
+      <link>https://ajdintrejic.github.io/tags/nosql-injection/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/nosql-injection/</guid>
+      <guid>https://ajdintrejic.github.io/tags/nosql-injection/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SSL certificate</title>
-      <link>http://ajdintrejic.github.io/tags/ssl-certificate/</link>
+      <link>https://ajdintrejic.github.io/tags/ssl-certificate/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/ssl-certificate/</guid>
+      <guid>https://ajdintrejic.github.io/tags/ssl-certificate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>john</title>
-      <link>http://ajdintrejic.github.io/tags/john/</link>
+      <link>https://ajdintrejic.github.io/tags/john/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/john/</guid>
+      <guid>https://ajdintrejic.github.io/tags/john/</guid>
       <description></description>
     </item>
     
     <item>
       <title>redis</title>
-      <link>http://ajdintrejic.github.io/tags/redis/</link>
+      <link>https://ajdintrejic.github.io/tags/redis/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/redis/</guid>
+      <guid>https://ajdintrejic.github.io/tags/redis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>webmin</title>
-      <link>http://ajdintrejic.github.io/tags/webmin/</link>
+      <link>https://ajdintrejic.github.io/tags/webmin/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://ajdintrejic.github.io/tags/webmin/</guid>
+      <guid>https://ajdintrejic.github.io/tags/webmin/</guid>
       <description></description>
     </item>
     
