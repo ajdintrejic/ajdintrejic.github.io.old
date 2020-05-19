@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>redis on Ajdin Trejić</title>
-    <link>https://ajdintrejic.github.io/tags/redis/</link>
-    <description>Recent content in redis on Ajdin Trejić</description>
+    <title>redis on ajdintrejic</title>
+    <link>http://ajdintrejic.github.io/tags/redis/</link>
+    <description>Recent content in redis on ajdintrejic</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Fri, 13 Mar 2020 13:28:11 +0200</lastBuildDate>
     
-	<atom:link href="https://ajdintrejic.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ajdintrejic.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox :: Postman Write Up</title>
-      <link>https://ajdintrejic.github.io/posts/2020/03/hackthebox-postman-write-up/</link>
+      <link>http://ajdintrejic.github.io/posts/htb-postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdintrejic.github.io/posts/2020/03/hackthebox-postman-write-up/</guid>
+      <guid>http://ajdintrejic.github.io/posts/htb-postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
 # nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
 -sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.
