@@ -3,13 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://ajdintrejic.github.io/cv/</loc>
-    <lastmod>2020-05-19T00:00:00+00:00</lastmod>
+    <loc>http://ajdintrejic.github.io/</loc>
+    <lastmod>2020-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://ajdintrejic.github.io/</loc>
-    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
+    <loc>http://ajdintrejic.github.io/posts/webdev/</loc>
+    <lastmod>2020-07-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ajdintrejic.github.io/posts/</loc>
+    <lastmod>2020-07-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ajdintrejic.github.io/cv/</loc>
+    <lastmod>2020-05-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -29,11 +39,6 @@
   
   <url>
     <loc>http://ajdintrejic.github.io/posts/csrf-bypass-token-with-xss/</loc>
-    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ajdintrejic.github.io/posts/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   

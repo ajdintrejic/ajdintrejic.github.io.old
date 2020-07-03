@@ -6,10 +6,23 @@
     <description>Recent content in Posts on ajdintrejic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ajdintrejic.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building a simple web app with Postgres, React and Express</title>
+      <link>http://ajdintrejic.github.io/posts/webdev/</link>
+      <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ajdintrejic.github.io/posts/webdev/</guid>
+      <description>I&amp;rsquo;ll be building a simple webapp:
+Setting up the environment I&amp;rsquo;m running Arch Linux, so this part will be Linux specific.
+Postgres Thanks to Archwiki, this is easy:
+ Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:
+$ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data The files belonging to this database system will be owned by user &amp;#34;postgres&amp;#34;.</description>
+    </item>
     
     <item>
       <title>CSRF :: Token Extraction</title>
