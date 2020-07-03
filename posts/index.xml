@@ -12,15 +12,16 @@
     
     
     <item>
-      <title>Building a simple web app with Postgres, React and Express</title>
+      <title>Building a Simple Web App with Postgres, React and Express</title>
       <link>https://ajdintrejic.github.io/posts/webdev/</link>
       <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ajdintrejic.github.io/posts/webdev/</guid>
-      <description>Introduction I&amp;rsquo;ll be building a simple web application to log workers activity. I&amp;rsquo;ll be using PostgresSQL for database, React for front end and Express for routing the app.
+      <description>Introduction I&amp;rsquo;ll be building a simple web application to log workers activity. I&amp;rsquo;ll be using PostgresSQL for database, React for frontend and Express for routing the app.
+Functionality TODO: add functionality after the web app is built
 Setting up the environment I&amp;rsquo;m running Arch Linux, so this part will be Linux specific.
 Postgres Thanks to Archwiki, this is easy:
- Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:</description>
+ Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres.</description>
     </item>
     
     <item>
