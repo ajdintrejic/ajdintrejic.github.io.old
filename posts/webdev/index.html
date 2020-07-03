@@ -7,27 +7,24 @@
     <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="Ajdin Trejić">
-    <meta name="description" content="I&rsquo;ll be building a simple webapp:
+    <meta name="description" content="Introduction I&rsquo;ll be building a simple web application to log workers activity. I&rsquo;ll be using PostgresSQL for database, React for front end and Express for routing the app.
 Setting up the environment I&rsquo;m running Arch Linux, so this part will be Linux specific.
 Postgres Thanks to Archwiki, this is easy:
- Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:
-$ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data The files belonging to this database system will be owned by user &#34;postgres&#34;.">
+ Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:">
     <meta name="keywords" content="blog,developer,personal,write-up">
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Building a simple web app with Postgres, React and Express"/>
-<meta name="twitter:description" content="I&rsquo;ll be building a simple webapp:
+<meta name="twitter:description" content="Introduction I&rsquo;ll be building a simple web application to log workers activity. I&rsquo;ll be using PostgresSQL for database, React for front end and Express for routing the app.
 Setting up the environment I&rsquo;m running Arch Linux, so this part will be Linux specific.
 Postgres Thanks to Archwiki, this is easy:
- Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:
-$ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data The files belonging to this database system will be owned by user &#34;postgres&#34;."/>
+ Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:"/>
 
     <meta property="og:title" content="Building a simple web app with Postgres, React and Express" />
-<meta property="og:description" content="I&rsquo;ll be building a simple webapp:
+<meta property="og:description" content="Introduction I&rsquo;ll be building a simple web application to log workers activity. I&rsquo;ll be using PostgresSQL for database, React for front end and Express for routing the app.
 Setting up the environment I&rsquo;m running Arch Linux, so this part will be Linux specific.
 Postgres Thanks to Archwiki, this is easy:
- Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:
-$ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data The files belonging to this database system will be owned by user &#34;postgres&#34;." />
+ Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres. 2. Switch to postgres user:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ajdintrejic.github.io/posts/webdev/" />
 <meta property="article:published_time" content="2020-07-03T00:00:00+00:00" />
@@ -122,7 +119,7 @@ $ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data T
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              3-minute read
+              4-minute read
             </span>
           </div>
         </div>
@@ -138,6 +135,7 @@ $ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data T
 	  <h6 id="toc">Table of Contents</h6>
 	  <div> <nav id="TableOfContents">
   <ul>
+    <li><a href="#introduction">Introduction</a></li>
     <li><a href="#setting-up-the-environment">Setting up the environment</a>
       <ul>
         <li><a href="#postgres">Postgres</a></li>
@@ -152,7 +150,8 @@ $ sudo -iu postgres Initialize db cluster:  $ initdb -D /var/lib/postgres/data T
 	
 
 
-        <p>I&rsquo;ll be building a simple webapp:</p>
+        <h2 id="introduction">Introduction</h2>
+<p>I&rsquo;ll be building a simple web application to log workers activity. I&rsquo;ll be using PostgresSQL for database, React for front end and Express for routing the app.</p>
 <h2 id="setting-up-the-environment">Setting up the environment</h2>
 <p>I&rsquo;m running Arch Linux, so this part will be Linux specific.</p>
 <h3 id="postgres">Postgres</h3>
@@ -244,7 +243,8 @@ cd webapp/
 </code></pre></div><p>Now we can create our <code>index.js</code> file and open our code editor:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">touch index.js
 code .
-</code></pre></div><p>Note: The dot &ldquo;.&rdquo; in previous command indicates to our code editor in current working directory.</p>
+</code></pre></div><p>Note: The dot &ldquo;.&rdquo; in previous command tell our code editor to open current working directory.</p>
+<p><strong>to be continued&hellip;</strong></p>
 
       </div>
 
