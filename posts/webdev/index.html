@@ -122,7 +122,7 @@ Postgres Thanks to Archwiki, this is easy:
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              4-minute read
+              5-minute read
             </span>
           </div>
         </div>
@@ -153,6 +153,8 @@ Postgres Thanks to Archwiki, this is easy:
     <li><a href="#actual-code">Actual code</a>
       <ul>
         <li><a href="#frontend-with-reactjs">Frontend with React.js</a></li>
+        <li><a href="#trying-to-open-the-page-with-express">Trying to open the page with Express</a></li>
+        <li><a href="#frontend-pages">Frontend pages</a></li>
       </ul>
     </li>
   </ul>
@@ -285,9 +287,86 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 
 <span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> App;
 </code></pre></div><p>and also add css to <code>src/App.css</code> at the top of the file (I&rsquo;ve removed the other css properties as they were made for that React boilerplate):</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">@import &#39;~antd/dist/antd.css&#39;;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="">@</span><span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#39;~antd/dist/antd.css&#39;</span>;
 </code></pre></div><p>and now, we should have a button on <code>localhost:3000</code></p>
 <p><img src="https://ajdintrejic.github.io/webdev/button.gif" alt="button yay"></p>
+<h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express</h3>
+<p>The page can be loaded with <code>npm start</code> but that is not going through Express router. So Now I will configure this quickly before making any frontend.I&rsquo;m going to install express and react-router-dom so we can connect React and Express:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
+</code></pre></div><p><code>src/index.js</code> has to import the app like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import React from &#39;react&#39;;
+import { render } from &#39;react-dom&#39;;
+import { BrowserRouter } from &#39;react-router-dom&#39;;
+
+import &#39;./index.css&#39;;
+import App from &#39;./App&#39;;
+
+render((
+    &lt;BrowserRouter&gt;
+        &lt;App/&gt;
+    &lt;/BrowserRouter&gt;
+), document.getElementById(&#39;root&#39;));
+
+</code></pre></div><p>and now App.js should make all the paths to other pages like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020;font-weight:bold">import</span> React, { Component } from <span style="color:#4070a0">&#39;react&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> { Route, Switch } from <span style="color:#4070a0">&#39;react-router-dom&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#39;./App.css&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> Login from <span style="color:#4070a0">&#39;./pages/Login&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> Log from <span style="color:#4070a0">&#39;./pages/Log&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> History from <span style="color:#4070a0">&#39;./pages/History&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> Admin from <span style="color:#4070a0">&#39;./pages/Admin&#39;</span>
+
+
+<span style="color:#007020;font-weight:bold">class</span> App <span style="color:#007020;font-weight:bold">extends</span> Component {
+  render() {
+    <span style="color:#007020;font-weight:bold">const</span> App <span style="color:#666">=</span> () =&gt; (
+      <span style="color:#666">&lt;</span>div<span style="color:#666">&gt;</span>
+        <span style="color:#666">&lt;</span>Switch<span style="color:#666">&gt;</span>
+          <span style="color:#666">&lt;</span>Route exact path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/&#39;</span> component<span style="color:#666">=</span>{Login}<span style="color:#666">/&gt;</span>
+          <span style="color:#666">&lt;</span>Route path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/log&#39;</span> component<span style="color:#666">=</span>{Log}<span style="color:#666">/&gt;</span>
+          <span style="color:#666">&lt;</span>Route path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/history&#39;</span> component<span style="color:#666">=</span>{History}<span style="color:#666">/&gt;</span>
+          <span style="color:#666">&lt;</span>Route path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/admin&#39;</span> component<span style="color:#666">=</span>{Admin}<span style="color:#666">/&gt;</span>
+        <span style="color:#666">&lt;</span><span style="">/Switch&gt;</span>
+      <span style="color:#666">&lt;</span><span style="">/div&gt;</span>
+    )
+    <span style="color:#007020;font-weight:bold">return</span> (
+      <span style="color:#666">&lt;</span>Switch<span style="color:#666">&gt;</span>
+        <span style="color:#666">&lt;</span>App<span style="color:#666">/&gt;</span>
+      <span style="color:#666">&lt;</span><span style="">/Switch&gt;</span>
+    );
+  }
+}
+
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> App;
+
+</code></pre></div><p>Now I have made this pages quickly and I&rsquo;ll fix them later and add/remove fuctionality if I feel like in the end when I build the database.</p>
+<h3 id="frontend-pages">Frontend pages</h3>
+<ul>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/login_desktop.png">Login page desktop</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/login_mobile.png">Login page mobile</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/log_desktop.png">User log desktop</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/log_mobile.png">User log mobile</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/history_desktop.png">User history page desktop</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/history_mobile.png">User history mobile</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/admin_desktop.png">Admin panel desktop</a></p>
+</li>
+<li>
+<p><a href="https://ajdintrejic.github.io/webdev/frontend/admin_mobile.png">Admin panel mobile</a></p>
+</li>
+</ul>
 <p><strong>to be continued&hellip;</strong></p>
 
       </div>
