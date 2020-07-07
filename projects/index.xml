@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on ajdintrejic</title>
+    <link>https://ajdintrejic.github.io/projects/</link>
+    <description>Recent content in Projects on ajdintrejic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 07 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ajdintrejic.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>WorkLog - A simple Web App</title>
+      <link>https://ajdintrejic.github.io/projects/webdev/</link>
+      <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajdintrejic.github.io/projects/webdev/</guid>
+      <description>Simple Web App built with React.js, Express and PostgreSQL WorkLog is a web app which is made for logging workers data. User/worker can input data when and what has done in that time. It can also track location. Admins can look at aggregated data which can be useful for expanding their business or be more efficient at what they do.
+The app is currently mostly done. It still needs tweaks most of which aren&amp;rsquo;t hard to implement.</description>
+    </item>
+    
+  </channel>
+</rss>

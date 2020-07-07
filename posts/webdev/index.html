@@ -95,6 +95,10 @@ Postgres Thanks to Archwiki, this is easy:
           </li>
         
           <li class="navigation-item">
+            <a class="navigation-link" href="https://ajdintrejic.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
             <a class="navigation-link" href="https://ajdintrejic.github.io/cv/">CV</a>
           </li>
         
@@ -250,7 +254,7 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga postgres<span style="col
 Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="color:#666">[</span>1<span style="color:#666">]</span>: Started PostgreSQL database server.
 <span style="color:#666">[</span>ajdin@yoga ~<span style="color:#666">]</span>$ 
 
-</code></pre></div><p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I wont be doing that.</p>
+</code></pre></div><p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I won&rsquo;t be doing that.</p>
 <h3 id="code">Code</h3>
 <p>I&rsquo;ll use the VSCode, but the OSS version, it can be installed with</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S code
@@ -277,7 +281,7 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 └── src
 </code></pre></div><p>I&rsquo;ll start the server with <code>npm start</code> and we will get the React greeter on <code>localhost:3000</code>:</p>
 <p><img src="https://ajdintrejic.github.io/webdev/react.png" alt="react"></p>
-<p>For React I&rsquo;m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/use-with-create-react-app#Install-and-Initialization">here</a>,but I&rsquo;ll  include some steps anyway.</p>
+<p>For React I&rsquo;m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/use-with-create-react-app#Install-and-Initialization">here</a>, but I&rsquo;ll  include some steps anyway.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
 </code></pre></div><p>Overwrite <code>src/App.js</code> with this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#007020;font-weight:bold">import</span> React from <span style="color:#4070a0">&#39;react&#39;</span>;
@@ -296,7 +300,7 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 </code></pre></div><p>and now, we should have a button on <code>localhost:3000</code></p>
 <p><img src="https://ajdintrejic.github.io/webdev/button.gif" alt="button yay"></p>
 <h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express</h3>
-<p>The page can be loaded with <code>npm start</code> but that is not going through Express router. So Now I will configure this quickly before making any frontend.I&rsquo;m going to install express and react-router-dom so we can connect React and Express:</p>
+<p>The page can be loaded with <code>npm start</code> but that is not going through Express router. So Now I will configure this quickly before making any frontend. I&rsquo;m going to install express and react-router-dom so we can connect React and Express:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
 </code></pre></div><p><code>src/index.js</code> has to import the app like this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#007020;font-weight:bold">import</span> React from <span style="color:#4070a0">&#39;react&#39;</span>;
@@ -344,7 +348,7 @@ render((
 
 <span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> App;
 
-</code></pre></div><p>Now I have made this pages quickly and I&rsquo;ll fix them later and add/remove fuctionality if I feel like in the end when I build the database.</p>
+</code></pre></div><p>I have made these pages quickly and I&rsquo;ll fix them later and add/remove fuctionality if I feel like in the end when I build the database.</p>
 <h3 id="frontend-pages">Frontend pages</h3>
 <ul>
 <li><a href="https://ajdintrejic.github.io/webdev/frontend/login_desktop.png">Login page desktop</a></li>
@@ -416,7 +420,6 @@ render(
 };
 
 </code></pre></div><p>So what is this class <code>auth</code>? Well it&rsquo;s a custom class that handles functions like: <code>login()</code>, <code>logout()</code>, <code>isAuthenticated()</code> and so on&hellip;</p>
-<p><strong>to be continued&hellip;</strong></p>
 <h3 id="connecting-the-app-to-postgres">Connecting the app to Postgres</h3>
 <p>I need 2 files here:</p>
 <ol>
