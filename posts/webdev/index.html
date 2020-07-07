@@ -52,13 +52,15 @@ Postgres Thanks to Archwiki, this is easy:
     
       
       
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/coder.min.8ca1e620659915ffe2eb0a01ebc407d0da2d96ce00f1eb885d93612840044b64.css" integrity="sha256-jKHmIGWZFf/i6woB68QH0Notls4A8euIXZNhKEAES2Q=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
     
 
     
 
     
 
+    
+      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/codeFix.css" />
     
 
     
@@ -122,7 +124,7 @@ Postgres Thanks to Archwiki, this is easy:
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              5-minute read
+              10-minute read
             </span>
           </div>
         </div>
@@ -156,8 +158,10 @@ Postgres Thanks to Archwiki, this is easy:
         <li><a href="#trying-to-open-the-page-with-express">Trying to open the page with Express</a></li>
         <li><a href="#frontend-pages">Frontend pages</a></li>
         <li><a href="#basic-authentication">Basic authentication</a></li>
+        <li><a href="#connecting-the-app-to-postgres">Connecting the app to Postgres</a></li>
       </ul>
     </li>
+    <li><a href="#things-that-are-left-to-do">Things that are left to do</a></li>
   </ul>
 </nav> </div>
 	  <hr>
@@ -276,14 +280,14 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 <p>For React I&rsquo;m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/use-with-create-react-app#Install-and-Initialization">here</a>,but I&rsquo;ll  include some steps anyway.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
 </code></pre></div><p>Overwrite <code>src/App.js</code> with this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020;font-weight:bold">import</span> React from <span style="color:#4070a0">&#39;react&#39;</span>;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#007020;font-weight:bold">import</span> React from <span style="color:#4070a0">&#39;react&#39;</span>;
 <span style="color:#007020;font-weight:bold">import</span> { Button } from <span style="color:#4070a0">&#39;antd&#39;</span>;
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#39;./App.css&#39;</span>;
 
 <span style="color:#007020;font-weight:bold">const</span> App <span style="color:#666">=</span> () =&gt; (
-  <span style="color:#666">&lt;</span>div className<span style="color:#666">=</span><span style="color:#4070a0">&#34;App&#34;</span><span style="color:#666">&gt;</span>
-    <span style="color:#666">&lt;</span>Button type<span style="color:#666">=</span><span style="color:#4070a0">&#34;primary&#34;</span><span style="color:#666">&gt;</span>Button<span style="color:#666">&lt;</span><span style="">/Button&gt;</span>
-  <span style="color:#666">&lt;</span><span style="">/div&gt;</span>
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">className</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;App&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">Button</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;primary&#34;</span>&gt;Button&lt;/<span style="color:#062873;font-weight:bold">Button</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
 );
 
 <span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> App;
@@ -295,21 +299,21 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 <p>The page can be loaded with <code>npm start</code> but that is not going through Express router. So Now I will configure this quickly before making any frontend.I&rsquo;m going to install express and react-router-dom so we can connect React and Express:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
 </code></pre></div><p><code>src/index.js</code> has to import the app like this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import React from &#39;react&#39;;
-import { render } from &#39;react-dom&#39;;
-import { BrowserRouter } from &#39;react-router-dom&#39;;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#007020;font-weight:bold">import</span> React from <span style="color:#4070a0">&#39;react&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> { render } from <span style="color:#4070a0">&#39;react-dom&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> { BrowserRouter } from <span style="color:#4070a0">&#39;react-router-dom&#39;</span>;
 
-import &#39;./index.css&#39;;
-import App from &#39;./App&#39;;
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#39;./index.css&#39;</span>;
+<span style="color:#007020;font-weight:bold">import</span> App from <span style="color:#4070a0">&#39;./App&#39;</span>;
 
 render((
-    &lt;BrowserRouter&gt;
-        &lt;App/&gt;
-    &lt;/BrowserRouter&gt;
-), document.getElementById(&#39;root&#39;));
+    &lt;<span style="color:#062873;font-weight:bold">BrowserRouter</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">App</span>/&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">BrowserRouter</span>&gt;
+), <span style="color:#007020">document</span>.getElementById(<span style="color:#4070a0">&#39;root&#39;</span>));
 
 </code></pre></div><p>and now App.js should make all the paths to other pages like this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020;font-weight:bold">import</span> React, { Component } from <span style="color:#4070a0">&#39;react&#39;</span>;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#007020;font-weight:bold">import</span> React, { Component } from <span style="color:#4070a0">&#39;react&#39;</span>;
 <span style="color:#007020;font-weight:bold">import</span> { Route, Switch } from <span style="color:#4070a0">&#39;react-router-dom&#39;</span>;
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#39;./App.css&#39;</span>;
 <span style="color:#007020;font-weight:bold">import</span> Login from <span style="color:#4070a0">&#39;./pages/Login&#39;</span>;
@@ -321,19 +325,19 @@ render((
 <span style="color:#007020;font-weight:bold">class</span> App <span style="color:#007020;font-weight:bold">extends</span> Component {
   render() {
     <span style="color:#007020;font-weight:bold">const</span> App <span style="color:#666">=</span> () =&gt; (
-      <span style="color:#666">&lt;</span>div<span style="color:#666">&gt;</span>
-        <span style="color:#666">&lt;</span>Switch<span style="color:#666">&gt;</span>
-          <span style="color:#666">&lt;</span>Route exact path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/&#39;</span> component<span style="color:#666">=</span>{Login}<span style="color:#666">/&gt;</span>
-          <span style="color:#666">&lt;</span>Route path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/log&#39;</span> component<span style="color:#666">=</span>{Log}<span style="color:#666">/&gt;</span>
-          <span style="color:#666">&lt;</span>Route path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/history&#39;</span> component<span style="color:#666">=</span>{History}<span style="color:#666">/&gt;</span>
-          <span style="color:#666">&lt;</span>Route path<span style="color:#666">=</span><span style="color:#4070a0">&#39;/admin&#39;</span> component<span style="color:#666">=</span>{Admin}<span style="color:#666">/&gt;</span>
-        <span style="color:#666">&lt;</span><span style="">/Switch&gt;</span>
-      <span style="color:#666">&lt;</span><span style="">/div&gt;</span>
+      &lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+          &lt;<span style="color:#062873;font-weight:bold">Route</span> <span style="color:#4070a0">exact</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#39;/&#39;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{Login}/&gt;
+          &lt;<span style="color:#062873;font-weight:bold">Route</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#39;/log&#39;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{Log}/&gt;
+          &lt;<span style="color:#062873;font-weight:bold">Route</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#39;/history&#39;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{History}/&gt;
+          &lt;<span style="color:#062873;font-weight:bold">Route</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#39;/admin&#39;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{Admin}/&gt;
+        &lt;/<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
     )
     <span style="color:#007020;font-weight:bold">return</span> (
-      <span style="color:#666">&lt;</span>Switch<span style="color:#666">&gt;</span>
-        <span style="color:#666">&lt;</span>App<span style="color:#666">/&gt;</span>
-      <span style="color:#666">&lt;</span><span style="">/Switch&gt;</span>
+      &lt;<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">App</span>/&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">Switch</span>&gt;
     );
   }
 }
@@ -353,7 +357,225 @@ render((
 <li><a href="https://ajdintrejic.github.io/webdev/frontend/admin_mobile.png">Admin panel mobile</a></li>
 </ul>
 <h3 id="basic-authentication">Basic authentication</h3>
+<p>I&rsquo;m going to briefly explain how is authentication handled by this app. Entry point into this web app is in <code>index.js</code> which opens <code>App.js</code> like this (if there is &lsquo;&hellip;&rsquo; in a code block, some code there was removed):</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+render(
+  &lt;<span style="color:#062873;font-weight:bold">BrowserRouter</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">App</span> /&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">BrowserRouter</span>&gt;,
+  <span style="color:#007020">document</span>.getElementById(<span style="color:#4070a0">&#34;root&#34;</span>)
+);
+</code></pre></div><p><code>App.js</code> has a switch so the user can open different websites.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+<span style="color:#007020;font-weight:bold">class</span> App <span style="color:#007020;font-weight:bold">extends</span> Component {
+  render() {
+    <span style="color:#007020;font-weight:bold">const</span> App <span style="color:#666">=</span> () =&gt; (
+      &lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+          &lt;<span style="color:#062873;font-weight:bold">Route</span> <span style="color:#4070a0">exact</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;/&#34;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{Login} /&gt;
+          &lt;<span style="color:#062873;font-weight:bold">ProtectedRoute</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;/log&#34;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{Log} /&gt;
+          &lt;<span style="color:#062873;font-weight:bold">ProtectedRoute</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;/history&#34;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{History} /&gt;
+          &lt;<span style="color:#062873;font-weight:bold">ProtectedRoute</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;/admin&#34;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{Admin} /&gt;
+          &lt;<span style="color:#062873;font-weight:bold">Route</span> <span style="color:#4070a0">path</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;*&#34;</span> <span style="color:#4070a0">component</span><span style="color:#666">=</span>{() =&gt; <span style="color:#4070a0">&#34;404 Not found, what are you doing here?&#34;</span>} /&gt;
+        &lt;/<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+    );
+    <span style="color:#007020;font-weight:bold">return</span> (
+      &lt;<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">App</span> /&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">Switch</span>&gt;
+    );
+  }
+}
+
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> App;
+</code></pre></div><p>So the user can now open all these sites, if he is authenticated. If he is not he won&rsquo;t be able to open the switch to the <code>&lt;ProtectedRoute ... /&gt;</code>. ProtectedRoute is a custom class I made which checks if the user is authenticated and opens that Route or returns the user to the login page if he is not.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">const</span> ProtectedRoute <span style="color:#666">=</span> ({ component<span style="color:#666">:</span> Component, ...rest }) =&gt; {
+  <span style="color:#007020;font-weight:bold">return</span> (
+    &lt;<span style="color:#062873;font-weight:bold">Route</span>
+      {<span style="color:#4070a0">...rest</span>}
+      <span style="color:#4070a0">render</span><span style="color:#666">=</span>{(props) =&gt; {
+        <span style="color:#007020;font-weight:bold">if</span> (auth.isAuthenticated()) {
+          <span style="color:#007020;font-weight:bold">return</span> &lt;<span style="color:#062873;font-weight:bold">Component</span> {<span style="color:#4070a0">...props</span>} /&gt;;
+        } <span style="color:#007020;font-weight:bold">else</span> {
+          <span style="color:#007020;font-weight:bold">return</span> (
+            &lt;<span style="color:#062873;font-weight:bold">Redirect</span>
+              <span style="color:#4070a0">to</span><span style="color:#666">=</span>{{
+                pathname<span style="color:#666">:</span> <span style="color:#4070a0">&#34;/&#34;</span>,
+                state<span style="color:#666">:</span> {
+                  from<span style="color:#666">:</span> props.location,
+                },
+              }}
+            /&gt;
+          );
+        }
+      }}
+    /&gt;
+  );
+};
+
+</code></pre></div><p>So what is this class <code>auth</code>? Well it&rsquo;s a custom class that handles functions like: <code>login()</code>, <code>logout()</code>, <code>isAuthenticated()</code> and so on&hellip;</p>
 <p><strong>to be continued&hellip;</strong></p>
+<h3 id="connecting-the-app-to-postgres">Connecting the app to Postgres</h3>
+<p>I need 2 files here:</p>
+<ol>
+<li><code>createDb.js</code> to create the database (or I can create it with <code>psql</code>, but It&rsquo;s better to put all the commands in a file so it&rsquo;s easier to deploy)</li>
+<li><code>db.js</code> to execute search queries on the database. Postgres for NodeJS requires the package <code>pg</code>.</li>
+</ol>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">src/db
+├── createDb.js
+└── db.js
+</code></pre></div><p>The database should look something like this:
+<img src="https://ajdintrejic.github.io/webdev/sql.png" alt="sql"></p>
+<p>and the coresponding SQL code to create this looks like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">TABLE</span> Town(
+  town_name <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">64</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  town_id <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  <span style="color:#007020;font-weight:bold">PRIMARY</span> <span style="color:#007020;font-weight:bold">KEY</span> (town_id)
+);
+
+<span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">TABLE</span> Work_log(
+  time_start <span style="color:#007020;font-weight:bold">TIMESTAMP</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  work_id <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  time_end <span style="color:#007020;font-weight:bold">TIMESTAMP</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span> <span style="color:#007020;font-weight:bold">CONSTRAINT</span> checkTime <span style="color:#007020;font-weight:bold">CHECK</span>(time_end <span style="color:#666">&gt;</span> time_start),
+  work_description <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">128</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  work_title <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">32</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  <span style="color:#007020;font-weight:bold">PRIMARY</span> <span style="color:#007020;font-weight:bold">KEY</span> (work_id)
+);
+
+<span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">TABLE</span> Jobs(
+  job_id <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  job_name <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">64</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  <span style="color:#007020;font-weight:bold">PRIMARY</span> <span style="color:#007020;font-weight:bold">KEY</span> (job_id)
+);
+
+<span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">TABLE</span> <span style="color:#007020;font-weight:bold">User</span>(
+  user_id <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  username <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">32</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  fullname <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">32</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  estimated_hours_per_month <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  hourly_wage <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  is_admin <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  town_id <span style="color:#007020">INT</span> <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,
+  job_id <span style="color:#007020">INT</span>,
+  <span style="color:#007020;font-weight:bold">PRIMARY</span> <span style="color:#007020;font-weight:bold">KEY</span> (user_id),
+  <span style="color:#007020;font-weight:bold">FOREIGN</span> <span style="color:#007020;font-weight:bold">KEY</span> (town_id) <span style="color:#007020;font-weight:bold">REFERENCES</span> town(town_id),
+  <span style="color:#007020;font-weight:bold">FOREIGN</span> <span style="color:#007020;font-weight:bold">KEY</span> (job_id) <span style="color:#007020;font-weight:bold">REFERENCES</span> Jobs(job_id),
+  <span style="color:#007020;font-weight:bold">UNIQUE</span> (username)
+);
+</code></pre></div><p>We can transfer these commands into <code>createDb.js</code> like this (example for table town):</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020;font-weight:bold">const</span> sql_create_town <span style="color:#666">=</span> <span style="color:#4070a0">`CREATE TABLE Town(
+</span><span style="color:#4070a0">    town_name VARCHAR(64) NOT NULL,
+</span><span style="color:#4070a0">    town_id INT NOT NULL,
+</span><span style="color:#4070a0">    PRIMARY KEY (town_id)
+</span><span style="color:#4070a0">);`</span>;
+</code></pre></div><p>The queries (eg. <code>CREATE</code>, <code>INSERT</code>) can be executed like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#007020;font-weight:bold">const</span> {Pool} <span style="color:#666">=</span> require(<span style="color:#4070a0">&#39;pg&#39;</span>);
+
+<span style="color:#007020;font-weight:bold">const</span> pool <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">new</span> Pool({
+    user<span style="color:#666">:</span> <span style="color:#4070a0">&#39;postgres&#39;</span>,
+    host<span style="color:#666">:</span> <span style="color:#4070a0">&#39;localhost&#39;</span>,
+    database<span style="color:#666">:</span> <span style="color:#4070a0">&#39;DATABASE NAME&#39;</span>,
+    password<span style="color:#666">:</span> <span style="color:#4070a0">&#39;PASSWORD&#39;</span>,
+    port<span style="color:#666">:</span> <span style="color:#40a070">5432</span>,
+});
+
+module.exports <span style="color:#666">=</span> {
+    query<span style="color:#666">:</span> (text, params) =&gt; {
+        <span style="color:#007020;font-weight:bold">const</span> start <span style="color:#666">=</span> <span style="color:#007020">Date</span>.now();
+        <span style="color:#007020;font-weight:bold">return</span> pool.query(text, params)
+            .then(res =&gt; {
+                <span style="color:#007020;font-weight:bold">const</span> duration <span style="color:#666">=</span> <span style="color:#007020">Date</span>.now() <span style="color:#666">-</span> start;
+                <span style="color:#60a0b0;font-style:italic">//console.log(&#39;executed query&#39;, {text, params, duration, rows: res.rows});
+</span><span style="color:#60a0b0;font-style:italic"></span>                <span style="color:#007020;font-weight:bold">return</span> res;
+            });
+    },
+    pool<span style="color:#666">:</span> pool
+}
+
+</code></pre></div><p>Once the SQL is ready, We need to create a new user for postgres as we don&rsquo;t want it to be a superuser. In production this should include revoking some rights from this user so the database is more secure.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>postgres@yoga ~<span style="color:#666">]</span>$ createuser --interactive
+Enter name of role to add: work-log-user
+Shall the new role be a superuser? <span style="color:#666">(</span>y/n<span style="color:#666">)</span> n
+Shall the new role be allowed to create databases? <span style="color:#666">(</span>y/n<span style="color:#666">)</span> n
+Shall the new role be allowed to create more new roles? <span style="color:#666">(</span>y/n<span style="color:#666">)</span> n
+<span style="color:#666">[</span>postgres@yoga ~<span style="color:#666">]</span>$ 
+</code></pre></div><p>Creating the database:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">[postgres<span style="color:#666">@</span>yoga <span style="color:#666">~</span>]<span style="">$</span> psql
+psql (<span style="color:#40a070">12</span>.<span style="color:#40a070">3</span>)
+<span style="color:#007020;font-weight:bold">Type</span> <span style="color:#4070a0">&#34;help&#34;</span> <span style="color:#007020;font-weight:bold">for</span> help.
+
+postgres<span style="color:#666">=#</span> <span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">DATABASE</span> worklogdb;
+<span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">DATABASE</span>
+postgres<span style="color:#666">=#</span> <span style="color:#007020;font-weight:bold">GRANT</span> <span style="color:#007020;font-weight:bold">SELECT</span> <span style="color:#007020;font-weight:bold">ON</span> <span style="color:#007020;font-weight:bold">ALL</span> TABLES <span style="color:#007020;font-weight:bold">IN</span> <span style="color:#007020;font-weight:bold">SCHEMA</span> <span style="color:#007020;font-weight:bold">public</span> <span style="color:#007020;font-weight:bold">TO</span> workloguser;
+<span style="color:#007020;font-weight:bold">GRANT</span>
+postgres<span style="color:#666">=#</span> <span style="color:#007020;font-weight:bold">ALTER</span> <span style="color:#007020;font-weight:bold">DEFAULT</span> <span style="color:#007020;font-weight:bold">PRIVILEGES</span> <span style="color:#007020;font-weight:bold">IN</span> <span style="color:#007020;font-weight:bold">SCHEMA</span> <span style="color:#007020;font-weight:bold">public</span> <span style="color:#007020;font-weight:bold">GRANT</span> <span style="color:#007020;font-weight:bold">SELECT</span>, <span style="color:#007020;font-weight:bold">UPDATE</span>, <span style="color:#007020;font-weight:bold">INSERT</span> <span style="color:#007020;font-weight:bold">ON</span> TABLES <span style="color:#007020;font-weight:bold">TO</span> workloguser;
+<span style="color:#007020;font-weight:bold">ALTER</span> <span style="color:#007020;font-weight:bold">DEFAULT</span> <span style="color:#007020;font-weight:bold">PRIVILEGES</span>
+</code></pre></div><p>I&rsquo;ve edited the script to create the database, so when I run <code>node src/db/createDb.js</code> it outputs:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">┌[ajdin@yoga] [/dev/pts/1] [master ⚡] 
+└[~/Documents/webapp/worklog-app]&gt; node src/db/createDb.js
+Creating table town.
+Table town created.
+Creating table work_log.
+Table work_log created.
+Creating table jobs.
+Table jobs created.
+Creating table user.
+Table user created.
+</code></pre></div><p>Now the tables are here, we need to provide it with some mock data, I&rsquo;ll create a new file called <code>mockDb.js</code> which will supply test data to the database so it can be tested. (I won&rsquo;t populate <code>work_log</code> with data)</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worklogdb=&gt; \dt
+              List of relations
+ Schema |     Name     | Type  |    Owner    
+--------+--------------+-------+-------------
+ public | jobs         | table | workloguser
+ public | town         | table | workloguser
+ public | work_log     | table | workloguser
+ public | worklog_user | table | workloguser
+(4 rows)
+
+worklogdb=&gt; SELECT * FROM work_log;
+ time_start | work_id | time_end | work_description | work_title 
+------------+---------+----------+------------------+------------
+(0 rows)
+
+worklogdb=&gt; SELECT * FROM worklog_user;
+ user_id | username |   fullname   | estimated_hours_per_month | hourly_wage | is_admin | town_id | job_id 
+---------+----------+--------------+---------------------------+-------------+----------+---------+--------
+       1 | admin    | Ajdin Trejić |                       150 |          20 |        1 |       2 |      1
+(1 row)
+
+worklogdb=&gt; SELECT * FROM jobs;
+ job_id |       job_name       
+--------+----------------------
+      1 | posao administratora
+(1 row)
+
+worklogdb=&gt; SELECT * FROM town;
+ town_name | town_id 
+-----------+---------
+ Poreč     |       1
+ Funtana   |       2
+ Rovinj    |       3
+ Pazin     |       4
+ Novigrad  |       5
+(5 rows)
+
+worklogdb=&gt; 
+</code></pre></div><p>So, the database is connected and has mockdata.</p>
+<h2 id="things-that-are-left-to-do">Things that are left to do</h2>
+<ol>
+<li>Make use of sessions and cookies with <code>express-session</code> middleware (e.g. leaving cookies when user clicks on &lsquo;Remember me on login&rsquo;, or to enable dark mode).</li>
+<li>Create an admin route for users with <code>is_admin == 1</code>.</li>
+<li>Make frontend render data from the database:
+<ul>
+<li>Create a class which handles the dataflow.</li>
+<li>Make it secure so no symbols can pass through (so I don&rsquo;t have problens with SQL injections) and disable <code>DROP TABLE</code> for obvious reasons.</li>
+</ul>
+</li>
+<li>Add another user which can edit other user data if a regular user entered wrong data, like a more priviledged user.</li>
+<li>Make the admin dashboard display all useful info (Current frontend only shows data which I thought could be useful).</li>
+</ol>
 
       </div>
 
