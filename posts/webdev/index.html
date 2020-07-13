@@ -29,20 +29,20 @@ Setting up the environment I&rsquo;m running Arch Linux, so this part will be Li
 Postgres Thanks to Archwiki, this is easy:
  Install the PostgreSQL package:  sudo pacman -S postgresql Now this will also create an new user postgres." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdintrejic.github.io/posts/webdev/" />
+<meta property="og:url" content="https://ajdin.io/posts/webdev/" />
 <meta property="article:published_time" content="2020-07-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-07-03T00:00:00+00:00" />
 
 
     
-      <base href="https://ajdintrejic.github.io/posts/webdev/">
+      <base href="https://ajdin.io/posts/webdev/">
     
     <title>
   Building a Simple Web App with Postgres, React and Express · ajdintrejic
 </title>
 
     
-      <link rel="canonical" href="https://ajdintrejic.github.io/posts/webdev/">
+      <link rel="canonical" href="https://ajdin.io/posts/webdev/">
     
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@ Postgres Thanks to Archwiki, this is easy:
     
       
       
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://ajdin.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -60,13 +60,13 @@ Postgres Thanks to Archwiki, this is easy:
     
 
     
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/codeFix.css" />
+      <link rel="stylesheet" href="https://ajdin.io/css/codeFix.css" />
     
 
     
 
-    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://ajdin.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://ajdin.io/images/favicon-16x16.png" sizes="16x16">
 
     <meta name="generator" content="Hugo 0.73.0" />
   </head>
@@ -77,7 +77,7 @@ Postgres Thanks to Archwiki, this is easy:
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="https://ajdintrejic.github.io/">
+    <a class="navigation-title" href="https://ajdin.io/">
       ajdintrejic
     </a>
     
@@ -87,19 +87,19 @@ Postgres Thanks to Archwiki, this is easy:
       
         
           <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/about/">About</a>
+            <a class="navigation-link" href="https://ajdin.io/about/">About</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/posts/">Blog</a>
+            <a class="navigation-link" href="https://ajdin.io/posts/">Blog</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/projects/">Projects</a>
+            <a class="navigation-link" href="https://ajdin.io/projects/">Projects</a>
           </li>
         
           <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/cv/">CV</a>
+            <a class="navigation-link" href="https://ajdin.io/cv/">CV</a>
           </li>
         
       
@@ -136,7 +136,7 @@ Postgres Thanks to Archwiki, this is easy:
 
       <div>
         
-          <img src='https://ajdintrejic.github.io/webdev/cover.jpg' alt="Featured image"/>
+          <img src='https://ajdin.io/webdev/cover.jpg' alt="Featured image"/>
         
 
 	
@@ -258,7 +258,7 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 <h3 id="code">Code</h3>
 <p>I&rsquo;ll use the VSCode, but the OSS version, it can be installed with</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S code
-</code></pre></div><p><img src="https://ajdintrejic.github.io/webdev/code.png" alt="code"></p>
+</code></pre></div><p><img src="https://ajdin.io/webdev/code.png" alt="code"></p>
 <h3 id="nodejs-and-node-package-manager">Node.js and Node package manager</h3>
 <p>This is also easy to install, just run this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S nodejs npm
@@ -280,7 +280,7 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 ├── README.md
 └── src
 </code></pre></div><p>I&rsquo;ll start the server with <code>npm start</code> and we will get the React greeter on <code>localhost:3000</code>:</p>
-<p><img src="https://ajdintrejic.github.io/webdev/react.png" alt="react"></p>
+<p><img src="https://ajdin.io/webdev/react.png" alt="react"></p>
 <p>For React I&rsquo;m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/use-with-create-react-app#Install-and-Initialization">here</a>, but I&rsquo;ll  include some steps anyway.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
 </code></pre></div><p>Overwrite <code>src/App.js</code> with this:</p>
@@ -298,7 +298,7 @@ Jul <span style="color:#40a070">03</span> 18:51:04 yoga systemd<span style="colo
 </code></pre></div><p>and also add css to <code>src/App.css</code> at the top of the file (I&rsquo;ve removed the other css properties as they were made for that React boilerplate):</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="">@</span><span style="color:#007020;font-weight:bold">import</span> <span style="color:#4070a0">&#39;~antd/dist/antd.css&#39;</span>;
 </code></pre></div><p>and now, we should have a button on <code>localhost:3000</code></p>
-<p><img src="https://ajdintrejic.github.io/webdev/button.gif" alt="button yay"></p>
+<p><img src="https://ajdin.io/webdev/button.gif" alt="button yay"></p>
 <h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express</h3>
 <p>The page can be loaded with <code>npm start</code> but that is not going through Express router. So Now I will configure this quickly before making any frontend. I&rsquo;m going to install express and react-router-dom so we can connect React and Express:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
@@ -351,14 +351,14 @@ render((
 </code></pre></div><p>I have made these pages quickly and I&rsquo;ll fix them later and add/remove fuctionality if I feel like in the end when I build the database.</p>
 <h3 id="frontend-pages">Frontend pages</h3>
 <ul>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/login_desktop.png">Login page desktop</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/login_mobile.png">Login page mobile</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/log_desktop.png">User log desktop</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/log_mobile.png">User log mobile</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/history_desktop.png">User history page desktop</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/history_mobile.png">User history mobile</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/admin_desktop.png">Admin panel desktop</a></li>
-<li><a href="https://ajdintrejic.github.io/webdev/frontend/admin_mobile.png">Admin panel mobile</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/login_desktop.png">Login page desktop</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/login_mobile.png">Login page mobile</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/log_desktop.png">User log desktop</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/log_mobile.png">User log mobile</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/history_desktop.png">User history page desktop</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/history_mobile.png">User history mobile</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/admin_desktop.png">Admin panel desktop</a></li>
+<li><a href="https://ajdin.io/webdev/frontend/admin_mobile.png">Admin panel mobile</a></li>
 </ul>
 <h3 id="basic-authentication">Basic authentication</h3>
 <p>I&rsquo;m going to briefly explain how is authentication handled by this app. Entry point into this web app is in <code>index.js</code> which opens <code>App.js</code> like this (if there is &lsquo;&hellip;&rsquo; in a code block, some code there was removed):</p>
@@ -430,7 +430,7 @@ render(
 ├── createDb.js
 └── db.js
 </code></pre></div><p>The database should look something like this:
-<img src="https://ajdintrejic.github.io/webdev/sql.png" alt="sql"></p>
+<img src="https://ajdin.io/webdev/sql.png" alt="sql"></p>
 <p>and the coresponding SQL code to create this looks like this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#007020;font-weight:bold">CREATE</span> <span style="color:#007020;font-weight:bold">TABLE</span> Town(
   town_name <span style="color:#007020">VARCHAR</span>(<span style="color:#40a070">64</span>) <span style="color:#007020;font-weight:bold">NOT</span> <span style="color:#007020;font-weight:bold">NULL</span>,

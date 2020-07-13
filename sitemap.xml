@@ -3,152 +3,152 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ajdintrejic.github.io/</loc>
+    <loc>https://ajdin.io/</loc>
     <lastmod>2020-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/projects/</loc>
+    <loc>https://ajdin.io/projects/</loc>
     <lastmod>2020-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/projects/webdev/</loc>
+    <loc>https://ajdin.io/projects/webdev/</loc>
     <lastmod>2020-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/webdev/</loc>
+    <loc>https://ajdin.io/posts/webdev/</loc>
     <lastmod>2020-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/</loc>
+    <loc>https://ajdin.io/posts/</loc>
     <lastmod>2020-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/cv/</loc>
+    <loc>https://ajdin.io/cv/</loc>
     <lastmod>2020-05-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/categories/</loc>
+    <loc>https://ajdin.io/categories/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/csrf/</loc>
+    <loc>https://ajdin.io/tags/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/categories/csrf/</loc>
+    <loc>https://ajdin.io/categories/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/csrf-bypass-token-with-xss/</loc>
+    <loc>https://ajdin.io/posts/csrf-bypass-token-with-xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/</loc>
+    <loc>https://ajdin.io/tags/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/xss/</loc>
+    <loc>https://ajdin.io/tags/xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/categories/hackthebox/</loc>
+    <loc>https://ajdin.io/categories/hackthebox/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/htb-openadmin/</loc>
+    <loc>https://ajdin.io/posts/htb/openadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/nano/</loc>
+    <loc>https://ajdin.io/tags/nano/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/netstat/</loc>
+    <loc>https://ajdin.io/tags/netstat/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/opennetadmin/</loc>
+    <loc>https://ajdin.io/tags/opennetadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/authentication-bypass/</loc>
+    <loc>https://ajdin.io/tags/authentication-bypass/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/htb-mango/</loc>
+    <loc>https://ajdin.io/posts/htb/mango/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/jjs/</loc>
+    <loc>https://ajdin.io/tags/jjs/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/mongodb/</loc>
+    <loc>https://ajdin.io/tags/mongodb/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/nosql-injection/</loc>
+    <loc>https://ajdin.io/tags/nosql-injection/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/ssl-certificate/</loc>
+    <loc>https://ajdin.io/tags/ssl-certificate/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/posts/htb-postman/</loc>
+    <loc>https://ajdin.io/posts/htb/postman/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/john/</loc>
+    <loc>https://ajdin.io/tags/john/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/redis/</loc>
+    <loc>https://ajdin.io/tags/redis/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/tags/webmin/</loc>
+    <loc>https://ajdin.io/tags/webmin/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/about/</loc>
+    <loc>https://ajdin.io/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/privacy/</loc>
+    <loc>https://ajdin.io/privacy/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdintrejic.github.io/series/</loc>
+    <loc>https://ajdin.io/series/</loc>
   </url>
   
 </urlset>

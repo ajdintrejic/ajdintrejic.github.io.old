@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on ajdintrejic</title>
-    <link>https://ajdintrejic.github.io/categories/</link>
+    <link>https://ajdin.io/categories/</link>
     <description>Recent content in Categories on ajdintrejic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
     
-	<atom:link href="https://ajdintrejic.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdin.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CSRF</title>
-      <link>https://ajdintrejic.github.io/categories/csrf/</link>
+      <link>https://ajdin.io/categories/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>https://ajdintrejic.github.io/categories/csrf/</guid>
+      <guid>https://ajdin.io/categories/csrf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>HackTheBox</title>
-      <link>https://ajdintrejic.github.io/categories/hackthebox/</link>
+      <link>https://ajdin.io/categories/hackthebox/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>https://ajdintrejic.github.io/categories/hackthebox/</guid>
+      <guid>https://ajdin.io/categories/hackthebox/</guid>
       <description></description>
     </item>
     
