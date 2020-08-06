@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>HackTheBox :: Openadmin Write Up</title>
+      <title>HackTheBox Openadmin Write Up</title>
       <link>https://ajdin.io/posts/htb/openadmin/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
@@ -22,7 +22,7 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
     </item>
     
     <item>
-      <title>HackTheBox :: Mango Write Up</title>
+      <title>HackTheBox Mango Write Up</title>
       <link>https://ajdin.io/posts/htb/mango/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
@@ -33,7 +33,7 @@ Getting user account I checked the /robots.txt, also ran gobuster, nothing usefu
     </item>
     
     <item>
-      <title>HackTheBox :: Postman Write Up</title>
+      <title>HackTheBox Postman Write Up</title>
       <link>https://ajdin.io/posts/htb/postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
