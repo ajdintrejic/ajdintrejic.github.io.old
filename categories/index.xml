@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Ajdin.io</title>
-    <link>https://ajdin.io/categories/</link>
-    <description>Recent content in Categories on Ajdin.io</description>
+    <title>Categories on Ajdin Trejić</title>
+    
+    
+    
+    <link>/categories/</link>
+    <description>Recent content in Categories on Ajdin Trejić</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
     
-	<atom:link href="https://ajdin.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CSRF</title>
-      <link>https://ajdin.io/categories/csrf/</link>
+      <link>/categories/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>https://ajdin.io/categories/csrf/</guid>
-      <description></description>
+      <guid>/categories/csrf/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
     </item>
     
     <item>
       <title>HackTheBox</title>
-      <link>https://ajdin.io/categories/hackthebox/</link>
+      <link>/categories/hackthebox/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>https://ajdin.io/categories/hackthebox/</guid>
-      <description></description>
+      <guid>/categories/hackthebox/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
     </item>
     
   </channel>

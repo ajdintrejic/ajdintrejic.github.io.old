@@ -3,152 +3,132 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ajdin.io/</loc>
-    <lastmod>2020-07-07T00:00:00+00:00</lastmod>
+    <loc>/privacy/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/projects/</loc>
-    <lastmod>2020-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/projects/webdev/</loc>
-    <lastmod>2020-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/posts/webdev/</loc>
-    <lastmod>2020-07-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/posts/</loc>
-    <lastmod>2020-07-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/cv/</loc>
+    <loc>/cv/</loc>
     <lastmod>2020-05-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/</loc>
+    <loc>/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/csrf/</loc>
+    <loc>/categories/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/csrf/</loc>
+    <loc>/tags/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/csrf-bypass-token-with-xss/</loc>
+    <loc>/categories/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/</loc>
+    <loc>/posts/csrf-bypass-token-with-xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/xss/</loc>
+    <loc>/posts/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/hackthebox/</loc>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/xss/</loc>
+    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/hackthebox/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/openadmin/</loc>
+    <loc>/posts/htb-openadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/nano/</loc>
+    <loc>/tags/nano/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/netstat/</loc>
+    <loc>/tags/netstat/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/opennetadmin/</loc>
+    <loc>/tags/opennetadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/authentication-bypass/</loc>
+    <loc>/tags/authentication-bypass/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/mango/</loc>
+    <loc>/posts/htb-mango/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/jjs/</loc>
+    <loc>/tags/jjs/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/mongodb/</loc>
+    <loc>/tags/mongodb/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/nosql-injection/</loc>
+    <loc>/tags/nosql-injection/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/ssl-certificate/</loc>
+    <loc>/tags/ssl-certificate/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/postman/</loc>
+    <loc>/posts/htb-postman/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/john/</loc>
+    <loc>/tags/john/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/redis/</loc>
+    <loc>/tags/redis/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/webmin/</loc>
+    <loc>/tags/webmin/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/about/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/privacy/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/series/</loc>
+    <loc>/about/</loc>
   </url>
   
 </urlset>

@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>john on Ajdin.io</title>
-    <link>https://ajdin.io/tags/john/</link>
-    <description>Recent content in john on Ajdin.io</description>
+    <title>john on Ajdin Trejić</title>
+    
+    
+    
+    <link>/tags/john/</link>
+    <description>Recent content in john on Ajdin Trejić</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <lastBuildDate>Fri, 13 Mar 2020 13:28:11 +0200</lastBuildDate>
     
-	<atom:link href="https://ajdin.io/tags/john/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/john/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox Postman Write Up</title>
-      <link>https://ajdin.io/posts/htb/postman/</link>
+      <link>/posts/htb-postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/posts/htb/postman/</guid>
-      <description>Reconnaissance Let’s run a quick nmap scan as always.
-# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
--sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.
-While I wait for this to be finished I’ll start a full nmap scan.
-# nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160 As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</description>
+      <guid>/posts/htb-postman/</guid>
+      <description>
+        
+          &lt;img src=&#34;/htb-postman/cover.jpg&#34;/&gt;
+          
+        
+        
+        
+          This is a write up on how to gain root on HackTheBox Postman
+          
+        
+        </description>
     </item>
     
   </channel>

