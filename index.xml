@@ -9,10 +9,29 @@
     <description>Recent content on Ajdin Trejić</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HackTheBox Traceback Write Up w/o Metasploit</title>
+      <link>/posts/htb/traceback/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/htb/traceback/</guid>
+      <description>
+        
+          &lt;img src=&#34;/htb/traceback/cover.jpg&#34;/&gt;
+          
+        
+        
+        
+          Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Privacy</title>
@@ -79,13 +98,13 @@ General Data Protection Regulation (GDPR) We are a Data Controller of your infor
     
     <item>
       <title>HackTheBox Openadmin Write Up</title>
-      <link>/posts/htb-openadmin/</link>
+      <link>/posts/htb/openadmin/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>/posts/htb-openadmin/</guid>
+      <guid>/posts/htb/openadmin/</guid>
       <description>
         
-          &lt;img src=&#34;/htb-openadmin/cover.jpg&#34;/&gt;
+          &lt;img src=&#34;/htb/openadmin/cover.jpg&#34;/&gt;
           
         
         
@@ -98,13 +117,13 @@ General Data Protection Regulation (GDPR) We are a Data Controller of your infor
     
     <item>
       <title>HackTheBox Mango Write Up</title>
-      <link>/posts/htb-mango/</link>
+      <link>/posts/htb/mango/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb-mango/</guid>
+      <guid>/posts/htb/mango/</guid>
       <description>
         
-          &lt;img src=&#34;/htb-mango/cover.jpg&#34;/&gt;
+          &lt;img src=&#34;/htb/mango/cover.jpg&#34;/&gt;
           
         
         
@@ -117,13 +136,13 @@ General Data Protection Regulation (GDPR) We are a Data Controller of your infor
     
     <item>
       <title>HackTheBox Postman Write Up</title>
-      <link>/posts/htb-postman/</link>
+      <link>/posts/htb/postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb-postman/</guid>
+      <guid>/posts/htb/postman/</guid>
       <description>
         
-          &lt;img src=&#34;/htb-postman/cover.jpg&#34;/&gt;
+          &lt;img src=&#34;/htb/postman/cover.jpg&#34;/&gt;
           
         
         
