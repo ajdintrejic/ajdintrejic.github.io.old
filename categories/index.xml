@@ -35,6 +35,46 @@
     </item>
     
     <item>
+      <title>projects</title>
+      <link>/categories/projects/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/projects/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>WorkLog</title>
+      <link>/categories/worklog/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/worklog/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
       <title>CSRF</title>
       <link>/categories/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>

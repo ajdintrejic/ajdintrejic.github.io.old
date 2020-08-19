@@ -57,6 +57,25 @@ General Data Protection Regulation (GDPR) We are a Data Controller of your infor
     </item>
     
     <item>
+      <title>Building Worklog: a PERN stack web application</title>
+      <link>/posts/worklog/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/worklog/</guid>
+      <description>
+        
+          &lt;img src=&#34;/worklog/cover.jpg&#34;/&gt;
+          
+        
+        
+        
+          Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for frontend. This app is supposed to help medium sized businesses automate the boring work.
+          
+        
+        </description>
+    </item>
+    
+    <item>
       <title>CV</title>
       <link>/cv/</link>
       <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>

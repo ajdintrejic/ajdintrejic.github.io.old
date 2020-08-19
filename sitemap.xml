@@ -68,6 +68,41 @@
   </url>
   
   <url>
+    <loc>/posts/worklog/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/node/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/npm/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/projects/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/react/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/webdev/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/worklog/</loc>
+    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/cv/</loc>
     <lastmod>2020-05-19T00:00:00+00:00</lastmod>
   </url>
