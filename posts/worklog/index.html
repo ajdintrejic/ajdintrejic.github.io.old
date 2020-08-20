@@ -6,7 +6,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Introduction I’ll be building a simple web application to log workers activity. I’ll be using PostgresSQL for database, React for frontend and Express for routing the app.
+<meta name="description" content="Introduction I’ll be building a simple web application to log workers&amp;rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.
 Functionality For user:
  Log work time, location, job details Calculate pay/wage automatically  For admin:
  See all current working users See all jobs done by time/category/location etc. Automate the boring stuff  Setting up the environment I’m running Arch Linux, so this part will be Linux specific."/>
@@ -35,13 +35,13 @@ Functionality For user:
 <meta name="twitter:image" content="https://ajdin.io/worklog/cover.jpg"/>
 
 <meta name="twitter:title" content="Building Worklog: a PERN stack web application"/>
-<meta name="twitter:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for frontend. This app is supposed to help medium sized businesses automate the boring work."/>
+<meta name="twitter:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work."/>
 <meta name="twitter:site" content="@ajdintrejic"/>
 
 
 
 <meta property="og:title" content="Building Worklog: a PERN stack web application" />
-<meta property="og:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for frontend. This app is supposed to help medium sized businesses automate the boring work." />
+<meta property="og:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/worklog/" />
 <meta property="og:image" content="https://ajdin.io/worklog/cover.jpg" />
@@ -219,7 +219,7 @@ Functionality For user:
     </li>
     <li><a href="#actual-code">Actual code</a>
       <ul>
-        <li><a href="#frontend-with-reactjs">Frontend with React.js</a></li>
+        <li><a href="#front-end-with-reactjs">Front end with React.js</a></li>
         <li><a href="#trying-to-open-the-page-with-express">Trying to open the page with Express</a></li>
       </ul>
     </li>
@@ -228,7 +228,7 @@ Functionality For user:
 </nav></aside>
       
       <h2 id="introduction">Introduction</h2>
-<p>I’ll be building a simple web application to log workers activity. I’ll be using PostgresSQL for database, React for frontend and Express for routing the app.</p>
+<p>I’ll be building a simple web application to log workers&rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.</p>
 <h2 id="functionality">Functionality</h2>
 <p>For user:</p>
 <ul>
@@ -244,12 +244,12 @@ Functionality For user:
 <h2 id="setting-up-the-environment">Setting up the environment</h2>
 <p>I’m running Arch Linux, so this part will be Linux specific.</p>
 <h3 id="postgres">Postgres</h3>
-<p>Thanks to Archwiki, this is easy:</p>
+<p>Thanks to Arch Wiki, this is easy:</p>
 <ol>
 <li>Install the PostgreSQL package:</li>
 </ol>
 <pre><code>sudo pacman -S postgresql 
-</code></pre><p>Now this will also create an new user postgres.</p>
+</code></pre><p>Now this will also create a new user postgres.</p>
 <ol start="2">
 <li>Switch to postgres user:</li>
 </ol>
@@ -330,7 +330,7 @@ Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga systemd<span style="colo
 <p>This is also easy to install, just run this:</p>
 <pre><code>sudo pacman -S nodejs npm
 </code></pre><h2 id="actual-code">Actual code</h2>
-<h3 id="frontend-with-reactjs">Frontend with React.js</h3>
+<h3 id="front-end-with-reactjs">Front end with React.js</h3>
 <p>Now we need a boilerplate. This is achieved with a Node module called create-react-app.</p>
 <pre><code>npx create-react-app worklog-app
 </code></pre><p>Difference between npm and npx:</p>
@@ -372,7 +372,7 @@ npx is a tool to execute packages.
 
 
 <h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express</h3>
-<p>The page can be loaded with npm start but that is not going through Express router. So Now I will configure this quickly before making any frontend. I’m going to install express and react-router-dom so we can connect React and Express:</p>
+<p>The page can be loaded with npm start but that is not going through Express router. So Now I will configure this quickly before making any front end. I’m going to install express and react-router-dom so we can connect React and Express:</p>
 <pre><code>npm install express react-router-dom
 </code></pre><p>src/index.js has to import the app like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
@@ -418,8 +418,8 @@ npx is a tool to execute packages.
 }
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
-</code></pre></div><p>I have made these pages quickly and I’ll fix them later and add/remove fuctionality if I feel like in the end when I build the database.</p>
-<p>Frontend pages</p>
+</code></pre></div><p>I have made these pages quickly and I’ll fix them later and add/remove functionality if I feel like in the end when I build the database.</p>
+<p>Front end pages</p>
 <ul>
 <li><a href="/worklog/login_desktop.png">Login page desktop</a></li>
 <li><a href="/worklog/login_mobile.png">Login page mobile</a></li>
@@ -642,14 +642,14 @@ worklogdb<span style="color:#f92672">=&gt;</span>
 <ul>
 <li>Make use of sessions and cookies with express-session middleware (e.g. leaving cookies when user clicks on ‘Remember me on login’, or to enable dark mode).</li>
 <li>Create an admin route for users with is_admin == 1.</li>
-<li>Make frontend render data from the database:
+<li>Make front end render data from the database:
 <ul>
 <li>Create a class which handles the dataflow.</li>
-<li>Make it secure so no symbols can pass through (so I don’t have problens with SQL injections) and disable DROP TABLE for obvious reasons.</li>
+<li>Make it secure so no symbols can pass through (so I don’t have problems with SQL injections) and disable DROP TABLE for obvious reasons.</li>
 </ul>
 </li>
-<li>Add another user which can edit other user data if a regular user entered wrong data, like a more priviledged user.</li>
-<li>Make the admin dashboard display all useful info (Current frontend only shows data which I thought could be useful).</li>
+<li>Add another user which can edit other user data if a regular user entered wrong data, like a more privileged user.</li>
+<li>Make the admin dashboard display all useful info (Current front end only shows data which I thought could be useful).</li>
 </ul>
 
     </div>
