@@ -223,6 +223,7 @@ Functionality For user:
         <li><a href="#trying-to-open-the-page-with-express">Trying to open the page with Express</a></li>
       </ul>
     </li>
+    <li><a href="#connecting-the-app-to-postgres">Connecting the app to Postgres</a></li>
     <li><a href="#things-which-are-left-to-do">Things which are left to do</a></li>
   </ul>
 </nav></aside>
@@ -489,7 +490,7 @@ npx is a tool to execute packages.
   );
 };
 </code></pre></div><p>So what is this class auth? Well it’s a custom class that handles functions like: login(), logout(), isAuthenticated() and so on…</p>
-<p>Connecting the app to Postgres</p>
+<h2 id="connecting-the-app-to-postgres">Connecting the app to Postgres</h2>
 <p>I need 2 files here:</p>
 <ul>
 <li>createDb.js to create the database (or I can create it with psql, but It’s better to put all the commands in a file so it’s easier to deploy)</li>
