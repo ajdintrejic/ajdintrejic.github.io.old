@@ -48,16 +48,6 @@ Functionality For user:
     </item>
     
     <item>
-      <title>CV</title>
-      <link>https://ajdin.io/cv/</link>
-      <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/cv/</guid>
-      <description>You can download my resume here in English. I might add German and Croatian translations.
- English German Croatian  </description>
-    </item>
-    
-    <item>
       <title>CSRF Token Extraction</title>
       <link>https://ajdin.io/posts/csrf-bypass-token-with-xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
@@ -118,6 +108,16 @@ You can find me here:  Twitter: @ajdintrejic Discord: nsf#7437 Mail: ajdintrejic
       
       <guid>https://ajdin.io/archive/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>CV</title>
+      <link>https://ajdin.io/cv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajdin.io/cv/</guid>
+      <description>You can download my resume here in English. I might add German and Croatian translations.
+ English German Croatian  </description>
     </item>
     
   </channel>
