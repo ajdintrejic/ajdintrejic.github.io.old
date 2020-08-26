@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>node on codex</title>
-    <link>https://example.org/tags/node/</link>
-    <description>Recent content in node on codex</description>
+    <title>node on Ajdin&#39;s blog about security and development</title>
+    <link>https://ajdin.io/tags/node/</link>
+    <description>Recent content in node on Ajdin&#39;s blog about security and development</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year}</copyright>
     <lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.org/tags/node/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdin.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Building Worklog: a PERN stack web application</title>
-      <link>https://example.org/posts/worklog/</link>
+      <link>https://ajdin.io/posts/worklog/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/posts/worklog/</guid>
+      <guid>https://ajdin.io/posts/worklog/</guid>
       <description>Introduction I’ll be building a simple web application to log workers&amp;rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.
 Functionality For user:
  Log work time, location, job details Calculate pay/wage automatically  For admin:

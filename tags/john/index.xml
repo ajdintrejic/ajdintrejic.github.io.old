@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>john on codex</title>
-    <link>https://example.org/tags/john/</link>
-    <description>Recent content in john on codex</description>
+    <title>john on Ajdin&#39;s blog about security and development</title>
+    <link>https://ajdin.io/tags/john/</link>
+    <description>Recent content in john on Ajdin&#39;s blog about security and development</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year}</copyright>
     <lastBuildDate>Fri, 13 Mar 2020 13:28:11 +0200</lastBuildDate>
     
-	<atom:link href="https://example.org/tags/john/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdin.io/tags/john/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox Postman Write Up</title>
-      <link>https://example.org/posts/htb/postman/</link>
+      <link>https://ajdin.io/posts/htb/postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://example.org/posts/htb/postman/</guid>
+      <guid>https://ajdin.io/posts/htb/postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
 # nmap -sV -sC -O -oA nmap/initial 10.10.10.160  Short explanation:
 -sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats  For a more detailed explanation click here.
