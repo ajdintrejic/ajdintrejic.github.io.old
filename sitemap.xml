@@ -3,206 +3,206 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
+    <loc>https://example.org/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://example.org/categories/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/hackthebox/</loc>
+    <loc>https://example.org/categories/hackthebox/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/htb/traceback/</loc>
+    <loc>https://example.org/posts/htb/traceback/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/lua/</loc>
+    <loc>https://example.org/tags/lua/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/luvit/</loc>
+    <loc>https://example.org/tags/luvit/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/moth/</loc>
+    <loc>https://example.org/tags/moth/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/</loc>
+    <loc>https://example.org/posts/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/privacy/</loc>
+    <loc>https://example.org/privacy/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/smevk.php/</loc>
+    <loc>https://example.org/tags/smevk.php/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/ssh/</loc>
+    <loc>https://example.org/tags/ssh/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/suid/</loc>
+    <loc>https://example.org/tags/suid/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://example.org/tags/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/worklog/</loc>
+    <loc>https://example.org/posts/worklog/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/node/</loc>
+    <loc>https://example.org/tags/node/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/npm/</loc>
+    <loc>https://example.org/tags/npm/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/projects/</loc>
+    <loc>https://example.org/categories/projects/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/react/</loc>
+    <loc>https://example.org/tags/react/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/webdev/</loc>
+    <loc>https://example.org/tags/webdev/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/worklog/</loc>
+    <loc>https://example.org/categories/worklog/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/cv/</loc>
+    <loc>https://example.org/cv/</loc>
     <lastmod>2020-05-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/csrf/</loc>
+    <loc>https://example.org/tags/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/csrf/</loc>
+    <loc>https://example.org/categories/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/csrf-bypass-token-with-xss/</loc>
+    <loc>https://example.org/posts/csrf-bypass-token-with-xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/xss/</loc>
+    <loc>https://example.org/tags/xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/htb/openadmin/</loc>
+    <loc>https://example.org/posts/htb/openadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/nano/</loc>
+    <loc>https://example.org/tags/nano/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/netstat/</loc>
+    <loc>https://example.org/tags/netstat/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/opennetadmin/</loc>
+    <loc>https://example.org/tags/opennetadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/authentication-bypass/</loc>
+    <loc>https://example.org/tags/authentication-bypass/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/htb/mango/</loc>
+    <loc>https://example.org/posts/htb/mango/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/jjs/</loc>
+    <loc>https://example.org/tags/jjs/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/mongodb/</loc>
+    <loc>https://example.org/tags/mongodb/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/nosql-injection/</loc>
+    <loc>https://example.org/tags/nosql-injection/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/ssl-certificate/</loc>
+    <loc>https://example.org/tags/ssl-certificate/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/htb/postman/</loc>
+    <loc>https://example.org/posts/htb/postman/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/john/</loc>
+    <loc>https://example.org/tags/john/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/redis/</loc>
+    <loc>https://example.org/tags/redis/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/webmin/</loc>
+    <loc>https://example.org/tags/webmin/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://example.org/about/</loc>
   </url>
   
   <url>
-    <loc>/archive/</loc>
+    <loc>https://example.org/archive/</loc>
   </url>
   
 </urlset>

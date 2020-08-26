@@ -1,97 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Ajdin Trejić</title>
-    
-    
-    
-    <link>/categories/</link>
-    <description>Recent content in Categories on Ajdin Trejić</description>
+    <title>Categories on codex</title>
+    <link>https://example.org/categories/</link>
+    <description>Recent content in Categories on codex</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>© {year}</copyright>
     <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.org/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox</title>
-      <link>/categories/hackthebox/</link>
+      <link>https://example.org/categories/hackthebox/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/categories/hackthebox/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
+      <guid>https://example.org/categories/hackthebox/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>projects</title>
-      <link>/categories/projects/</link>
+      <link>https://example.org/categories/projects/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/categories/projects/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
+      <guid>https://example.org/categories/projects/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>WorkLog</title>
-      <link>/categories/worklog/</link>
+      <link>https://example.org/categories/worklog/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/categories/worklog/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
+      <guid>https://example.org/categories/worklog/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>CSRF</title>
-      <link>/categories/csrf/</link>
+      <link>https://example.org/categories/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>/categories/csrf/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
+      <guid>https://example.org/categories/csrf/</guid>
+      <description></description>
     </item>
     
   </channel>

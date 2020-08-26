@@ -1,93 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>HackTheBox on Ajdin Trejić</title>
-    
-    
-    
-    <link>/categories/hackthebox/</link>
-    <description>Recent content in HackTheBox on Ajdin Trejić</description>
+    <title>HackTheBox on codex</title>
+    <link>https://example.org/categories/hackthebox/</link>
+    <description>Recent content in HackTheBox on codex</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>© {year}</copyright>
     <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.org/categories/hackthebox/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox Traceback Write Up w/o Metasploit</title>
-      <link>/posts/htb/traceback/</link>
+      <link>https://example.org/posts/htb/traceback/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/posts/htb/traceback/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/traceback/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access.
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/traceback/</guid>
+      <description>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.
+Reconnaissance Let’s run a quick nmap and full nmap scan in background:
+#top 1000 ports sudo nmap -sV -sC -O -oA nmap/initial 10.</description>
     </item>
     
     <item>
       <title>HackTheBox Openadmin Write Up</title>
-      <link>/posts/htb/openadmin/</link>
+      <link>https://example.org/posts/htb/openadmin/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>/posts/htb/openadmin/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/openadmin/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Openadmin
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/openadmin/</guid>
+      <description>Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
+nmap -sC -sV -O -oA nmap/initial 10.10.10.171  -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute  Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
     </item>
     
     <item>
       <title>HackTheBox Mango Write Up</title>
-      <link>/posts/htb/mango/</link>
+      <link>https://example.org/posts/htb/mango/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb/mango/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/mango/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Mango
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/mango/</guid>
+      <description>Reconnaissance Let’s run nmap,
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162  We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order.</description>
     </item>
     
     <item>
       <title>HackTheBox Postman Write Up</title>
-      <link>/posts/htb/postman/</link>
+      <link>https://example.org/posts/htb/postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb/postman/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/postman/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Postman
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/postman/</guid>
+      <description>Reconnaissance Let’s run a quick nmap scan as always.
+# nmap -sV -sC -O -oA nmap/initial 10.10.10.160  Short explanation:
+-sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats  For a more detailed explanation click here.
+While I wait for this to be finished I’ll start a full nmap scan.
+# nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160  As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</description>
     </item>
     
   </channel>

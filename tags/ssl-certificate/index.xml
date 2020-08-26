@@ -1,36 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SSL certificate on Ajdin Trejić</title>
-    
-    
-    
-    <link>/tags/ssl-certificate/</link>
-    <description>Recent content in SSL certificate on Ajdin Trejić</description>
+    <title>SSL certificate on codex</title>
+    <link>https://example.org/tags/ssl-certificate/</link>
+    <description>Recent content in SSL certificate on codex</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>© {year}</copyright>
     <lastBuildDate>Sat, 18 Apr 2020 13:28:11 +0200</lastBuildDate>
     
-	<atom:link href="/tags/ssl-certificate/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.org/tags/ssl-certificate/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox Mango Write Up</title>
-      <link>/posts/htb/mango/</link>
+      <link>https://example.org/posts/htb/mango/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb/mango/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/mango/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Mango
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/mango/</guid>
+      <description>Reconnaissance Let’s run nmap,
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162  We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order.</description>
     </item>
     
   </channel>

