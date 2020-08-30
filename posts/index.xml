@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year}</copyright>
-    <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2020 10:50:14 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdin.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Connecting PostgreSQL to a NodeJS app</title>
+      <link>https://ajdin.io/posts/pg/</link>
+      <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
+      
+      <guid>https://ajdin.io/posts/pg/</guid>
+      <description>Quick intro This is a short blog post on how to connect Postgres to a NodeJS app. This isn&amp;rsquo;t that hard to do but I figured I might as well write it down as I&amp;rsquo;m going to be doing this a lot in the future.
+Postgres quick intro Connecting to Postgres # Switch to the postgres user sudo -iu postgres # Connect to psql psql  Psql commands  \l - list all databases \dt - list all tables in current database \c database_name - connect to a specific database  Executing pg queries from NodeJS First we need to install a npm package called pg.</description>
+    </item>
     
     <item>
       <title>HackTheBox Traceback Write Up w/o Metasploit</title>

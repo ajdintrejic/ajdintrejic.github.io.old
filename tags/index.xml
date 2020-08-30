@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year}</copyright>
-    <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2020 10:50:14 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdin.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>express</title>
+      <link>https://ajdin.io/tags/express/</link>
+      <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
+      
+      <guid>https://ajdin.io/tags/express/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://ajdin.io/tags/postgres/</link>
+      <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
+      
+      <guid>https://ajdin.io/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webdev</title>
+      <link>https://ajdin.io/tags/webdev/</link>
+      <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
+      
+      <guid>https://ajdin.io/tags/webdev/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>lua</title>
@@ -90,15 +117,6 @@
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ajdin.io/tags/react/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>webdev</title>
-      <link>https://ajdin.io/tags/webdev/</link>
-      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/tags/webdev/</guid>
       <description></description>
     </item>
     

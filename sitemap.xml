@@ -4,7 +4,37 @@
   
   <url>
     <loc>https://ajdin.io/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/posts/pg/</loc>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/tags/express/</loc>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/tags/postgres/</loc>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/posts/</loc>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/tags/</loc>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/tags/webdev/</loc>
+    <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
@@ -38,11 +68,6 @@
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ajdin.io/privacy/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
@@ -59,11 +84,6 @@
   
   <url>
     <loc>https://ajdin.io/tags/suid/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -89,11 +109,6 @@
   
   <url>
     <loc>https://ajdin.io/tags/react/</loc>
-    <lastmod>2020-07-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/webdev/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
