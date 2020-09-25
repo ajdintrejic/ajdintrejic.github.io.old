@@ -1,239 +1,275 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Ajdin&#39;s blog about security and development</title>
-    <link>https://ajdin.io/tags/</link>
-    <description>Recent content in Tags on Ajdin&#39;s blog about security and development</description>
+    <title>Tags on AJDIN</title>
+    <link>http://example.org/tags/</link>
+    <description>Recent content in Tags on AJDIN</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© {year}</copyright>
+    <copyright>© All rights reserved</copyright>
     <lastBuildDate>Sun, 30 Aug 2020 10:50:14 +0200</lastBuildDate>
     
-	<atom:link href="https://ajdin.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>express</title>
-      <link>https://ajdin.io/tags/express/</link>
+      <link>http://example.org/tags/express/</link>
       <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/express/</guid>
+      <guid>http://example.org/tags/express/</guid>
       <description></description>
     </item>
     
     <item>
       <title>postgres</title>
-      <link>https://ajdin.io/tags/postgres/</link>
+      <link>http://example.org/tags/postgres/</link>
       <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/postgres/</guid>
+      <guid>http://example.org/tags/postgres/</guid>
       <description></description>
     </item>
     
     <item>
       <title>webdev</title>
-      <link>https://ajdin.io/tags/webdev/</link>
+      <link>http://example.org/tags/webdev/</link>
       <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/webdev/</guid>
+      <guid>http://example.org/tags/webdev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FTP</title>
+      <link>http://example.org/tags/ftp/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/tags/ftp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>lua</title>
-      <link>https://ajdin.io/tags/lua/</link>
+      <link>http://example.org/tags/lua/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/lua/</guid>
+      <guid>http://example.org/tags/lua/</guid>
       <description></description>
     </item>
     
     <item>
       <title>luvit</title>
-      <link>https://ajdin.io/tags/luvit/</link>
+      <link>http://example.org/tags/luvit/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/luvit/</guid>
+      <guid>http://example.org/tags/luvit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>moth</title>
-      <link>https://ajdin.io/tags/moth/</link>
+      <link>http://example.org/tags/moth/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/moth/</guid>
+      <guid>http://example.org/tags/moth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PowerUp.ps1</title>
+      <link>http://example.org/tags/powerup.ps1/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/tags/powerup.ps1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RPC</title>
+      <link>http://example.org/tags/rpc/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/tags/rpc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>smevk.php</title>
-      <link>https://ajdin.io/tags/smevk.php/</link>
+      <link>http://example.org/tags/smevk.php/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/smevk.php/</guid>
+      <guid>http://example.org/tags/smevk.php/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ssh</title>
-      <link>https://ajdin.io/tags/ssh/</link>
+      <link>http://example.org/tags/ssh/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/ssh/</guid>
+      <guid>http://example.org/tags/ssh/</guid>
       <description></description>
     </item>
     
     <item>
       <title>suid</title>
-      <link>https://ajdin.io/tags/suid/</link>
+      <link>http://example.org/tags/suid/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/suid/</guid>
+      <guid>http://example.org/tags/suid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Umbraco</title>
+      <link>http://example.org/tags/umbraco/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/tags/umbraco/</guid>
       <description></description>
     </item>
     
     <item>
       <title>node</title>
-      <link>https://ajdin.io/tags/node/</link>
+      <link>http://example.org/tags/node/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/node/</guid>
+      <guid>http://example.org/tags/node/</guid>
       <description></description>
     </item>
     
     <item>
       <title>npm</title>
-      <link>https://ajdin.io/tags/npm/</link>
+      <link>http://example.org/tags/npm/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/npm/</guid>
+      <guid>http://example.org/tags/npm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>react</title>
-      <link>https://ajdin.io/tags/react/</link>
+      <link>http://example.org/tags/react/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/tags/react/</guid>
+      <guid>http://example.org/tags/react/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CSRF</title>
-      <link>https://ajdin.io/tags/csrf/</link>
+      <link>http://example.org/tags/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/csrf/</guid>
+      <guid>http://example.org/tags/csrf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>XSS</title>
-      <link>https://ajdin.io/tags/xss/</link>
+      <link>http://example.org/tags/xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/xss/</guid>
+      <guid>http://example.org/tags/xss/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nano</title>
-      <link>https://ajdin.io/tags/nano/</link>
+      <link>http://example.org/tags/nano/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/nano/</guid>
+      <guid>http://example.org/tags/nano/</guid>
       <description></description>
     </item>
     
     <item>
       <title>netstat</title>
-      <link>https://ajdin.io/tags/netstat/</link>
+      <link>http://example.org/tags/netstat/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/netstat/</guid>
+      <guid>http://example.org/tags/netstat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OpenNetAdmin</title>
-      <link>https://ajdin.io/tags/opennetadmin/</link>
+      <link>http://example.org/tags/opennetadmin/</link>
       <pubDate>Sat, 02 May 2020 09:03:27 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/opennetadmin/</guid>
+      <guid>http://example.org/tags/opennetadmin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Authentication bypass</title>
-      <link>https://ajdin.io/tags/authentication-bypass/</link>
+      <link>http://example.org/tags/authentication-bypass/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/authentication-bypass/</guid>
+      <guid>http://example.org/tags/authentication-bypass/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jjs</title>
-      <link>https://ajdin.io/tags/jjs/</link>
+      <link>http://example.org/tags/jjs/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/jjs/</guid>
+      <guid>http://example.org/tags/jjs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MongoDB</title>
-      <link>https://ajdin.io/tags/mongodb/</link>
+      <link>http://example.org/tags/mongodb/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/mongodb/</guid>
+      <guid>http://example.org/tags/mongodb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NoSQL injection</title>
-      <link>https://ajdin.io/tags/nosql-injection/</link>
+      <link>http://example.org/tags/nosql-injection/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/nosql-injection/</guid>
+      <guid>http://example.org/tags/nosql-injection/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SSL certificate</title>
-      <link>https://ajdin.io/tags/ssl-certificate/</link>
+      <link>http://example.org/tags/ssl-certificate/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/ssl-certificate/</guid>
+      <guid>http://example.org/tags/ssl-certificate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>john</title>
-      <link>https://ajdin.io/tags/john/</link>
+      <link>http://example.org/tags/john/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/john/</guid>
+      <guid>http://example.org/tags/john/</guid>
       <description></description>
     </item>
     
     <item>
       <title>redis</title>
-      <link>https://ajdin.io/tags/redis/</link>
+      <link>http://example.org/tags/redis/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/redis/</guid>
+      <guid>http://example.org/tags/redis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>webmin</title>
-      <link>https://ajdin.io/tags/webmin/</link>
+      <link>http://example.org/tags/webmin/</link>
       <pubDate>Fri, 13 Mar 2020 13:28:11 +0200</pubDate>
       
-      <guid>https://ajdin.io/tags/webmin/</guid>
+      <guid>http://example.org/tags/webmin/</guid>
       <description></description>
     </item>
     

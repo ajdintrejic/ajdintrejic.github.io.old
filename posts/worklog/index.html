@@ -1,124 +1,80 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
+<html>
 <head>
-  <title>Building Worklog: a PERN stack web application | Ajdin&#39;s blog about security and development</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Building Worklog: a PERN stack web application - AJDIN</title><link rel="icon" type="image/png" href=icons/myicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Building Worklog: a PERN stack web application" />
+<meta property="og:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/worklog/" />
+<meta property="og:image" content="https://ajdin.io/worklog/cover.jpg" />
+<meta property="article:published_time" content="2020-07-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ajdin.io/worklog/cover.jpg"/>
 
-  <meta charset="UTF-8">
-  <meta name="language" content="en">
-  <meta name="description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work.">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="twitter:title" content="Building Worklog: a PERN stack web application"/>
+<meta name="twitter:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work."/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
-  
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Building Worklog: a PERN stack web application" />
-  <meta name="twitter:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work."/>
-  <meta name="twitter:site" content="@ajdintrejic" />
-  <meta name="twitter:creator" content="https://twitter.com/ajdintrejic" />
-  
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/custom.css" />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/dark.css"  />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/custom-dark.css"  />
 
-  <link rel="shortcut icon" type="image/png" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/water-wave_1f30a.png" />
-
-  
-  
-    
- 
-  
-  
-  
-  
-  
-  
-    
-    <link type="text/css" rel="stylesheet" href="/css/post.min.89fa77e4b9794341578ef456e6f2f0e8217abeb3b9cedd3c659ff7f5ba6c0c3d.css" integrity="sha256-ifp35Ll5Q0FXjvRW5vLw6CF6vrO5zt08ZZ/39bpsDD0="/>
-  
-    
-    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
-  
-  
-   
-   
-    
-
-<script type="application/ld+json">
-  
-    { 
-      "@context": "http://schema.org", 
-      "@type": "WebSite", 
-      "url": "https:\/\/ajdin.io\/posts\/worklog\/",
-      "name": "Building Worklog: a PERN stack web application",
-      "author": {
-        "@type": "Person",
-        "name": ""
-      },
-      "description": "Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work."
-    }
-  
-  </script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-165836726-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="http://example.org/js/main.js"></script>
+	<script src="http://example.org/js/abc.js"></script>
+	<script src="http://example.org/js/xyz.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
-  <div class="burger__container">
-  <div class="burger" aria-controls="navigation" aria-label="Menu">
-    <div class="burger__meat burger__meat--1"></div>
-    <div class="burger__meat burger__meat--2"></div>
-    <div class="burger__meat burger__meat--3"></div>
-  </div>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="http://example.org/">
+	<h1 class="site-title"><a href="http://example.org/">AJDIN</a></h1>
+	<div class="site-description"><h2>welcome to ajdin.io</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/categories">Categories</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
 </div>
- 
-
-  <nav class="nav" id="navigation">
-  <ul class="nav__list">
-    
-    
-      <li>
-        <a  href="/about">about</a>
-      </li>
-    
-      <li>
-        <a  href="/posts">blog</a>
-      </li>
-    
-      <li>
-        <a  href="/cv">cv</a>
-      </li>
-    
-      <li>
-        <a  href="/">home</a>
-      </li>
-    
-  </ul>
-</nav>
 
 
-  <main>
-    
-    
+		<div class="post-header">
+			<h1 class="title">Building Worklog: a PERN stack web application</h1>
+			<div class="meta">Posted at &mdash; Jul 18, 2020</div>
+		</div>
 
-    <div class="flex-wrapper">
-      <div class="post__container">
-        <div class="post">
-          <header class="post__header">
-            <h1 id="post__title">Building Worklog: a PERN stack web application</h1>
-            <time datetime="2020-07-18 00:00:00 &#43;0000 UTC" class="post__date">Jul 18 2020</time> 
-          </header>
-          <article class="post__content">
-              
+		<div class="markdown">
+            
 <h2 id="introduction">Introduction<a class="anchor" href="#introduction">#</a></h2>
 <p>I’ll be building a simple web application to log workers&rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.</p>
 <h2 id="functionality">Functionality<a class="anchor" href="#functionality">#</a></h2>
@@ -140,24 +96,22 @@ if (!doNotTrack) {
 <ol>
 <li>Install the PostgreSQL package:</li>
 </ol>
-<pre><code>sudo pacman -S postgresql 
-</code></pre>
-<p>Now this will also create a new user postgres.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S postgresql 
+</code></pre></div><p>Now this will also create a new user postgres.</p>
 <ol start="2">
 <li>Switch to postgres user:</li>
 </ol>
-<pre><code>$ sudo -iu postgres
-</code></pre>
-<ol start="3">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -iu postgres
+</code></pre></div><ol start="3">
 <li>Initialize db cluster:</li>
 </ol>
-<pre><code>$ initdb -D /var/lib/postgres/data
-The files belonging to this database system will be owned by user &quot;postgres&quot;.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ initdb -D /var/lib/postgres/data
+The files belonging to this database system will be owned by user &#34;postgres&#34;.
 This user must also own the server process.
 
-The database cluster will be initialized with locale &quot;en_US.UTF-8&quot;.
-The default database encoding has accordingly been set to &quot;UTF8&quot;.
-The default text search configuration will be set to &quot;english&quot;.
+The database cluster will be initialized with locale &#34;en_US.UTF-8&#34;.
+The default database encoding has accordingly been set to &#34;UTF8&#34;.
+The default text search configuration will be set to &#34;english&#34;.
 
 Data page checksums are disabled.
 
@@ -172,7 +126,7 @@ running bootstrap script ... ok
 performing post-bootstrap initialization ... ok
 syncing data to disk ... ok
 
-initdb: warning: enabling &quot;trust&quot; authentication for local connections
+initdb: warning: enabling &#34;trust&#34; authentication for local connections
 You can change this by editing pg_hba.conf or using the option -A, or
 --auth-local and --auth-host, the next time you run initdb.
 
@@ -180,21 +134,19 @@ Success. You can now start the database server using:
 
     pg_ctl -D /var/lib/postgres/data -l logfile start
 
-</code></pre>
-<p>Typing exit in the shell will return us to previous user.</p>
+</code></pre></div><p>Typing exit in the shell will return us to previous user.</p>
 <ol start="4">
 <li>Start or enable postgres service: If you start postgres it won’t start again on boot, if you enable it it will run on every boot but not right now. I won’t enable it as I don’t want Postgres running everytime I boot. I can just run this command every time I want to use it:</li>
 </ol>
-<pre><code>systemctl start postgresql.service
-</code></pre>
-<p>I can check if it’s running by running this command:</p>
-<pre><code class="language-sh">$ systemctl status postgresql.service
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">systemctl start postgresql.service
+</code></pre></div><p>I can check if it’s running by running this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ systemctl status postgresql.service
 ● postgresql.service - PostgreSQL database server
-     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled)
-     Active: active (running) since Fri 2020-07-03 18:51:04 CEST; 3min 16s ago
-    Process: 129806 ExecStartPre=/usr/bin/postgresql-check-db-dir ${PGROOT}/data (code=exited, status=0/SUCCESS)
-   Main PID: 129809 (postgres)
-      Tasks: 7 (limit: 9229)
+     Loaded: loaded <span style="color:#f92672">(</span>/usr/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled<span style="color:#f92672">)</span>
+     Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Fri 2020-07-03 18:51:04 CEST; 3min 16s ago
+    Process: <span style="color:#ae81ff">129806</span> ExecStartPre<span style="color:#f92672">=</span>/usr/bin/postgresql-check-db-dir <span style="color:#e6db74">${</span>PGROOT<span style="color:#e6db74">}</span>/data <span style="color:#f92672">(</span>code<span style="color:#f92672">=</span>exited, status<span style="color:#f92672">=</span>0/SUCCESS<span style="color:#f92672">)</span>
+   Main PID: <span style="color:#ae81ff">129809</span> <span style="color:#f92672">(</span>postgres<span style="color:#f92672">)</span>
+      Tasks: <span style="color:#ae81ff">7</span> <span style="color:#f92672">(</span>limit: 9229<span style="color:#f92672">)</span>
      Memory: 16.5M
      CGroup: /system.slice/postgresql.service
              ├─129809 /usr/bin/postgres -D /var/lib/postgres/data
@@ -205,127 +157,116 @@ Success. You can now start the database server using:
              ├─129816 postgres: stats collector
              └─129817 postgres: logical replication launcher
 
-Jul 03 18:51:04 yoga systemd[1]: Starting PostgreSQL database server...
-Jul 03 18:51:04 yoga postgres[129809]: 2020-07-03 18:51:04.284 CEST [129809] LOG:  starting PostgreSQL 12.3 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 10.1.0, 64-bit
-Jul 03 18:51:04 yoga postgres[129809]: 2020-07-03 18:51:04.284 CEST [129809] LOG:  listening on IPv6 address &quot;::1&quot;, port 5432
-Jul 03 18:51:04 yoga postgres[129809]: 2020-07-03 18:51:04.284 CEST [129809] LOG:  listening on IPv4 address &quot;127.0.0.1&quot;, port 5432
-Jul 03 18:51:04 yoga postgres[129809]: 2020-07-03 18:51:04.288 CEST [129809] LOG:  listening on Unix socket &quot;/run/postgresql/.s.PGSQL.5432&quot;
-Jul 03 18:51:04 yoga postgres[129811]: 2020-07-03 18:51:04.321 CEST [129811] LOG:  database system was shut down at 2020-07-03 18:46:51 CEST
-Jul 03 18:51:04 yoga postgres[129809]: 2020-07-03 18:51:04.327 CEST [129809] LOG:  database system is ready to accept connections
-Jul 03 18:51:04 yoga systemd[1]: Started PostgreSQL database server.
-[ajdin@yoga ~]$ 
-</code></pre>
-<p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I won’t be doing that.</p>
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Starting PostgreSQL database server...
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.284 CEST <span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span> LOG:  starting PostgreSQL 12.3 on x86_64-pc-linux-gnu, compiled by gcc <span style="color:#f92672">(</span>GCC<span style="color:#f92672">)</span> 10.1.0, 64-bit
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.284 CEST <span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span> LOG:  listening on IPv6 address <span style="color:#e6db74">&#34;::1&#34;</span>, port <span style="color:#ae81ff">5432</span>
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.284 CEST <span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span> LOG:  listening on IPv4 address <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, port <span style="color:#ae81ff">5432</span>
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.288 CEST <span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span> LOG:  listening on Unix socket <span style="color:#e6db74">&#34;/run/postgresql/.s.PGSQL.5432&#34;</span>
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129811<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.321 CEST <span style="color:#f92672">[</span>129811<span style="color:#f92672">]</span> LOG:  database system was shut down at 2020-07-03 18:46:51 CEST
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.327 CEST <span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span> LOG:  database system is ready to accept connections
+Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Started PostgreSQL database server.
+<span style="color:#f92672">[</span>ajdin@yoga ~<span style="color:#f92672">]</span>$ 
+</code></pre></div><p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I won’t be doing that.</p>
 <h3 id="code">Code<a class="anchor" href="#code">#</a></h3>
 <p>I’ll use the VSCode, but the OSS version, it can be installed with</p>
-<pre><code>sudo pacman -S code
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S code
+</code></pre></div>
   <img src="/worklog/code.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <h3 id="nodejs-and-node-package-manager">Node.js and Node package manager<a class="anchor" href="#nodejs-and-node-package-manager">#</a></h3>
 <p>This is also easy to install, just run this:</p>
-<pre><code>sudo pacman -S nodejs npm
-</code></pre>
-<h2 id="actual-code">Actual code<a class="anchor" href="#actual-code">#</a></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S nodejs npm
+</code></pre></div><h2 id="actual-code">Actual code<a class="anchor" href="#actual-code">#</a></h2>
 <h3 id="front-end-with-reactjs">Front end with React.js<a class="anchor" href="#front-end-with-reactjs">#</a></h3>
 <p>Now we need a boilerplate. This is achieved with a Node module called create-react-app.</p>
-<pre><code>npx create-react-app worklog-app
-</code></pre>
-<p>Difference between npm and npx:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npx create-react-app worklog-app
+</code></pre></div><p>Difference between npm and npx:</p>
 <pre><code>npm is a tool mainly used to install packages.
 npx is a tool to execute packages.
 </code></pre>
 <p>The code above also creates a directory called worklog-app with following components:</p>
-<pre><code>worklog-app
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worklog-app
 ├── node_modules
 ├── package.json
 ├── package-lock.json
 ├── public
 ├── README.md
 └── src
-</code></pre>
-<p>I’ll start the server with npm start and we will get the React greeter on localhost:3000:</p>
+</code></pre></div><p>I’ll start the server with npm start and we will get the React greeter on localhost:3000:</p>
 
   <img src="/worklog/react.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <p>For React I’m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/getting-started">here</a>, but I’ll include some steps anyway.</p>
-<pre><code>npm install antd
-</code></pre>
-<p>Overwrite src/App.js with this:</p>
-<pre><code class="language-jsx">import React from 'react';
-import { Button } from 'antd';
-import './App.css';
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
+</code></pre></div><p>Overwrite src/App.js with this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Button</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;antd&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./App.css&#39;</span>;
 
-const App = () =&gt; (
-  &lt;div className=&quot;App&quot;&gt;
-    &lt;Button type=&quot;primary&quot;&gt;Button&lt;/Button&gt;
-  &lt;/div&gt;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">App</span> <span style="color:#f92672">=</span> () =&gt; (
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;App&#34;</span>&gt;
+    &lt;<span style="color:#f92672">Button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;primary&#34;</span>&gt;<span style="color:#a6e22e">Button</span>&lt;/<span style="color:#f92672">Button</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
 );
 
-export default App;
-</code></pre>
-<p>and also add css to src/App.css at the top of the file (I’ve removed the other css properties as they were made for that React boilerplate):</p>
-<pre><code class="language-jsx">@import '~antd/dist/antd.css';
-</code></pre>
-<p>and now, we should have a button on localhost:3000</p>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
+</code></pre></div><p>and also add css to src/App.css at the top of the file (I’ve removed the other css properties as they were made for that React boilerplate):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;~antd/dist/antd.css&#39;</span>;
+</code></pre></div><p>and now, we should have a button on localhost:3000</p>
 
   <img src="/worklog/button.gif"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
 
 
 <h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express<a class="anchor" href="#trying-to-open-the-page-with-express">#</a></h3>
 <p>The page can be loaded with npm start but that is not going through Express router. So Now I will configure this quickly before making any front end. I’m going to install express and react-router-dom so we can connect React and Express:</p>
-<pre><code>npm install express react-router-dom
-</code></pre>
-<p>src/index.js has to import the app like this:</p>
-<pre><code class="language-jsx">import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
+</code></pre></div><p>src/index.js has to import the app like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">BrowserRouter</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-router-dom&#39;</span>;
 
-import './index.css';
-import App from './App';
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./index.css&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">App</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./App&#39;</span>;
 
-render((
-    &lt;BrowserRouter&gt;
-        &lt;App/&gt;
-    &lt;/BrowserRouter&gt;
-), document.getElementById('root'));
-</code></pre>
-<p>and now App.js should make all the paths to other pages like this:</p>
-<pre><code class="language-jsx">import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import './App.css';
-import Login from './pages/Login';
-import Log from './pages/Log';
-import History from './pages/History';
-import Admin from './pages/Admin'
+<span style="color:#a6e22e">render</span>((
+    &lt;<span style="color:#f92672">BrowserRouter</span>&gt;
+        &lt;<span style="color:#f92672">App</span>/&gt;
+    &lt;/<span style="color:#f92672">BrowserRouter</span>&gt;
+), document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>));
+</code></pre></div><p>and now App.js should make all the paths to other pages like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">Component</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Route</span>, <span style="color:#a6e22e">Switch</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-router-dom&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./App.css&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Login</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./pages/Login&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Log</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./pages/Log&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">History</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./pages/History&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Admin</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./pages/Admin&#39;</span>
 
 
-class App extends Component {
-  render() {
-    const App = () =&gt; (
-      &lt;div&gt;
-        &lt;Switch&gt;
-          &lt;Route exact path='/' component={Login}/&gt;
-          &lt;Route path='/log' component={Log}/&gt;
-          &lt;Route path='/history' component={History}/&gt;
-          &lt;Route path='/admin' component={Admin}/&gt;
-        &lt;/Switch&gt;
-      &lt;/div&gt;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">App</span> <span style="color:#f92672">=</span> () =&gt; (
+      &lt;<span style="color:#f92672">div</span>&gt;
+        &lt;<span style="color:#f92672">Switch</span>&gt;
+          &lt;<span style="color:#f92672">Route</span> <span style="color:#a6e22e">exact</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">Login</span>}/&gt;
+          &lt;<span style="color:#f92672">Route</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/log&#39;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">Log</span>}/&gt;
+          &lt;<span style="color:#f92672">Route</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/history&#39;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">History</span>}/&gt;
+          &lt;<span style="color:#f92672">Route</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/admin&#39;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">Admin</span>}/&gt;
+        &lt;/<span style="color:#f92672">Switch</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
     )
-    return (
-      &lt;Switch&gt;
-        &lt;App/&gt;
-      &lt;/Switch&gt;
+    <span style="color:#66d9ef">return</span> (
+      &lt;<span style="color:#f92672">Switch</span>&gt;
+        &lt;<span style="color:#f92672">App</span>/&gt;
+      &lt;/<span style="color:#f92672">Switch</span>&gt;
     );
   }
 }
 
-export default App;
-</code></pre>
-<p>I have made these pages quickly and I’ll fix them later and add/remove functionality if I feel like in the end when I build the database.</p>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
+</code></pre></div><p>I have made these pages quickly and I’ll fix them later and add/remove functionality if I feel like in the end when I build the database.</p>
 <p>Front end pages</p>
 <ul>
 <li><a href="/worklog/login_desktop.png">Login page desktop</a></li>
@@ -339,55 +280,53 @@ export default App;
 </ul>
 <p>Basic authentication</p>
 <p>I’m going to briefly explain how is authentication handled by this app. Entry point into this web app is in index.js which opens App.js like this (if there is ‘…’ in a code block, some code there was removed):</p>
-<pre><code class="language-jsx">...
-render(
-  &lt;BrowserRouter&gt;
-    &lt;App /&gt;
-  &lt;/BrowserRouter&gt;,
-  document.getElementById(&quot;root&quot;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+<span style="color:#a6e22e">render</span>(
+  &lt;<span style="color:#f92672">BrowserRouter</span>&gt;
+    &lt;<span style="color:#f92672">App</span> /&gt;
+  &lt;/<span style="color:#f92672">BrowserRouter</span>&gt;,
+  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;root&#34;</span>)
 );
-</code></pre>
-<p>App.js has a switch so the user can open different websites.</p>
-<pre><code class="language-jsx">...
-class App extends Component {
-  render() {
-    const App = () =&gt; (
-      &lt;div&gt;
-        &lt;Switch&gt;
-          &lt;Route exact path=&quot;/&quot; component={Login} /&gt;
-          &lt;ProtectedRoute path=&quot;/log&quot; component={Log} /&gt;
-          &lt;ProtectedRoute path=&quot;/history&quot; component={History} /&gt;
-          &lt;ProtectedRoute path=&quot;/admin&quot; component={Admin} /&gt;
-          &lt;Route path=&quot;*&quot; component={() =&gt; &quot;404 Not found, what are you doing here?&quot;} /&gt;
-        &lt;/Switch&gt;
-      &lt;/div&gt;
+</code></pre></div><p>App.js has a switch so the user can open different websites.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">App</span> <span style="color:#f92672">=</span> () =&gt; (
+      &lt;<span style="color:#f92672">div</span>&gt;
+        &lt;<span style="color:#f92672">Switch</span>&gt;
+          &lt;<span style="color:#f92672">Route</span> <span style="color:#a6e22e">exact</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">Login</span>} /&gt;
+          &lt;<span style="color:#f92672">ProtectedRoute</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/log&#34;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">Log</span>} /&gt;
+          &lt;<span style="color:#f92672">ProtectedRoute</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/history&#34;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">History</span>} /&gt;
+          &lt;<span style="color:#f92672">ProtectedRoute</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/admin&#34;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">Admin</span>} /&gt;
+          &lt;<span style="color:#f92672">Route</span> <span style="color:#a6e22e">path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#a6e22e">component</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#e6db74">&#34;404 Not found, what are you doing here?&#34;</span>} /&gt;
+        &lt;/<span style="color:#f92672">Switch</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
     );
-    return (
-      &lt;Switch&gt;
-        &lt;App /&gt;
-      &lt;/Switch&gt;
+    <span style="color:#66d9ef">return</span> (
+      &lt;<span style="color:#f92672">Switch</span>&gt;
+        &lt;<span style="color:#f92672">App</span> /&gt;
+      &lt;/<span style="color:#f92672">Switch</span>&gt;
     );
   }
 }
 
-export default App;
-</code></pre>
-<p>So the user can now open all these sites, if he is authenticated. If he is not he won’t be able to open the switch to the &lt;ProtectedRoute &hellip; /&gt;. ProtectedRoute is a custom class I made which checks if the user is authenticated and opens that Route or returns the user to the login page if he is not.</p>
-<pre><code class="language-jsx">...
-export const ProtectedRoute = ({ component: Component, ...rest }) =&gt; {
-  return (
-    &lt;Route
-      {...rest}
-      render={(props) =&gt; {
-        if (auth.isAuthenticated()) {
-          return &lt;Component {...props} /&gt;;
-        } else {
-          return (
-            &lt;Redirect
-              to={{
-                pathname: &quot;/&quot;,
-                state: {
-                  from: props.location,
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
+</code></pre></div><p>So the user can now open all these sites, if he is authenticated. If he is not he won’t be able to open the switch to the &lt;ProtectedRoute &hellip; /&gt;. ProtectedRoute is a custom class I made which checks if the user is authenticated and opens that Route or returns the user to the login page if he is not.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ProtectedRoute</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Component</span>, ...<span style="color:#a6e22e">rest</span> }) =&gt; {
+  <span style="color:#66d9ef">return</span> (
+    &lt;<span style="color:#f92672">Route</span>
+      {<span style="color:#a6e22e">...rest</span>}
+      <span style="color:#a6e22e">render</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">props</span>) =&gt; {
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">auth</span>.<span style="color:#a6e22e">isAuthenticated</span>()) {
+          <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">Component</span> {<span style="color:#a6e22e">...props</span>} /&gt;;
+        } <span style="color:#66d9ef">else</span> {
+          <span style="color:#66d9ef">return</span> (
+            &lt;<span style="color:#f92672">Redirect</span>
+              <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span>{{
+                <span style="color:#a6e22e">pathname</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/&#34;</span>,
+                <span style="color:#a6e22e">state</span><span style="color:#f92672">:</span> {
+                  <span style="color:#a6e22e">from</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">location</span>,
                 },
               }}
             /&gt;
@@ -397,115 +336,108 @@ export const ProtectedRoute = ({ component: Component, ...rest }) =&gt; {
     /&gt;
   );
 };
-</code></pre>
-<p>So what is this class auth? Well it’s a custom class that handles functions like: login(), logout(), isAuthenticated() and so on…</p>
+</code></pre></div><p>So what is this class auth? Well it’s a custom class that handles functions like: login(), logout(), isAuthenticated() and so on…</p>
 <h2 id="connecting-the-app-to-postgres">Connecting the app to Postgres<a class="anchor" href="#connecting-the-app-to-postgres">#</a></h2>
 <p>I need 2 files here:</p>
 <ul>
 <li>createDb.js to create the database (or I can create it with psql, but It’s better to put all the commands in a file so it’s easier to deploy)</li>
 <li>db.js to execute search queries on the database. Postgres for NodeJS requires the package pg.</li>
 </ul>
-<pre><code>src/db
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">src/db
 ├── createDb.js
 └── db.js
-</code></pre>
-<p>The database should look something like this:</p>
+</code></pre></div><p>The database should look something like this:</p>
 
   <img src="/worklog/sql.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;background-color:#b0b0b0;"  />
 
 
 <p>and the coresponding SQL code to create this looks like this:</p>
-<pre><code class="language-sql">CREATE TABLE Town(
-  town_name VARCHAR(64) NOT NULL,
-  town_id INT NOT NULL,
-  PRIMARY KEY (town_id)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(
+  town_name VARCHAR(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  town_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (town_id)
 );
 
-CREATE TABLE Work_log(
-  time_start TIMESTAMP NOT NULL,
-  work_id INT NOT NULL,
-  time_end TIMESTAMP NOT NULL CONSTRAINT checkTime CHECK(time_end &gt; time_start),
-  work_description VARCHAR(128) NOT NULL,
-  work_title VARCHAR(32) NOT NULL,
-  PRIMARY KEY (work_id)
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Work_log(
+  time_start <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  work_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  time_end <span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">CONSTRAINT</span> checkTime <span style="color:#66d9ef">CHECK</span>(time_end <span style="color:#f92672">&gt;</span> time_start),
+  work_description VARCHAR(<span style="color:#ae81ff">128</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  work_title VARCHAR(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (work_id)
 );
 
-CREATE TABLE Jobs(
-  job_id INT NOT NULL,
-  job_name VARCHAR(64) NOT NULL,
-  PRIMARY KEY (job_id)
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Jobs(
+  job_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  job_name VARCHAR(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (job_id)
 );
 
-CREATE TABLE User(
-  user_id INT NOT NULL,
-  username VARCHAR(32) NOT NULL,
-  fullname VARCHAR(32) NOT NULL,
-  estimated_hours_per_month INT NOT NULL,
-  hourly_wage INT NOT NULL,
-  is_admin INT NOT NULL,
-  town_id INT NOT NULL,
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">User</span>(
+  user_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  username VARCHAR(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  fullname VARCHAR(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  estimated_hours_per_month INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  hourly_wage INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  is_admin INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  town_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   job_id INT,
-  PRIMARY KEY (user_id),
-  FOREIGN KEY (town_id) REFERENCES town(town_id),
-  FOREIGN KEY (job_id) REFERENCES Jobs(job_id),
-  UNIQUE (username)
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (user_id),
+  <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (town_id) <span style="color:#66d9ef">REFERENCES</span> town(town_id),
+  <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (job_id) <span style="color:#66d9ef">REFERENCES</span> Jobs(job_id),
+  <span style="color:#66d9ef">UNIQUE</span> (username)
 );
 
-</code></pre>
-<p>We can transfer these commands into createDb.js like this (example for table town):</p>
-<pre><code class="language-sql">const sql_create_town = `CREATE TABLE Town(
-    town_name VARCHAR(64) NOT NULL,
-    town_id INT NOT NULL,
-    PRIMARY KEY (town_id)
-);`;
-</code></pre>
-<p>The queries (eg. CREATE, INSERT) can be executed like this:</p>
-<pre><code class="language-jsx">const {Pool} = require('pg');
+</code></pre></div><p>We can transfer these commands into createDb.js like this (example for table town):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">const sql_create_town <span style="color:#f92672">=</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(
+    town_name VARCHAR(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+    town_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+    <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (town_id)
+);<span style="color:#f92672">`</span>;
+</code></pre></div><p>The queries (eg. CREATE, INSERT) can be executed like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">Pool</span>} <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;pg&#39;</span>);
 
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'DATABASE NAME',
-    password: 'PASSWORD',
-    port: 5432,
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Pool</span>({
+    <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;postgres&#39;</span>,
+    <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;localhost&#39;</span>,
+    <span style="color:#a6e22e">database</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DATABASE NAME&#39;</span>,
+    <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;PASSWORD&#39;</span>,
+    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5432</span>,
 });
 
-module.exports = {
-    query: (text, params) =&gt; {
-        const start = Date.now();
-        return pool.query(text, params)
-            .then(res =&gt; {
-                const duration = Date.now() - start;
-                //console.log('executed query', {text, params, duration, rows: res.rows});
-                return res;
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">query</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">params</span>) =&gt; {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">start</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>();
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pool</span>.<span style="color:#a6e22e">query</span>(<span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">params</span>)
+            .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; {
+                <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">duration</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">start</span>;
+                <span style="color:#75715e">//console.log(&#39;executed query&#39;, {text, params, duration, rows: res.rows});
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>;
             });
     },
-    pool: pool
+    <span style="color:#a6e22e">pool</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">pool</span>
 }
-</code></pre>
-<p>Once the SQL is ready, We need to create a new user for postgres as we don’t want it to be a superuser. In production this should include revoking some rights from this user so the database is more secure.</p>
-<pre><code class="language-sh">[postgres@yoga ~]$ createuser --interactive
+</code></pre></div><p>Once the SQL is ready, We need to create a new user for postgres as we don’t want it to be a superuser. In production this should include revoking some rights from this user so the database is more secure.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>postgres@yoga ~<span style="color:#f92672">]</span>$ createuser --interactive
 Enter name of role to add: work-log-user
-Shall the new role be a superuser? (y/n) n
-Shall the new role be allowed to create databases? (y/n) n
-Shall the new role be allowed to create more new roles? (y/n) n
-[postgres@yoga ~]$ 
-</code></pre>
-<p>Creating the database:</p>
-<pre><code class="language-sql">[postgres@yoga ~]$ psql
-psql (12.3)
-Type &quot;help&quot; for help.
+Shall the new role be a superuser? <span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span> n
+Shall the new role be allowed to create databases? <span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span> n
+Shall the new role be allowed to create more new roles? <span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span> n
+<span style="color:#f92672">[</span>postgres@yoga ~<span style="color:#f92672">]</span>$ 
+</code></pre></div><p>Creating the database:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">[postgres<span style="color:#f92672">@</span>yoga <span style="color:#f92672">~</span>]<span style="color:#960050;background-color:#1e0010">$</span> psql
+psql (<span style="color:#ae81ff">12</span>.<span style="color:#ae81ff">3</span>)
+<span style="color:#66d9ef">Type</span> <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9ef">for</span> help.
 
-postgres=# CREATE DATABASE worklogdb;
-CREATE DATABASE
-postgres=# GRANT SELECT ON ALL TABLES IN SCHEMA public TO workloguser;
-GRANT
-postgres=# ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, UPDATE, INSERT ON TABLES TO workloguser;
-ALTER DEFAULT PRIVILEGES
-</code></pre>
-<p>I’ve edited the script to create the database, so when I run node src/db/createDb.js it outputs:</p>
-<pre><code class="language-bash">┌[ajdin@yoga] [/dev/pts/1] [master ⚡] 
-└[~/Documents/webapp/worklog-app]&gt; node src/db/createDb.js
+postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> worklogdb;
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span>
+postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">ALL</span> TABLES <span style="color:#66d9ef">IN</span> <span style="color:#66d9ef">SCHEMA</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">TO</span> workloguser;
+<span style="color:#66d9ef">GRANT</span>
+postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">IN</span> <span style="color:#66d9ef">SCHEMA</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span>, <span style="color:#66d9ef">UPDATE</span>, <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">ON</span> TABLES <span style="color:#66d9ef">TO</span> workloguser;
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">PRIVILEGES</span>
+</code></pre></div><p>I’ve edited the script to create the database, so when I run node src/db/createDb.js it outputs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>ajdin@yoga<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>/dev/pts/1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>master ⚡<span style="color:#f92672">]</span> 
+└<span style="color:#f92672">[</span>~/Documents/webapp/worklog-app<span style="color:#f92672">]</span>&gt; node src/db/createDb.js
 Creating table town.
 Table town created.
 Creating table work_log.
@@ -514,48 +446,46 @@ Creating table jobs.
 Table jobs created.
 Creating table user.
 Table user created.
-</code></pre>
-<p>Now the tables are here, we need to provide it with some mock data, I’ll create a new file called mockDb.js which will supply test data to the database so it can be tested. (I won’t populate work_log with data)</p>
-<pre><code class="language-sql">worklogdb=&gt; \dt
-              List of relations
- Schema |     Name     | Type  |    Owner    
---------+--------------+-------+-------------
- public | jobs         | table | workloguser
- public | town         | table | workloguser
- public | work_log     | table | workloguser
- public | worklog_user | table | workloguser
-(4 rows)
+</code></pre></div><p>Now the tables are here, we need to provide it with some mock data, I’ll create a new file called mockDb.js which will supply test data to the database so it can be tested. (I won’t populate work_log with data)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>dt
+              List <span style="color:#66d9ef">of</span> relations
+ <span style="color:#66d9ef">Schema</span> <span style="color:#f92672">|</span>     Name     <span style="color:#f92672">|</span> <span style="color:#66d9ef">Type</span>  <span style="color:#f92672">|</span>    <span style="color:#66d9ef">Owner</span>    
+<span style="color:#75715e">--------+--------------+-------+-------------
+</span><span style="color:#75715e"></span> <span style="color:#66d9ef">public</span> <span style="color:#f92672">|</span> jobs         <span style="color:#f92672">|</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">|</span> workloguser
+ <span style="color:#66d9ef">public</span> <span style="color:#f92672">|</span> town         <span style="color:#f92672">|</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">|</span> workloguser
+ <span style="color:#66d9ef">public</span> <span style="color:#f92672">|</span> work_log     <span style="color:#f92672">|</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">|</span> workloguser
+ <span style="color:#66d9ef">public</span> <span style="color:#f92672">|</span> worklog_user <span style="color:#f92672">|</span> <span style="color:#66d9ef">table</span> <span style="color:#f92672">|</span> workloguser
+(<span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span>)
 
-worklogdb=&gt; SELECT * FROM work_log;
- time_start | work_id | time_end | work_description | work_title 
-------------+---------+----------+------------------+------------
-(0 rows)
+worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> work_log;
+ time_start <span style="color:#f92672">|</span> work_id <span style="color:#f92672">|</span> time_end <span style="color:#f92672">|</span> work_description <span style="color:#f92672">|</span> work_title 
+<span style="color:#75715e">------------+---------+----------+------------------+------------
+</span><span style="color:#75715e"></span>(<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span>)
 
-worklogdb=&gt; SELECT * FROM worklog_user;
- user_id | username |   fullname   | estimated_hours_per_month | hourly_wage | is_admin | town_id | job_id 
----------+----------+--------------+---------------------------+-------------+----------+---------+--------
-       1 | admin    | Ajdin Trejić |                       150 |          20 |        1 |       2 |      1
-(1 row)
+worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> worklog_user;
+ user_id <span style="color:#f92672">|</span> username <span style="color:#f92672">|</span>   fullname   <span style="color:#f92672">|</span> estimated_hours_per_month <span style="color:#f92672">|</span> hourly_wage <span style="color:#f92672">|</span> is_admin <span style="color:#f92672">|</span> town_id <span style="color:#f92672">|</span> job_id 
+<span style="color:#75715e">---------+----------+--------------+---------------------------+-------------+----------+---------+--------
+</span><span style="color:#75715e"></span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">admin</span>    <span style="color:#f92672">|</span> Ajdin Trejić <span style="color:#f92672">|</span>                       <span style="color:#ae81ff">150</span> <span style="color:#f92672">|</span>          <span style="color:#ae81ff">20</span> <span style="color:#f92672">|</span>        <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>       <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span>      <span style="color:#ae81ff">1</span>
+(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
 
-worklogdb=&gt; SELECT * FROM jobs;
- job_id |       job_name       
---------+----------------------
-      1 | posao administratora
-(1 row)
+worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> jobs;
+ job_id <span style="color:#f92672">|</span>       job_name       
+<span style="color:#75715e">--------+----------------------
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> posao administratora
+(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
 
-worklogdb=&gt; SELECT * FROM town;
- town_name | town_id 
------------+---------
- Poreč     |       1
- Funtana   |       2
- Rovinj    |       3
- Pazin     |       4
- Novigrad  |       5
-(5 rows)
+worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> town;
+ town_name <span style="color:#f92672">|</span> town_id 
+<span style="color:#75715e">-----------+---------
+</span><span style="color:#75715e"></span> Poreč     <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span>
+ Funtana   <span style="color:#f92672">|</span>       <span style="color:#ae81ff">2</span>
+ Rovinj    <span style="color:#f92672">|</span>       <span style="color:#ae81ff">3</span>
+ Pazin     <span style="color:#f92672">|</span>       <span style="color:#ae81ff">4</span>
+ Novigrad  <span style="color:#f92672">|</span>       <span style="color:#ae81ff">5</span>
+(<span style="color:#ae81ff">5</span> <span style="color:#66d9ef">rows</span>)
 
-worklogdb=&gt; 
-</code></pre>
-<p>So, the database is connected and has mock data.</p>
+worklogdb<span style="color:#f92672">=&gt;</span> 
+</code></pre></div><p>So, the database is connected and has mock data.</p>
 <h2 id="things-which-are-left-to-do">Things which are left to do<a class="anchor" href="#things-which-are-left-to-do">#</a></h2>
 <ul>
 <li>Make use of sessions and cookies with express-session middleware (e.g. leaving cookies when user clicks on ‘Remember me on login’, or to enable dark mode).</li>
@@ -571,140 +501,36 @@ worklogdb=&gt;
 </ul>
 
 
-              
-          </article>
-          
+		</div>
 
-<ul class="tags__list">
-    
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/webdev/">webdev</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/react/">react</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/node/">node</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/npm/">npm</a>
-    </li></ul>
-
- <div class="pagination">
-  
-    
-      <a class="pagination__item" href="https://ajdin.io/posts/csrf-bypass-token-with-xss/">
-          <span class="pagination__label">Previous Post</span>
-          <span class="pagination__title">CSRF Token Extraction</span>
-      </a>
-    
-
-    
-      <a class="pagination__item" href="https://ajdin.io/posts/htb/traceback/">
-        <span class="pagination__label">Next Post</span>
-        <span class="pagination__title" >HackTheBox Traceback Write Up w/o Metasploit</a>
-      </a>
-    
-    
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/webdev">webdev</a></li>
+								
+								<li><a href="/tags/react">react</a></li>
+								
+								<li><a href="/tags/node">node</a></li>
+								
+								<li><a href="/tags/npm">npm</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+	</nav>
 </div>
 
-          
-          <footer class="post__footer">
-            
 
 
-<div class="social-icons">
-  
-     
-    
-      <a class="social-icons__link" title="Twitter"
-         href="https://twitter.com/ajdintrejic"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/twitter.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="GitHub"
-         href="https://github.com/ajdintrejic"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/github.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="Email"
-         href="mailto:ajdintrejic@protonmail.ch"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/email.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="LinkedIn"
-         href="https://www.linkedin.com/in/ajdin-treji%C4%87-5103441b4/"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/linkedin.svg')"></div>
-      </a>
-    
-     
-</div>
-
-            <p>© 2020</p>
-          </footer>
-          </div>
-      </div>
-      
-      <div class="toc-container">
-          
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#functionality">Functionality</a></li>
-    <li><a href="#setting-up-the-environment">Setting up the environment</a>
-      <ul>
-        <li><a href="#postgres">Postgres</a></li>
-        <li><a href="#code">Code</a></li>
-        <li><a href="#nodejs-and-node-package-manager">Node.js and Node package manager</a></li>
-      </ul>
-    </li>
-    <li><a href="#actual-code">Actual code</a>
-      <ul>
-        <li><a href="#front-end-with-reactjs">Front end with React.js</a></li>
-        <li><a href="#trying-to-open-the-page-with-express">Trying to open the page with Express</a></li>
-      </ul>
-    </li>
-    <li><a href="#connecting-the-app-to-postgres">Connecting the app to Postgres</a></li>
-    <li><a href="#things-which-are-left-to-do">Things which are left to do</a></li>
-  </ul>
-</nav>
-      </div>
-      
-    </div>
-    
-
-  </main>
-
-   
-
-  
-  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
-  
-  
-  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
-
-  
-  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
-    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
-
-  
-    <script src="/js/table-of-contents.js"></script>
-  
-
-
+<script>feather.replace()</script>
 </body>
-
 </html>

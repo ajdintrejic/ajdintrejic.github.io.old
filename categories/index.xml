@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Ajdin&#39;s blog about security and development</title>
-    <link>https://ajdin.io/categories/</link>
-    <description>Recent content in Categories on Ajdin&#39;s blog about security and development</description>
+    <title>Categories on AJDIN</title>
+    <link>http://example.org/categories/</link>
+    <description>Recent content in Categories on AJDIN</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© {year}</copyright>
+    <copyright>© All rights reserved</copyright>
     <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://ajdin.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox</title>
-      <link>https://ajdin.io/categories/hackthebox/</link>
+      <link>http://example.org/categories/hackthebox/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/categories/hackthebox/</guid>
+      <guid>http://example.org/categories/hackthebox/</guid>
       <description></description>
     </item>
     
     <item>
       <title>projects</title>
-      <link>https://ajdin.io/categories/projects/</link>
+      <link>http://example.org/categories/projects/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/categories/projects/</guid>
+      <guid>http://example.org/categories/projects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>WorkLog</title>
-      <link>https://ajdin.io/categories/worklog/</link>
+      <link>http://example.org/categories/worklog/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://ajdin.io/categories/worklog/</guid>
+      <guid>http://example.org/categories/worklog/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CSRF</title>
-      <link>https://ajdin.io/categories/csrf/</link>
+      <link>http://example.org/categories/csrf/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>https://ajdin.io/categories/csrf/</guid>
+      <guid>http://example.org/categories/csrf/</guid>
       <description></description>
     </item>
     

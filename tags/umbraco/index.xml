@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Umbraco on AJDIN</title>
+    <link>http://example.org/tags/umbraco/</link>
+    <description>Recent content in Umbraco on AJDIN</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© All rights reserved</copyright>
+    <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://example.org/tags/umbraco/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HackTheBox Remote Write Up w/o Metasploit</title>
+      <link>http://example.org/posts/htb/remote/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://example.org/posts/htb/remote/</guid>
+      <description>This is an easy Windows box by mrb3n. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE.</description>
+    </item>
+    
+  </channel>
+</rss>

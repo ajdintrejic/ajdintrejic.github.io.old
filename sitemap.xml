@@ -3,220 +3,245 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ajdin.io/</loc>
+    <loc>http://example.org/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/pg/</loc>
+    <loc>http://example.org/posts/pg/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/express/</loc>
+    <loc>http://example.org/tags/express/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/postgres/</loc>
+    <loc>http://example.org/tags/postgres/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/</loc>
+    <loc>http://example.org/posts/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/</loc>
+    <loc>http://example.org/tags/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/webdev/</loc>
+    <loc>http://example.org/tags/webdev/</loc>
     <lastmod>2020-08-30T10:50:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/</loc>
+    <loc>http://example.org/categories/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/hackthebox/</loc>
+    <loc>http://example.org/tags/ftp/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/traceback/</loc>
+    <loc>http://example.org/categories/hackthebox/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/lua/</loc>
+    <loc>http://example.org/posts/htb/remote/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/luvit/</loc>
+    <loc>http://example.org/posts/htb/traceback/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/moth/</loc>
+    <loc>http://example.org/tags/lua/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/privacy/</loc>
+    <loc>http://example.org/tags/luvit/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/smevk.php/</loc>
+    <loc>http://example.org/tags/moth/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/ssh/</loc>
+    <loc>http://example.org/tags/powerup.ps1/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/suid/</loc>
+    <loc>http://example.org/privacy/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/worklog/</loc>
+    <loc>http://example.org/tags/rpc/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/smevk.php/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/ssh/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/suid/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/umbraco/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/posts/worklog/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/node/</loc>
+    <loc>http://example.org/tags/node/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/npm/</loc>
+    <loc>http://example.org/tags/npm/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/projects/</loc>
+    <loc>http://example.org/categories/projects/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/react/</loc>
+    <loc>http://example.org/tags/react/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/worklog/</loc>
+    <loc>http://example.org/categories/worklog/</loc>
     <lastmod>2020-07-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/csrf/</loc>
+    <loc>http://example.org/tags/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/csrf/</loc>
+    <loc>http://example.org/categories/csrf/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/csrf-bypass-token-with-xss/</loc>
+    <loc>http://example.org/posts/csrf-bypass-token-with-xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/xss/</loc>
+    <loc>http://example.org/tags/xss/</loc>
     <lastmod>2020-05-07T00:43:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/openadmin/</loc>
+    <loc>http://example.org/posts/htb/openadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/nano/</loc>
+    <loc>http://example.org/tags/nano/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/netstat/</loc>
+    <loc>http://example.org/tags/netstat/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/opennetadmin/</loc>
+    <loc>http://example.org/tags/opennetadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/authentication-bypass/</loc>
+    <loc>http://example.org/tags/authentication-bypass/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/mango/</loc>
+    <loc>http://example.org/posts/htb/mango/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/jjs/</loc>
+    <loc>http://example.org/tags/jjs/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/mongodb/</loc>
+    <loc>http://example.org/tags/mongodb/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/nosql-injection/</loc>
+    <loc>http://example.org/tags/nosql-injection/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/ssl-certificate/</loc>
+    <loc>http://example.org/tags/ssl-certificate/</loc>
     <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/posts/htb/postman/</loc>
+    <loc>http://example.org/posts/htb/postman/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/john/</loc>
+    <loc>http://example.org/tags/john/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/redis/</loc>
+    <loc>http://example.org/tags/redis/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/webmin/</loc>
+    <loc>http://example.org/tags/webmin/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ajdin.io/about/</loc>
+    <loc>http://example.org/about/</loc>
   </url>
   
   <url>
-    <loc>https://ajdin.io/archive/</loc>
+    <loc>http://example.org/archive/</loc>
   </url>
   
   <url>
-    <loc>https://ajdin.io/cv/</loc>
+    <loc>http://example.org/cv/</loc>
   </url>
   
 </urlset>
