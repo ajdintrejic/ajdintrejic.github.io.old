@@ -136,9 +136,6 @@ h6 {
     max-width: 800px;
 }
 
-ul {
-    padding-left: 15px;
-}
 
 ul.flat {
     margin: 0;
@@ -454,4 +451,12 @@ h3 {
    .anchor:hover {
        color: $darkGrey;
 }
+
+
+.toc-post-title {
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+}
+
 

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Connecting and using PostgreSQL to a NodeJS app - AJDIN</title><link rel="icon" type="image/png" href=icons/myicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Connecting and using PostgreSQL to a NodeJS app - AJDIN</title><link rel="icon" type="image/png" href=favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Connecting and using PostgreSQL to a NodeJS app" />
 <meta property="og:description" content="Quick intro This is a short blog post on how to connect Postgres to a NodeJS app. This isn&rsquo;t that hard to do but I figured I might as well write it down as I&rsquo;m going to be doing this a lot in the future." />
 <meta property="og:type" content="article" />
@@ -18,16 +18,10 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/custom.css" />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/custom-dark.css"  />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/js/abc.js"></script>
-	<script src="https://ajdin.io/js/xyz.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
@@ -72,13 +66,41 @@
 			<h1 class="title">Connecting and using PostgreSQL to a NodeJS app</h1>
 			<div class="meta">Posted at &mdash; Aug 30, 2020</div>
 		</div>
+        
+            <div class="toc-container">
+                <div class="toc-post-title">Table Of Contents</div>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quick-intro">Quick intro</a></li>
+    <li><a href="#postgres-quick-intro">Postgres quick intro</a>
+      <ul>
+        <li><a href="#connecting-to-postgres">Connecting to Postgres</a></li>
+      </ul>
+    </li>
+    <li><a href="#executing-pg-queries-from-nodejs">Executing pg queries from NodeJS</a>
+      <ul>
+        <li><a href="#dbjs-file-for-queries">Db.js file for queries</a></li>
+      </ul>
+    </li>
+    <li><a href="#executing-postgres-queries-from-the-file">Executing postgres queries from the file</a>
+      <ul>
+        <li><a href="#example-add-user">Example: Add user</a></li>
+        <li><a href="#example-get-all-users">Example: Get all users</a></li>
+        <li><a href="#example-get-specific-user">Example: Get specific user</a></li>
+        <li><a href="#example-modify-specific-user">Example: Modify specific user</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+        
 
 		<div class="markdown">
             
 <h2 id="quick-intro">Quick intro<a class="anchor" href="#quick-intro">#</a></h2>
 <p>This is a short blog post on how to connect Postgres to a NodeJS app. This isn&rsquo;t that hard to do but I figured I might as well write it down as I&rsquo;m going to be doing this a lot in the future.</p>
 <h2 id="postgres-quick-intro">Postgres quick intro<a class="anchor" href="#postgres-quick-intro">#</a></h2>
-<h4 id="connecting-to-postgres">Connecting to Postgres</h4>
+<h3 id="connecting-to-postgres">Connecting to Postgres<a class="anchor" href="#connecting-to-postgres">#</a></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Switch to the postgres user
 sudo -iu postgres 
 

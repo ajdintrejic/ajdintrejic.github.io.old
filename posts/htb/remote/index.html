@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Remote Write Up w/o Metasploit - AJDIN</title><link rel="icon" type="image/png" href=icons/myicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Remote Write Up w/o Metasploit - AJDIN</title><link rel="icon" type="image/png" href=favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="HackTheBox Remote Write Up w/o Metasploit" />
 <meta property="og:description" content="This is an easy Windows box by mrb3n. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE." />
 <meta property="og:type" content="article" />
@@ -15,16 +15,10 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/custom.css" />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/custom-dark.css"  />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/js/abc.js"></script>
-	<script src="https://ajdin.io/js/xyz.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
@@ -69,6 +63,20 @@
 			<h1 class="title">HackTheBox Remote Write Up w/o Metasploit</h1>
 			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
 		</div>
+        
+            <div class="toc-container">
+                <div class="toc-post-title">Table Of Contents</div>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#getting-a-reverse-shell">Getting a reverse shell</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#privilege-escalation">Privilege escalation</a></li>
+  </ul>
+</nav>
+            </div>
+        
 
 		<div class="markdown">
             

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Traceback Write Up w/o Metasploit - AJDIN</title><link rel="icon" type="image/png" href=icons/myicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Traceback Write Up w/o Metasploit - AJDIN</title><link rel="icon" type="image/png" href=favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="HackTheBox Traceback Write Up w/o Metasploit" />
 <meta property="og:description" content="Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access." />
 <meta property="og:type" content="article" />
@@ -15,16 +15,10 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/custom.css" />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-	<link rel="stylesheet" type="text/css" href="https://ajdin.io/css/custom-dark.css"  />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/js/abc.js"></script>
-	<script src="https://ajdin.io/js/xyz.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
@@ -69,6 +63,25 @@
 			<h1 class="title">HackTheBox Traceback Write Up w/o Metasploit</h1>
 			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
 		</div>
+        
+            <div class="toc-container">
+                <div class="toc-post-title">Table Of Contents</div>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#reconnaissance">Reconnaissance</a></li>
+    <li><a href="#getting-user">Getting user</a>
+      <ul>
+        <li><a href="#smevkphp">Smevk.php</a></li>
+        <li><a href="#ssh-keygen">ssh-keygen</a></li>
+        <li><a href="#enumeration">Enumeration</a></li>
+        <li><a href="#luvit-privilege-escalation">Luvit privilege escalation</a></li>
+      </ul>
+    </li>
+    <li><a href="#getting-root">Getting Root</a></li>
+  </ul>
+</nav>
+            </div>
+        
 
 		<div class="markdown">
             
