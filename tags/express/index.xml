@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>express on AJDIN</title>
-    <link>http://example.org/tags/express/</link>
+    <link>https://ajdin.io/tags/express/</link>
     <description>Recent content in express on AJDIN</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© All rights reserved</copyright>
     <lastBuildDate>Sun, 30 Aug 2020 10:50:14 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/express/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdin.io/tags/express/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Connecting and using PostgreSQL to a NodeJS app</title>
-      <link>http://example.org/posts/pg/</link>
+      <link>https://ajdin.io/posts/pg/</link>
       <pubDate>Sun, 30 Aug 2020 10:50:14 +0200</pubDate>
       
-      <guid>http://example.org/posts/pg/</guid>
+      <guid>https://ajdin.io/posts/pg/</guid>
       <description>Quick intro This is a short blog post on how to connect Postgres to a NodeJS app. This isn&amp;rsquo;t that hard to do but I figured I might as well write it down as I&amp;rsquo;m going to be doing this a lot in the future.</description>
     </item>
     

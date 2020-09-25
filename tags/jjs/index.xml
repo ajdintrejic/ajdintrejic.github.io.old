@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>jjs on AJDIN</title>
-    <link>http://example.org/tags/jjs/</link>
+    <link>https://ajdin.io/tags/jjs/</link>
     <description>Recent content in jjs on AJDIN</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© All rights reserved</copyright>
     <lastBuildDate>Sat, 18 Apr 2020 13:28:11 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/jjs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdin.io/tags/jjs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HackTheBox Mango Write Up</title>
-      <link>http://example.org/posts/htb/mango/</link>
+      <link>https://ajdin.io/posts/htb/mango/</link>
       <pubDate>Sat, 18 Apr 2020 13:28:11 +0200</pubDate>
       
-      <guid>http://example.org/posts/htb/mango/</guid>
+      <guid>https://ajdin.io/posts/htb/mango/</guid>
       <description>Reconnaissance Let’s run nmap,
 sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”.</description>
     </item>

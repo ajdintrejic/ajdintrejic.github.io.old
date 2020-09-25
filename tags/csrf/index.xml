@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CSRF on AJDIN</title>
-    <link>http://example.org/tags/csrf/</link>
+    <link>https://ajdin.io/tags/csrf/</link>
     <description>Recent content in CSRF on AJDIN</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© All rights reserved</copyright>
     <lastBuildDate>Thu, 07 May 2020 00:43:19 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajdin.io/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CSRF Token Extraction</title>
-      <link>http://example.org/posts/csrf-bypass-token-with-xss/</link>
+      <link>https://ajdin.io/posts/csrf-bypass-token-with-xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
       
-      <guid>http://example.org/posts/csrf-bypass-token-with-xss/</guid>
+      <guid>https://ajdin.io/posts/csrf-bypass-token-with-xss/</guid>
       <description>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token.</description>
     </item>
     
