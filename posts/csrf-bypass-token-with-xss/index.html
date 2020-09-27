@@ -47,10 +47,6 @@
 			</li>
 			
 			<li>
-				<a href="/categories">Categories</a>
-			</li>
-			
-			<li>
 				<a href="/tags">Tags</a>
 			</li>
 			
@@ -63,11 +59,9 @@
 			<h1 class="title">CSRF Token Extraction</h1>
 			<div class="meta">Posted at &mdash; May 7, 2020</div>
 		</div>
-        
 
 		<div class="markdown">
-            
-<p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
+			<p>So I was doing a CTF challenge and I have learned how to bypass CSRF token protection with extracting the token. I had to remove the CSRF code as the CTF forbids leaking solutions.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;url goes here&gt;&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;csrf&#34;</span> <span style="color:#a6e22e">enctype</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;multipart/form-data&#34;</span><span style="color:#f92672">&gt;</span>
                 <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> ... <span style="color:#f92672">/&gt;</span>
                 <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;token&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hidden&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;token&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -87,7 +81,6 @@
 <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
 </code></pre></div><p>What is this token? Well one way to protect your site from CSRF attacks it to use tokens to validate if the request is being authentic, so we have to switch our token with victims token.</p>
 <p>The code is pretty easy to understand. This code inside the <code>&lt;script&gt;</code> tag is executed on our victims machine, and it loads a new <code>HTTP</code> request, finds the token using regular expressions and replaces it. Now our form has a valid token and we can submit it.</p>
-
 
 		</div>
 
@@ -109,7 +102,7 @@
 		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div>
 

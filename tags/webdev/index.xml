@@ -21,14 +21,5 @@
       <description>Quick intro This is a short blog post on how to connect Postgres to a NodeJS app. This isn&amp;rsquo;t that hard to do but I figured I might as well write it down as I&amp;rsquo;m going to be doing this a lot in the future.</description>
     </item>
     
-    <item>
-      <title>Building Worklog: a PERN stack web application</title>
-      <link>https://ajdin.io/posts/worklog/</link>
-      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/posts/worklog/</guid>
-      <description>Introduction I’ll be building a simple web application to log workers&amp;rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.</description>
-    </item>
-    
   </channel>
 </rss>

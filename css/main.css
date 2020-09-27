@@ -1,5 +1,5 @@
 body {
-    font-family: -apple-system,BlinkMacSystemFont,"segoe ui",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"helvetica neue",sans-serif;
+    font-family: "ubuntu", sans-serif;
     font-weight: 400;
     color: #333;
     line-height: 1.6;
@@ -63,7 +63,7 @@ textarea {
 blockquote {
     margin-left: 1rem;
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-family: Georgia,bitstream charter,serif;
     border-left: 3px solid;
     border-color: #a00;
@@ -89,8 +89,7 @@ a:hover {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: -apple-system,BlinkMacSystemFont,"segoe ui",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"helvetica neue",sans-serif;
-    padding-top: 20px;
+    font-family: raleway,sans-serif;
     line-height: 1.2;
     color: #333;
     font-weight: 200;
@@ -136,6 +135,9 @@ h6 {
     max-width: 800px;
 }
 
+ul {
+    padding-left: 15px;
+}
 
 ul.flat {
     margin: 0;
@@ -170,8 +172,7 @@ ul {
 }
 
 .post ul li {
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .post ul li p {
@@ -181,16 +182,13 @@ ul {
 .highlight pre {
     margin-bottom: 0;
     margin-top: 0;
-    padding: 16px;
-    background-color: #222 !important;
-    font-size: 0.85em;
-    color: #f00;
+    padding: 20px;
+    background-color: transparent !important;
 }
 
 .highlight {
-    background-color: #f00;
-    margin-bottom: 16px;
-    margin-top: 16px;
+    background: 0 0;
+    background-color: #FAFAFA;
 }
 
 pre code {
@@ -261,7 +259,7 @@ pre code {
 }
 
 .header .site-description nav ul svg {
-    max-height: 20px;
+    max-height: 15px;
 }
 
 .section .section-header {
@@ -274,19 +272,19 @@ pre code {
 }
 
 .recent-posts .posts .post {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .recent-posts .posts .post .meta,
 .post .post-header .meta,
 .list .posts .post .meta {
-    font-size: 0.8rem;
+    font-size: 0.725rem;
     color: #999;
     margin-bottom: 4px;
 }
 
 .post .post-header {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .post .post-header .title {
@@ -359,7 +357,7 @@ pre code {
     padding: 0;
     text-align: left;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .pagination li {
@@ -393,71 +391,26 @@ table th, table td {
 
 @media (max-width: 767px) {
     body {
-        padding: 3rem 1.5rem 1rem;
+        padding: 20px;
     }
 
     h1 {
         font-size: 1.8rem;
-        font-weight: bold;
     }
 
     h2 {
         font-size: 1.6rem;
-        font-weight: bold;
     }
 
     h3 {
         font-size: 1.2rem;
-        font-weight: bold;
     }
 
     h4 {
         font-size: 1rem;
-        font-weight: bold;
     }
 
     .container {
         margin-top: 10px;
     }
 }
-
-.code {
-    font-size: 0.8em;
-}
-
-.post h2 .anchor, .post h3 .anchor {
-    text-decoration: none;
-    position: absolute;
-    left: -1.2rem;
-    color: #999;
-    font-size: inherit;
-    font-weight: 400;
-}
-
-h2,
-h3 {
-    position: relative;
-    padding-top: 10px;
-
-   .anchor {
-       top: .5rem;
-       text-decoration: none;
-       position: absolute;
-       left: -1rem;
-       color: $grey;
-       font-size: 1.2rem;
-       font-weight: 400;
-   }
-
-   .anchor:hover {
-       color: $darkGrey;
-}
-
-
-.toc-post-title {
-  font-size: 0.9rem;
-  margin-bottom: 0.8rem;
-  font-weight: bold;
-}
-
-

