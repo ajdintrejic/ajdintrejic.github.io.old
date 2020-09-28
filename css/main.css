@@ -32,7 +32,7 @@ hr {
     border: 0;
     border-top: 1px solid #ccc;
     margin: 1rem 0;
-    padding: 0;
+    padding: 16px;
 }
 
 img {
@@ -398,22 +398,22 @@ table th, table td {
 
     h1 {
         font-size: 1.8rem;
-        font-weight: bold;
+        font-weight: 400;
     }
 
     h2 {
         font-size: 1.6rem;
-        font-weight: bold;
+        font-weight: 400;
     }
 
     h3 {
         font-size: 1.2rem;
-        font-weight: bold;
+        font-weight: 400;
     }
 
     h4 {
         font-size: 1rem;
-        font-weight: bold;
+        font-weight: 400;
     }
 
     .container {
@@ -429,7 +429,7 @@ table th, table td {
     text-decoration: none;
     position: absolute;
     left: -1.2rem;
-    color: #999;
+    color: #666;
     font-size: inherit;
     font-weight: 400;
 }

