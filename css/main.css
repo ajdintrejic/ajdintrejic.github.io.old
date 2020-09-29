@@ -394,17 +394,6 @@ table th, table td {
 
 @media (max-width: 767px) {
     #cookies-eu-banner {
-        color: #ddd;
-        font-size: 13px;
-        text-align: center;
-        display: block;
-        position: fixed;
-	width: inherit;
-	left: 0px;
-	background: #000;
-        bottom: 0px;
-        border: 2px solid #ff7979;
-        padding: 10px;
     }
 
     body {
@@ -504,12 +493,13 @@ h3 {
     font-size: 14px;
     text-align: center;
     display: block;
-    position: fixed;
-    bottom: 0px;
-    width:100%;
-    max-width:760px;
     border: 2px solid #ff7979;
-    padding: 10px 0;
+    padding: 10px;
+    margin: 20px;
     background: #000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-width: 350px;
 }
 
