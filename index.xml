@@ -60,6 +60,15 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
     </item>
     
     <item>
+      <title>Building Worklog: a PERN stack web application</title>
+      <link>https://ajdin.io/posts/worklog/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajdin.io/posts/worklog/</guid>
+      <description>Introduction I’ll be building a simple web application to log workers&amp;rsquo; activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.</description>
+    </item>
+    
+    <item>
       <title>CSRF Token Extraction</title>
       <link>https://ajdin.io/posts/csrf-bypass-token-with-xss/</link>
       <pubDate>Thu, 07 May 2020 00:43:19 +0200</pubDate>
