@@ -19,12 +19,22 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 	<script src="https://ajdin.io/js/main.js"></script>
+	<script src="https://ajdin.io/cookieconsent.js"></script>
 </head>
 
 <body>
 	<div class="container wrapper post">
 		<div class="header">
 	<base href="https://ajdin.io/">
+
+	<div id="cookies-eu-banner" style="display: none;" class="cookie-style">
+	    	By continuing to visit this site, you accept the use of anonymized cookies for analytics.
+		<a href="https://ajdin.io/privacy" id="cookies-eu-more">Read more</a>
+		
+	    	<button id="cookies-eu-accept">Accept</button>
+	</div>
+
+
 	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
 	<div class="site-description"><h2>welcome to ajdin.io</h2><nav class="nav social">
 			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
@@ -608,5 +618,19 @@ C:\Windows\system32&gt;
 
 
 <script>feather.replace()</script>
+<script src="cookieconsent.js"></script>
+<script>
+    new CookiesEuBanner(function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        
+	ga('set', 'anonymizeIp', true);
+        ga('create', 'UA-165836726-1', 'auto');
+        ga('send', 'pageview');
+    });
+</script>
 </body>
 </html>

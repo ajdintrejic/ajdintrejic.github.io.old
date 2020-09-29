@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© All rights reserved</copyright>
-    <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2020 17:06:16 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdin.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -57,16 +57,6 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       
       <guid>https://ajdin.io/posts/htb/traceback/</guid>
       <description>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access.</description>
-    </item>
-    
-    <item>
-      <title>Privacy</title>
-      <link>https://ajdin.io/privacy/</link>
-      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/privacy/</guid>
-      <description>Privacy Policy for ajdin.io
-At ajdin.io, accessible from https://ajdin.io, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ajdin.</description>
     </item>
     
     <item>
@@ -134,6 +124,15 @@ At ajdin.io, accessible from https://ajdin.io, one of our main priorities is the
       <guid>https://ajdin.io/cv/</guid>
       <description>You can download my resume here in English. I might add German and Croatian translations.
  English German Croatian  </description>
+    </item>
+    
+    <item>
+      <title>Privacy Policy</title>
+      <link>https://ajdin.io/privacy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajdin.io/privacy/</guid>
+      <description>//Todo</description>
     </item>
     
   </channel>

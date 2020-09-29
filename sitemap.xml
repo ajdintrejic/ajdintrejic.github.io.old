@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ajdin.io/</loc>
+    <lastmod>2020-09-28T17:06:16+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ajdin.io/posts/</loc>
     <lastmod>2020-09-28T17:06:16+02:00</lastmod>
   </url>
@@ -43,11 +48,6 @@
   </url>
   
   <url>
-    <loc>https://ajdin.io/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ajdin.io/tags/ftp/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
@@ -79,11 +79,6 @@
   
   <url>
     <loc>https://ajdin.io/tags/powerup.ps1/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/privacy/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -207,6 +202,10 @@
   
   <url>
     <loc>https://ajdin.io/cv/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ajdin.io/privacy/</loc>
   </url>
   
 </urlset>
