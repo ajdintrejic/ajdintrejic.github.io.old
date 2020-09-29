@@ -398,8 +398,8 @@ table th, table td {
         font-size: 13px;
         text-align: center;
         display: block;
-        position: absolute;
-	width: auto;
+        position: fixed;
+	width: inherit;
 	left: 0px;
 	background: #000;
         bottom: 0px;
@@ -504,11 +504,12 @@ h3 {
     font-size: 14px;
     text-align: center;
     display: block;
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width:100%;
     max-width:760px;
     border: 2px solid #ff7979;
-    padding: 10px;
+    padding: 10px 0;
+    background: #000;
 }
 
