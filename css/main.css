@@ -393,6 +393,20 @@ table th, table td {
 }
 
 @media (max-width: 767px) {
+    #cookies-eu-banner {
+        color: #ddd;
+        font-size: 13px;
+        text-align: center;
+        display: block;
+        position: absolute;
+	width: auto;
+	left: 0px;
+	background: #000;
+        bottom: 0px;
+        border: 2px solid #ff7979;
+        padding: 10px;
+    }
+
     body {
         padding: 3rem 1.5rem 1rem;
     }
@@ -474,9 +488,6 @@ h3 {
     border: none;
 }
 
-#cookies-eu-more {
-    margin-left: 7px;
-}
 
 #cookies-eu-reject {
     background: none;
@@ -489,12 +500,15 @@ h3 {
 }
 
 #cookies-eu-banner {
-    color: #fff;
-    font-size: 13px;
+    color: #ddd;
+    font-size: 14px;
     text-align: center;
     display: block;
+    position: absolute;
+    bottom: 0px;
+    width:100%;
+    max-width:760px;
     border: 2px solid #ff7979;
     padding: 10px;
-    
 }
 
