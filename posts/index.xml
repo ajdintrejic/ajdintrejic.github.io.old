@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© All rights reserved</copyright>
-    <lastBuildDate>Sat, 26 Sep 2020 19:17:05 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2020 17:06:16 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdin.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Prompt.ml XSS challenge write up</title>
+      <link>https://ajdin.io/posts/prompt-ml/</link>
+      <pubDate>Mon, 28 Sep 2020 17:06:16 +0200</pubDate>
+      
+      <guid>https://ajdin.io/posts/prompt-ml/</guid>
+      <description>Prompt.ml is is a XSS injection site inspired by alert(1) to win.
+0x0 Just a simple XSS payload, close the last html element and get prompt(1)</description>
+    </item>
     
     <item>
       <title>BalCCon 2k20 CTF Write Up</title>
@@ -65,7 +75,7 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       
       <guid>https://ajdin.io/posts/htb/openadmin/</guid>
       <description>Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
-nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
+1  nmap -sC -sV -O -oA nmap/initial 10.10.10.171   1 2 3 4  -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute   Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
     </item>
     
     <item>
@@ -75,7 +85,7 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
       
       <guid>https://ajdin.io/posts/htb/mango/</guid>
       <description>Reconnaissance Let’s run nmap,
-sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”.</description>
+1  sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162   We have to use https for this website on port 80, and we can get this “search page”.</description>
     </item>
     
     <item>
@@ -85,8 +95,7 @@ sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this
       
       <guid>https://ajdin.io/posts/htb/postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
-# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
--sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.</description>
+1  # nmap -sV -sC -O -oA nmap/initial 10.10.10.160   Short explanation:</description>
     </item>
     
   </channel>

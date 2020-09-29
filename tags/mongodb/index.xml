@@ -19,7 +19,7 @@
       
       <guid>https://ajdin.io/posts/htb/mango/</guid>
       <description>Reconnaissance Let’s run nmap,
-sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”.</description>
+1  sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162   We have to use https for this website on port 80, and we can get this “search page”.</description>
     </item>
     
   </channel>

