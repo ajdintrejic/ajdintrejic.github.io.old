@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Cheatsheet - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Cheatsheet" />
+<meta property="og:description" content="This is a cheatsheet for pentesting I made for HackTheBox.
+ This is still work in progress, I&rsquo;ll add more stuff here." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ajdin.io/cheatsheet/" />
+<meta property="article:published_time" content="2020-10-05T19:19:47+02:00" />
+<meta property="article:modified_time" content="2020-10-05T19:19:47+02:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cheatsheet"/>
+<meta name="twitter:description" content="This is a cheatsheet for pentesting I made for HackTheBox.
+ This is still work in progress, I&rsquo;ll add more stuff here."/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://ajdin.io/js/main.js"></script>
+	<script src="https://ajdin.io/cookieconsent.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div id="cookies-eu-banner" style="display: none;" >
+    	By continuing to visit this site, you accept the use of anonymized cookies for analytics.
+	<a href="https://ajdin.io/privacy" id="cookies-eu-more">Read more</a>.
+	
+	<button id="cookies-eu-accept"><a>Accept</a></button>
+</div>
+<div class="header">
+	<base href="https://ajdin.io/">
+
+
+
+	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
+	<div class="site-description"><h2>ajdin.io</h2><nav class="nav social">
+			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Cheatsheet</h1>
+			<div class="meta">Posted at &mdash; Oct 5, 2020</div>
+		</div>
+
+		
+		<div class="toc">              
+			<h3>Table of Contents</h3>
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="https://ajdin.io/cheatsheet/#recon">Recon</a>
+      <ul>
+        <li><a href="https://ajdin.io/cheatsheet/#nmap">Nmap</a></li>
+        <li><a href="https://ajdin.io/cheatsheet/#directory-busting-with-gobuster">Directory busting with Gobuster</a></li>
+        <li><a href="https://ajdin.io/cheatsheet/#find-hidden-virtual-hosts">Find hidden Virtual Hosts</a></li>
+      </ul>
+    </li>
+    <li><a href="https://ajdin.io/cheatsheet/#ftp">FTP</a></li>
+    <li><a href="https://ajdin.io/cheatsheet/#privesc">Privesc</a>
+      <ul>
+        <li><a href="https://ajdin.io/cheatsheet/#general">General</a></li>
+        <li><a href="https://ajdin.io/cheatsheet/#suid-or-sudo--l">SUID or sudo -l</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+			<hr>
+		</div>              
+		
+		</aside>              
+
+		<div class="markdown">
+              		
+<p>This is a cheatsheet for pentesting I made for HackTheBox.</p>
+<blockquote>
+<p><strong>This is still work in progress, I&rsquo;ll add more stuff here.</strong></p>
+</blockquote>
+<h2 id="recon">Recon<a class="anchor" href="#recon">#</a></h2>
+<h3 id="nmap">Nmap<a class="anchor" href="#nmap">#</a></h3>
+<p>Get all open ports.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nmap -p- --min-rate=1000 -T4 &lt;IP&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>Get more info on open ports. (eg. 21, 22, 80)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -p21,22,80 -sC -sV -O -oA nmap/scan &lt;IP&gt;
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="directory-busting-with-gobuster">Directory busting with Gobuster<a class="anchor" href="#directory-busting-with-gobuster">#</a></h3>
+<p>If hosts uses <code>/index.php</code> scan with <code>-x php</code>, for <code>/index.html</code> use <code>-x html</code>. Sometimes using <code>big.txt</code> can also find something that <code>directory-list-2.3-medium.txt</code> didn&rsquo;t.</p>
+<p>Scanning Windows machines should be done with all lowercase letters as Windows Server doesn&rsquo;t differentiate between uppercase and lowercase paths.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u &lt;IP&gt; -x php,html,txt -t 100
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="find-hidden-virtual-hosts">Find hidden Virtual Hosts<a class="anchor" href="#find-hidden-virtual-hosts">#</a></h3>
+<p>First grab a subdomain which doesn&rsquo;t exist and get the length, in this case its <code>4242</code>.</p>
+<h4 id="grabbing-the-length">Grabbing the length</h4>
+<p>Piping curl to <code>wc</code>, we can count the chars with <code>-c</code> flag</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl -H &#39;Host: randomsubdomain.target.com&#39; http://&lt;IP&gt; | wc -c
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="fuzzing-the-subdomains">Fuzzing the subdomains</h4>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffuf -w /path/to/vhost/wordlist -u https://target -H &#34;Host: FUZZ&#34; -fs 4242
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="ftp">FTP<a class="anchor" href="#ftp">#</a></h2>
+<p>Get all files from FTP to local machine.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget -m --user=&lt;USERNAME&gt; --password=&#39;&lt;PASSWD&gt;&#39; ftp://&lt;IP&gt;
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="privesc">Privesc<a class="anchor" href="#privesc">#</a></h2>
+<h3 id="general">General<a class="anchor" href="#general">#</a></h3>
+<ul>
+<li>On Linux/Unix servers use <a href="https://github.com/rebootuser/LinEnum">linenum.sh</a> or <a href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS">linpeas</a>.</li>
+<li>On Windows servers use <a href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS">winpeas.sh</a>.</li>
+</ul>
+<h3 id="suid-or-sudo--l">SUID or sudo -l<a class="anchor" href="#suid-or-sudo--l">#</a></h3>
+<p>If something can be ran with higher privileges, <a href="https://gtfobins.github.io/">GTFOBins</a> can be useful for exploiting such scripts/programs</p>
+
+
+		</div>
+
+		<div class="post-tags">
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> © All rights reserved | <a href="https://ajdin.io/privacy/">Privacy</a> | 
+                <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+<script src="cookieconsent.js"></script>
+<script>
+    new CookiesEuBanner(function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        
+	ga('set', 'anonymizeIp', true);
+        ga('create', 'UA-165836726-1', 'auto');
+        ga('send', 'pageview');
+    });
+</script>
+</body>
+</html>
