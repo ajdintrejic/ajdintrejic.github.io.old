@@ -85,10 +85,12 @@
       </ul>
     </li>
     <li><a href="https://ajdin.io/cheatsheet/#ftp">FTP</a></li>
+    <li><a href="https://ajdin.io/cheatsheet/#process-spying">Process spying</a></li>
     <li><a href="https://ajdin.io/cheatsheet/#privesc">Privesc</a>
       <ul>
         <li><a href="https://ajdin.io/cheatsheet/#general">General</a></li>
         <li><a href="https://ajdin.io/cheatsheet/#suid-or-sudo--l">SUID or sudo -l</a></li>
+        <li><a href="https://ajdin.io/cheatsheet/#finding-specific-strings-in-whole-directory">Finding specific strings in whole directory</a></li>
       </ul>
     </li>
   </ul>
@@ -182,6 +184,21 @@
 </code></pre></td></tr></table>
 </div>
 </div><hr>
+<h2 id="process-spying">Process spying<a class="anchor" href="#process-spying">#</a></h2>
+<p><a href="https://github.com/DominicBreuker/pspy">pspy</a></p>
+<blockquote>
+<p>pspy is a command line tool designed to snoop on processes without need for root permissions.</p>
+</blockquote>
+<p>Get all processes by root:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./pspy -c false | grep &#34;UID=0&#34;
+</code></pre></td></tr></table>
+</div>
+</div><hr>
 <h2 id="privesc">Privesc<a class="anchor" href="#privesc">#</a></h2>
 <h3 id="general">General<a class="anchor" href="#general">#</a></h3>
 <ul>
@@ -190,7 +207,17 @@
 </ul>
 <h3 id="suid-or-sudo--l">SUID or sudo -l<a class="anchor" href="#suid-or-sudo--l">#</a></h3>
 <p>If something can be ran with higher privileges, <a href="https://gtfobins.github.io/">GTFOBins</a> can be useful for exploiting such scripts/programs.</p>
-
+<h3 id="finding-specific-strings-in-whole-directory">Finding specific strings in whole directory<a class="anchor" href="#finding-specific-strings-in-whole-directory">#</a></h3>
+<p>Using grep you can recursively search all directories below you.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep  -nriE &#39;password|passwd|admin|sha|hash|config|creds&#39;
+</code></pre></td></tr></table>
+</div>
+</div>
 
 		</div>
 
