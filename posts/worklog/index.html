@@ -1,109 +1,95 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Building Worklog: a PERN stack web application - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Building Worklog: a PERN stack web application" />
-<meta property="og:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdin.io/posts/worklog/" />
-<meta property="og:image" content="https://ajdin.io/worklog/cover.jpg" />
-<meta property="article:published_time" content="2020-07-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-07-18T00:00:00+00:00" />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ajdin.io/worklog/cover.jpg"/>
-
-<meta name="twitter:title" content="Building Worklog: a PERN stack web application"/>
-<meta name="twitter:description" content="Building a web based application using PostgreSQL for database, ExpressJS for routing and ReactJS for front end. This app is supposed to help medium sized businesses automate the boring work."/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/cookieconsent.js"></script>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    
+    <title>Building Worklog: a PERN stack web application | Ajdin&#39;s blog</title>
 </head>
-
 <body>
-	<div class="container wrapper post">
-		<div id="cookies-eu-banner" style="display: none;" >
-    	By continuing to visit this site, you accept the use of anonymized cookies for analytics.
-	<a href="https://ajdin.io/privacy" id="cookies-eu-more">Read more</a>.
-	
-	<button id="cookies-eu-accept"><a>Accept</a></button>
+        <div class="container"><div id="header">
+    <div id="header-top">
+        <div id="header-left">
+            <a href="/" class="link-fix">
+            <h1 class="title"> Ajdin&#39;s blog</h1>
+            <h3 class="handle">@ajdintrejic</h3>
+            </a>
+        </div>
+        <div id="header-right">
+            
+            
+            
+             
+            
+              <a class="social-icons__link" rel="me" title="Twitter"
+                 href="https://twitter.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="twitter"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="GitHub"
+                 href="https://github.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="github"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="RSS"
+                 href="/index.xml"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="rss"></i>
+        
+              </a>
+            
+             
+        </div>
+    </div>
+    <div class="nav-bar">
+        
+        <a class="nav-item link-fix" href="/">
+                
+                Home
+        </a>
+        
+        <a class="nav-item link-fix" href="/about">
+                
+                About
+        </a>
+        
+        <a class="nav-item link-fix" href="/tags">
+                
+                Tags
+        </a>
+        
+    </div>
 </div>
-<div class="header">
-	<base href="https://ajdin.io/">
+
+<div id="content">
+<h2 class="post-title">Building Worklog: a PERN stack web application</h2>
 
 
 
-	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
-	<div class="site-description"><h2>ajdin.io</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">Archive</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+<div class="date">Jul 18, 2020</div>
 
 
-		<div class="post-header">
-			<h1 class="title">Building Worklog: a PERN stack web application</h1>
-			<div class="meta">Posted at &mdash; Jul 18, 2020</div>
-		</div>
 
-		
-		<div class="toc">              
-			<h3>Table of Contents</h3>
-			<nav id="TableOfContents">
-  <ul>
-    <li><a href="https://ajdin.io/posts/worklog/#introduction">Introduction</a></li>
-    <li><a href="https://ajdin.io/posts/worklog/#functionality">Functionality</a></li>
-    <li><a href="https://ajdin.io/posts/worklog/#setting-up-the-environment">Setting up the environment</a>
-      <ul>
-        <li><a href="https://ajdin.io/posts/worklog/#postgres">Postgres</a></li>
-        <li><a href="https://ajdin.io/posts/worklog/#code">Code</a></li>
-        <li><a href="https://ajdin.io/posts/worklog/#nodejs-and-node-package-manager">Node.js and Node package manager</a></li>
-      </ul>
-    </li>
-    <li><a href="https://ajdin.io/posts/worklog/#actual-code">Actual code</a>
-      <ul>
-        <li><a href="https://ajdin.io/posts/worklog/#front-end-with-reactjs">Front end with React.js</a></li>
-        <li><a href="https://ajdin.io/posts/worklog/#trying-to-open-the-page-with-express">Trying to open the page with Express</a></li>
-      </ul>
-    </li>
-    <li><a href="https://ajdin.io/posts/worklog/#connecting-the-app-to-postgres">Connecting the app to Postgres</a></li>
-    <li><a href="https://ajdin.io/posts/worklog/#things-which-are-left-to-do">Things which are left to do</a></li>
-  </ul>
-</nav>
-			<hr>
-		</div>              
-		
-		</aside>              
+<br/>
 
-		<div class="markdown">
-              		
 <h2 id="introduction">Introduction<a class="anchor" href="#introduction">#</a></h2>
 <p>I’ll be building a simple web application to log workers' activity. I’ll be using PostgresSQL for database, React for front end and Express for routing the app.</p>
 <h2 id="functionality">Functionality<a class="anchor" href="#functionality">#</a></h2>
@@ -125,63 +111,16 @@
 <ol>
 <li>Install the PostgreSQL package:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S postgresql 
-</code></pre></td></tr></table>
-</div>
-</div><p>Now this will also create a new user postgres.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S postgresql 
+</code></pre></div><p>Now this will also create a new user postgres.</p>
 <ol start="2">
 <li>Switch to postgres user:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -iu postgres
-</code></pre></td></tr></table>
-</div>
-</div><ol start="3">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -iu postgres
+</code></pre></div><ol start="3">
 <li>Initialize db cluster:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ initdb -D /var/lib/postgres/data
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ initdb -D /var/lib/postgres/data
 The files belonging to this database system will be owned by user &#34;postgres&#34;.
 This user must also own the server process.
 
@@ -210,52 +149,13 @@ Success. You can now start the database server using:
 
     pg_ctl -D /var/lib/postgres/data -l logfile start
 
-</code></pre></td></tr></table>
-</div>
-</div><p>Typing exit in the shell will return us to previous user.</p>
+</code></pre></div><p>Typing exit in the shell will return us to previous user.</p>
 <ol start="4">
 <li>Start or enable postgres service: If you start postgres it won’t start again on boot, if you enable it it will run on every boot but not right now. I won’t enable it as I don’t want Postgres running everytime I boot. I can just run this command every time I want to use it:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">systemctl start postgresql.service
-</code></pre></td></tr></table>
-</div>
-</div><p>I can check if it’s running by running this command:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ systemctl status postgresql.service
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">systemctl start postgresql.service
+</code></pre></div><p>I can check if it’s running by running this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ systemctl status postgresql.service
 ● postgresql.service - PostgreSQL database server
      Loaded: loaded <span style="color:#f92672">(</span>/usr/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled<span style="color:#f92672">)</span>
      Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Fri 2020-07-03 18:51:04 CEST; 3min 16s ago
@@ -281,94 +181,36 @@ Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="col
 Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga postgres<span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span>: 2020-07-03 18:51:04.327 CEST <span style="color:#f92672">[</span>129809<span style="color:#f92672">]</span> LOG:  database system is ready to accept connections
 Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Started PostgreSQL database server.
 <span style="color:#f92672">[</span>ajdin@yoga ~<span style="color:#f92672">]</span>$ 
-</code></pre></td></tr></table>
-</div>
-</div><p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I won’t be doing that.</p>
+</code></pre></div><p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I won’t be doing that.</p>
 <h3 id="code">Code<a class="anchor" href="#code">#</a></h3>
 <p>I’ll use the VSCode, but the OSS version, it can be installed with</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S code
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/worklog/code.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S code
+</code></pre></div><p><img src="/worklog/code.png" alt=""></p>
 <h3 id="nodejs-and-node-package-manager">Node.js and Node package manager<a class="anchor" href="#nodejs-and-node-package-manager">#</a></h3>
 <p>This is also easy to install, just run this:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S nodejs npm
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="actual-code">Actual code<a class="anchor" href="#actual-code">#</a></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S nodejs npm
+</code></pre></div><h2 id="actual-code">Actual code<a class="anchor" href="#actual-code">#</a></h2>
 <h3 id="front-end-with-reactjs">Front end with React.js<a class="anchor" href="#front-end-with-reactjs">#</a></h3>
 <p>Now we need a boilerplate. This is achieved with a Node module called create-react-app.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npx create-react-app worklog-app
-</code></pre></td></tr></table>
-</div>
-</div><p>Difference between npm and npx:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npx create-react-app worklog-app
+</code></pre></div><p>Difference between npm and npx:</p>
 <pre><code>npm is a tool mainly used to install packages.
 npx is a tool to execute packages.
 </code></pre>
 <p>The code above also creates a directory called worklog-app with following components:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worklog-app
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worklog-app
 ├── node_modules
 ├── package.json
 ├── package-lock.json
 ├── public
 ├── README.md
 └── src
-</code></pre></td></tr></table>
-</div>
-</div><p>I’ll start the server with npm start and we will get the React greeter on localhost:3000:
+</code></pre></div><p>I’ll start the server with npm start and we will get the React greeter on localhost:3000:
 <img src="/worklog/react.png" alt=""></p>
 <p>For React I’m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/getting-started">here</a>, but I’ll include some steps anyway.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
-</code></pre></td></tr></table>
-</div>
-</div><p>Overwrite src/App.js with this:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
+</code></pre></div><p>Overwrite src/App.js with this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Button</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;antd&#39;</span>;
 <span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./App.css&#39;</span>;
 
@@ -379,47 +221,15 @@ npx is a tool to execute packages.
 );
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
-</code></pre></td></tr></table>
-</div>
-</div><p>and also add css to src/App.css at the top of the file (I’ve removed the other css properties as they were made for that React boilerplate):</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;~antd/dist/antd.css&#39;</span>;
-</code></pre></td></tr></table>
-</div>
-</div><p>and now, we should have a button on localhost:3000
+</code></pre></div><p>and also add css to src/App.css at the top of the file (I’ve removed the other css properties as they were made for that React boilerplate):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#960050;background-color:#1e0010">@</span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;~antd/dist/antd.css&#39;</span>;
+</code></pre></div><p>and now, we should have a button on localhost:3000
 <img src="/worklog/button.gif" alt=""></p>
 <h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express<a class="anchor" href="#trying-to-open-the-page-with-express">#</a></h3>
 <p>The page can be loaded with npm start but that is not going through Express router. So Now I will configure this quickly before making any front end. I’m going to install express and react-router-dom so we can connect React and Express:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
-</code></pre></td></tr></table>
-</div>
-</div><p>src/index.js has to import the app like this:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
+</code></pre></div><p>src/index.js has to import the app like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">BrowserRouter</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-router-dom&#39;</span>;
 
@@ -431,44 +241,8 @@ npx is a tool to execute packages.
         &lt;<span style="color:#f92672">App</span>/&gt;
     &lt;/<span style="color:#f92672">BrowserRouter</span>&gt;
 ), document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>));
-</code></pre></td></tr></table>
-</div>
-</div><p>and now App.js should make all the paths to other pages like this:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">Component</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</code></pre></div><p>and now App.js should make all the paths to other pages like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span>, { <span style="color:#a6e22e">Component</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Route</span>, <span style="color:#a6e22e">Switch</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-router-dom&#39;</span>;
 <span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./App.css&#39;</span>;
 <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Login</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./pages/Login&#39;</span>;
@@ -498,9 +272,7 @@ npx is a tool to execute packages.
 }
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
-</code></pre></td></tr></table>
-</div>
-</div><p>I have made these pages quickly and I’ll fix them later and add/remove functionality if I feel like in the end when I build the database.</p>
+</code></pre></div><p>I have made these pages quickly and I’ll fix them later and add/remove functionality if I feel like in the end when I build the database.</p>
 <p>Front end pages</p>
 <ul>
 <li><a href="/worklog/login_desktop.png">Login page desktop</a></li>
@@ -514,55 +286,15 @@ npx is a tool to execute packages.
 </ul>
 <p>Basic authentication</p>
 <p>I’m going to briefly explain how is authentication handled by this app. Entry point into this web app is in index.js which opens App.js like this (if there is ‘…’ in a code block, some code there was removed):</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
 <span style="color:#a6e22e">render</span>(
   &lt;<span style="color:#f92672">BrowserRouter</span>&gt;
     &lt;<span style="color:#f92672">App</span> /&gt;
   &lt;/<span style="color:#f92672">BrowserRouter</span>&gt;,
   document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;root&#34;</span>)
 );
-</code></pre></td></tr></table>
-</div>
-</div><p>App.js has a switch so the user can open different websites.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+</code></pre></div><p>App.js has a switch so the user can open different websites.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Component</span> {
   <span style="color:#a6e22e">render</span>() {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">App</span> <span style="color:#f92672">=</span> () =&gt; (
@@ -585,38 +317,8 @@ npx is a tool to execute packages.
 }
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;
-</code></pre></td></tr></table>
-</div>
-</div><p>So the user can now open all these sites, if he is authenticated. If he is not he won’t be able to open the switch to the &lt;ProtectedRoute &hellip; /&gt;. ProtectedRoute is a custom class I made which checks if the user is authenticated and opens that Route or returns the user to the login page if he is not.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
+</code></pre></div><p>So the user can now open all these sites, if he is authenticated. If he is not he won’t be able to open the switch to the &lt;ProtectedRoute &hellip; /&gt;. ProtectedRoute is a custom class I made which checks if the user is authenticated and opens that Route or returns the user to the login page if he is not.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">...
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ProtectedRoute</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Component</span>, ...<span style="color:#a6e22e">rest</span> }) =&gt; {
   <span style="color:#66d9ef">return</span> (
     &lt;<span style="color:#f92672">Route</span>
@@ -640,71 +342,20 @@ npx is a tool to execute packages.
     /&gt;
   );
 };
-</code></pre></td></tr></table>
-</div>
-</div><p>So what is this class auth? Well it’s a custom class that handles functions like: login(), logout(), isAuthenticated() and so on…</p>
+</code></pre></div><p>So what is this class auth? Well it’s a custom class that handles functions like: login(), logout(), isAuthenticated() and so on…</p>
 <h2 id="connecting-the-app-to-postgres">Connecting the app to Postgres<a class="anchor" href="#connecting-the-app-to-postgres">#</a></h2>
 <p>I need 2 files here:</p>
 <ul>
 <li>createDb.js to create the database (or I can create it with psql, but It’s better to put all the commands in a file so it’s easier to deploy)</li>
 <li>db.js to execute search queries on the database. Postgres for NodeJS requires the package pg.</li>
 </ul>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">src/db
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">src/db
 ├── createDb.js
 └── db.js
-</code></pre></td></tr></table>
-</div>
-</div><p>The database should look something like this:
+</code></pre></div><p>The database should look something like this:
 <img src="/worklog/sql.png" alt=""></p>
 <p>and the coresponding SQL code to create this looks like this:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(
   town_name VARCHAR(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   town_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
   <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (town_id)
@@ -740,53 +391,14 @@ npx is a tool to execute packages.
   <span style="color:#66d9ef">UNIQUE</span> (username)
 );
 
-</code></pre></td></tr></table>
-</div>
-</div><p>We can transfer these commands into createDb.js like this (example for table town):</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">const sql_create_town <span style="color:#f92672">=</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(
+</code></pre></div><p>We can transfer these commands into createDb.js like this (example for table town):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">const sql_create_town <span style="color:#f92672">=</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(
     town_name VARCHAR(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
     town_id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
     <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (town_id)
 );<span style="color:#f92672">`</span>;
-</code></pre></td></tr></table>
-</div>
-</div><p>The queries (eg. CREATE, INSERT) can be executed like this:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">Pool</span>} <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;pg&#39;</span>);
+</code></pre></div><p>The queries (eg. CREATE, INSERT) can be executed like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">Pool</span>} <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;pg&#39;</span>);
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Pool</span>({
     <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;postgres&#39;</span>,
@@ -808,43 +420,15 @@ npx is a tool to execute packages.
     },
     <span style="color:#a6e22e">pool</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">pool</span>
 }
-</code></pre></td></tr></table>
-</div>
-</div><p>Once the SQL is ready, We need to create a new user for postgres as we don’t want it to be a superuser. In production this should include revoking some rights from this user so the database is more secure.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>postgres@yoga ~<span style="color:#f92672">]</span>$ createuser --interactive
+</code></pre></div><p>Once the SQL is ready, We need to create a new user for postgres as we don’t want it to be a superuser. In production this should include revoking some rights from this user so the database is more secure.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>postgres@yoga ~<span style="color:#f92672">]</span>$ createuser --interactive
 Enter name of role to add: work-log-user
 Shall the new role be a superuser? <span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span> n
 Shall the new role be allowed to create databases? <span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span> n
 Shall the new role be allowed to create more new roles? <span style="color:#f92672">(</span>y/n<span style="color:#f92672">)</span> n
 <span style="color:#f92672">[</span>postgres@yoga ~<span style="color:#f92672">]</span>$ 
-</code></pre></td></tr></table>
-</div>
-</div><p>Creating the database:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">[postgres<span style="color:#f92672">@</span>yoga <span style="color:#f92672">~</span>]<span style="color:#960050;background-color:#1e0010">$</span> psql
+</code></pre></div><p>Creating the database:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">[postgres<span style="color:#f92672">@</span>yoga <span style="color:#f92672">~</span>]<span style="color:#960050;background-color:#1e0010">$</span> psql
 psql (<span style="color:#ae81ff">12</span>.<span style="color:#ae81ff">3</span>)
 <span style="color:#66d9ef">Type</span> <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9ef">for</span> help.
 
@@ -854,24 +438,8 @@ postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">GRANT<
 <span style="color:#66d9ef">GRANT</span>
 postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">IN</span> <span style="color:#66d9ef">SCHEMA</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">SELECT</span>, <span style="color:#66d9ef">UPDATE</span>, <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">ON</span> TABLES <span style="color:#66d9ef">TO</span> workloguser;
 <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">PRIVILEGES</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>I’ve edited the script to create the database, so when I run node src/db/createDb.js it outputs:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>ajdin@yoga<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>/dev/pts/1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>master ⚡<span style="color:#f92672">]</span> 
+</code></pre></div><p>I’ve edited the script to create the database, so when I run node src/db/createDb.js it outputs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">┌<span style="color:#f92672">[</span>ajdin@yoga<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>/dev/pts/1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>master ⚡<span style="color:#f92672">]</span> 
 └<span style="color:#f92672">[</span>~/Documents/webapp/worklog-app<span style="color:#f92672">]</span>&gt; node src/db/createDb.js
 Creating table town.
 Table town created.
@@ -881,52 +449,8 @@ Creating table jobs.
 Table jobs created.
 Creating table user.
 Table user created.
-</code></pre></td></tr></table>
-</div>
-</div><p>Now the tables are here, we need to provide it with some mock data, I’ll create a new file called mockDb.js which will supply test data to the database so it can be tested. (I won’t populate work_log with data)</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>dt
+</code></pre></div><p>Now the tables are here, we need to provide it with some mock data, I’ll create a new file called mockDb.js which will supply test data to the database so it can be tested. (I won’t populate work_log with data)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>dt
               List <span style="color:#66d9ef">of</span> relations
  <span style="color:#66d9ef">Schema</span> <span style="color:#f92672">|</span>     Name     <span style="color:#f92672">|</span> <span style="color:#66d9ef">Type</span>  <span style="color:#f92672">|</span>    <span style="color:#66d9ef">Owner</span>    
 <span style="color:#75715e">--------+--------------+-------+-------------
@@ -964,9 +488,7 @@ worklogdb<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">SE
 (<span style="color:#ae81ff">5</span> <span style="color:#66d9ef">rows</span>)
 
 worklogdb<span style="color:#f92672">=&gt;</span> 
-</code></pre></td></tr></table>
-</div>
-</div><p>So, the database is connected and has mock data.</p>
+</code></pre></div><p>So, the database is connected and has mock data.</p>
 <h2 id="things-which-are-left-to-do">Things which are left to do<a class="anchor" href="#things-which-are-left-to-do">#</a></h2>
 <ul>
 <li>Make use of sessions and cookies with express-session middleware (e.g. leaving cookies when user clicks on ‘Remember me on login’, or to enable dark mode).</li>
@@ -982,51 +504,64 @@ worklogdb<span style="color:#f92672">=&gt;</span>
 </ul>
 
 
-		</div>
 
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/webdev">webdev</a></li>
-								
-								<li><a href="/tags/react">react</a></li>
-								
-								<li><a href="/tags/node">node</a></li>
-								
-								<li><a href="/tags/npm">npm</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> © All rights reserved | <a href="https://ajdin.io/privacy/">Privacy</a> | 
-                <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
-	</nav>
+<div class="post-tags">
+    
+    <a class="post-tag" href="https://ajdin.io/tags/webdev/">webdev</a>
+    <a class="post-tag" href="https://ajdin.io/tags/react/">react</a>
+    <a class="post-tag" href="https://ajdin.io/tags/node/">node</a>
+    <a class="post-tag" href="https://ajdin.io/tags/npm/">npm</a></div>
+
+
+
+
+
+<div class="social-icons">
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="Twitter"
+         href="https://twitter.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="twitter"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="github"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="RSS"
+         href="/index.xml"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="rss"></i>
+
+      </a>
+    
+     
 </div>
 
 
 
-<script>feather.replace()</script>
-<script src="cookieconsent.js"></script>
+            </div><footer id="footer">
+    <p>  © 2020</p>
+</footer>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
-    new CookiesEuBanner(function () {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        
-	ga('set', 'anonymizeIp', true);
-        ga('create', 'UA-165836726-1', 'auto');
-        ga('send', 'pageview');
-    });
+  feather.replace()
 </script>
-</body>
+</div>
+    </body>
 </html>

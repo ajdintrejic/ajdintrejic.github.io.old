@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>webmin on AJDIN</title>
+    <title>webmin on Ajdin&#39;s blog</title>
     <link>https://ajdin.io/tags/webmin/</link>
-    <description>Recent content in webmin on AJDIN</description>
+    <description>Recent content in webmin on Ajdin&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© All rights reserved</copyright>
     <lastBuildDate>Fri, 13 Mar 2020 13:28:11 +0200</lastBuildDate><atom:link href="https://ajdin.io/tags/webmin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox Postman Write Up</title>
@@ -15,7 +14,8 @@
       
       <guid>https://ajdin.io/posts/htb/postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
-1  # nmap -sV -sC -O -oA nmap/initial 10.10.10.160   Short explanation:</description>
+# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
+-sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.</description>
     </item>
     
   </channel>

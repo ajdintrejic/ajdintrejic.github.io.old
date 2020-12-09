@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AJDIN</title>
+    <title>Ajdin&#39;s blog</title>
     <link>https://ajdin.io/</link>
-    <description>Recent content on AJDIN</description>
+    <description>Recent content on Ajdin&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© All rights reserved</copyright>
     <lastBuildDate>Tue, 06 Oct 2020 14:24:42 +0200</lastBuildDate><atom:link href="https://ajdin.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox Sneakymailer Write Up w/o Metasploit</title>
@@ -99,7 +98,7 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       
       <guid>https://ajdin.io/posts/htb/openadmin/</guid>
       <description>Reconnaissance Let&amp;rsquo;s see what have we got here with nmap.
-1  nmap -sC -sV -O -oA nmap/initial 10.10.10.171   1 2 3 4  -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute   Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
+nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: probe open ports to determine service/version info -O: OS detection -oA: output OS detection, version detection, script scanning, and traceroute Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</description>
     </item>
     
     <item>
@@ -109,7 +108,7 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       
       <guid>https://ajdin.io/posts/htb/mango/</guid>
       <description>Reconnaissance Let’s run nmap,
-1  sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162   We have to use https for this website on port 80, and we can get this “search page”.</description>
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”.</description>
     </item>
     
     <item>
@@ -119,7 +118,8 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       
       <guid>https://ajdin.io/posts/htb/postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
-1  # nmap -sV -sC -O -oA nmap/initial 10.10.10.160   Short explanation:</description>
+# nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
+-sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.</description>
     </item>
     
     <item>
@@ -128,36 +128,7 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajdin.io/about/</guid>
-      <description>I’m a computer science student @ UniZg. I’m interested in development and security of modern web applications. I have created this website to take notes when I see fit.</description>
-    </item>
-    
-    <item>
-      <title>Archive</title>
-      <link>https://ajdin.io/archive/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/archive/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CV</title>
-      <link>https://ajdin.io/cv/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/cv/</guid>
-      <description>You can download my resume here in English. I might add German and Croatian translations.
- English German Croatian  </description>
-    </item>
-    
-    <item>
-      <title>Privacy Policy</title>
-      <link>https://ajdin.io/privacy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/privacy/</guid>
-      <description>Privacy Policy Last updated: 02.09.2020
-Ajdin.io operates at https://www.ajdin.io . This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.</description>
+      <description>I’m a computer science student @ UniZg. I’m interested in development and security of modern web applications. I have created this website to take notes .</description>
     </item>
     
   </channel>

