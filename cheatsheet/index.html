@@ -97,40 +97,40 @@
 <h2 id="recon">Recon<a class="anchor" href="#recon">#</a></h2>
 <h3 id="nmap">Nmap<a class="anchor" href="#nmap">#</a></h3>
 <p>Get all open ports.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nmap -p- --min-rate=1000 -T4 &lt;IP&gt;
-</code></pre></div><p>Get more info on open ports. (eg. 21, 22, 80)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -p21,22,80 -sC -sV -O -oA nmap/scan &lt;IP&gt;
-</code></pre></div><p>Some servers could be blocking pings, this can be bypassed by using <code>-Pn</code> flag.</p>
+<pre><code>nmap -p- --min-rate=1000 -T4 &lt;IP&gt;
+</code></pre><p>Get more info on open ports. (eg. 21, 22, 80)</p>
+<pre><code>sudo nmap -p21,22,80 -sC -sV -O -oA nmap/scan &lt;IP&gt;
+</code></pre><p>Some servers could be blocking pings, this can be bypassed by using <code>-Pn</code> flag.</p>
 <hr>
 <h3 id="directory-busting">Directory busting<a class="anchor" href="#directory-busting">#</a></h3>
 <h4 id="gobuster">Gobuster</h4>
 <p>If hosts uses <code>/index.php</code> scan with <code>-x php</code>, for <code>/index.html</code> use <code>-x html</code>. Sometimes using <code>big.txt</code> can also find something that <code>directory-list-2.3-medium.txt</code> didn&rsquo;t.</p>
 <p>Scanning Windows machines should be done with all lowercase letters as Windows Server doesn&rsquo;t differentiate between uppercase and lowercase paths.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u &lt;IP&gt; -x php,html,txt -t 100
-</code></pre></div><h4 id="ffuf">FFUF</h4>
+<pre><code>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u &lt;IP&gt; -x php,html,txt -t 100
+</code></pre><h4 id="ffuf">FFUF</h4>
 <p>Same can be achieved with ffuf, sometimes if I get a lot of errors with gobuster I run ffuf.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://&lt;IP&gt;/FUZZ
-</code></pre></div><hr>
+<pre><code>ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://&lt;IP&gt;/FUZZ
+</code></pre><hr>
 <h3 id="find-hidden-virtual-hosts">Find hidden Virtual Hosts<a class="anchor" href="#find-hidden-virtual-hosts">#</a></h3>
 <p>First grab a subdomain which doesn&rsquo;t exist and get the length, in this case its <code>4242</code>.</p>
 <h4 id="grabbing-the-length">Grabbing the length</h4>
 <p>Piping curl to <code>wc</code>, we can count the chars with <code>-c</code> flag</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl -H &#39;Host: randomsubdomain.target.com&#39; http://&lt;IP&gt; | wc -c
-</code></pre></div><h4 id="fuzzing-the-subdomains">Fuzzing the subdomains</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffuf -w /path/to/vhost/wordlist -u https://target -H &#34;Host: FUZZ&#34; -fs 4242
-</code></pre></div><hr>
+<pre><code>curl -H 'Host: randomsubdomain.target.com' http://&lt;IP&gt; | wc -c
+</code></pre><h4 id="fuzzing-the-subdomains">Fuzzing the subdomains</h4>
+<pre><code>ffuf -w /path/to/vhost/wordlist -u https://target -H &quot;Host: FUZZ&quot; -fs 4242
+</code></pre><hr>
 <h2 id="ftp">FTP<a class="anchor" href="#ftp">#</a></h2>
 <p>Get all files from FTP to local machine.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget -m --user=&lt;USERNAME&gt; --password=&#39;&lt;PASSWD&gt;&#39; ftp://&lt;IP&gt;
-</code></pre></div><hr>
+<pre><code>wget -m --user=&lt;USERNAME&gt; --password='&lt;PASSWD&gt;' ftp://&lt;IP&gt;
+</code></pre><hr>
 <h2 id="process-spying">Process spying<a class="anchor" href="#process-spying">#</a></h2>
 <p><a href="https://github.com/DominicBreuker/pspy">pspy</a></p>
 <blockquote>
 <p>pspy is a command line tool designed to snoop on processes without need for root permissions.</p>
 </blockquote>
 <p>Get all processes by root:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./pspy -c false | grep &#34;UID=0&#34;
-</code></pre></div><hr>
+<pre><code>./pspy -c false | grep &quot;UID=0&quot;
+</code></pre><hr>
 <h2 id="privesc">Privesc<a class="anchor" href="#privesc">#</a></h2>
 <h3 id="general">General<a class="anchor" href="#general">#</a></h3>
 <ul>
@@ -141,8 +141,8 @@
 <p>If something can be ran with higher privileges, <a href="https://gtfobins.github.io/">GTFOBins</a> can be useful for exploiting such scripts/programs.</p>
 <h3 id="finding-specific-strings-in-whole-directory">Finding specific strings in whole directory<a class="anchor" href="#finding-specific-strings-in-whole-directory">#</a></h3>
 <p>Using grep you can recursively search all directories below you.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep  -nriE &#39;password|passwd|admin|sha|hash|config|creds&#39;
-</code></pre></div>
+<pre><code>$ grep  -nriE 'password|passwd|admin|sha|hash|config|creds'
+</code></pre>
 
 
 

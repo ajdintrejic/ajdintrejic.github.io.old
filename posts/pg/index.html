@@ -94,12 +94,12 @@
 <p>This is a short blog post on how to connect Postgres to a NodeJS app. This isn&rsquo;t that hard to do but I figured I might as well write it down as I&rsquo;m going to be doing this a lot in the future.</p>
 <h2 id="postgres-quick-intro">Postgres quick intro<a class="anchor" href="#postgres-quick-intro">#</a></h2>
 <h3 id="connecting-to-postgres">Connecting to Postgres<a class="anchor" href="#connecting-to-postgres">#</a></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Switch to the postgres user
+<pre><code># Switch to the postgres user
 sudo -iu postgres 
 
 # Connect to psql
 psql
-</code></pre></div><h4 id="psql-commands">Psql commands</h4>
+</code></pre><h4 id="psql-commands">Psql commands</h4>
 <ul>
 <li><code>\l</code> - list all databases</li>
 <li><code>\dt</code> - list all tables in current database</li>
@@ -107,14 +107,14 @@ psql
 </ul>
 <h2 id="executing-pg-queries-from-nodejs">Executing pg queries from NodeJS<a class="anchor" href="#executing-pg-queries-from-nodejs">#</a></h2>
 <p>First we need to install a npm package called pg.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm i pg
-</code></pre></div><p>Now, in the root of our project, lets make a directory and a <code>db.js</code> file in.</p>
+<pre><code>npm i pg
+</code></pre><p>Now, in the root of our project, lets make a directory and a <code>db.js</code> file in.</p>
 <h3 id="dbjs-file-for-queries">Db.js file for queries<a class="anchor" href="#dbjs-file-for-queries">#</a></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">~/Documents/worklog-app &gt;&gt;&gt; mkdir db
+<pre><code>~/Documents/worklog-app &gt;&gt;&gt; mkdir db
 ~/Documents/worklog-app &gt;&gt;&gt; cd db  
 ~/.../worklog-app/db &gt;&gt;&gt; touch db.js
 ~/.../worklog-app/db &gt;&gt;&gt;
-</code></pre></div><p>in that file:</p>
+</code></pre><p>in that file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Pool</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;pg&#34;</span>).<span style="color:#a6e22e">Pool</span>;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Pool</span>({

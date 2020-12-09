@@ -94,11 +94,11 @@
 <p>Let’s run a quick nmap scan as always.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p>Short explanation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sV Version detection
+<pre><code>-sV Version detection
 -sC Script scan
 -O  Enable OS detection 
 -oA Output to all formats
-</code></pre></div><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
+</code></pre><p>For a more detailed explanation <a href="https://explainshell.com/explain?cmd=nmap+-sV+-sC+-O+-oA+nmap%2Finitial+10.10.10.160#">click here</a>.</p>
 <p>While I wait for this to be finished I’ll start a full nmap scan.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160</span>
 </code></pre></div><p><img src="/htb/postman/nmap_initial.png" alt="nmap initial"></p>

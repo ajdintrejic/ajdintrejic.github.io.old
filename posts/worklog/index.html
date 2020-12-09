@@ -111,22 +111,22 @@
 <ol>
 <li>Install the PostgreSQL package:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S postgresql 
-</code></pre></div><p>Now this will also create a new user postgres.</p>
+<pre><code>sudo pacman -S postgresql 
+</code></pre><p>Now this will also create a new user postgres.</p>
 <ol start="2">
 <li>Switch to postgres user:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo -iu postgres
-</code></pre></div><ol start="3">
+<pre><code>$ sudo -iu postgres
+</code></pre><ol start="3">
 <li>Initialize db cluster:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ initdb -D /var/lib/postgres/data
-The files belonging to this database system will be owned by user &#34;postgres&#34;.
+<pre><code>$ initdb -D /var/lib/postgres/data
+The files belonging to this database system will be owned by user &quot;postgres&quot;.
 This user must also own the server process.
 
-The database cluster will be initialized with locale &#34;en_US.UTF-8&#34;.
-The default database encoding has accordingly been set to &#34;UTF8&#34;.
-The default text search configuration will be set to &#34;english&#34;.
+The database cluster will be initialized with locale &quot;en_US.UTF-8&quot;.
+The default database encoding has accordingly been set to &quot;UTF8&quot;.
+The default text search configuration will be set to &quot;english&quot;.
 
 Data page checksums are disabled.
 
@@ -141,7 +141,7 @@ running bootstrap script ... ok
 performing post-bootstrap initialization ... ok
 syncing data to disk ... ok
 
-initdb: warning: enabling &#34;trust&#34; authentication for local connections
+initdb: warning: enabling &quot;trust&quot; authentication for local connections
 You can change this by editing pg_hba.conf or using the option -A, or
 --auth-local and --auth-host, the next time you run initdb.
 
@@ -149,12 +149,12 @@ Success. You can now start the database server using:
 
     pg_ctl -D /var/lib/postgres/data -l logfile start
 
-</code></pre></div><p>Typing exit in the shell will return us to previous user.</p>
+</code></pre><p>Typing exit in the shell will return us to previous user.</p>
 <ol start="4">
 <li>Start or enable postgres service: If you start postgres it won’t start again on boot, if you enable it it will run on every boot but not right now. I won’t enable it as I don’t want Postgres running everytime I boot. I can just run this command every time I want to use it:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">systemctl start postgresql.service
-</code></pre></div><p>I can check if it’s running by running this command:</p>
+<pre><code>systemctl start postgresql.service
+</code></pre><p>I can check if it’s running by running this command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ systemctl status postgresql.service
 ● postgresql.service - PostgreSQL database server
      Loaded: loaded <span style="color:#f92672">(</span>/usr/lib/systemd/system/postgresql.service; disabled; vendor preset: disabled<span style="color:#f92672">)</span>
@@ -184,32 +184,32 @@ Jul <span style="color:#ae81ff">03</span> 18:51:04 yoga systemd<span style="colo
 </code></pre></div><p>Note: you could set up a graphical user interface for Postgres like PgAdmin4, but I prefer to use the terminal, so I won’t be doing that.</p>
 <h3 id="code">Code<a class="anchor" href="#code">#</a></h3>
 <p>I’ll use the VSCode, but the OSS version, it can be installed with</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S code
-</code></pre></div><p><img src="/worklog/code.png" alt=""></p>
+<pre><code>sudo pacman -S code
+</code></pre><p><img src="/worklog/code.png" alt=""></p>
 <h3 id="nodejs-and-node-package-manager">Node.js and Node package manager<a class="anchor" href="#nodejs-and-node-package-manager">#</a></h3>
 <p>This is also easy to install, just run this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo pacman -S nodejs npm
-</code></pre></div><h2 id="actual-code">Actual code<a class="anchor" href="#actual-code">#</a></h2>
+<pre><code>sudo pacman -S nodejs npm
+</code></pre><h2 id="actual-code">Actual code<a class="anchor" href="#actual-code">#</a></h2>
 <h3 id="front-end-with-reactjs">Front end with React.js<a class="anchor" href="#front-end-with-reactjs">#</a></h3>
 <p>Now we need a boilerplate. This is achieved with a Node module called create-react-app.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npx create-react-app worklog-app
-</code></pre></div><p>Difference between npm and npx:</p>
+<pre><code>npx create-react-app worklog-app
+</code></pre><p>Difference between npm and npx:</p>
 <pre><code>npm is a tool mainly used to install packages.
 npx is a tool to execute packages.
 </code></pre>
 <p>The code above also creates a directory called worklog-app with following components:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worklog-app
+<pre><code>worklog-app
 ├── node_modules
 ├── package.json
 ├── package-lock.json
 ├── public
 ├── README.md
 └── src
-</code></pre></div><p>I’ll start the server with npm start and we will get the React greeter on localhost:3000:
+</code></pre><p>I’ll start the server with npm start and we will get the React greeter on localhost:3000:
 <img src="/worklog/react.png" alt=""></p>
 <p>For React I’m going to be using a framework called <a href="https://ant.design/">Ant Design</a>. A good tutorial can be found <a href="https://ant.design/docs/react/getting-started">here</a>, but I’ll include some steps anyway.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install antd
-</code></pre></div><p>Overwrite src/App.js with this:</p>
+<pre><code>npm install antd
+</code></pre><p>Overwrite src/App.js with this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Button</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;antd&#39;</span>;
 <span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./App.css&#39;</span>;
@@ -227,8 +227,8 @@ npx is a tool to execute packages.
 <img src="/worklog/button.gif" alt=""></p>
 <h3 id="trying-to-open-the-page-with-express">Trying to open the page with Express<a class="anchor" href="#trying-to-open-the-page-with-express">#</a></h3>
 <p>The page can be loaded with npm start but that is not going through Express router. So Now I will configure this quickly before making any front end. I’m going to install express and react-router-dom so we can connect React and Express:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install express react-router-dom
-</code></pre></div><p>src/index.js has to import the app like this:</p>
+<pre><code>npm install express react-router-dom
+</code></pre><p>src/index.js has to import the app like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">BrowserRouter</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-router-dom&#39;</span>;
@@ -349,10 +349,10 @@ npx is a tool to execute packages.
 <li>createDb.js to create the database (or I can create it with psql, but It’s better to put all the commands in a file so it’s easier to deploy)</li>
 <li>db.js to execute search queries on the database. Postgres for NodeJS requires the package pg.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">src/db
+<pre><code>src/db
 ├── createDb.js
 └── db.js
-</code></pre></div><p>The database should look something like this:
+</code></pre><p>The database should look something like this:
 <img src="/worklog/sql.png" alt=""></p>
 <p>and the coresponding SQL code to create this looks like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> Town(

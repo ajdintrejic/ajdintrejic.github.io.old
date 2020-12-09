@@ -93,23 +93,23 @@
 <h2 id="reconnaissance">Reconnaissance<a class="anchor" href="#reconnaissance">#</a></h2>
 <p>Let&rsquo;s see what have we got here with nmap.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -oA nmap/initial 10.10.10.171
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-sC: run default script scan
+</code></pre></div><pre><code>-sC: run default script scan
 -sV: probe open ports to determine service/version info
 -O: OS detection
 -oA: output OS detection, version detection, script scanning, and traceroute 
-</code></pre></div><p>Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</p>
+</code></pre><p>Nmap returns the results quick as it by default scans only for most popular 1000 ports, so lets scan all the ports while we investigate the initial nmap scan.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nmap -sC -sV -O -p- -oA nmap/full 10.10.10.171
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-p-: scans from port 1 to 65535, same as -p1-65535
-</code></pre></div><p><img src="/htb/openadmin/nmap_initial.png" alt="namp initial"></p>
+</code></pre></div><pre><code>-p-: scans from port 1 to 65535, same as -p1-65535
+</code></pre><p><img src="/htb/openadmin/nmap_initial.png" alt="namp initial"></p>
 <p>Let&rsquo;s look at the http server.</p>
 <p><img src="/htb/openadmin/http_server.png" alt="http server"></p>
 <p>The page has the default Apache 2 page, so let&rsquo;s fire up gobuster. </p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.171 -x php,html -t <span style="color:#ae81ff">100</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-w: use a wordlist
+</code></pre></div><pre><code>-w: use a wordlist
 -u: target url
 -x: search for extensions
 -t: number of threads to run
-</code></pre></div><p><img src="/htb/openadmin/gobuster.png" alt="gobuster"></p>
+</code></pre><p><img src="/htb/openadmin/gobuster.png" alt="gobuster"></p>
 <h2 id="owning-user">Owning user<a class="anchor" href="#owning-user">#</a></h2>
 <p>Gobuster found /music, if we take a look we can find a reference to 10.10.10.171/ona. This could also be achieved with dirbuster as it can parse html and search for other links. Gobuster doesn&rsquo;t offer this functionality but it&rsquo;s much faster. Let&rsquo;s enum /ona.</p>
 <p><img src="/htb/openadmin/ona.png" alt="ona"></p>
@@ -137,9 +137,9 @@ set payload linux/x64/shell_reverse_tcp
 <p><img src="/htb/openadmin/main_php.png" alt="main php"></p>
 <p>So if we can access the server it will output us the ssh private key for joanna. Amazing, but how do we access that? Let&rsquo;s run netstat</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -lt 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-l: listening connections
+</code></pre></div><pre><code>-l: listening connections
 -t: TCP connections
-</code></pre></div><p><img src="/htb/openadmin/n2.png" alt="netstat"></p>
+</code></pre><p><img src="/htb/openadmin/n2.png" alt="netstat"></p>
 <p>So we have an unusual port 52846 listening on localhost. We can curl from ssh as we can&rsquo;t access this from the browser. </p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl localhost:52846
 </code></pre></div><p><img src="/htb/openadmin/curl_1.png" alt="curl"></p>

