@@ -6,10 +6,21 @@
     <description>Recent content on Ajdin&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Oct 2020 19:19:47 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 23 May 2021 12:55:32 +0200</lastBuildDate>
     
 	<atom:link href="https://ajdin.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HackTheBox Passage Write Up w/o Metasploit</title>
+      <link>https://ajdin.io/posts/htb/passage/</link>
+      <pubDate>Sun, 23 May 2021 12:55:32 +0200</pubDate>
+      
+      <guid>https://ajdin.io/posts/htb/passage/</guid>
+      <description>This is a medium box by ChefByzen.
+Recon Quick nmap scan for open ports
+$ nmap -p- --min-rate=1000 -T4 passage.htb Starting Nmap 7.</description>
+    </item>
     
     <item>
       <title>HackTheBox Sneakymailer Write Up w/o Metasploit</title>
@@ -21,13 +32,13 @@
     </item>
     
     <item>
-      <title>Cheatsheet</title>
-      <link>https://ajdin.io/cheatsheet/</link>
+      <title>HTB Cheatsheet</title>
+      <link>https://ajdin.io/posts/cheatsheet/</link>
       <pubDate>Mon, 05 Oct 2020 19:19:47 +0200</pubDate>
       
-      <guid>https://ajdin.io/cheatsheet/</guid>
-      <description>This is a cheatsheet for pentesting I made for HackTheBox.
- This is still work in progress, I&amp;rsquo;ll add more stuff here.</description>
+      <guid>https://ajdin.io/posts/cheatsheet/</guid>
+      <description>Recon Nmap Get all open ports.
+nmap -p- --min-rate=1000 -T4 &amp;lt;IP&amp;gt; Get more info on open ports. (eg. 21, 22, 80)</description>
     </item>
     
     <item>
@@ -97,15 +108,6 @@ sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this
       <description>Reconnaissance Let’s run a quick nmap scan as always.
 # nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
 -sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://ajdin.io/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajdin.io/about/</guid>
-      <description>I’m a computer science student at UniZg.</description>
     </item>
     
   </channel>

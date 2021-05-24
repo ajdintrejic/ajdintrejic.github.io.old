@@ -3,7 +3,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/medium.css">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     
     
     <title>HackTheBox Remote Write Up w/o Metasploit | Ajdin&#39;s blog</title>
@@ -11,10 +18,6 @@
 <body>
         <main><div>
     <a class="nav-item link-fix" href="/">Ajdin&#39;s blog</a>
-    
-    <a class="nav-item link-fix" href="/about">About</a>
-    
-    <a class="nav-item link-fix" href="/cv/cv.pdf">CV</a>
     
     <a class="nav-item link-fix" href="/tags">Tags</a>
     
@@ -30,11 +33,11 @@
 
 
 
-<span class="date">[2020-08-20]</span>
+<span class="date">18 Aug 2020</span>
 
 
 
-<p>================================</p>
+<hr>
 <p>This is an <strong>easy</strong> Windows box by <strong>mrb3n</strong>. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE. After that we need PowerUp.ps1 powershell script to exploit a Windows Service so we can elevate privileges to nt authority\system. If you have any questions you can find me on Twitter @ajdintrejic.</p>
 <h1 id="reconnaissance">Reconnaissance</h1>
 <p>Let’s do a quick nmap scan.</p>
@@ -297,8 +300,8 @@ C:\Windows\system32&gt;
 
 
             </div><div class="footer">
-    <p>================================</p>
-    <p> > Copyright 2021 Ajdin Trejic</p>
+    <hr>
+    <p> Copyright 2021 Ajdin Trejic</p>
 </div>
 </main>
     </body>

@@ -3,7 +3,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/medium.css">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     
     
     <title>HackTheBox Sneakymailer Write Up w/o Metasploit | Ajdin&#39;s blog</title>
@@ -11,10 +18,6 @@
 <body>
         <main><div>
     <a class="nav-item link-fix" href="/">Ajdin&#39;s blog</a>
-    
-    <a class="nav-item link-fix" href="/about">About</a>
-    
-    <a class="nav-item link-fix" href="/cv/cv.pdf">CV</a>
     
     <a class="nav-item link-fix" href="/tags">Tags</a>
     
@@ -30,11 +33,11 @@
 
 
 
-<span class="date">[2020-10-20]</span>
+<span class="date">6 Oct 2020</span>
 
 
 
-<p>================================</p>
+<hr>
 <p>This is a <strong>medium</strong> box from <strong>sulcud</strong>. First we have to phish users and get creds, find another creds from a SMTP server and get into FTP. Then we find out we can upload a file and we can get RCE with it. We get in as www-data, and find a hash for pypiserver. We upload a evil server.py and get user.txt. We can run pip3 as sudo. we simply break out of pip3 and get a shell as root.</p>
 <h2 id="recon">Recon</h2>
 <h3 id="nmap-scan">Nmap scan</h3>
@@ -423,15 +426,15 @@ drwxr-xr-x    8 0        0            4096 May 26 19:52 vendor
 226 Directory send OK.
 </code></pre><p>And I thought, maybe the <code>dev</code> direcory is hidden/deployed on another host. I ran ffuf to find another Virtual host.</p>
 <p>I curled a random subdomain so I could see how the request looks like when I hit a subdomain that doesn&rsquo;t exist.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">$ curl -H &#39;Host: randomsubdomain.sneakycorp.htb&#39; http://sneakycorp.htb
-&lt;<span style="font-weight:bold">html</span>&gt;
-&lt;<span style="font-weight:bold">head</span>&gt;&lt;<span style="font-weight:bold">title</span>&gt;301 Moved Permanently&lt;/<span style="font-weight:bold">title</span>&gt;&lt;/<span style="font-weight:bold">head</span>&gt;
-&lt;<span style="font-weight:bold">body</span> <span style="color:#007f7f">bgcolor</span>=<span style="color:#0ff;font-weight:bold">&#34;white&#34;</span>&gt;
-&lt;<span style="font-weight:bold">center</span>&gt;&lt;<span style="font-weight:bold">h1</span>&gt;301 Moved Permanently&lt;/<span style="font-weight:bold">h1</span>&gt;&lt;/<span style="font-weight:bold">center</span>&gt;
-&lt;<span style="font-weight:bold">hr</span>&gt;&lt;<span style="font-weight:bold">center</span>&gt;nginx/1.14.2&lt;/<span style="font-weight:bold">center</span>&gt;
-&lt;/<span style="font-weight:bold">body</span>&gt;
-&lt;/<span style="font-weight:bold">html</span>&gt;
-</code></pre></div><p>I extracted the length from that response.</p>
+<pre><code>$ curl -H 'Host: randomsubdomain.sneakycorp.htb' http://sneakycorp.htb
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;
+&lt;body bgcolor=&quot;white&quot;&gt;
+&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;
+&lt;hr&gt;&lt;center&gt;nginx/1.14.2&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>I extracted the length from that response.</p>
 <pre><code>$ curl -H 'Host: randomsubdomain.sneakycorp.htb' http://sneakycorp.htb | wc -c
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -590,8 +593,8 @@ $ sudo /usr/bin/pip3 install $TF
 
 
             </div><div class="footer">
-    <p>================================</p>
-    <p> > Copyright 2021 Ajdin Trejic</p>
+    <hr>
+    <p> Copyright 2021 Ajdin Trejic</p>
 </div>
 </main>
     </body>

