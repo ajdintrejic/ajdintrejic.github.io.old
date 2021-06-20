@@ -2,8 +2,8 @@
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/css/medium.css">
+    <link rel="stylesheet" type="text/css" href="/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -16,28 +16,18 @@
     <title>HackTheBox Sneakymailer Write Up w/o Metasploit | Ajdin&#39;s blog</title>
 </head>
 <body>
-        <main><div>
-    <a class="nav-item link-fix" href="/">Ajdin&#39;s blog</a>
-    
-    <a class="nav-item link-fix" href="/tags">Tags</a>
-    
-    <a class="nav-item link-fix" href="https://github.com/ajdintrejic">Github</a>
-    
-    <a class="nav-item link-fix" href="/index.xml">RSS</a>
-    
-</div>
-
-<div id="content">
+        <main>
+            <div id="content">
 <br/>
 <h2>HackTheBox Sneakymailer Write Up w/o Metasploit</h2>
 
 
 
-<span class="date">6 Oct 2020</span>
+<span class="date">2020-10-06</span>
 
 
 
-<hr>
+<br/>
 <p>This is a <strong>medium</strong> box from <strong>sulcud</strong>. First we have to phish users and get creds, find another creds from a SMTP server and get into FTP. Then we find out we can upload a file and we can get RCE with it. We get in as www-data, and find a hash for pypiserver. We upload a evil server.py and get user.txt. We can run pip3 as sudo. we simply break out of pip3 and get a shell as root.</p>
 <h2 id="recon">Recon</h2>
 <h3 id="nmap-scan">Nmap scan</h3>
@@ -592,10 +582,7 @@ $ sudo /usr/bin/pip3 install $TF
 
 
 
-            </div><div class="footer">
-    <hr>
-    <p> Copyright 2021 Ajdin Trejic</p>
-</div>
-</main>
+            </div>
+        </main>
     </body>
 </html>

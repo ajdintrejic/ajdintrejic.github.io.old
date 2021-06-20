@@ -19,7 +19,7 @@
       <guid>https://ajdin.io/posts/htb/passage/</guid>
       <description>This is a medium box by ChefByzen.
 Recon Quick nmap scan for open ports
-$ nmap -p- --min-rate=1000 -T4 passage.htb Starting Nmap 7.</description>
+$ nmap -p- --min-rate=1000 -T4 passage.htb Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-08 09:05 EDT Nmap scan report for passage.htb (10.10.10.206) Host is up (0.072s latency). Not shown: 65533 closed ports PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 11.28 seconds I scanned further those ports with nmap&amp;rsquo;s tools.</description>
     </item>
     
     <item>
@@ -28,7 +28,7 @@ $ nmap -p- --min-rate=1000 -T4 passage.htb Starting Nmap 7.</description>
       <pubDate>Tue, 06 Oct 2020 14:24:42 +0200</pubDate>
       
       <guid>https://ajdin.io/posts/htb/sneakymailer/</guid>
-      <description>This is a medium box from sulcud. First we have to phish users and get creds, find another creds from a SMTP server and get into FTP.</description>
+      <description>This is a medium box from sulcud. First we have to phish users and get creds, find another creds from a SMTP server and get into FTP. Then we find out we can upload a file and we can get RCE with it. We get in as www-data, and find a hash for pypiserver. We upload a evil server.py and get user.txt. We can run pip3 as sudo. we simply break out of pip3 and get a shell as root.</description>
     </item>
     
     <item>
@@ -38,7 +38,9 @@ $ nmap -p- --min-rate=1000 -T4 passage.htb Starting Nmap 7.</description>
       
       <guid>https://ajdin.io/posts/cheatsheet/</guid>
       <description>Recon Nmap Get all open ports.
-nmap -p- --min-rate=1000 -T4 &amp;lt;IP&amp;gt; Get more info on open ports. (eg. 21, 22, 80)</description>
+nmap -p- --min-rate=1000 -T4 &amp;lt;IP&amp;gt; Get more info on open ports. (eg. 21, 22, 80)
+sudo nmap -p21,22,80 -sC -sV -O -oA nmap/scan &amp;lt;IP&amp;gt; Some servers could be blocking pings, this can be bypassed by using -Pn flag.
+ Directory busting Gobuster If hosts uses /index.php scan with -x php, for /index.html use -x html. Sometimes using big.txt can also find something that directory-list-2.3-medium.txt didn&amp;rsquo;t.</description>
     </item>
     
     <item>
@@ -48,7 +50,10 @@ nmap -p- --min-rate=1000 -T4 &amp;lt;IP&amp;gt; Get more info on open ports. (eg
       
       <guid>https://ajdin.io/posts/prompt-ml/</guid>
       <description>Prompt.ml is is a XSS injection site inspired by alert(1) to win.
-0x0 Just a simple XSS payload, close the last html element and get prompt(1)</description>
+0x0 Just a simple XSS payload, close the last html element and get prompt(1)
+&amp;quot;&amp;gt;&amp;lt;img src=x onerror=&amp;quot;prompt(1) 0x1 We don&amp;rsquo;t have to close the tag
+&amp;lt;img src=x onerror=&amp;quot;prompt(1)&amp;quot; 0x2 call the eval function to hex encode ( and ) into \x28 and \x29
+&amp;lt;script&amp;gt;eval.call`${&#39;prompt\x281\x29&#39;}`&amp;lt;/script&amp;gt; 0x3 call the eval function to hex encode ( and ) into \x28 and \x29</description>
     </item>
     
     <item>
@@ -58,7 +63,8 @@ nmap -p- --min-rate=1000 -T4 &amp;lt;IP&amp;gt; Get more info on open ports. (eg
       
       <guid>https://ajdin.io/posts/ctf-balccon-2020/</guid>
       <description>This is a BalCCon 2k20 Write Up by imm0rtals
-forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is some message hidden, I am sure!</description>
+forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is some message hidden, I am sure!
+ We are given a .pcap file and if we look at the duration &amp;gt;&amp;gt;&amp;gt; for i in durs: ... if i &amp;lt; 0.20: ... morse +=&#39;.&#39; ... elif i &amp;gt; 0.5 and i &amp;lt; 1: ... morse +=&#39;-&#39; ... else: ... morse +=&#39; &#39; .</description>
     </item>
     
     <item>
@@ -67,7 +73,8 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ajdin.io/posts/htb/remote/</guid>
-      <description>This is an easy Windows box by mrb3n. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE.</description>
+      <description>This is an easy Windows box by mrb3n. For initial foothold we need to find and crack creds found in NFS and use them in an exploit so we can get RCE. After that we need PowerUp.ps1 powershell script to exploit a Windows Service so we can elevate privileges to nt authority\system. If you have any questions you can find me on Twitter @ajdintrejic.
+Reconnaissance Let’s do a quick nmap scan.</description>
     </item>
     
     <item>
@@ -76,7 +83,9 @@ forensics/Patience  Strange&amp;hellip; Everything looks the same. But there is 
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>https://ajdin.io/posts/htb/traceback/</guid>
-      <description>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access.</description>
+      <description>Traceback is an easy Linux box created by Xh4H. You have to enter a shell planted on the server, enter as webadmin, escalate privileges with lua/luvit to sysadmin and echo a reverse shell in 00-header file to get root access. If you have any questions you can find me on twitter @ajdintrejic.
+Reconnaissance Let’s run a quick nmap and full nmap scan in background:
+#top 1000 ports sudo nmap -sV -sC -O -oA nmap/initial 10.</description>
     </item>
     
     <item>
@@ -96,7 +105,8 @@ nmap -sC -sV -O -oA nmap/initial 10.10.10.171 -sC: run default script scan -sV: 
       
       <guid>https://ajdin.io/posts/htb/mango/</guid>
       <description>Reconnaissance Let’s run nmap,
-sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”.</description>
+sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.
+Getting user account I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference: staging-order.</description>
     </item>
     
     <item>
@@ -107,7 +117,9 @@ sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162 We have to use https for this
       <guid>https://ajdin.io/posts/htb/postman/</guid>
       <description>Reconnaissance Let’s run a quick nmap scan as always.
 # nmap -sV -sC -O -oA nmap/initial 10.10.10.160 Short explanation:
--sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.</description>
+-sV Version detection -sC Script scan -O Enable OS detection -oA Output to all formats For a more detailed explanation click here.
+While I wait for this to be finished I’ll start a full nmap scan.
+# nmap -sV -sC -O -p- -oA nmap/initial 10.10.10.160 As usual we have port 22 and port 80 running, but here we also have http protocol running on port 10000, let’s enumerate on those pages.</description>
     </item>
     
   </channel>

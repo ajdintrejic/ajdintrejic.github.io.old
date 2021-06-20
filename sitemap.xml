@@ -38,21 +38,6 @@
   </url>
   
   <url>
-    <loc>https://ajdin.io/categories/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/ftp/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/categories/hackthebox/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ajdin.io/posts/htb/remote/</loc>
     <lastmod>2020-08-18T00:00:00+00:00</lastmod>
   </url>
@@ -63,78 +48,8 @@
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/lua/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/luvit/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/moth/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/powerup.ps1/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/rpc/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/smevk.php/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/ssh/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/suid/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/umbraco/</loc>
-    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ajdin.io/posts/htb/openadmin/</loc>
     <lastmod>2020-05-02T09:03:27+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/nano/</loc>
-    <lastmod>2020-05-02T09:03:27+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/netstat/</loc>
-    <lastmod>2020-05-02T09:03:27+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/opennetadmin/</loc>
-    <lastmod>2020-05-02T09:03:27+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/authentication-bypass/</loc>
-    <lastmod>2020-04-18T13:28:11+02:00</lastmod>
   </url>
   
   <url>
@@ -143,42 +58,7 @@
   </url>
   
   <url>
-    <loc>https://ajdin.io/tags/jjs/</loc>
-    <lastmod>2020-04-18T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/mongodb/</loc>
-    <lastmod>2020-04-18T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/nosql-injection/</loc>
-    <lastmod>2020-04-18T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/ssl-certificate/</loc>
-    <lastmod>2020-04-18T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ajdin.io/posts/htb/postman/</loc>
-    <lastmod>2020-03-13T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/john/</loc>
-    <lastmod>2020-03-13T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/redis/</loc>
-    <lastmod>2020-03-13T13:28:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ajdin.io/tags/webmin/</loc>
     <lastmod>2020-03-13T13:28:11+02:00</lastmod>
   </url>
   
